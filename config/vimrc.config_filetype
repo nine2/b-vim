@@ -1,0 +1,202 @@
+"==========================================
+" FileType Settings  文件类型设置
+"==========================================
+
+" for # indent, python文件中输入新行时#号注释不切回行首
+autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
+
+autocmd BufRead,BufNew *.pike setfiletype pike
+autocmd BufRead,BufNew *.decl setfiletype cpp
+autocmd BufRead,BufNew *.pl setfiletype perl
+autocmd BufRead,BufNew *.pm setfiletype perl
+autocmd BufRead,BufNew *.plx setfiletype perl
+autocmd BufRead,BufNewFile *.go setfiletype go
+
+autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown.mkd
+" autocmd FileType python,py,c,cpp,java,javascript,go,php,ruby,xml,yml,perl set tabstop=4 shiftwidth=4 expandtab ai
+autocmd FileType python,py set tabstop=4 shiftwidth=4 expandtab ai
+autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
+autocmd FileType pike set tabstop=4 shiftwidth=4 expandtab ai
+autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown.mkd
+" 保存文件时删除多余空格
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+" autocmd FileType c,cpp,py,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,pike autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
+
+" ###### 加入注释， 主要以 # 和 c++系列 进行注释的语言
+function! SetComment()
+    let l = 0
+    let cx= 1
+    if &filetype == 'sh' || &filetype == "perl"
+        let l = 0
+    elseif &filetype == 'python'
+        let l = 2
+    else
+        let l = 0
+        let cx= 0
+    endif
+    if cx == 1
+        call append(l + 1,"\# ====================================================")
+    else
+        call append(l + 1,"/* ====================================================")
+    endif
+    call append(l + 2, "\#   Copyright (C)".strftime("%Y")." All rights reserved.")
+    call append(l + 3, "#")
+    call append(l + 4, "\#   Author        : bbxytl")
+    call append(l + 5, "\#   Email         : bbxytl@gmail.com")
+    call append(l + 6, "\#   File Name     : ".expand("%:t"))
+    call append(l + 7, "\#   Last Modified : ".strftime("%Y-%m-%d %H:%M"))
+    call append(l + 8, "\#   Describe      :")
+    call append(l + 9, "\#")
+    call append(l + 10, "\#   Log           :")
+    call append(l + 11, "\#")
+    if cx == 1
+        call append(l + 12, "\# ====================================================")
+    else
+        call append(l + 12, "\# ====================================================*/")
+    endif
+endfunction
+
+" 将键盘上的 uh 功能键映射为添加文件头的快捷键
+map uh :call AutoSetFileHead()<cr>'s
+" map <F4> :call AutoSetFileHead()<cr>'s
+" 定义函数AutoSetFileHead，自动插入文件头
+autocmd BufNewFile *.sh,*.plx,*.pl,*.pm,*.py,*.pike,*.h,*.hpp,*c,*cpp exec ":call AutoSetFileHead()"
+
+function! AutoSetFileHead()
+    let n = 1
+    while n < 15
+        let line = getline(n)
+        if line =~'^#\s*\S*Last\sModified\s*:\s*\S*.*$'
+            call UpdateTitle()
+            return
+        endif
+        let n = n + 1
+    endwhile
+    call AddTitle()
+endfunction
+
+function! UpdateTitle()
+    " normal m'
+    execute '/#\s*\S*Last\sModified\s*:/s@:.*$@\=strftime(": %Y-%m-%d %H:%M")@'
+    " execute '/# *LastModify:/s@:.*$@\=strftime(":\t%Y-%m-%d %H:%M ====")'
+    " normal "
+    " normal mk
+    execute '/#\s*\S*File\sName\s*:/s@:.*$@\=": ".expand("%:t")@'
+    execute "noh"
+    " normal 'k
+    echohl WarningMsg | echo "Successful in updating the copy right." | echohl None
+endfunction
+
+" ##### 不同文件添加不同头总调用函数
+function! AddTitle()
+    "如果文件类型为.sh文件
+    if &filetype == 'sh'
+        call Title_sh()
+    endif
+
+    "如果文件类型为perl文件
+    if &filetype == 'perl'
+        call Title_perl()
+    endif
+
+    "如果文件类型为python
+    if &filetype == 'python'
+        call Title_python()
+    endif
+
+    " Pike 文件
+    if &filetype == 'pike'
+        call Title_pike()
+    endif
+
+    " H 文件
+    let hf = expand("%:e") == "h" || expand("%:e") == "hpp"
+    if hf
+        call Title_h()
+    endif
+
+    " C 文件
+    if &filetype == 'c' && !hf
+        call Title_c()
+    endif
+
+    " CPP 文件
+    if &filetype == "cpp" && !hf || expand("%:e") == "cc"
+        call Title_cpp()
+    endif
+
+    normal G
+    normal o
+    normal o
+endfunc
+
+" ##### 具体实现函数
+func! Title_sh()
+    call setline(1, "\#!/bin/bash")
+    call SetComment()
+endfunc
+
+func! Title_perl()
+    call setline(1, "\#!/usr/bin/perl -w")
+    call SetComment()
+endfunc
+
+
+func! Title_python()
+    call setline(1, "\#!/usr/bin/env python")
+    call append(1, "\# encoding: utf-8")
+    call append(2, "\# coding style: pep8")
+    call SetComment()
+    let l = 13
+    call append(line(".") + l + 1, "")
+    call append(line(".") + l + 2, "import sys")
+    call append(line(".") + l + 3, "\# import os")
+endfunc
+
+func! Title_pike()
+    call SetComment()
+endfunc
+
+func! Title_h()
+    call SetComment()
+    let l = 11
+    call append(line(".") + l + 1, "")
+    call append(line(".") + l + 2, "\#ifndef  _".toupper(expand("%:t:r"))."_H")
+    call append(line(".") + l + 3, "\#define  _".toupper(expand("%:t:r"))."_H")
+    call append(line(".") + l + 4, "")
+    call append(line(".") + l + 5, "")
+    call append(line(".") + l + 6, "\#endif // _".toupper(expand("%:t:r"))."_H")
+endfunc
+
+func! Title_c()
+    call SetComment()
+    let l = 11
+    call append(line(".") + l + 1, "")
+    call append(line(".") + l + 2, "\#include <stdio.h>")
+    call append(line(".") + l + 3, "")
+    call append(line(".") + l + 4, "")
+endfunc
+
+func! Title_cpp()
+    call SetComment()
+    let l = 11
+    call append(line(".") + l + 1, "")
+    call append(line(".") + l + 2, "\#include <iostream>")
+    call append(line(".") + l + 3, "using namespace std;")
+    call append(line(".") + l + 4, "")
+    call append(line(".") + l + 6, "")
+    "call append(line(".") + l + 5, "\#include \"".expand("%:t:r").".h\"")
+endfunc
+
+" set some keyword to highlight
+if has("autocmd")
+    if v:version > 701
+        autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|DONE\|XXX\|BUG\|HACK\)')
+        autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
+    endif
+endif

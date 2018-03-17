@@ -1,0 +1,67 @@
+# git仓库忽略文件目录
+# 在项目目录下使用 progit 命令即可
+
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac
+.DS_Store
+
+# Office
+\~\$*.doc
+\~\$*.docx
+\~\$*.ppt
+\~\$*.pptx
+\~\$*.xls
+\~\$*.xlsx
+
+# Object files
+#*.o
+#
+## Libraries
+#*.lib
+#*.a
+#
+## Shared objects (inc. Windows DLLs)
+#*.dll
+#*.so
+#*.so.*
+#*.dylib
+#
+## Executables
+#*.exe
+#*.out
+#*.app
+
+# Not use git
+*.ngit
+
+# Vim
+.ycm_simple_conf.xml
+.workspace.vim
+.workspace_syntax.vim
+tags
+cscope.out
+.idea
+.svn
+.git.*
+core.*
+*.syntax
+
+# go
+vendor
+
+# Custom
+*.pyc
+.xmake
+vim-packges
+*.bak
+

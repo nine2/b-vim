@@ -1,0 +1,586 @@
+"==========================================
+" Author:  bbxytl
+" Version: 3.0
+" Email: bbxytl@gmail.com
+" BlogPost: http://bbxytl.github.com
+" Last_modify: 2018-03-16
+" Sections:
+"==========================================
+
+if(has("win32") || has("win95") || has("win64") || has("win16"))
+    let g:vimrc_iswindows=1
+else
+    let g:vimrc_iswindows=0
+endif
+
+" ###################  基本设置 ###################
+		" 允许插件 启动自动补全
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+" 文件修改之后自动载入。
+set autoread
+" 启动的时候不显示那个援助索马里儿童的提示
+set shortmess=atI
+" 突出显示当前列
+"set cursorcolumn
+" 突出显示当前行
+set cursorline
+"设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制
+"好处：误删什么的，如果以前屏幕打开，可以找回
+set t_ti= t_te=
+"- 则点击光标不会换,用于复制
+" 鼠标暂不启用, 键盘党....
+set mouse-=a
+" Automatically enable mouse usage
+" set mouse=a
+" Hide the mouse cursor while typing
+" set mousehide
+" 修复ctrl+m 多光标操作选择的bug，但是改变了ctrl+v进行字符选中时将包含光标下的字符
+"set selection=exclusive
+set selection=inclusive
+set selectmode=mouse,key
+" 去掉输入错误的提示声音
+" change the terminal's title
+set title
+" don't beep
+set novisualbell
+" don't beep
+set noerrorbells
+set t_vb=
+set tm=500
+" Remember info about open buffers on close
+set viminfo^=%
+" For regular expressions turn magic on
+set magic
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+
+"==========================================
+" Display Settings 展示/排版等界面格式设置
+"==========================================
+syntax on
+" 显示当前的行号列号
+set ruler
+" 在状态栏显示正在输入的命令
+set showcmd
+" 左下角显示当前vim模式
+"set showmode
+" 在上下移动光标时，光标的上方或下方至少会保留显示的行数
+set scrolloff=3
+" 一行宽度
+set winwidth=79
+" 命令行（在状态行下）的高度，默认为1，这里是2
+" Hide the default mode text (e.g. -- INSERT -- below the statusline)
+set noshowmode
+" Always show the status line - use 2 lines for the status bar
+set laststatus=2
+" These lines setup the environment to show graphics and colors correctly.
+set nocompatible
+set t_Co=256
+" 显示行号
+set number
+" " 取消换行
+set nowrap
+" 按词换行
+set lbr
+" 括号配对情况,跳转并高亮一下匹配的括号
+set showmatch
+set matchtime=2
+
+
+" ##### 设置文内智能搜索提示
+    " 高亮search命中的文本
+set hlsearch
+    " 打开增量搜索模式,随着键入即时搜索
+set incsearch
+    " 搜索时忽略大小写
+set ignorecase
+    " 有一个或以上大写字母时仍大小写敏感
+set smartcase
+
+
+" ##### 代码折叠
+" za，打开或关闭当前折叠；zM，关闭所有折叠；zR，打开所有折叠。
+set foldenable
+" 折叠方法
+" manual    手工折叠
+" indent    使用缩进表示折叠
+" expr      使用表达式定义折叠
+" syntax    使用语法定义折叠
+" diff      对没有更改的文本进行折叠
+" marker    使用标记进行折叠, 默认标记是 {{{ 和 }}}
+" set foldmethod=indent
+set foldmethod=syntax
+" set foldmethod=manual
+set foldlevel=99
+" 代码折叠自定义快捷键
+let g:FoldMethod = 0
+map <leader>zz :call ToggleFold()<cr>
+fun! ToggleFold()
+    if g:FoldMethod == 0
+        exe "normal! zM"
+        let g:FoldMethod = 1
+    else
+        exe "normal! zR"
+        let g:FoldMethod = 0
+    endif
+endfun
+
+" ##### 缩进配置
+" Smart indent
+set smartindent
+" 打开自动缩进
+set autoindent
+" never add copyindent, case error   " copy the previous indentation on autoindenting
+
+" ##### tab相关变更
+" 设置Tab键的宽度        [等同的空格个数]
+set tabstop=4
+" 每一次缩进对应的空格数
+set shiftwidth=4
+" 按退格键时可以一次删掉 4 个空格
+set softtabstop=4
+" insert tabs on the start of a line according to shiftwidth, not tabstop 按退格键时可以一次删掉 4 个空格
+set smarttab
+" " 将Tab自动转化成空格    [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+set expandtab
+" set noexpandtab
+" 缩进时，取整 use multiple of shiftwidth when indenting with '<' and '>'
+set shiftround
+
+" ##### A buffer becomes hidden when it is abandoned
+set hidden
+" set wildmode=list:longest
+" set ttyfast
+
+" ##### 00x增减数字时使用十进制
+set nrformats=
+
+" Vim 7.3以上版本才支持，7.3一下版本不支持 relativenumber
+" ##### 相对行号 行号变成相对，可以用 nj  nk   进行跳转 5j   5k 上下跳5行
+set relativenumber number
+au FocusLost * :set norelativenumber number
+au FocusGained * :set relativenumber
+" 插入模式下用绝对行号, 普通模式下用相对
+autocmd InsertEnter * :set norelativenumber number
+autocmd InsertLeave * :set relativenumber
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber number
+    else
+        set relativenumber
+    endif
+endfunc
+nnoremap <silent> <C-n> :call NumberToggle()<cr>
+
+
+"==========================================
+" FileEncode Settings 文件编码,格式
+"==========================================
+" 设置新文件的编码为 UTF-8
+set encoding=utf-8
+" 自动判断编码时，依次尝试以下编码：
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set helplang=cn
+"set langmenu=zh_CN.UTF-8
+"set enc=2byte-gb18030
+" 这句只影响普通模式 (非图形界面) 下的 Vim。
+set termencoding=utf-8
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+" 如遇Unicode值大于255的文本，不必等到空格再折行
+set formatoptions+=m
+" 合并两行中文时，不在中间加空格
+set formatoptions+=B
+
+"==========================================
+" others 其它设置
+"==========================================
+" vimrc文件修改之后自动加载。 windows。
+autocmd! bufwritepost _vimrc source %
+" vimrc文件修改之后自动加载。 linux。
+autocmd! bufwritepost .vimrc source %
+" 自动补全配置
+set completeopt=longest,menu
+" 增强模式中的命令行自动完成操作
+set wildmenu
+" set wildignore=*.swp,*.bak,*.pyc,*.class,.svn,*.o,*.obj
+set wildignore=*.o,*~,*.pyc,*.class		" Ignore compiled files
+" 离开插入模式后自动关闭预览窗口
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" if this not work ,make sure .viminfo is writable for you
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+
+"==========================================
+" HotKey Settings  自定义快捷键设置
+"==========================================
+"Treat long lines as break lines (useful when moving around in them)
+"se swap之后，同物理行上线直接跳
+nnoremap k gk
+nnoremap gk k
+nnoremap j gj
+nnoremap gj j
+
+" ##### F1 - F12 设置, 部分设置在 vimrc.bundle 里
+" F1
+" F2 行号开关，用于鼠标复制代码用
+" F3 显示/关闭 树形资源管理器
+" F4 换行开关
+" F5 开启关闭粘贴模式
+" F6 语法开关，关闭语法可以加快大文件的展示
+"
+" F9 显示函数列表--tagbar
+" <leader><F6> 切换十六进制
+" <leader><leader><F6> 切换回文本模式
+if &filetype == 'go' || expand("%:e") == "go"
+    set list
+    set lcs=tab:\|\ ,nbsp:% ",trail:-
+endif
+
+noremap <F1> <Esc>"
+" 根据是否有行号来决定是否显示 tab 标示符，用来方便 copy
+function! TabShowSign()
+    if(&relativenumber || &number)
+        set lcs=tab:\|\ ,nbsp:% ",trail:-
+    else
+        set lcs=tab:\ \ ,nbsp:% ",trail:-
+    endif
+endfunc
+" 为方便复制，用<F2>开启/关闭行号显示:
+function! HideNumber()
+    if(&relativenumber == &number)
+        set relativenumber! number!
+    elseif(&number)
+        set number!
+    else
+        set relativenumber!
+    endif
+    call TabShowSign()
+    set number?
+endfunc
+nnoremap <F2> :call HideNumber()<CR>
+" 插件 nerdtree 显示关闭快捷键
+map <F3> <leader>n
+nnoremap <F4> :set wrap! wrap?<CR>
+set pastetoggle=<F5>
+" disbale paste mode when leaving insert mode
+au InsertLeave * set nopaste
+nnoremap <F6> :exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>
+nnoremap <leader><F6> :%!xxd -g 2<CR>
+nnoremap <leader><leader><F6> :%!xxd -r<CR>
+
+" ##### 分屏窗口移动 在vim的各个窗口间切换
+map <leader>j <C-W>j
+map <leader>k <C-W>k
+map <leader>h <C-W>h
+map <leader>l <C-W>l
+" 行首行尾
+noremap H ^
+noremap L $
+
+" 更改窗口大小
+nmap w=  :resize +3<CR>
+nmap w-  :resize -3<CR>
+nmap w,  :vertical resize -3<CR>
+nmap w.  :vertical resize +3<CR>
+
+" ##### 搜索相关
+" Keep search pattern at the center of the screen."
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
+" switch # *
+nnoremap # *
+nnoremap * #
+
+" 去掉搜索高亮
+noremap <silent><leader>/ :nohls<CR>
+
+" ##### tab/buffer相关
+" :b1 :b2   :bf :bl
+nnoremap [b :bprevious<cr>
+nnoremap ]b :bnext<cr>
+
+" ##### tab 操作
+" http://vim.wikia.com/wiki/Alternative_tab_navigation
+" http://stackoverflow.com/questions/2005214/switching-to-a-particular-tab-in-vim
+"map <C-2> 2gt
+map <leader>th :tabfirst<cr>
+map <leader>tl :tablast<cr>
+map <leader>tj :tabnext<cr>
+map <leader>tk :tabprev<cr>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprev<cr>
+map <leader>te :tabedit<cr>
+map <leader>td :tabclose<cr>
+map <leader>tm :tabm<cr>
+map <leader>to :tabnew<cr>
+
+" normal模式下切换到确切的tab
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+noremap <leader>= :tabedit<cr>
+noremap <leader>- :tabclose<cr>
+
+" Toggles between the active and last active tab "
+" The first tab is always 1 "
+let g:last_active_tab = 1
+nnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
+vnoremap <silent> <leader>tt :execute 'tabnext ' . g:last_active_tab<cr>
+autocmd TabLeave * let g:last_active_tab = tabpagenr()
+
+" ##### 选中及操作改键
+" 调整缩进后自动选中，方便再次操作
+vnoremap < <gv
+vnoremap > >gv
+" y$ -> Y Make Y behave like other capitals
+map Y y$
+set mouse+=v
+set clipboard=unnamed
+" select all 全选
+map <Leader>sa ggVG"
+" select block
+nnoremap <leader>v V`}
+" w!! to sudo & write a file
+cmap w!! w !sudo tee >/dev/null %
+
+" Quickly close the current window
+nnoremap <leader>q :q<CR>
+
+" Swap implementations of ` and ' jump to markers
+" By default, ' jumps to the marked line, ` jumps to the marked line and
+" column, so swap them
+nnoremap ' `
+nnoremap ` '
+
+" remap U to <C-r> for easier redo
+nnoremap U <C-r>
+" Quickly edit/reload the vimrc file
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+
+"==========================================
+" Theme Settings  主题设置
+"==========================================
+" Set extra options when running in GUI mode
+if has("gui_running")
+set guifont=Monaco:h14
+if has("gui_gtk2")   "GTK2
+    set guifont=Monaco\ 12,Monospace\ 12
+endif
+set guioptions-=T
+set guioptions+=e
+set guioptions-=r
+set guioptions-=L
+set guitablabel=%M\ %t
+set showtabline=1
+set linespace=2
+set noimd
+set t_Co=256
+endif
+" 具体的主题插件参考 .vimrc.bundles 文件
+" ##### theme主题
+
+"设置标记一列的背景颜色和数字一行颜色一致
+hi! link SignColumn   LineNr
+hi! link ShowMarksHLl DiffAdd
+hi! link ShowMarksHLu DiffChange
+
+"" for error highlight，防止错误整行标红导致看不清
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+highlight clear SpellCap
+highlight SpellCap term=underline cterm=underline
+highlight clear SpellRare
+highlight SpellRare term=underline cterm=underline
+highlight clear SpellLocal
+highlight SpellLocal term=underline cterm=underline
+
+" ===============================
+highlight Pmenu    guibg=darkgrey  guifg=black
+highlight PmenuSel guibg=lightgrey guifg=black
+highlight Pmenu    ctermbg=darkgrey  ctermfg=black
+highlight PmenuSel ctermbg=lightgrey ctermfg=black
+
+set term=screen-256color
+" 快速保存 快捷键
+nnoremap <silent> <Leader>w :w<CR>
+
+" 设置快捷键将选中文本块复制至系统剪贴板
+nmap ,y "+y
+vmap ,y "+y
+vmap ,d "+d
+" 设置快捷键将系统剪贴板内容粘贴至 vim
+nmap ,p "+p
+nmap ,P "+p
+vmap ,p "+p
+vmap ,P "+P
+
+" 标签映射
+" 生成系统 头文件的 tags
+" set tags+=~/.vim/systags
+" set tags+=~/.vim/systags_local
+" map <leader><F12> :call Do_CsTag_Sys()<CR>
+map <leader><leader>T :call Do_CsTag_Sys()<CR>
+map <c-]> g<C-]>
+function! Do_CsTag_Sys()
+    delete("~/.vim/systags")
+    " 本地自定义的头文件目录标签文件
+    delete("~/.vim/systags_local")
+    silent! execute "!ctags -R -f ~/.vim/systags -L ~/.vim/tags_list"
+    " 需要自己新建 tags_list_local 文件，用以指示自定义的头文件目录
+    silent! execute "!ctags -R -f ~/.vim/systags_local -L ~/.vim/tags_list_local"
+endfunction
+
+" 使用 gf 跳转到对应的include文件
+if has("mac")
+	set path=.,/usr/local/include
+	set path+=,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include
+	set path+=,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include/c++/4.2.1
+elseif has("linux")|| has("unix")
+	set path=.,/usr/include,/usr/local/include
+endif
+
+" 生成当前项目的 tags
+map <leader>T :call Do_CsTag()<CR>
+function! Do_CsTag()
+let dir = getcwd()
+if filereadable("tags")
+    if(g:iswindows==1)
+        let tagsdeleted=delete(dir."\\"."tags")
+    else
+        let tagsdeleted=delete("./"."tags")
+    endif
+    if(tagsdeleted!=0)
+        echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
+        return
+        endif
+    endif
+    if(executable('ctags'))
+        silent! execute "!ctags --exclude=branches  -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+    endif
+endfunction
+" lua 的 ctags 命令:
+" ctags --langdef=MYLUA --langmap=MYLUA:.lua --regex-MYLUA="/^.*\s*function\s*(\w+):(\w+).*$/\2/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*[0-9]+.*$/\1/e/" --regex-MYLUA="/^.*\s*function\s*(\w+)\.(\w+).*$/\2/f/" --regex-MYLUA="/^.*\s*function\s*(\w+)\s*\(.*$/\1/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*\{.*$/\1/e/" --regex-MYLUA="/^\s*module\s+\"(\w+)\".*$/\1/m,module/" --regex-MYLUA="/^\s*module\s+\"[a-zA-Z0-9._]+\.(\w+)\".*$/\1/m,module/" --regex-MYLUA="/^\s*local\s*(\w+)\s*=\s*/\1/f/"  --regex-MYLUA="/^\s*(\w+).(\w+)\s*=\s*/\1/f/"  --languages=MYLUA --excmd=number -R .
+
+" 在当前文件中快速查找光标下的单词
+nmap <leader>s :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
+
+function! Zoom ()
+    " check if is the zoomed state (tabnumber > 1 && window == 1)
+    if tabpagenr('$') > 1 && tabpagewinnr(tabpagenr(), '$') == 1
+        let l:cur_winview = winsaveview()
+        let l:cur_bufname = bufname('')
+        tabclose
+        " restore the view
+        if l:cur_bufname == bufname('')
+            call winrestview(cur_winview)
+        endif
+    else
+        tab split
+    endif
+endfunction
+nmap <leader>z :call Zoom()<CR>
+
+
+" 在处理未保存或只读文件的时候，弹出确认
+set confirm
+
+" tab键特殊显示
+set list
+set lcs=tab:\|\ ,nbsp:% ",trail:-
+
+"  在 tab页显示序号，方便使用 ngt
+set tabline=%!CustomMyTabLine()  " custom tab pages line
+function! CustomMyTabLine()
+    let s = '' " complete tabline goes here
+    " loop through each tab page
+    for t in range(tabpagenr('$'))
+        " set highlight
+        if t + 1 == tabpagenr()
+            let s .= '%#TabLineSel#'
+        else
+            let s .= '%#TabLine#'
+        endif
+        " set the tab page number (for mouse clicks)
+        let s .= '%' . (t + 1) . 'T'
+        let s .= ' '
+        " set page number string
+        let s .= t + 1 . ' '
+        " get buffer names and statuses
+        let n = ''      "temp string for buffer names while we loop and check buftype
+        let m = 0       " &modified counter
+        let bc = len(tabpagebuflist(t + 1))     "counter to avoid last ' '
+        " loop through each buffer in a tab
+        for b in tabpagebuflist(t + 1)
+            " buffer types: quickfix gets a [Q], help gets [H]{base fname}
+            " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
+            if getbufvar( b, "&buftype" ) == 'help'
+                let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
+            elseif getbufvar( b, "&buftype" ) == 'quickfix'
+                let n .= '[Q]'
+            else
+                let n .= pathshorten(bufname(b))
+            endif
+            " check and ++ tab's &modified count
+            if getbufvar( b, "&modified" )
+                let m += 1
+            endif
+            " no final ' ' added...formatting looks better done later
+            if bc > 1
+                let n .= ' '
+            endif
+            let bc -= 1
+        endfor
+        " add modified label [n+] where n pages in tab are modified
+        if m > 0
+            let s .= '[' . m . '+]'
+        endif
+        " select the highlighting for the buffer names
+        " my default highlighting only underlines the active tab
+        " buffer names.
+        if t + 1 == tabpagenr()
+            let s .= '%#TabLineSel#'
+        else
+            let s .= '%#TabLine#'
+        endif
+        " add buffer names
+        if n == ''
+            let s.= '[New]'
+        else
+            let s .= n
+        endif
+        " switch to no underlining and add final space to buffer list
+        let s .= ' '
+    endfor
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let s .= '%#TabLineFill#%T'
+    " right-align the label to close the current tab page
+    if tabpagenr('$') > 1
+        let s .= '%=%#TabLineFill#999Xclose'
+    endif
+    return s
+endfunction
+
+" macvim 或 gvim 中的基本配色
+highlight Normal guifg=grey70
+highlight Cursor guifg=grey70
+
