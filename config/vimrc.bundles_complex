@@ -274,7 +274,7 @@ Bundle 'Blackrush/vim-gocode'
 
 " go debug
 Bundle 'sebdah/vim-delve'
-let g:delve_backend = "native"
+" let g:delve_backend = "native"
 
 
 " ###############################
