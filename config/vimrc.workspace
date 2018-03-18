@@ -1,0 +1,45 @@
+
+" ##### 如果当前项目文件内有关于 vim  的特殊配置，
+" 则加载此配置，实现自定义化.
+" if filereadable(expand(".workspace.vim"))
+    " source .workspace.vim
+" endif
+
+" 获取目录对应的所有父目录, 到 / 或者 $HOME 截止
+fun! CustomGetParentDirs(directory)
+  let root_dirs = []
+  if !empty(a:directory)
+    let parent_dirs = split(a:directory, '/')
+    while len(parent_dirs)
+      let s = remove(parent_dirs, -1)
+      let parent_dir = '/'.join(parent_dirs, '/')
+      let root_dirs = add(root_dirs, parent_dir)
+      if parent_dir == $HOME || parent_dir == '/'
+        break
+      endif
+    endwhile
+  endif
+  return root_dirs
+endfun
+
+" 从指定目录开始向前查找对应的文件
+fun! CustomGetFileInParentDirs(fromdir, filename)
+  let parent_dirs = CustomGetParentDirs(a:fromdir)
+  if !len(parent_dirs)
+    return ""
+  endif
+  for directory in parent_dirs
+    let filepath = join([directory,a:filename], '/')
+    if filereadable(filepath)
+      return filepath
+    endif
+  endfor
+  return ""
+endfun
+
+let b:cur_filepath = CustomGetFileInParentDirs(expand('%:p:h'), '.workspace.vim')
+" echo b:cur_filepath
+if filereadable(expand(b:cur_filepath))
+    exec "so ".b:cur_filepath
+endif
+
