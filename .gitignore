@@ -62,6 +62,6 @@ vendor
 # Custom
 *.pyc
 .xmake
-vim-packges
+.vim
 *.bak
 

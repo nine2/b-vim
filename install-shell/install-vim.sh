@@ -29,7 +29,7 @@ ROOT_PATH=$(
 )
 # 基本配置目录
 VIM_CONFIG_PATH="$ROOT_PATH/config"
-VIM_TMP_PATH="$ROOT_PATH/vim-packges"
+VIM_TMP_PATH="$ROOT_PATH/.vim"
 mkdir -p $VIM_TMP_PATH
 
 VIM_CONFIG_BUNDLE_FILE="$VIM_CONFIG_PATH/vimrc.bundles_simple"
