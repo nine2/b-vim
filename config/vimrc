@@ -8,6 +8,7 @@ nnoremap ; :
 " 保证工作目录为当前目录
 autocmd BufEnter * lcd %:p:h
 
+
 " ##### 插件配置
 if filereadable(expand("$VIM_TMP_PATH/vimrc.bundles"))
     source $VIM_TMP_PATH/vimrc.bundles
@@ -23,17 +24,16 @@ if filereadable(expand("$VIM_CONFIG_PATH/vimrc.config_filetype"))
     source $VIM_CONFIG_PATH/vimrc.config_filetype
 endif
 
+" ##### 项目自定义配置
+" ##### 如果当前项目文件内有关于 vim  的特殊配置，
+if filereadable(expand("$VIM_CONFIG_PATH/vimrc.workspace"))
+    source $VIM_CONFIG_PATH/vimrc.workspace
+endif
+
 " ##### 本地自定义配置
 if filereadable(expand("$HOME/vimrc.local"))
     source $HOME/vimrc.local
 endif
-
-" ##### 如果当前项目文件内有关于 vim  的特殊配置，
-" 则加载此配置，实现自定义化.
-if filereadable(expand(".workspace.vim"))
-    source .workspace.vim
-endif
-
 
 " ##### 各种 vim 文件设置
 " 备份

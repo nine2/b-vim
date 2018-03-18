@@ -176,6 +176,8 @@ map <F8> :F8FormatFile<CR>
 
 " ###############################
 " 语法高亮
+" 针对项目设置的自定义语法，参考 README
+Bundle "nine2/vim-custom-syntax"
 " ###### 多语言语法检查
 Bundle 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
