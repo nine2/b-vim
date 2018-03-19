@@ -10,8 +10,8 @@ autocmd BufEnter * lcd %:p:h
 
 
 " ##### 插件配置
-if filereadable(expand("$VIM_TMP_PATH/vimrc.bundles"))
-    source $VIM_TMP_PATH/vimrc.bundles
+if filereadable(expand("$VIM_CONFIG_PATH/vimrc.bundles_base"))
+    source $VIM_CONFIG_PATH/vimrc.bundles_base
 endif
 
 " ##### 基本配置

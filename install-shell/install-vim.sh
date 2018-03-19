@@ -32,19 +32,19 @@ VIM_CONFIG_PATH="$ROOT_PATH/config"
 VIM_TMP_PATH="$ROOT_PATH/.vim"
 mkdir -p $VIM_TMP_PATH
 
-VIM_CONFIG_BUNDLE_FILE="$VIM_CONFIG_PATH/vimrc.bundles_simple"
+VIM_BUNDLE_FILE="$VIM_CONFIG_PATH/vimrc.bundles_simple"
 # 默认安装 simple 版
 COMPLEX=false
 if [ $# -ge 1 ]; then
 	if [ $1="--complex" ]; then
 		COMPLEX=true
-		VIM_CONFIG_BUNDLE_FILE="$VIM_CONFIG_PATH/vimrc.bundle_complex"
+		VIM_BUNDLE_FILE="$VIM_CONFIG_PATH/vimrc.bundle_complex"
 	else
 		echo "Error arg! no arg to rum simple , arg: --complex to use ycm and so on !"
 		exit
 	fi
 fi
-lnif $VIM_CONFIG_BUNDLE_FILE $VIM_TMP_PATH/vimrc.bundles
+lnif $VIM_BUNDLE_FILE $VIM_TMP_PATH/vimrc.bundles
 
 
 
@@ -52,6 +52,7 @@ BASHRC_FILE="$HOME/.bashrc.local"
 echo " Step 1: add config to $BASHRC_FILE"
 
 echo "export VIM_CONFIG_PATH=$VIM_CONFIG_PATH" >>$BASHRC_FILE
+# echo "export VIM_BUNDLE_FILE=$VIM_BUNDLE_FILE" >>$BASHRC_FILE
 echo "export VIM_TMP_PATH=$VIM_TMP_PATH" >>$BASHRC_FILE
 
 # 保留 从 github 上搞来的配置
@@ -77,7 +78,7 @@ mkdir -p \
 	$VIM_TMP_PATH/vimswap
 
 echo " Step 4: install plugins"
-grep "^Bundle [',\"]\S*/" $VIM_CONFIG_BUNDLE_FILE \
+grep "^Bundle [',\"]\S*/" $VIM_BUNDLE_FILE \
 	| sed "s/Bundle [',\"]/https:\/\/github.com\//g" | sed "s/[',\"]//g" | cut -d ' ' -f1 \
 	| while read line;do \
 		dirname=`echo ${line##*/} | sed 's/ //g'`; \
