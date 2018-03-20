@@ -24,7 +24,7 @@ endfun
 
 " 从指定目录开始向前查找对应的文件
 fun! CustomGetFileInParentDirs(fromdir, filename)
-  let parent_dirs = CustomGetParentDirs(a:fromdir)
+  let parent_dirs = CustomGetParentDirs(a:fromdir.'/flag')
   if !len(parent_dirs)
     return ""
   endif
