@@ -71,8 +71,8 @@ set showcmd
 "set showmode
 " 在上下移动光标时，光标的上方或下方至少会保留显示的行数
 set scrolloff=3
-" 一行宽度
-set winwidth=79
+" 一行宽度, 可控制自动调整窗口宽带
+" set winwidth=79
 " 命令行（在状态行下）的高度，默认为1，这里是2
 " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 set noshowmode
@@ -91,6 +91,7 @@ set lbr
 set showmatch
 set matchtime=2
 
+" set equalalways
 
 " ##### 设置文内智能搜索提示
     " 高亮search命中的文本
@@ -243,6 +244,10 @@ if &filetype == 'go' || expand("%:e") == "go"
     set list
     set lcs=tab:\|\ ,nbsp:% ",trail:-
 endif
+
+" tab键特殊显示
+" set list
+" set lcs=tab:\|\ ,nbsp:% ",trail:-
 
 noremap <F1> <Esc>"
 " 根据是否有行号来决定是否显示 tab 标示符，用来方便 copy
@@ -503,10 +508,6 @@ nmap <leader>z :call Zoom()<CR>
 
 " 在处理未保存或只读文件的时候，弹出确认
 set confirm
-
-" tab键特殊显示
-set list
-set lcs=tab:\|\ ,nbsp:% ",trail:-
 
 "  在 tab页显示序号，方便使用 ngt
 set tabline=%!CustomMyTabLine()  " custom tab pages line
