@@ -289,7 +289,11 @@ map <leader>l <C-W>l
 " 行首行尾
 noremap H ^
 noremap L $
-
+" 一次跨10行
+" 保留原来的 J 的功能
+noremap O J
+noremap J 10j
+noremap K 10k
 " 更改窗口大小
 nmap w=  :resize +3<CR>
 nmap w-  :resize -3<CR>

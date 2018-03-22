@@ -155,8 +155,8 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 5
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
 let g:syntastic_error_symbol='✘✘'
 let g:syntastic_warning_symbol='➤➤'
 let g:syntastic_enable_highlighting=1
@@ -165,9 +165,9 @@ let g:syntastic_python_checkers=['pep8', 'pyflakes']
 let g:syntastic_python_pep8_args='--ignore=E501,E225'
 " 修改高亮的背景色, 适应主题
 highlight SyntasticErrorSign guifg=white guibg=black
-nnoremap <Leader>se :cw<cr>
-nnoremap <Leader>sn :cnext<cr>
-nnoremap <Leader>sp :cprevious<cr>
+nnoremap <Leader>se :Errors<cr>
+nnoremap <Leader>sn :lnext<cr>
+nnoremap <Leader>sp :lprevious<cr>
 
 " ##### 增加对 STL\C++14等的C++语法高亮
 Bundle 'Mizuchi/STL-Syntax'
@@ -244,9 +244,12 @@ let g:vim_markdown_no_default_key_mappings=1
 " ###############################
 " Golang
 Bundle "fatih/vim-go"
-nmap gs :GoDef<CR>
+" nmap gs :GoDef<CR>
 " 此行会导致 C-] 失效, 同时禁用了 go 的 gd 指令，使用上面的 gs 代替
 let g:go_def_mapping_enabled = 0
+au FileType go nnoremap <buffer> <silent> <C-]> :GoDef<cr>
+" 取消绑定K, 使用 <leader>gd 代替
+let g:go_doc_keywordprg_enabled = 0
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 
 Bundle 'Blackrush/vim-gocode'
