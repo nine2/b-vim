@@ -633,5 +633,8 @@ if filereadable(expand(g:cur_bundle_file_path))
     exec "so  ".g:cur_bundle_file_path
 endif
 
+
+Bundle "guns/xterm-color-table.vim"
+
 " ################## 插件配置结束 ###########################
 filetype plugin indent on     " required!
