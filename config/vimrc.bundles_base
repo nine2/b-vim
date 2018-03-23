@@ -220,9 +220,10 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_enabled = 0
 let g:gitgutter_highlight_lines = 1
 nnoremap <leader>gs :GitGutterToggle<CR>
+nnoremap <leader>gk :GitGutterPrevHunk<CR>
+nnoremap <leader>gj :GitGutterNextHunk<CR>
+
 " ##### 可以查看回到某个历史状态
-
-
 Bundle 'sjl/gundo.vim'
 """"""
 noremap <leader>ht :GundoToggle<CR>
