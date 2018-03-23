@@ -114,13 +114,21 @@ set foldenable
 " syntax    使用语法定义折叠
 " diff      对没有更改的文本进行折叠
 " marker    使用标记进行折叠, 默认标记是 {{{ 和 }}}
-" set foldmethod=indent
-set foldmethod=syntax
+set foldmethod=indent
+" set foldmethod=syntax
 " set foldmethod=manual
-set foldlevel=99
+" set foldlevel=99
+" set foldenable              " 开始折叠
+" set foldmethod=indent       " 设置语法折叠
+" set foldcolumn=0            " 设置折叠区域的宽度
+setlocal foldlevel=1        " 设置折叠层数为
+set foldlevelstart=99       " 打开文件是默认不折叠代码
+" set foldclose=all          " 设置为自动关闭折叠
+
 " 代码折叠自定义快捷键
 let g:FoldMethod = 0
 map <leader>zz :call ToggleFold()<cr>
+map zA zM
 fun! ToggleFold()
     if g:FoldMethod == 0
         exe "normal! zM"
