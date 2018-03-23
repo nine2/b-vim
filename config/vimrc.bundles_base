@@ -228,6 +228,8 @@ Bundle 'sjl/gundo.vim'
 """"""
 noremap <leader>ht :GundoToggle<CR>
 
+Bundle 'Xuyuanp/nerdtree-git-plugin'
+
 
 
 " ###############################
@@ -447,6 +449,7 @@ let g:NERDTreeMapOpenVSplit = 'v'
 "打开NERDTree,定位到当前文件
 noremap <silent> <Leader>nf :NERDTreeFind<cr>
 autocmd vimenter * if !argc() | NERDTree | endif
+" 选中目录，按 ma 可以在目录中新建文件
 
 
 " ##### 目录导航
