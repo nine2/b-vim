@@ -38,7 +38,7 @@ COMPLEX=false
 if [ $# -ge 1 ]; then
 	if [ $1="--complex" ]; then
 		COMPLEX=true
-		VIM_BUNDLE_FILE="$VIM_CONFIG_PATH/vimrc.bundle_complex"
+		VIM_BUNDLE_FILE="$VIM_CONFIG_PATH/vimrc.bundles_complex"
 	else
 		echo "Error arg! no arg to rum simple , arg: --complex to use ycm and so on !"
 		exit
