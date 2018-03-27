@@ -14,3 +14,11 @@ git clone https://github.com/nine2/b-vim.git
 cd b-vim/install-shell
 ./install-vim.sh
 ```
+
+插件管理使用 Vundle, 插件管理使用 Vundle 的方式。
+插件命令使用的是 Bundle，因此新增插件时使用 Bundle, 如：
+加入插件 "github/eg"，则在 vimrc.bundles_base 里增加：
+```
+Bundle "github/eg"
+```
+然后 打开 vim, 使用命令 `:BundleInstall` 安装插件，安装后重新打开 vim 即可使用。
