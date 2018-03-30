@@ -254,6 +254,8 @@ au FileType go nnoremap <buffer> <silent> <C-]> :GoDef<cr>
 " 取消绑定K, 使用 <leader>gd 代替
 let g:go_doc_keywordprg_enabled = 0
 au FileType go nmap <Leader>gd <Plug>(go-doc)
+" 自动导入包
+nmap gi :GoImports<CR>
 
 Bundle 'Blackrush/vim-gocode'
 
