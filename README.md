@@ -22,3 +22,6 @@ cd b-vim/install-shell
 Bundle "github/eg"
 ```
 然后 打开 vim, 使用命令 `:BundleInstall` 安装插件，安装后重新打开 vim 即可使用。
+
+# 注意
+由于部分插件的原因，需要 vim7.4 以上版本！
