@@ -24,16 +24,17 @@ if filereadable(expand("$VIM_CONFIG_PATH/vimrc.config_filetype"))
     source $VIM_CONFIG_PATH/vimrc.config_filetype
 endif
 
+" ##### 本地自定义配置
+if filereadable(expand("$HOME/.vimrc.local"))
+    source $HOME/.vimrc.local
+endif
+
 " ##### 项目自定义配置
 " ##### 如果当前项目文件内有关于 vim  的特殊配置，
 if filereadable(expand("$VIM_CONFIG_PATH/vimrc.workspace"))
     source $VIM_CONFIG_PATH/vimrc.workspace
 endif
 
-" ##### 本地自定义配置
-if filereadable(expand("$HOME/.vimrc.local"))
-    source $HOME/.vimrc.local
-endif
 
 " ##### 各种 vim 文件设置
 " 备份
