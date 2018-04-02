@@ -28,6 +28,8 @@ endfun
 " autocmd FileType c,cpp,py,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,pike autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
 " ###### 加入注释， 主要以 # 和 c++系列 进行注释的语言
+let g:file_copyright_name = "在 vimrc 文件中添加 let g:file_copyright_name = 'your name'"
+let g:file_copyright_email = "在 vimrc 文件中添加 let g:file_copyright_name = 'your email'"
 function! SetComment()
     let l = 0
     let cx= 1
@@ -46,20 +48,19 @@ function! SetComment()
     endif
     call append(l + 2, "\#   Copyright (C)".strftime("%Y")." All rights reserved.")
     call append(l + 3, "#")
-    call append(l + 4, "\#   Author        : bbxytl")
-    call append(l + 5, "\#   Email         : bbxytl@gmail.com")
+    call append(l + 4, "\#   Author        : ".expand(g:file_copyright_name))
+    call append(l + 5, "\#   Email         : ".expand(g:file_copyright_email))
     call append(l + 6, "\#   File Name     : ".expand("%:t"))
     call append(l + 7, "\#   Last Modified : ".strftime("%Y-%m-%d %H:%M"))
     call append(l + 8, "\#   Describe      :")
     call append(l + 9, "\#")
-    call append(l + 10, "\#   Log           :")
-    call append(l + 11, "\#")
     if cx == 1
-        call append(l + 12, "\# ====================================================")
+        call append(l + 10, "\# ====================================================")
     else
-        call append(l + 12, "\# ====================================================*/")
+        call append(l + 10, "\# ====================================================*/")
     endif
 endfunction
+let s:file_copyright_head_end_line_no = 9
 
 " 将键盘上的 uh 功能键映射为添加文件头的快捷键
 map uh :call AutoSetFileHead()<cr>'s
@@ -94,40 +95,57 @@ endfunction
 
 " ##### 不同文件添加不同头总调用函数
 function! AddTitle()
+    let file_copyright_head_hase = 0
     "如果文件类型为.sh文件
     if &filetype == 'sh'
         call Title_sh()
+        let file_copyright_head_hase = 1
     endif
 
     "如果文件类型为perl文件
     if &filetype == 'perl'
         call Title_perl()
+        let file_copyright_head_hase = 1
     endif
 
     "如果文件类型为python
     if &filetype == 'python'
         call Title_python()
+        let file_copyright_head_hase = 1
     endif
 
     " Pike 文件
     if &filetype == 'pike'
         call Title_pike()
+        let file_copyright_head_hase = 1
     endif
 
     " H 文件
     let hf = expand("%:e") == "h" || expand("%:e") == "hpp"
     if hf
         call Title_h()
+        let file_copyright_head_hase = 1
     endif
 
     " C 文件
     if &filetype == 'c' && !hf
         call Title_c()
+        let file_copyright_head_hase = 1
     endif
 
     " CPP 文件
     if &filetype == "cpp" && !hf || expand("%:e") == "cc"
         call Title_cpp()
+        let file_copyright_head_hase = 1
+    endif
+
+    if &filetype == 'go'
+        call Title_go()
+        let file_copyright_head_hase = 1
+    endif
+
+    if file_copyright_head_hase is 0
+        call Title_file()
     endif
 
     normal G
@@ -152,7 +170,7 @@ func! Title_python()
     call append(1, "\# encoding: utf-8")
     call append(2, "\# coding style: pep8")
     call SetComment()
-    let l = 13
+    let l = s:file_copyright_head_end_line_no + 2
     call append(line(".") + l + 1, "")
     call append(line(".") + l + 2, "import sys")
     call append(line(".") + l + 3, "\# import os")
@@ -164,7 +182,8 @@ endfunc
 
 func! Title_h()
     call SetComment()
-    let l = 11
+    " let l = 9
+    let l = s:file_copyright_head_end_line_no
     call append(line(".") + l + 1, "")
     call append(line(".") + l + 2, "\#ifndef  _".toupper(expand("%:t:r"))."_H")
     call append(line(".") + l + 3, "\#define  _".toupper(expand("%:t:r"))."_H")
@@ -175,7 +194,9 @@ endfunc
 
 func! Title_c()
     call SetComment()
-    let l = 11
+    " let l = 9
+    let l = s:file_copyright_head_end_line_no
+    echom l
     call append(line(".") + l + 1, "")
     call append(line(".") + l + 2, "\#include <stdio.h>")
     call append(line(".") + l + 3, "")
@@ -184,7 +205,8 @@ endfunc
 
 func! Title_cpp()
     call SetComment()
-    let l = 11
+    " let l = 9
+    let l = s:file_copyright_head_end_line_no
     call append(line(".") + l + 1, "")
     call append(line(".") + l + 2, "\#include <iostream>")
     call append(line(".") + l + 3, "using namespace std;")
@@ -192,6 +214,21 @@ func! Title_cpp()
     call append(line(".") + l + 6, "")
     "call append(line(".") + l + 5, "\#include \"".expand("%:t:r").".h\"")
 endfunc
+
+func! Title_go()
+    call SetComment()
+    let l = s:file_copyright_head_end_line_no
+    call append(line(".") + l + 1, "")
+    call append(line(".") + l + 2, "")
+endfunc
+
+func! Title_file()
+    call SetComment()
+    let l = s:file_copyright_head_end_line_no
+    call append(line(".") + l + 1, "")
+    call append(line(".") + l + 2, "")
+endfunc
+
 
 " set some keyword to highlight
 if has("autocmd")
