@@ -220,6 +220,7 @@ func! Title_go()
     let l = s:file_copyright_head_end_line_no
     call append(line(".") + l + 1, "")
     call append(line(".") + l + 2, "")
+    call append(line(".") + l + 2, "import \"fmt\"")
 endfunc
 
 func! Title_file()
