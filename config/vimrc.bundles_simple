@@ -30,7 +30,13 @@ map <F8> :F8FormatFile<CR>
 
 " ###############################
 " 自动补全
-Bundle 'vim-scripts/AutoComplPop'
+" Bundle 'vim-scripts/AutoComplPop'
+Bundle "Shougo/neocomplcache.vim"
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 
 " #### 主要用于 C/C++ 代码补全，需要 ctag 支持

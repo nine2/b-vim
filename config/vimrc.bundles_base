@@ -254,8 +254,12 @@ au FileType go nnoremap <buffer> <silent> <C-]> :GoDef<cr>
 " 取消绑定K, 使用 <leader>gd 代替
 let g:go_doc_keywordprg_enabled = 0
 au FileType go nmap <Leader>gd <Plug>(go-doc)
-" 自动导入包
+" 自动导入包, 格式化 imports
 nmap gi :GoImports<CR>
+" 保存时自动使用 gofmt 格式代码，使用 goimports 格式 import 部分，
+" 同时自动导入缺少的import
+let g:go_fmt_command = "goimports"
+
 
 Bundle 'Blackrush/vim-gocode'
 
