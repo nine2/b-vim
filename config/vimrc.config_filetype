@@ -29,7 +29,7 @@ endfun
 
 " ###### 加入注释， 主要以 # 和 c++系列 进行注释的语言
 let g:file_copyright_name = "在 vimrc 文件中添加 let g:file_copyright_name = 'your name'"
-let g:file_copyright_email = "在 vimrc 文件中添加 let g:file_copyright_name = 'your email'"
+let g:file_copyright_email = "在 vimrc 文件中添加 let g:file_copyright_email = 'your email'"
 function! SetComment()
     let l = 0
     let cx= 1
