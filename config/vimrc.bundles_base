@@ -228,8 +228,14 @@ Bundle 'sjl/gundo.vim'
 """"""
 noremap <leader>ht :GundoToggle<CR>
 
+" ##### 在 nerdtree 上显示目录文件的 git 状态
 Bundle 'Xuyuanp/nerdtree-git-plugin'
 
+" ##### 使用 git blame 等功能
+Bundle "tpope/vim-fugitive"
+" 使用命令
+" Gblame, Gstatue, help fugitive
+" 使用 Glog 可查看历史版本文件
 
 
 " ###############################
