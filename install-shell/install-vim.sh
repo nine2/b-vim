@@ -47,16 +47,8 @@ fi
 lnif $VIM_BUNDLE_FILE $VIM_TMP_PATH/vimrc.bundles
 
 
-
-BASHRC_FILE="$HOME/.bashrc.local"
-echo " Step 1: add config to $BASHRC_FILE"
-
-echo "export VIM_CONFIG_PATH=$VIM_CONFIG_PATH" >>$BASHRC_FILE
-# echo "export VIM_BUNDLE_FILE=$VIM_BUNDLE_FILE" >>$BASHRC_FILE
-echo "export VIM_TMP_PATH=$VIM_TMP_PATH" >>$BASHRC_FILE
-
 # 保留 从 github 上搞来的配置
-echo " Step 12 bucking up current config"
+echo " Step 0: bucking up current config"
 if [ -e $HOME/.vimrc ]; then mv $HOME/.vimrc $HOME/.vimrc_other; fi
 today=$(date +%Y%m%d)
 ORG_CONFIG_BAK="$VIM_TMP_PATH/orgConfigBak"
@@ -65,6 +57,14 @@ vimbak="$ORG_CONFIG_BAK/ori-vim.$today"
 mkdir -p $vimbak
 for i in $HOME/.vim/tags_list; do [ -L $i ] && unlink $i; done
 for i in $HOME/.vim/tags_list; do [ -e $i ] && cp $i $i.bak; done
+
+echo " Step 1: add config to $BASHRC_FILE"
+TMP_ENV_FILE="vim-tmp-env-file"
+echo "export VIM_CONFIG_PATH=$VIM_CONFIG_PATH" >$TMP_ENV_FILE
+echo "export VIM_TMP_PATH=$VIM_TMP_PATH" >>$TMP_ENV_FILE
+[[ -f $HOME/.bashrc ]] && cat $TMP_ENV_FILE >> $HOME/.bashrc
+[[ -f $HOME/.zshrc ]] && cat $TMP_ENV_FILE >> $HOME/.zshrc
+rm $TMP_ENV_FILE
 
 echo " Step 2: setting tu symlinks"
 lnif $VIM_CONFIG_PATH/vimrc $HOME/.vimrc
@@ -77,7 +77,17 @@ mkdir -p \
 	$VIM_TMP_PATH/vimview \
 	$VIM_TMP_PATH/vimswap
 
-echo " Step 4: install plugins"
+echo " Step 4: link tags_list"
+SYS_VERSION=`uname -s`
+projects=$VIM_CONFIG_PATH/projects
+if [ $SYS_VERSION = 'Darwin' ];then
+    lnif $projects/tags_list_mac $VIM_TMP_PATH/tags_list
+else if [ $SYS_VERSION = 'Linux' ];then
+    lnif $projects/tags_list_linux $VIM_TMP_PATH/tags_list
+    fi
+fi
+
+echo " Step 5: install plugins"
 grep "^Bundle [',\"]\S*/" $VIM_CONFIG_PATH/vimrc.bundles_base \
 	| sed "s/Bundle [',\"]/https:\/\/github.com\//g" | sed "s/[',\"]//g" | cut -d ' ' -f1 \
 	| while read line;do \
@@ -96,17 +106,6 @@ grep "^Bundle [',\"]\S*/" $VIM_BUNDLE_FILE \
 # export SHELL="/bin/sh"
 # vim +BundleInstall! +BundleClean +qall
 # export SHELL=$system_shell
-
-echo " Step 5: link tags_list"
-SYS_VERSION=`uname -s`
-projects=$VIM_CONFIG_PATH/projects
-if [ $SYS_VERSION = 'Darwin' ];then
-    lnif $projects/tags_list_mac $VIM_TMP_PATH/tags_list
-else if [ $SYS_VERSION = 'Linux' ];then
-    lnif $projects/tags_list_linux $VIM_TMP_PATH/tags_list
-    fi
-fi
-
 
 # 编译前确定安装了：sudo apt-get install python2.7-dev
 #                   sudo yum install python-devel
