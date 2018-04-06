@@ -630,13 +630,20 @@ nmap <Leader>r <Plug>(quickrun)
 map <F10> :QuickRun<CR>
 
 
-Bundle "vim-scripts/DoxygenToolkit.vim"
-let s:licenseTag = "Copyright(C)\<enter>"
-let s:licenseTag = s:licenseTag . "For free\<enter>"
-let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
-let g:DoxygenToolkit_licenseTag = s:licenseTag
-let g:DoxygenToolkit_briefTag_funcName="yes"
-let g:doxygen_enhanced_color=1
+" 文件头增加 copyright
+Bundle "nine2/vim-copyright"
+let g:file_copyright_name = "bbxytl"
+let g:file_copyright_email = "bbxytl@gmail.com"
+let g:file_copyright_auto_filetypes = ['sh', 'plx', 'pl', 'pm', 'py', 'python', 'h', 'hpp', 'c', 'cpp', 'java']
+map uh :CopyrightUpdate<cr>
+
+" Bundle "vim-scripts/DoxygenToolkit.vim"
+" let s:licenseTag = "Copyright(C)\<enter>"
+" let s:licenseTag = s:licenseTag . "For free\<enter>"
+" let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
+" let g:DoxygenToolkit_licenseTag = s:licenseTag
+" let g:DoxygenToolkit_briefTag_funcName="yes"
+" let g:doxygen_enhanced_color=1
 
 " ####################################
 " 加载 不同 配置
@@ -645,7 +652,7 @@ if filereadable(expand(g:cur_bundle_file_path))
     exec "so  ".g:cur_bundle_file_path
 endif
 
-
+" xterm 颜色(256色)
 Bundle "guns/xterm-color-table.vim"
 
 " ################## 插件配置结束 ###########################
