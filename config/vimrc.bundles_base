@@ -217,11 +217,28 @@ Bundle 'yssource/python.vim'
 Bundle 'airblade/vim-gitgutter'
 """"""
 let g:gitgutter_map_keys = 0
-let g:gitgutter_enabled = 0
-let g:gitgutter_highlight_lines = 1
+let g:gitgutter_enabled = 1
+let g:gitgutter_highlight_lines = 0
 nnoremap <leader>gs :GitGutterToggle<CR>
 nnoremap <leader>gk :GitGutterPrevHunk<CR>
 nnoremap <leader>gj :GitGutterNextHunk<CR>
+" 一个命令切换高亮行
+func! CustomGitGutterLineHights()
+    if g:gitgutter_highlight_lines is 1
+        exe ":GitGutterLineHighlightsDisable"
+    else
+        exe ":GitGutterLineHighlightsEnable"
+    endif
+endfunc
+nnoremap <leader>gh :call CustomGitGutterLineHights()<CR>
+
+" ##### 使用 git blame 等功能
+Bundle "tpope/vim-fugitive"
+" 使用命令
+" Gblame, Gstatue, help fugitive
+" 使用 Glog 可查看历史版本文件
+nnoremap <leader>gb :Gblame<CR>
+
 
 " ##### 可以查看回到某个历史状态
 Bundle 'sjl/gundo.vim'
@@ -230,13 +247,6 @@ noremap <leader>ht :GundoToggle<CR>
 
 " ##### 在 nerdtree 上显示目录文件的 git 状态
 Bundle 'Xuyuanp/nerdtree-git-plugin'
-
-" ##### 使用 git blame 等功能
-Bundle "tpope/vim-fugitive"
-" 使用命令
-" Gblame, Gstatue, help fugitive
-" 使用 Glog 可查看历史版本文件
-
 
 " ###############################
 " Markdown
