@@ -51,7 +51,7 @@ set noerrorbells
 set t_vb=
 set tm=500
 " Remember info about open buffers on close
-set viminfo^=%
+" set viminfo^=%
 " For regular expressions turn magic on
 set magic
 " Configure backspace so it acts as it should act
@@ -596,4 +596,16 @@ endfunction
 " macvim 或 gvim 中的基本配色
 highlight Normal guifg=grey70
 highlight Cursor guifg=grey70
+
+
+" 显示当前行所在函数名信息
+fun! ShowFuncName()
+  let lnum = line(".")
+  let col = col(".")
+  echohl ModeMsg
+  echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
+  echohl None
+  call search("\\%" . lnum . "l" . "\\%" . col . "c")
+endfun
+map f :call ShowFuncName() <CR>
 
