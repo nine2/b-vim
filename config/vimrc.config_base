@@ -609,3 +609,9 @@ fun! ShowFuncName()
 endfun
 map f :call ShowFuncName() <CR>
 
+" vim 配置说明：
+" 跳到函数头
+" [[
+" 跳到下一个函数
+" ]]
+
