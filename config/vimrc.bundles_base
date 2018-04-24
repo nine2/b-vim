@@ -40,14 +40,24 @@ colorscheme molokai
 " Bundle 'Lokaltog/vim-powerline'
 Bundle 'vim-airline/vim-airline'
 " set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
+" Bundle 'gcmt/taboo.vim'
+" let g:taboo_tab_format = " %N.[%f %m] "
+" let g:taboo_modified_tab_flag = "+"
 Bundle 'vim-airline/vim-airline-themes'
 let g:airline_theme='molokai'
 let g:airline_exclude_preview = 1
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tabline#buffer_nr_show = 0
-let g:airline#extensions#bufferline#enabled = 1
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#buffer_idx_mode = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tabs = 1
+let g:airline#extensions#tabline#show_tab_nr = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#show_tab_type = 1
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
+
+let g:airline#extensions#taboo#enabled = 0
+let g:airline#extensions#whitespace#enabled = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -608,6 +618,7 @@ nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr>
 
 " Vim Workspace Controller
 Bundle 'szw/vim-ctrlspace'
+set hidden
 """"""
 hi CtrlSpaceSelected guifg=#586e75 guibg=#eee8d5 guisp=#839496 gui=reverse,bold ctermfg=10 ctermbg=7 cterm=reverse,bold
 hi CtrlSpaceNormal   guifg=#839496 guibg=#021B25 guisp=#839496 gui=NONE ctermfg=12 ctermbg=0 cterm=NONE
