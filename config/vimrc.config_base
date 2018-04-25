@@ -307,6 +307,10 @@ nmap w=  :resize +3<CR>
 nmap w-  :resize -3<CR>
 nmap w,  :vertical resize -3<CR>
 nmap w.  :vertical resize +3<CR>
+" 当前窗口最大化
+nmap wa  <C-W>_
+" 恢复窗口大小默认分布
+nmap wd  <C-W>=
 
 " ##### 搜索相关
 " Keep search pattern at the center of the screen."
