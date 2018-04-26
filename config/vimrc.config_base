@@ -330,6 +330,10 @@ noremap <silent><leader>/ :nohls<CR>
 " :b1 :b2   :bf :bl
 nnoremap [b :bprevious<cr>
 nnoremap ]b :bnext<cr>
+nnoremap bj :bprevious<cr>
+nnoremap bk :bnext<cr>
+nnoremap bd :bdelete<cr>
+nnoremap bw :bwipeout<cr>
 
 " ##### tab 操作
 " http://vim.wikia.com/wiki/Alternative_tab_navigation
@@ -337,8 +341,8 @@ nnoremap ]b :bnext<cr>
 "map <C-2> 2gt
 map th :tabfirst<cr>
 map tl :tablast<cr>
-map tj :tabnext<cr>
-map tk :tabprev<cr>
+map tk :tabnext<cr>
+map tj :tabprev<cr>
 " map <leader>tn :tabnext<cr>
 " map <leader>tp :tabprev<cr>
 " map <leader>te :tabedit<cr>
@@ -357,8 +361,8 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
-" noremap <leader>= :tabedit<cr>
-" noremap <leader>- :tabclose<cr>
+noremap <leader>= :tabedit<cr>
+noremap <leader>- :tabclose<cr>
 
 " Toggles between the active and last active tab "
 " The first tab is always 1 "
