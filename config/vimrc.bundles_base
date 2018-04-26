@@ -275,9 +275,9 @@ let g:vim_markdown_no_default_key_mappings=1
 " ###############################
 " Golang
 Bundle "fatih/vim-go"
-nmap gs :<C-u>call go#def#Jump("vsplit")<CR>
 " 此行会导致 C-] 失效, 同时禁用了 go 的 gd 指令，使用上面的 gs 代替
 let g:go_def_mapping_enabled = 0
+au FileType go nmap gs :<C-u>call go#def#Jump("vsplit")<CR>
 au FileType go nnoremap <buffer> <silent> <C-]> :GoDef<cr>
 au FileType go nnoremap <buffer> <silent> <leader>s :<C-u>call go#def#Jump("split")<CR>
 au FileType go nnoremap <buffer> <silent> <leader>v :<C-u>call go#def#Jump("vsplit")<CR>
