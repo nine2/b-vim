@@ -238,7 +238,7 @@ nnoremap j gj
 nnoremap gj j
 
 " ##### F1 - F12 设置, 部分设置在 vimrc.bundle 里
-" F1
+" F1 显示当前文件相对于 pwd 的相对路径
 " F2 行号开关，用于鼠标复制代码用
 " F3 显示/关闭 树形资源管理器
 " F4 换行开关
@@ -257,7 +257,8 @@ endif
 " set list
 " set lcs=tab:\|\ ,nbsp:% ",trail:-
 
-noremap <F1> <Esc>"
+" noremap <F1> <Esc>"
+nnoremap <F1> :file<CR>
 " 根据是否有行号来决定是否显示 tab 标示符，用来方便 copy
 function! TabShowSign()
     if(&relativenumber || &number)
@@ -599,7 +600,7 @@ set confirm
 ""      endif
 ""      return s
 ""  endfunction
-"  
+"
 " macvim 或 gvim 中的基本配色
 highlight Normal guifg=grey70
 highlight Cursor guifg=grey70
