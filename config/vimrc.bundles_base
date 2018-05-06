@@ -54,7 +54,7 @@ let g:airline#extensions#tabline#show_tab_type = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#switch_buffers_and_tabs = 0
+let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
@@ -177,9 +177,13 @@ let g:syntastic_python_checkers=['pep8', 'pyflakes']
 let g:syntastic_python_pep8_args='--ignore=E501,E225'
 " 修改高亮的背景色, 适应主题
 highlight SyntasticErrorSign guifg=white guibg=black
+nnoremap <Leader>ss :SyntasticCheck<cr>:Errors<cr>
 nnoremap <Leader>se :Errors<cr>
-nnoremap <Leader>sn :lnext<cr>
-nnoremap <Leader>sp :lprevious<cr>
+nnoremap <Leader>sj :lnext<cr>
+nnoremap <Leader>sk :lprevious<cr>
+nnoremap <Leader>sc :lclose<cr>
+" autocmd FileType go let g:syntastic_auto_loc_list = 1
+" autocmd VimEnter go SyntasticCheck
 
 " ##### 增加对 STL\C++14等的C++语法高亮
 Bundle 'Mizuchi/STL-Syntax'
