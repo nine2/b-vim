@@ -56,9 +56,16 @@ if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm
     let g:ycm_global_ycm_extra_conf = "$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 endif
 let g:ycm_confirm_extra_conf = 0
+" 使用 YCM 时 关闭 syntastic 的 java checker, 防止冲突
+let g:syntastic_java_checkers = []
 
 Bundle 'tdcdev/ycm_simple_conf'
 
 Bundle 'rizzatti/dash.vim'
 map <leader>ds :Dash<cr>
+
+" java 补全，不常用，主要用来 import
+Bundle 'artur-shaik/vim-javacomplete2'
+" autocmd FileType java setlocal omnifunc=javacomplete#Complete
+" let g:JavaComplete_GradleExecutable = 'gradle'
 

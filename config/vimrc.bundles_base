@@ -184,6 +184,8 @@ nnoremap <Leader>sk :lprevious<cr>
 nnoremap <Leader>sc :lclose<cr>
 " autocmd FileType go let g:syntastic_auto_loc_list = 1
 " autocmd VimEnter go SyntasticCheck
+"syntastic 保存检查代码时候传入参数, 可以解决 java 文件第三方包有 语法报警问题
+let g:syntastic_java_javac_args="-cp ../../lib:../../bin -sourcepath ../../bin -Djava.ext.dirs=../../lib -d ../../bin"
 
 " ##### 增加对 STL\C++14等的C++语法高亮
 Bundle 'Mizuchi/STL-Syntax'
@@ -295,7 +297,7 @@ nmap gi :GoImports<CR>
 " 同时自动导入缺少的import
 let g:go_fmt_command = "goimports"
 
-
+Bundle 'nsf/gocode'
 Bundle 'Blackrush/vim-gocode'
 
 " go debug
