@@ -426,9 +426,10 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " ##### 文件搜索 change to https://github.com/ctrlpvim/ctrlp.vim
 Bundle 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<leader>p'
+let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'
-" map <leader>f :CtrlPMRU<CR>
+" map <leader>f :CtrlP<CR>
+map <leader>b :CtrlPBuffer<CR>
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*        " Linux/MacOSX
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
@@ -477,11 +478,23 @@ let g:ctrlsf_mapping = {
     \ }
 nnoremap <leader>sp :CtrlSF<CR>
 
-" 强大的模糊搜索
+" 强大的模糊搜索, CtrlP 比它更强大
 " 默认：
 " <leader>f 查找文件
 " <leader>b 查找buffer
-Bundle 'Yggdroot/LeaderF'
+" Bundle 'Yggdroot/LeaderF'
+
+" 查看所有 tab 页内容
+" 默认快捷键
+" <leader>mf
+Bundle 'kien/tabman.vim'
+" 查看所有buffer
+" 默认快捷键
+" <leader>be
+" <leader>bs
+Bundle 'jlanzarotta/bufexplorer'
+let g:bufExplorerShowNoName=1
+
 
 " ##### 括号显示增强
 Bundle 'kien/rainbow_parentheses.vim'
@@ -729,18 +742,6 @@ Bundle "guns/xterm-color-table.vim"
 " let g:auto_save = 1
 " let g:auto_save_in_insert_mode = 0
 " let g:auto_save_silent = 1
-
-
-" 查看所有 tab 页内容
-" 默认快捷键
-" <leader>mf
-Bundle 'kien/tabman.vim'
-" 查看所有buffer
-" 默认快捷键
-" <leader>be
-" <leader>bs
-Bundle 'jlanzarotta/bufexplorer'
-let g:bufExplorerShowNoName=1
 
 " ################## 插件配置结束 ###########################
 filetype plugin indent on     " required!
