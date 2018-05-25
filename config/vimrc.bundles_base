@@ -45,13 +45,13 @@ Bundle 'vim-airline/vim-airline'
 " let g:taboo_modified_tab_flag = "+"
 Bundle 'vim-airline/vim-airline-themes'
 let g:airline_theme='molokai'
-let g:airline_exclude_preview = 1
-let g:airline#extensions#tabline#enabled = 1
+let g:airline_exclude_preview = 0
+let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#show_tabs = 1
 let g:airline#extensions#tabline#show_tab_nr = 1
 let g:airline#extensions#tabline#tab_nr_type = 1
 let g:airline#extensions#tabline#show_tab_type = 1
-let g:airline#extensions#tabline#show_buffers = 1
+let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
@@ -59,7 +59,10 @@ let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 let g:airline#extensions#taboo#enabled = 0
-let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
+
+let b:airline_whitespace_checks = [ 'indent', 'trailing', 'long']
+
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
@@ -165,7 +168,11 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 " to see error location list
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+" 默认为 2, 表示发现错误时不自动打开,当修正以后没有再发现错误时自动关闭
+" 1表示自动打开自动关闭
+" 0表示关闭自动打开和自动关闭
+" 3表示自动打开,但不自动关闭
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_loc_list_height = 5
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=1
@@ -177,15 +184,31 @@ let g:syntastic_python_checkers=['pep8', 'pyflakes']
 let g:syntastic_python_pep8_args='--ignore=E501,E225'
 " 修改高亮的背景色, 适应主题
 highlight SyntasticErrorSign guifg=white guibg=black
-nnoremap <Leader>ss :SyntasticCheck<cr>:Errors<cr>
-nnoremap <Leader>se :Errors<cr>
-nnoremap <Leader>sj :lnext<cr>
-nnoremap <Leader>sk :lprevious<cr>
-nnoremap <Leader>sc :lclose<cr>
-" autocmd FileType go let g:syntastic_auto_loc_list = 1
+nnoremap ew :SyntasticCheck<cr>:Errors<cr>
+nnoremap ee :SyntasticCheck<cr>
+nmap <silent> ek :cp
+nmap <silent> ej :cn
+" autocmd FileType go let g:syntastic_auto_loc_list = 0
 " autocmd VimEnter go SyntasticCheck
 "syntastic 保存检查代码时候传入参数, 可以解决 java 文件第三方包有 语法报警问题
 let g:syntastic_java_javac_args="-cp ../../lib:../../bin -sourcepath ../../bin -Djava.ext.dirs=../../lib -d ../../bin"
+
+" Bundle 'w0rp/ale'
+" let g:ale_sign_error = '✘✘'
+" let g:ale_sign_warning = '➤➤'
+" highlight clear ALEErrorSign
+" highlight clear ALEWarningSign
+" let g:ale_list_window_size = 5
+" " let g:ale_fix_on_save = 0
+" " let g:ale_go_staticcheck_lint_package = 0
+" " let g:ale_go_gometalinter_lint_package = 0
+" let g:ale_echo_msg_error_str = 'E'
+" let g:ale_echo_msg_warning_str = 'W'
+" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" let g:ale_linters = {'go': ['go vet', 'gofmt', 'golint']}
+" nmap <silent> ek <Plug>(ale_previous_wrap)
+" nmap <silent> ej <Plug>(ale_next_wrap)
+
 
 " ##### 增加对 STL\C++14等的C++语法高亮
 Bundle 'Mizuchi/STL-Syntax'
@@ -237,9 +260,9 @@ Bundle 'airblade/vim-gitgutter'
 let g:gitgutter_map_keys = 0
 let g:gitgutter_enabled = 1
 let g:gitgutter_highlight_lines = 0
-nnoremap <leader>gs :GitGutterToggle<CR>
-nnoremap <leader>gk :GitGutterPrevHunk<CR>
-nnoremap <leader>gj :GitGutterNextHunk<CR>
+nnoremap gt :GitGutterToggle<CR>
+nnoremap gk :GitGutterPrevHunk<CR>
+nnoremap gj :GitGutterNextHunk<CR>
 " 一个命令切换高亮行
 func! CustomGitGutterLineHights()
     if g:gitgutter_highlight_lines is 1
@@ -248,15 +271,17 @@ func! CustomGitGutterLineHights()
         exe ":GitGutterLineHighlightsEnable"
     endif
 endfunc
-nnoremap <leader>gh :call CustomGitGutterLineHights()<CR>
+nnoremap gh :call CustomGitGutterLineHights()<CR>
 
 " ##### 使用 git blame 等功能
 Bundle "tpope/vim-fugitive"
 " 使用命令
 " Gblame, Gstatue, help fugitive
 " 使用 Glog 可查看历史版本文件
-nnoremap <leader>gb :Gblame<CR>
+nnoremap gb :Gblame<CR>
 
+" 在vim中使用 git 命令
+Bundle 'motemen/git-vim'
 
 " ##### 可以查看回到某个历史状态
 Bundle 'sjl/gundo.vim'
@@ -296,6 +321,9 @@ nmap gi :GoImports<CR>
 " 保存时自动使用 gofmt 格式代码，使用 goimports 格式 import 部分，
 " 同时自动导入缺少的import
 let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
+" 取消每次有错都弹出报错框，如果希望看到所有报错，可使用 :lopen 打开报错框
+let g:go_metalinter_enabled = 0
 
 Bundle 'nsf/gocode'
 Bundle 'Blackrush/vim-gocode'
@@ -306,9 +334,9 @@ Bundle 'sebdah/vim-delve'
 map <leader>bb :DlvAddBreakpoint<cr>
 map <leader>ba :DlvToggleTracepoint<cr>
 map <leader>br :DlvRemoveBreakpoint<cr>
-map <leader>be :DlvRemoveTracepoint<cr>
+" map <leader>be :DlvRemoveTracepoint<cr>
 map <leader>bc :DlvClearAll<cr>
-map <leader>bt :DlvTest<cr>
+" map <leader>bt :DlvTest<cr>
 map <leader>bd :DlvDebug<cr>
 
 
@@ -328,10 +356,10 @@ au FileType python let b:delimitMate_nesting_quotes = ['"']
 Bundle 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 "let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
-map <Leader><leader>h <Plug>(easymotion-linebackward)
-map <Leader><Leader>j <Plug>(easymotion-j)
-map <Leader><Leader>k <Plug>(easymotion-k)
-map <Leader><leader>l <Plug>(easymotion-lineforward)
+map fh <Plug>(easymotion-linebackward)
+map fj <Plug>(easymotion-j)
+map fk <Plug>(easymotion-k)
+map fl <Plug>(easymotion-lineforward)
 " 重复上一次操作, 类似repeat插件, 很强大
 map <Leader><leader>. <Plug>(easymotion-repeat)
 
@@ -448,6 +476,11 @@ let g:ctrlsf_mapping = {
     \ }
 nnoremap <leader>sp :CtrlSF<CR>
 
+" 强大的模糊搜索
+" 默认：
+" <leader>f 查找文件
+" <leader>b 查找buffer
+Bundle 'Yggdroot/LeaderF'
 
 " ##### 括号显示增强
 Bundle 'kien/rainbow_parentheses.vim'
@@ -624,8 +657,10 @@ Bundle "rking/ag.vim"
 " set runtimepath^=~/.vim/bundle/ag
 " let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
 let g:ag_working_path_mode="r"
-let g:ag_highlight=1
+let g:ag_highlight=0
 nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr>
+" Ag 后面加一个 空格 方便输入处理
+nmap <leader>a :Ag 
 
 
 " Vim Workspace Controller
@@ -687,6 +722,24 @@ endif
 
 " xterm 颜色(256色)
 Bundle "guns/xterm-color-table.vim"
+
+" 自动保存
+" Bundle 'vim-scripts/vim-auto-save'
+" let g:auto_save = 1
+" let g:auto_save_in_insert_mode = 0
+" let g:auto_save_silent = 1
+
+
+" 查看所有 tab 页内容
+" 默认快捷键
+" <leader>mf
+Bundle 'kien/tabman.vim'
+" 查看所有buffer
+" 默认快捷键
+" <leader>be
+" <leader>bs
+Bundle 'jlanzarotta/bufexplorer'
+let g:bufExplorerShowNoName=1
 
 " ################## 插件配置结束 ###########################
 filetype plugin indent on     " required!
