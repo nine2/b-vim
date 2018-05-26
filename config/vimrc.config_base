@@ -248,14 +248,6 @@ nnoremap gj j
 " F9 显示函数列表--tagbar
 " <leader><F6> 切换十六进制
 " <leader><leader><F6> 切换回文本模式
-if &filetype == 'go' || expand("%:e") == "go"
-    set list
-    set lcs=tab:\|\ ,nbsp:% ",trail:-
-endif
-
-" tab键特殊显示
-" set list
-" set lcs=tab:\|\ ,nbsp:% ",trail:-
 
 " noremap <F1> <Esc>"
 nnoremap <F1> :file<CR>

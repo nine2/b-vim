@@ -124,17 +124,9 @@ let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
 
 " ###############################
 " 代码格式管理
-" ##### 缩进标识
-Bundle 'nathanaelkane/vim-indent-guides'
-" 随 vim 自启动
-let g:indent_guides_enable_on_vim_startup=0
-" 从第二层开始可视化显示缩进
-let g:indent_guides_start_level=1
-" 色块宽度
-let g:indent_guides_guide_size=1
-" 快捷键 i 开/关缩进可视化
-:nmap <silent> <Leader>i <Plug>IndentGuidesToggle
-
+" ##### 缩进标识, 这块通过设置 list 在文件 vimrc.config_base 里有些函数实现
+Bundle 'nine2/vim-indent-guides'
+map <leader>i :Nine2IndentGuides<cr>
 
 " ##### 快速去行尾空格
 Bundle 'bronson/vim-trailing-whitespace'
@@ -161,6 +153,8 @@ let g:NERDSpaceDelims=1
 " 语法高亮
 " 针对项目设置的自定义语法，参考 README
 Bundle "nine2/vim-custom-syntax"
+" 可使用此配置关闭语法高亮
+" let g:custom_syntax_hightlight_enable= 0
 " ###### 多语言语法检查
 Bundle 'scrooloose/syntastic'
 set statusline+=%#warningmsg#
@@ -244,7 +238,7 @@ nmap <Leader>sch :A<CR>
 
 " ##### Python 代码补全
 Bundle 'vim-scripts/Pydiction'
-let g:pydiction_location = '~/.vim/bundle/Pydiction/complete-dict'
+let g:pydiction_location = "$VIM_TMP_PATH/bundle/Pydiction/complete-dict"
 
 " ##### Python 快捷操作
 Bundle 'yssource/python.vim'
@@ -668,7 +662,6 @@ let g:tagbar_type_ruby = {
 
 
 Bundle "rking/ag.vim"
-" set runtimepath^=~/.vim/bundle/ag
 " let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
 let g:ag_working_path_mode="r"
 let g:ag_highlight=0
