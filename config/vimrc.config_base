@@ -232,10 +232,10 @@ endif
 "==========================================
 "Treat long lines as break lines (useful when moving around in them)
 "se swap之后，同物理行上线直接跳
-nnoremap k gk
-nnoremap gk k
-nnoremap j gj
-nnoremap gj j
+" nnoremap k gk
+" nnoremap gk k
+" nnoremap j gj
+" nnoremap gj j
 
 " ##### F1 - F12 设置, 部分设置在 vimrc.bundle 里
 " F1 显示当前文件相对于 pwd 的相对路径
@@ -631,3 +631,6 @@ nnoremap so :lopen<cr>
 nnoremap sj :lnext<cr>
 nnoremap sk :lprevious<cr>
 nnoremap sc :lclose<cr>
+
+" 格式化json
+nmap <leader>jf :%!python -m json.tool<cr>
