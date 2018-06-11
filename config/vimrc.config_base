@@ -634,3 +634,9 @@ nnoremap sc :lclose<cr>
 
 " 格式化json
 nmap <leader>jf :%!python -m json.tool<cr>
+
+" 防止vim卡顿
+set re=1
+set ttyfast
+set lazyredraw
+
