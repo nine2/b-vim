@@ -33,5 +33,13 @@
 " set tags+=~/.vim/systags
 " set tags+=~/.vim/systags_local
 
+" 创建对应目录, 可修改为当前项目独自的目录
+" let g:cust_vim_tmp_path_dir = $HOME/.vim
+" set backupdir=$HOME/.vim/vimbackup
+" set viewdir=$HOME/.vim/vimview
+" set dir=$HOME/.vim/vimswap
+" set undodir=$HOME/.vim/vimundo
+
+
 " 将此行加入文件首行，可以直接设置文件类型
 " /* vim: set filetype=vim : */

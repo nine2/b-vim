@@ -26,20 +26,26 @@ endfun
 fun! CustomGetFileInParentDirs(fromdir, filename)
   let parent_dirs = CustomGetParentDirs(a:fromdir.'/flag')
   if !len(parent_dirs)
-    return ""
+    return ["", ""]
   endif
   for directory in parent_dirs
     let filepath = join([directory,a:filename], '/')
     if filereadable(filepath)
-      return filepath
-    endif
+      return [directory, filepath]
+  endif
   endfor
-  return ""
+  return ["",""]
 endfun
 
-let b:cur_filepath = CustomGetFileInParentDirs(expand('%:p:h'), '.workspace.vim')
+let b:cur_filepath_list = CustomGetFileInParentDirs(expand('%:p:h'), '.workspace.vim')
+let b:cur_filepath = get(b:cur_filepath_list, 1, "")
 " echo b:cur_filepath
 if filereadable(expand(b:cur_filepath))
+    let b:cur_filepath_dir = get(b:cur_filepath_list, 0, "")
+    if !empty(b:cur_filepath_dir)
+        let g:cust_vim_tmp_path_dir = b:cur_filepath_dir
+        " echo g:cust_vim_tmp_path_dir
+    endif
     exec "so ".b:cur_filepath
 endif
 
