@@ -93,4 +93,6 @@ Bundle 'honza/vim-snippets'
 " A vim plugin that simplifies the transition between multiline and
 " single-line code
 Bundle 'AndrewRadev/splitjoin.vim'
+nmap sj :SplitjoinSplit<cr>
+nmap sk :SplitjoinJoin<cr>
 
