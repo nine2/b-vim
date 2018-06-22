@@ -250,7 +250,10 @@ endif
 " <leader><leader><F6> 切换回文本模式
 
 " noremap <F1> <Esc>"
+" 显示文件相对路径
 nnoremap <F1> :file<CR>
+" 显示文件的绝对路径
+nnoremap <leader><F1> :echo expand('%:p')<CR>
 " 根据是否有行号来决定是否显示 tab 标示符，用来方便 copy
 function! TabShowSign()
     if(&relativenumber || &number)
