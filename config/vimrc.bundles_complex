@@ -29,8 +29,8 @@ noremap <F8> :call F8FormatFile()<CR>
 " ##### 重量级补全
 Bundle 'Valloric/YouCompleteMe'
 " let g:ycm_key_list_select_completion = ['<Down>', '<Tab>']   " C-j 同时可用
-let g:ycm_key_list_select_completion = ['<Down>']   " C-j 同时可用, Tab 给 ultisnips 使用
-let g:ycm_key_list_previous_completion = ['<Up>']   " C-k 同时可用
+let g:ycm_key_list_select_completion = ['<Down>']   " C-n 同时可用, Tab 给 ultisnips 使用
+let g:ycm_key_list_previous_completion = ['<Up>']   " C-p 同时可用
 let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
 let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
 let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
@@ -81,14 +81,14 @@ imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
 Bundle 'SirVer/ultisnips'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-j>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " let g:UltiSnipsSnippetDirectories=[$VIM_CONFIG_PATH.'/projects/UltiSnips/']
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 " github 上的 snippets 集合
-Bundle 'honza/vim-snippets'
+Bundle 'bbxytl/vim-snippets'
 
 " A vim plugin that simplifies the transition between multiline and
 " single-line code

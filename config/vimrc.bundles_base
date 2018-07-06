@@ -131,7 +131,7 @@ map <leader>i :Nine2IndentGuides<cr>
 " ##### 快速去行尾空格
 Bundle 'bronson/vim-trailing-whitespace'
 " 下列文件类型中的行尾空格tab不高亮显示
-let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd', 'diff', 'ctrlsf']
+let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd', 'diff', 'ctrlsf', 'git']
 map <leader>, :FixWhitespace<cr>
 
 
@@ -348,7 +348,9 @@ nmap <Leader>tf :call Nine2GoTestFunc()<cr>
 nmap <F9> :call Nine2GoTestFunc()<CR>
 
 " 自动导入包, 格式化 imports
-nmap gi :GoImports<CR>
+nmap ga :GoAddTag json
+nmap gaj :GoAddTag json<CR>
+nmap gad :GoAddTag db json<CR>
 " 保存时自动使用 gofmt 格式代码，使用 goimports 格式 import 部分，
 " 同时自动导入缺少的import
 let g:go_fmt_command = "goimports"
@@ -494,6 +496,8 @@ nmap \ <Plug>CtrlSFCwordPath<CR>
 " let g:ctrlsf_winsize = '30%'
 let g:ctrlsf_auto_close = 0
 let g:ctrlsf_confirm_save = 0
+let g:ctrlsf_indent = 2
+" let g:ctrlsf_ignore_dir = ['bower_components', 'npm_modules']
 " Note: cannot use <CR> or <C-m> for open
 " Use : <sapce> or <tab>
 let g:ctrlsf_mapping = {
