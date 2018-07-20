@@ -92,15 +92,15 @@ grep "^Bundle [',\"]\S*/" $VIM_CONFIG_PATH/vimrc.bundles_base \
 	| sed "s/Bundle [',\"]/https:\/\/github.com\//g" | sed "s/[',\"]//g" | cut -d ' ' -f1 \
 	| while read line;do \
 		dirname=`echo ${line##*/} | sed 's/ //g'`; \
-		echo "git clone --depth 1 $line  $VIM_TMP_PATH/bundle/$dirname"; \
-		git clone --depth 1 $line  $VIM_TMP_PATH/bundle/$dirname; \
+		echo "git clone --depth 1 --recursive $line  $VIM_TMP_PATH/bundle/$dirname"; \
+		git clone --depth 1 --recursive $line  $VIM_TMP_PATH/bundle/$dirname; \
 	done
 grep "^Bundle [',\"]\S*/" $VIM_BUNDLE_FILE \
 	| sed "s/Bundle [',\"]/https:\/\/github.com\//g" | sed "s/[',\"]//g" | cut -d ' ' -f1 \
 	| while read line;do \
 		dirname=`echo ${line##*/} | sed 's/ //g'`; \
-		echo "git clone --depth 1 $line  $VIM_TMP_PATH/bundle/$dirname"; \
-		git clone --depth 1 $line  $VIM_TMP_PATH/bundle/$dirname; \
+		echo "git clone --depth 1 --recursive $line  $VIM_TMP_PATH/bundle/$dirname"; \
+		git clone --depth 1 --recursive $line  $VIM_TMP_PATH/bundle/$dirname; \
 	done
 # system_shell=$SHELLL
 # export SHELL="/bin/sh"

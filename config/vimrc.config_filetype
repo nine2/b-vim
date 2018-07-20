@@ -12,12 +12,11 @@ autocmd BufRead,BufNew *.pm setfiletype perl
 autocmd BufRead,BufNew *.plx setfiletype perl
 autocmd BufRead,BufNewFile *.go setfiletype go
 
-autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown.mkd
+autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=mkd
 " autocmd FileType python,py,c,cpp,java,javascript,go,php,ruby,xml,yml,perl set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType python,py set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 autocmd FileType pike set tabstop=4 shiftwidth=4 expandtab ai
-autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown.mkd
 
 
 " 保存文件时删除多余空格
