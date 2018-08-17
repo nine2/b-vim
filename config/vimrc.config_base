@@ -631,9 +631,10 @@ nnoremap cc :cclose<cr>
 
 " Location
 nnoremap so :lopen<cr>
+nnoremap sc :lclose<cr>
+" 跳转到不同的错误
 nnoremap sj :lnext<cr>
 nnoremap sk :lprevious<cr>
-nnoremap sc :lclose<cr>
 
 " 格式化json
 nmap <leader>jf :%!python -m json.tool<cr>
