@@ -162,6 +162,8 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 " to see error location list
 let g:syntastic_always_populate_loc_list = 1
+" 当第一行是报错时，自动跳转过去，否则，不自动跳转
+" let g:syntastic_auto_jump = 2
 " 默认为 2, 表示发现错误时不自动打开,当修正以后没有再发现错误时自动关闭
 " 1表示自动打开自动关闭
 " 0表示关闭自动打开和自动关闭
@@ -352,6 +354,7 @@ nmap <F9> :call Nine2GoTestFunc()<CR>
 " 自动导入包, 格式化 imports
 nmap ga :GoAddTag json
 nmap gaj :GoAddTag json<CR>
+nmap gar :GoAddTag schema json<CR>
 nmap gad :GoAddTag db json<CR>
 " 保存时自动使用 gofmt 格式代码，使用 goimports 格式 import 部分，
 " 同时自动导入缺少的import
