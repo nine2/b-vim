@@ -232,9 +232,9 @@ endif
 "==========================================
 "Treat long lines as break lines (useful when moving around in them)
 "se swap之后，同物理行上线直接跳
-" nnoremap k gk
+nnoremap k gk
 " nnoremap gk k
-" nnoremap j gj
+nnoremap j gj
 " nnoremap gj j
 
 " ##### F1 - F12 设置, 部分设置在 vimrc.bundle 里
@@ -303,10 +303,14 @@ nmap w=  :resize +3<CR>
 nmap w-  :resize -3<CR>
 nmap w,  :vertical resize -3<CR>
 nmap w.  :vertical resize +3<CR>
-" 当前窗口最大化
+" 当前窗口最大化, 高
 nmap wa  <C-W>_
+" 当前窗口最大化, 宽, 注意要有反斜杠
+nmap ws  <C-W>\|
 " 恢复窗口大小默认分布
 nmap wd  <C-W>=
+" 高和宽都最大化
+nmap ww  <C-W>_<C-W>\|
 
 " ##### 搜索相关
 " Keep search pattern at the center of the screen."

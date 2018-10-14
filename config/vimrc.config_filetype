@@ -35,3 +35,9 @@ if has("autocmd")
         autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\|NOTICE\)')
     endif
 endif
+
+" quickfix 窗口跳转到具体行
+au FileType qf nmap <leader>o :.cc<CR>
+" quickfix 窗口使用绝对行号
+au FileType qf set norelativenumber number
+

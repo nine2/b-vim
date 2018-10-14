@@ -131,7 +131,7 @@ map <leader>i :Nine2IndentGuides<cr>
 " ##### 快速去行尾空格
 Bundle 'bronson/vim-trailing-whitespace'
 " 下列文件类型中的行尾空格tab不高亮显示
-let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd', 'diff', 'ctrlsf', 'git']
+let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd', 'diff', 'ctrlsf', 'git', 'qf']
 map <leader>, :FixWhitespace<cr>
 
 
@@ -181,9 +181,18 @@ let g:syntastic_python_pep8_args='--ignore=E501,E225'
 " 修改高亮的背景色, 适应主题
 highlight SyntasticErrorSign guifg=white guibg=black
 nnoremap ew :SyntasticCheck<cr>:Errors<cr>
-nnoremap ee :SyntasticCheck<cr>
-nmap <silent> ek :cp
-nmap <silent> ej :cn
+" nnoremap ee :SyntasticCheck<cr>
+nmap <silent> ee :lr 1<cr>
+nmap <silent> e1 :lr 1<cr>
+nmap <silent> e2 :lr 2<cr>
+nmap <silent> e3 :lr 3<cr>
+nmap <silent> e4 :lr 4<cr>
+nmap <silent> e5 :lr 5<cr>
+nmap <silent> e6 :lr 6<cr>
+nmap <silent> e7 :lr 7<cr>
+nmap <silent> e8 :lr 8<cr>
+nmap <silent> e9 :lr 9<cr>
+nmap <silent> e0 :lla<cr>
 " autocmd FileType go let g:syntastic_auto_loc_list = 0
 " autocmd VimEnter go SyntasticCheck
 "syntastic 保存检查代码时候传入参数, 可以解决 java 文件第三方包有 语法报警问题
@@ -259,8 +268,8 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_enabled = 1
 let g:gitgutter_highlight_lines = 0
 nnoremap gt :GitGutterToggle<CR>
-nnoremap gk :GitGutterPrevHunk<CR>
-nnoremap gj :GitGutterNextHunk<CR>
+nnoremap gp :GitGutterPrevHunk<CR>
+nnoremap gn :GitGutterNextHunk<CR>
 nnoremap gr :GitGutterRevertHunk<CR>
 " 一个命令切换高亮行
 func! CustomGitGutterLineHights()
@@ -350,6 +359,7 @@ func! Nine2GoTestFunc()
 endfunc
 nmap <Leader>tf :call Nine2GoTestFunc()<cr>
 nmap <F9> :call Nine2GoTestFunc()<CR>
+nmap <leader><F7> :GoReferrers<cr>
 
 " 自动导入包, 格式化 imports
 nmap ga :GoAddTag json
