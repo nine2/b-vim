@@ -387,6 +387,7 @@ cmap w!! w !sudo tee >/dev/null %
 
 " Quickly close the current window
 nnoremap <leader>q :q<CR>
+nnoremap qq :q<CR>
 
 " Swap implementations of ` and ' jump to markers
 " By default, ' jumps to the marked line, ` jumps to the marked line and
