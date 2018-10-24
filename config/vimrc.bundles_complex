@@ -56,6 +56,9 @@ endif
 if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
     let g:ycm_global_ycm_extra_conf = "$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
 endif
+if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"))
+    let g:ycm_global_ycm_extra_conf = "$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
+endif
 let g:ycm_confirm_extra_conf = 0
 " 使用 YCM 时 关闭 syntastic 的 java checker, 防止冲突
 let g:syntastic_java_checkers = []
