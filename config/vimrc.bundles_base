@@ -345,6 +345,7 @@ nmap <Leader>tb :call Nine2GoBench()<cr>
 " 运行光标下的 Test
 func! Nine2GoTestFunc()
     exe ":ChangeToCurDir"
+    echo system('pwd')
     let test = search('func \(Test\|Example\)', "bcnW")
     if test == 0
         echo "vim-go: [test] no test found immediate to cursor"
@@ -354,8 +355,11 @@ func! Nine2GoTestFunc()
     let line = getline(test)
     let name = split(split(line, " ")[1], "(")[0]
     echo "Run Testing ".name." ....."
-    echo system("go test -v -test.run ".name)
+    echo "go test -v -test.run '".name."TestQueryAws$'"
+    " 防止运行到其他函数
+    echo system('go test -v -test.run "'.name.'$"')
     exe ":Rooter"
+    echo system('pwd')
 endfunc
 nmap <Leader>tf :call Nine2GoTestFunc()<cr>
 nmap <F9> :call Nine2GoTestFunc()<CR>
@@ -610,7 +614,18 @@ Bundle 'majutsushi/tagbar'
 nmap <leader>m :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
-let g:tagbar_show_linenumbers = 2
+let g:tagbar_show_linenumbers = 0
+" let g:tagbar_singleclick = 1
+let g:tagbar_left = 1
+let g:tagbar_map_zoomwin = "A"
+let g:tagbar_map_togglefold = "x"
+let g:tagbar_map_hidenonpublic = "t"
+let g:tagbar_map_showproto = "f"
+let g:tagbar_expand = 1
+let g:tagbar_autoshowtag = 1
+let g:tagbar_silent = 1
+let g:tagbar_map_jump = ["<CR>", "o"]
+set updatetime=500
 " cpp类型
 let g:tagbar_type_cpp = {
     \ 'kinds' : [
@@ -721,9 +736,13 @@ Bundle "rking/ag.vim"
 " let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
 let g:ag_working_path_mode="r"
 let g:ag_highlight=0
-nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr>
-" Ag 后面加一个 空格 方便输入处理
-nmap <leader>a :Ag 
+" nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr>
+" 查找函数调用
+nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr> \| grep '<c-r>=expand("<cword>")<cr>[(,)]'<cr>
+" 查询当前单词, 立刻查询
+nmap <leader>aa :Ag -w <c-r>=expand("<cword>")<cr><cr>
+" Ag 默认查找当前单词，可修改, 不立刻查询
+nmap <leader>a :Ag <c-r>=expand("<cword>")<cr>
 
 
 " Vim Workspace Controller

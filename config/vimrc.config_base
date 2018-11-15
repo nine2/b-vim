@@ -387,6 +387,8 @@ cmap w!! w !sudo tee >/dev/null %
 
 " Quickly close the current window
 nnoremap <leader>q :q<CR>
+" 快速保存 快捷键
+nnoremap <silent> <Leader>w :w<CR>
 nnoremap qq :q<CR>
 
 " Swap implementations of ` and ' jump to markers
@@ -446,8 +448,6 @@ highlight Pmenu    ctermbg=darkgrey  ctermfg=black
 highlight PmenuSel ctermbg=lightgrey ctermfg=black
 
 set term=screen-256color
-" 快速保存 快捷键
-nnoremap <silent> <Leader>w :w<CR>
 
 " 设置快捷键将选中文本块复制至系统剪贴板
 nmap ,y "+y
