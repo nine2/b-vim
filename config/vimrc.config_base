@@ -641,6 +641,10 @@ nnoremap sc :lclose<cr>
 nnoremap sj :lnext<cr>
 nnoremap sk :lprevious<cr>
 
+" 双击跳转
+map <2-LeftMouse> <C-]>
+map <C-RightMouse> <C-o>
+
 " 格式化json
 nmap <leader>jf :%!python -m json.tool<cr>
 
