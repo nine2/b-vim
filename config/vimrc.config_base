@@ -418,8 +418,11 @@ set guioptions+=e
 set guioptions-=r
 set guioptions-=L
 set guitablabel=%M\ %t
-set showtabline=1
-set linespace=2
+" 0: 永远不会
+" 1: 至少有两个标签页时才会
+" 2: 永远会
+set showtabline=2
+set linespace=4
 set noimd
 set t_Co=256
 endif

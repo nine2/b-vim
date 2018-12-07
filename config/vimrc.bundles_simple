@@ -38,6 +38,12 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
+" ##### Python 代码补全
+Bundle 'vim-scripts/Pydiction'
+let g:pydiction_location = "$VIM_TMP_PATH/bundle/Pydiction/complete-dict"
+" 这里使用的是 <Tab> 键补全，如果使用了 Ultisnips, 则必须修改 UltiSnips 的补全
+" 触发键，否则在python里没法触发 UltiSnips
+
 
 " #### 主要用于 C/C++ 代码补全，需要 ctag 支持
 Bundle 'vim-scripts/OmniCppComplete'

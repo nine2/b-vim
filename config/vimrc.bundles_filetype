@@ -1,0 +1,23 @@
+" go
+let g:bundle_filetype_dir= expand("$VIM_CONFIG_PATH/filetype_bundles/")
+if filereadable(expand(g:bundle_filetype_dir)."go.vim")
+    " exec "so  ".g:bundle_filetype_dir."go.vim"
+endif
+
+let fileList = [
+    \ "go.vim",
+    \ "cpp.vim",
+    \ "python.vim",
+    \ "java.vim",
+    \ "git.vim",
+    \ "markdown.vim"
+    \ ]
+
+for fl in fileList
+    let item = "$VIM_CONFIG_PATH/filetype_bundles/".fl
+    let bundle_filetype_dir= expand(item)
+    if filereadable(expand(bundle_filetype_dir))
+        " echo bundle_filetype_dir
+        exec "so  ".bundle_filetype_dir
+    endif
+endfor

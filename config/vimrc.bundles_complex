@@ -84,11 +84,6 @@ Bundle 'tdcdev/ycm_simple_conf'
 Bundle 'rizzatti/dash.vim'
 map <leader>ds :Dash<cr>
 
-" java 补全，不常用，主要用来 import
-Bundle 'artur-shaik/vim-javacomplete2'
-" autocmd FileType java setlocal omnifunc=javacomplete#Complete
-" let g:JavaComplete_GradleExecutable = 'gradle'
-
 Bundle 'tenfyzhong/CompleteParameter.vim'
 inoremap <silent><expr> ( complete_parameter#pre_complete("()")
 smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
@@ -102,10 +97,48 @@ Bundle 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" 列出匹配的所有 snippets
+let g:UltiSnipsListSnippets="<c-a>"
 " let g:UltiSnipsSnippetDirectories=[$VIM_CONFIG_PATH.'/projects/UltiSnips/']
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+inoremap <c-l> <C-R>=SnipComplete()<CR>
+func! SnipComplete()
+  let line = getline('.')
+  let start = col('.') - 1
+  while start > 0 && line[start - 1] =~# '\k'
+    let start -= 1
+  endwhile
+  let suggestions = []
+
+  for item in UltiSnips#ListSnippets()
+    let trigger = item[0]
+    let menu = fnamemodify(item[2], ':t:r')
+    let entry = {'word': trigger, 'menu': menu, 'info': item[1]}
+    call add(suggestions, entry)
+  endfor
+  if empty(suggestions)
+    echohl Error | echon 'no match' | echohl None
+  elseif len(suggestions) == 1
+    let pos = getcurpos()
+    if start == 0
+      let str = trigger
+    else
+      let str = line[0:start - 1] . trigger
+    endif
+    call setline('.', str)
+    let pos[2] = len(str) + 1
+    call setpos('.', pos)
+    call UltiSnips#ExpandSnippet()
+  else
+    call complete(start + 1, suggestions)
+  endif
+  return ''
+endfunc
+
+
 " github 上的 snippets 集合
 Bundle 'bbxytl/vim-snippets'
 
@@ -114,4 +147,5 @@ Bundle 'bbxytl/vim-snippets'
 Bundle 'AndrewRadev/splitjoin.vim'
 nmap sj :SplitjoinSplit<cr>
 nmap sk :SplitjoinJoin<cr>
+
 
