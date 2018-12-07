@@ -1,3 +1,14 @@
+" ====================================================
+"   Copyright (C)2018 All rights reserved.
+"
+"   Author        : bbxytl
+"   Email         : bbxytl@gmail.com
+"   File Name     : vimrc.workspace
+"   Last Modified : 2018-12-07 18:30
+"   Describe      :
+"
+" ====================================================
+
 
 " ##### 如果当前项目文件内有关于 vim  的特殊配置，
 " 则加载此配置，实现自定义化.

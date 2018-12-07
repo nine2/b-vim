@@ -1,3 +1,14 @@
+" ====================================================
+"   Copyright (C)2018 All rights reserved.
+"
+"   Author        : bbxytl
+"   Email         : bbxytl@gmail.com
+"   File Name     : go.vim
+"   Last Modified : 2018-12-07 18:29
+"   Describe      :
+"
+" ====================================================
+
 
 " ###############################
 " Golang

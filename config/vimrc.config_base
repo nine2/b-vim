@@ -1,11 +1,14 @@
-"==========================================
-" Author:  bbxytl
-" Version: 3.0
-" Email: bbxytl@gmail.com
-" BlogPost: http://bbxytl.github.com
-" Last_modify: 2018-03-16
-" Sections:
-"==========================================
+" ====================================================
+"   Copyright (C)2018 All rights reserved.
+"
+"   Author        : bbxytl
+"   Email         : bbxytl@gmail.com
+"   File Name     : vimrc.config_base
+"   Last Modified : 2018-12-07 18:30
+"   Describe      :
+"
+" ====================================================
+
 
 if(has("win32") || has("win95") || has("win64") || has("win16"))
     let g:vimrc_iswindows=1

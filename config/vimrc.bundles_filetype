@@ -1,3 +1,14 @@
+" ====================================================
+"   Copyright (C)2018 All rights reserved.
+"
+"   Author        : bbxytl
+"   Email         : bbxytl@gmail.com
+"   File Name     : vimrc.bundles_filetype
+"   Last Modified : 2018-12-07 18:30
+"   Describe      :
+"
+" ====================================================
+
 " go
 let g:bundle_filetype_dir= expand("$VIM_CONFIG_PATH/filetype_bundles/")
 if filereadable(expand(g:bundle_filetype_dir)."go.vim")
