@@ -52,4 +52,4 @@ noremap <leader>ht :GundoToggle<CR>
 " ##### 在 nerdtree 上显示目录文件的 git 状态
 Bundle 'Xuyuanp/nerdtree-git-plugin'
 
-
+Bundle 'junegunn/gv.vim'

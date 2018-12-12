@@ -115,39 +115,39 @@ let g:UltiSnipsListSnippets="<c-a>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-inoremap <c-l> <C-R>=SnipComplete()<CR>
-func! SnipComplete()
-  let line = getline('.')
-  let start = col('.') - 1
-  while start > 0 && line[start - 1] =~# '\k'
-    let start -= 1
-  endwhile
-  let suggestions = []
-
-  for item in UltiSnips#ListSnippets()
-    let trigger = item[0]
-    let menu = fnamemodify(item[2], ':t:r')
-    let entry = {'word': trigger, 'menu': menu, 'info': item[1]}
-    call add(suggestions, entry)
-  endfor
-  if empty(suggestions)
-    echohl Error | echon 'no match' | echohl None
-  elseif len(suggestions) == 1
-    let pos = getcurpos()
-    if start == 0
-      let str = trigger
-    else
-      let str = line[0:start - 1] . trigger
-    endif
-    call setline('.', str)
-    let pos[2] = len(str) + 1
-    call setpos('.', pos)
-    call UltiSnips#ExpandSnippet()
-  else
-    call complete(start + 1, suggestions)
-  endif
-  return ''
-endfunc
+" inoremap <c-l> <C-R>=SnipComplete()<CR>
+" func! SnipComplete()
+"   let line = getline('.')
+"   let start = col('.') - 1
+"   while start > 0 && line[start - 1] =~# '\k'
+"     let start -= 1
+"   endwhile
+"   let suggestions = []
+"
+"   for item in UltiSnips#ListSnippets()
+"     let trigger = item[0]
+"     let menu = fnamemodify(item[2], ':t:r')
+"     let entry = {'word': trigger, 'menu': menu, 'info': item[1]}
+"     call add(suggestions, entry)
+"   endfor
+"   if empty(suggestions)
+"     echohl Error | echon 'no match' | echohl None
+"   elseif len(suggestions) == 1
+"     let pos = getcurpos()
+"     if start == 0
+"       let str = trigger
+"     else
+"       let str = line[0:start - 1] . trigger
+"     endif
+"     call setline('.', str)
+"     let pos[2] = len(str) + 1
+"     call setpos('.', pos)
+"     call UltiSnips#ExpandSnippet()
+"   else
+"     call complete(start + 1, suggestions)
+"   endif
+"   return ''
+" endfunc
 
 
 " github 上的 snippets 集合
@@ -159,4 +159,16 @@ Bundle 'AndrewRadev/splitjoin.vim'
 nmap sj :SplitjoinSplit<cr>
 nmap sk :SplitjoinJoin<cr>
 
+set encoding=UTF-8
+" 显示文件类型图标
+" https://github.com/ryanoasis/vim-devicons
+" 需要安装 https://github.com/ryanoasis/nerd-fonts#glyph-sets, 才会正常显示图标
+Bundle 'ryanoasis/vim-devicons'
+
+Bundle 'rhysd/github-complete.vim'
+" Disable overwriting 'omnifunc'
+let g:github_complete_enable_omni_completion = 0
+" <C-x><C-x> invokes completions of github-complete.vim
+" autocmd FileType markdown,gitcommit,mkd
+imap <C-k><C-o> <Plug>(github-complete-manual-completion)
 

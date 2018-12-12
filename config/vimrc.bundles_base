@@ -61,7 +61,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline#extensions#taboo#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 
-let b:airline_whitespace_checks = [ 'indent', 'trailing', 'long']
+let b:airline_whitespace_checks = [ 'indent', 'trailing' ]
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -86,6 +86,7 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+let g:airline_powerline_fonts = 1
 " 修改文件： ~/.vim/bundle/vim-airline/autoload/airline.vim 中的下面的函数
 "     可以在状态栏显示时间
 " function! airline#statusline(winnr)
@@ -215,6 +216,11 @@ Bundle 'Raimondi/delimitMate'
 " for python docstring ,优化输入
 au FileType python let b:delimitMate_nesting_quotes = ['"']
 
+"Displays function signatures from completions in the command line.
+"When you accept a completion for a function with <c-y>, echodoc will display
+"the function signature in the command line and highlight the argument
+"position your cursor
+Bundle 'Shougo/echodoc.vim'
 
 
 " ###############################
@@ -405,6 +411,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
 let g:NERDTreeMouseMode = 2
+let g:NERDTreeWinSize = 50
+let g:NERDTreeDirArrows=1
 "打开NERDTree,定位到当前文件
 noremap <silent> <Leader>nf :NERDTreeFind<cr>
 autocmd vimenter * if !argc() | NERDTree | endif
@@ -421,6 +429,8 @@ let g:nerdtree_tabs_synchronize_focus=0
 " 自动开启nerdtree
 "let g:nerdtree_tabs_open_on_console_startup=1
 
+" ##### NerdTree文件类型高亮
+Bundle 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " 标签导航
 Bundle 'majutsushi/tagbar'
@@ -430,7 +440,7 @@ let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_show_linenumbers = 0
 " let g:tagbar_singleclick = 1
-let g:tagbar_left = 1
+let g:tagbar_left = 0
 let g:tagbar_map_zoomwin = "A"
 let g:tagbar_map_togglefold = "x"
 let g:tagbar_map_hidenonpublic = "t"
@@ -440,6 +450,11 @@ let g:tagbar_autoshowtag = 1
 let g:tagbar_silent = 1
 let g:tagbar_map_jump = ["<CR>", "o"]
 set updatetime=500
+" 保持鼠标可用，部分终端可能还是会失效，参照：
+" http://landcareweb.com/questions/6495/zai-vimzhong-wei-shi-yao-wo-de-shu-biao-bu-neng-chao-guo-di-220lie
+if has("mouse_sgr")
+    set ttymouse=sgr
+end
 " cpp类型
 let g:tagbar_type_cpp = {
     \ 'kinds' : [

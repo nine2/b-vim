@@ -1,8 +1,8 @@
 " 修改leader键
 let mapleader = "\<space>"
 let g:mapleader ="\<space>"
-        " ii 替换 Esc
-inoremap ii <Esc>
+        " ,, 替换 Esc
+inoremap ,, <Esc>
         " 将 ; 绑定到 : 用于快速进入命令行
 nnoremap ; :
 " 保证工作目录为当前目录
