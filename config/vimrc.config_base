@@ -254,9 +254,13 @@ nnoremap j gj
 
 " noremap <F1> <Esc>"
 " 显示文件相对路径
-nnoremap <F1> :file<CR>
+" nnoremap <F1> :file<CR>
+nnoremap <Space> :file<CR>
 " 显示文件的绝对路径
-nnoremap <leader><F1> :echo expand('%:p')<CR>
+" nnoremap <leader><F1> :echo expand('%:p')<CR>
+nnoremap <F1> :echo expand('%:p')<CR>
+" 设置文件类型 filetype
+nnoremap ft :set filetype=
 " 根据是否有行号来决定是否显示 tab 标示符，用来方便 copy
 function! TabShowSign()
     if(&relativenumber || &number)
@@ -513,7 +517,8 @@ endfunction
 " ctags --langdef=MYLUA --langmap=MYLUA:.lua --regex-MYLUA="/^.*\s*function\s*(\w+):(\w+).*$/\2/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*[0-9]+.*$/\1/e/" --regex-MYLUA="/^.*\s*function\s*(\w+)\.(\w+).*$/\2/f/" --regex-MYLUA="/^.*\s*function\s*(\w+)\s*\(.*$/\1/f/" --regex-MYLUA="/^\s*(\w+)\s*=\s*\{.*$/\1/e/" --regex-MYLUA="/^\s*module\s+\"(\w+)\".*$/\1/m,module/" --regex-MYLUA="/^\s*module\s+\"[a-zA-Z0-9._]+\.(\w+)\".*$/\1/m,module/" --regex-MYLUA="/^\s*local\s*(\w+)\s*=\s*/\1/f/"  --regex-MYLUA="/^\s*(\w+).(\w+)\s*=\s*/\1/f/"  --languages=MYLUA --excmd=number -R .
 
 " 在当前文件中快速查找光标下的单词
-nmap <leader>s :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
+" nmap <leader>s :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
+nmap fs :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
 
 function! Zoom ()
     " check if is the zoomed state (tabnumber > 1 && window == 1)
@@ -650,6 +655,7 @@ nnoremap sk :lprevious<cr>
 " 双击跳转
 map <2-LeftMouse> <C-]>
 map <C-RightMouse> <C-o>
+map <leader><LeftMouse> <C-i>
 
 " 格式化json
 nmap <leader>jf :%!python -m json.tool<cr>

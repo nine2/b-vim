@@ -70,10 +70,10 @@ endif
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '◀'
 let g:airline_symbols.crypt = '🔒'
+" let g:airline_symbols.linenr = ''
 let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.maxlinenr = '☰'
+" let g:airline_symbols.maxlinenr = '☰'
 let g:airline_symbols.maxlinenr = '│'
-let g:airline_symbols.maxlinenr = ''
 let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.spell = 'Ꞩ'
@@ -85,7 +85,6 @@ let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
 let g:airline_powerline_fonts = 1
 " 修改文件： ~/.vim/bundle/vim-airline/autoload/airline.vim 中的下面的函数
 "     可以在状态栏显示时间
@@ -405,7 +404,7 @@ au Syntax * RainbowParenthesesLoadBraces
 " ##### 目录导航
 Bundle 'scrooloose/nerdtree'
 " map <leader>n :NERDTreeToggle<CR>
-noremap <silent> <Leader>nf :NERDTreeFind<cr>
+noremap <silent> <Leader>n :NERDTreeFind<cr>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 "close vim if the only window left open is a NERDTree
@@ -598,7 +597,8 @@ nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr> \| grep '<c-r>=expand("<cword>")<cr
 " 查询当前单词, 立刻查询
 nmap <leader>aa :Ag -w <c-r>=expand("<cword>")<cr><cr>
 " Ag 默认查找当前单词，可修改, 不立刻查询
-nmap <leader>a :Ag <c-r>=expand("<cword>")<cr>
+" nmap <leader>a :Ag <c-r>=expand("<cword>")<cr>
+nmap <leader>a :Ag '
 
 
 " Vim Workspace Controller

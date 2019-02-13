@@ -53,6 +53,8 @@ let g:ycm_key_detailed_diagnostics = '<leader>d'    " 查看当前光标下标�
 let g:ycm_goto_buffer_command = 'new-tab'  " 跳转到定义处,新Tab打开
 let g:ycm_error_symbol = '❥✘' "  错误标记 ✗✘☛☛❦❥❤︎ℳ❣❣➤➤➽
 let g:ycm_warning_symbol = '❥➤' " 警告符号
+" let g:ycm_key_invoke_completion = '<c-z>'
+let g:ycm_min_num_identifier_candidate_chars = 2
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
@@ -61,14 +63,14 @@ nmap <leader>e :YcmDiags<CR>
 " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
 " old version
 if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = "$VIM_TMP_PATH/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
+    let g:ycm_global_ycm_extra_conf = expand("$VIM_TMP_PATH/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py")
 endif
 " new version
 if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = "$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+    let g:ycm_global_ycm_extra_conf = expand("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py")
 endif
 if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = "$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"
+    let g:ycm_global_ycm_extra_conf = expand("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py")
 endif
 let g:ycm_confirm_extra_conf = 0
 " 使用 YCM 时 关闭 syntastic 的 java checker, 防止冲突
@@ -86,8 +88,27 @@ let g:ycm_filetype_blacklist = {
     \ 'vimwiki' : 1,
     \ 'pandoc' : 1,
     \ 'infolog' : 1,
-    \ 'mail' : 1
+    \ 'mail' : 1,
     \}
+
+let g:ycm_filetype_whitelist = {
+    \ "c":1,
+    \ "cpp":1,
+    \ "h":1,
+    \ "objc":1,
+    \ "sh":1,
+    \ "zsh":1,
+    \ "vim":1,
+    \ "go":1,
+    \ "python":1,
+    \ "java":1,
+    \ }
+
+let g:ycm_semantic_triggers =  {
+    \ 'c,cpp,sh,zsh,python,java,go,erlang,perl,snippets': ['re!\w{2}'],
+    \ 'cs,lua,vim,javascript': ['re!\w{2}'],
+    \ }
+
 
 
 Bundle 'tdcdev/ycm_simple_conf'
