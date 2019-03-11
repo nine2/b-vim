@@ -40,6 +40,7 @@ noremap <F8> :call F8FormatFile()<CR>
 " ##### 重量级补全
 Bundle 'Valloric/YouCompleteMe'
 " let g:ycm_key_list_select_completion = ['<Down>', '<Tab>']   " C-j 同时可用
+let g:ycm_register_as_syntastic_checker = 1
 let g:ycm_key_list_select_completion = ['<Down>']   " C-n 同时可用, Tab 给 ultisnips 使用
 let g:ycm_key_list_previous_completion = ['<Up>']   " C-p 同时可用
 let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
@@ -50,29 +51,33 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符�
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
 let g:ycm_key_detailed_diagnostics = '<leader>d'    " 查看当前光标下标识符的详细信息
-let g:ycm_goto_buffer_command = 'new-tab'  " 跳转到定义处,新Tab打开
+" 跳转到定义处,新Tab打开, 如果已存在当前文件的 tab, 则跳转到对应 tab
+"取值范围：[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab', 'new-or-existing-tab' ]
+let g:ycm_goto_buffer_command = 'new-or-existing-tab'
 let g:ycm_error_symbol = '❥✘' "  错误标记 ✗✘☛☛❦❥❤︎ℳ❣❣➤➤➽
 let g:ycm_warning_symbol = '❥➤' " 警告符号
 " let g:ycm_key_invoke_completion = '<c-z>'
 let g:ycm_min_num_identifier_candidate_chars = 2
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" 定位当前函数、变量的定义处
+nnoremap ff :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>[ :YcmCompleter GoToDeclaration<CR>
 nmap <leader>e :YcmDiags<CR>
+nnoremap <buffer> <silent> <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
 " old version
-if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = expand("$VIM_TMP_PATH/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py")
-endif
-" new version
-if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = expand("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py")
-endif
-if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"))
-    let g:ycm_global_ycm_extra_conf = expand("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py")
-endif
-let g:ycm_confirm_extra_conf = 0
+"" if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
+""     let g:ycm_global_ycm_extra_conf = expand("$VIM_TMP_PATH/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py")
+"" endif
+" " new version
+"" if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"))
+""     let g:ycm_global_ycm_extra_conf = expand("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py")
+"" endif
+"" if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py"))
+""     let g:ycm_global_ycm_extra_conf = expand("$VIM_TMP_PATH/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py")
+"" endif
+"" let g:ycm_confirm_extra_conf = 0
 " 使用 YCM 时 关闭 syntastic 的 java checker, 防止冲突
 let g:syntastic_java_checkers = []
 

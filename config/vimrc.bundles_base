@@ -39,12 +39,14 @@ colorscheme molokai
 " 主题. 状态栏
 " Bundle 'Lokaltog/vim-powerline'
 Bundle 'vim-airline/vim-airline'
-" set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
+set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
 " Bundle 'gcmt/taboo.vim'
 " let g:taboo_tab_format = " %N.[%f %m] "
 " let g:taboo_modified_tab_flag = "+"
 Bundle 'vim-airline/vim-airline-themes'
 let g:airline_theme='molokai'
+" let g:airline_theme='powerlineish'
+" let g:airline_theme='monochrome'
 let g:airline_exclude_preview = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_tabs = 1
@@ -67,22 +69,22 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 " unicode symbols
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '◀'
 let g:airline_symbols.crypt = '🔒'
-" let g:airline_symbols.linenr = ''
 let g:airline_symbols.linenr = '␊'
 " let g:airline_symbols.maxlinenr = '☰'
 let g:airline_symbols.maxlinenr = '│'
-let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.spell = 'Ꞩ'
-let g:airline_symbols.notexists = '∄'
+" let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.notexists = ' '
 let g:airline_symbols.whitespace = 'Ξ'
+" let g:airline_left_sep = '▶'
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = '◀'
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = '⎇'
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_powerline_fonts = 1
@@ -97,6 +99,13 @@ let g:airline_powerline_fonts = 1
 "   return ''
 " endfunction
 
+" let g:airline#extensions#bufferline#enabled = 1
+" let g:airline#extensions#csv#enabled = 1
+" let g:airline#extensions#fugitiveline#enabled = 1
+" let g:airline#extensions#hunks#enabled = 1
+" let g:airline#extensions#tmuxline#enabled = 1
+" let g:airline#extensions#whitespace#enabled = 1
+" let g:airline#extensions#wordcount#enabled = 1
 " Always show the status line - use 2 lines for the status bar
 set laststatus=2
 
@@ -316,6 +325,7 @@ let g:ctrlp_max_height=15
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
+let g:ctrlp_mruf_default_order = 1
 " " 如果安装了ag, 使用ag
 "  if executable('ag')
 "   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
@@ -415,9 +425,10 @@ let g:NERDTreeMapOpenVSplit = 'v'
 let g:NERDTreeMouseMode = 2
 let g:NERDTreeWinSize = 50
 let g:NERDTreeDirArrows=1
+let g:NERDTreeChDirMode=2
 "打开NERDTree,定位到当前文件
 noremap <silent> <Leader>nf :NERDTreeFind<cr>
-autocmd vimenter * if !argc() | NERDTree | endif
+" autocmd vimenter *.go NERDTreeFind
 " 选中目录，按 ma 可以在目录中新建文件
 
 
@@ -426,10 +437,11 @@ Bundle 'jistr/vim-nerdtree-tabs'
 """"""
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 " 关闭同步
-let g:nerdtree_tabs_synchronize_view=0
-let g:nerdtree_tabs_synchronize_focus=0
+let g:nerdtree_tabs_synchronize_view=1
+let g:nerdtree_tabs_synchronize_focus=1
 " 自动开启nerdtree
-"let g:nerdtree_tabs_open_on_console_startup=1
+let g:nerdtree_tabs_open_on_console_startup = 0
+let g:nerdtree_tabs_focus_on_files = 1
 
 " ##### NerdTree文件类型高亮
 Bundle 'tiagofumo/vim-nerdtree-syntax-highlight'
@@ -441,13 +453,13 @@ nmap <leader>m :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_show_linenumbers = 0
-" let g:tagbar_singleclick = 1
+let g:tagbar_singleclick = 1
 let g:tagbar_left = 0
 let g:tagbar_map_zoomwin = "A"
 let g:tagbar_map_togglefold = "x"
 let g:tagbar_map_hidenonpublic = "t"
 let g:tagbar_map_showproto = "f"
-let g:tagbar_expand = 1
+let g:tagbar_expand = 0
 let g:tagbar_autoshowtag = 1
 let g:tagbar_silent = 1
 let g:tagbar_map_jump = ["<CR>", "o"]
@@ -560,6 +572,36 @@ let g:tagbar_type_ruby = {
         \ 'F:singleton methods'
     \ ]
 \ }
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+
 " 去除taglist =>原因: 使用tagbar和ctrlp-funky可以直接快速跳转函数和变量位置,taglist有些多余
 
 " autocmd vimenter * NERDTreeFind

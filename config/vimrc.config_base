@@ -129,6 +129,7 @@ set foldlevelstart=99       " 打开文件是默认不折叠代码
 " set foldclose=all          " 设置为自动关闭折叠
 
 " 代码折叠自定义快捷键
+" 折叠整个文件
 let g:FoldMethod = 0
 map <leader>zz :call ToggleFold()<cr>
 map zA zM
@@ -257,8 +258,8 @@ nnoremap j gj
 " nnoremap <F1> :file<CR>
 nnoremap <Space> :file<CR>
 " 显示文件的绝对路径
-" nnoremap <leader><F1> :echo expand('%:p')<CR>
-nnoremap <F1> :echo expand('%:p')<CR>
+nnoremap <leader><F1> :echo expand('%:p')<CR>
+nnoremap <F1> :file<CR>
 " 设置文件类型 filetype
 nnoremap ft :set filetype=
 " 根据是否有行号来决定是否显示 tab 标示符，用来方便 copy
@@ -394,6 +395,7 @@ cmap w!! w !sudo tee >/dev/null %
 
 " Quickly close the current window
 nnoremap <leader>q :q<CR>
+nnoremap <leader>x :x<CR>
 " 快速保存 快捷键
 nnoremap <silent> <Leader>w :w<CR>
 nnoremap qq :q<CR>
@@ -658,7 +660,13 @@ map <C-RightMouse> <C-o>
 map <leader><LeftMouse> <C-i>
 
 " 格式化json
-nmap <leader>jf :%!python -m json.tool<cr>
+fun! B_JsonFormat()
+    exe "set filetype=json"
+    exe "%!python -m json.tool"
+    echom ":call B_JsonFormat() { :set filetype=json  :%!python -m json.tool }"
+endfun
+nmap <leader>jf :call B_JsonFormat()<cr>
+" nmap <leader>jf :%!python -m json.tool<cr>
 
 " 防止vim卡顿
 set re=1
