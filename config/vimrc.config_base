@@ -397,7 +397,7 @@ cmap w!! w !sudo tee >/dev/null %
 nnoremap <leader>q :q<CR>
 nnoremap <leader>x :x<CR>
 " 快速保存 快捷键
-nnoremap <silent> <Leader>w :w<CR>
+nnoremap <silent> ss :w<CR>
 nnoremap qq :q<CR>
 
 " Swap implementations of ` and ' jump to markers
@@ -477,7 +477,7 @@ vmap ,P "+P
 " set tags+=~/.vim/systags_local
 " map <leader><F12> :call Do_CsTag_Sys()<CR>
 map <leader><leader>T :call Do_CsTag_Sys()<CR>
-map <c-]> g<C-]>
+" map <c-]> g<C-]>
 function! Do_CsTag_Sys()
     delete("~/.vim/systags")
     " 本地自定义的头文件目录标签文件
@@ -659,6 +659,9 @@ map <2-LeftMouse> <C-]>
 map <C-RightMouse> <C-o>
 map <leader><LeftMouse> <C-i>
 
+nnoremap oo <C-o>
+nnoremap ii <C-i>
+
 " 格式化json
 fun! B_JsonFormat()
     exe "set filetype=json"
@@ -672,4 +675,7 @@ nmap <leader>jf :call B_JsonFormat()<cr>
 set re=1
 set ttyfast
 set lazyredraw
+
+" 高亮当前单词，同时光标停留在当前单词不跳转，可能需要先使用 gd 高亮一次才会生效
+nmap wh :let @/=expand('<cword>')<cr>
 
