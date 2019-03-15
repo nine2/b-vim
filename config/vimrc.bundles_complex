@@ -45,12 +45,15 @@ let g:ycm_key_list_select_completion = ['<Down>']   " C-n 同时可用, Tab 给 
 let g:ycm_key_list_previous_completion = ['<Up>']   " C-p 同时可用
 let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
 let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+let g:ycm_filepath_completion_use_working_dir = 1
 let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
 let g:ycm_always_populate_location_list = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
 let g:ycm_key_detailed_diagnostics = '<leader>d'    " 查看当前光标下标识符的详细信息
+" let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 0
 " 跳转到定义处,新Tab打开, 如果已存在当前文件的 tab, 则跳转到对应 tab
 "取值范围：[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab', 'new-or-existing-tab' ]
 let g:ycm_goto_buffer_command = 'new-or-existing-tab'
@@ -81,9 +84,6 @@ nnoremap <buffer> <silent> <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " 使用 YCM 时 关闭 syntastic 的 java checker, 防止冲突
 let g:syntastic_java_checkers = []
 
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
 " let g:ycm_log_level = 'info'
 let g:ycm_filetype_blacklist = {
     \ 'tagbar' : 1,
@@ -113,7 +113,6 @@ let g:ycm_semantic_triggers =  {
     \ 'c,cpp,sh,zsh,python,java,go,erlang,perl,snippets': ['re!\w{2}'],
     \ 'cs,lua,vim,javascript': ['re!\w{2}'],
     \ }
-
 
 
 Bundle 'tdcdev/ycm_simple_conf'
