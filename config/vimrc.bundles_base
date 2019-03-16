@@ -57,13 +57,8 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
-
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-
-let g:airline#extensions#taboo#enabled = 0
-let g:airline#extensions#whitespace#enabled = 0
-
-let b:airline_whitespace_checks = [ 'indent', 'trailing' ]
+" let g:airline_statusline_ontop=1
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -99,13 +94,25 @@ let g:airline_powerline_fonts = 1
 "   return ''
 " endfunction
 
+" 状态栏布局
+let g:airline#extensions#default#layout = [
+      \ [ 'a', 'b', 'c' ],
+      \ [ 'x', 'y', 'z', 'error' ]
+      \ ]
+      " \ [ 'x', 'y', 'z', 'warning', 'error' ]
+" %B:ANSII码，%l:行号, %c:列号, %P:当前文件的百分比行, filetype:文件类型
+let g:airline_section_x = airline#section#create_right([' %B│ %lL:%cC│ %p%%│ ', 'filetype'])
+
+" let g:airline#extensions#taboo#enabled = 0
 " let g:airline#extensions#bufferline#enabled = 1
 " let g:airline#extensions#csv#enabled = 1
-" let g:airline#extensions#fugitiveline#enabled = 1
+let g:airline#extensions#fugitiveline#enabled = 1
 " let g:airline#extensions#hunks#enabled = 1
 " let g:airline#extensions#tmuxline#enabled = 1
-" let g:airline#extensions#whitespace#enabled = 1
-" let g:airline#extensions#wordcount#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#wordcount#enabled = 1
+let b:airline_whitespace_checks = [ 'indent', 'trailing' ]
+" let b:airline_whitespace_checks = [ 'trailing' ]
 " Always show the status line - use 2 lines for the status bar
 set laststatus=2
 
