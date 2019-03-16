@@ -97,7 +97,7 @@ let g:airline_powerline_fonts = 1
 " 状态栏布局
 let g:airline#extensions#default#layout = [
       \ [ 'a', 'b', 'c' ],
-      \ [ 'x', 'y', 'z', 'error' ]
+      \ [ 'x', 'y', 'warning', 'error' ]
       \ ]
       " \ [ 'x', 'y', 'z', 'warning', 'error' ]
 " %B:ANSII码，%l:行号, %c:列号, %P:当前文件的百分比行, filetype:文件类型
