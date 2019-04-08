@@ -660,7 +660,7 @@ map <C-RightMouse> <C-o>
 map <leader><LeftMouse> <C-i>
 
 nnoremap oo <C-o>
-nnoremap ii <C-i>
+" nnoremap ii <C-i>
 
 " 格式化json
 fun! B_JsonFormat()
