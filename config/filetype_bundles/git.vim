@@ -23,7 +23,7 @@ let g:gitgutter_highlight_lines = 0
 nnoremap gt :GitGutterToggle<CR>
 nnoremap gp :GitGutterPrevHunk<CR>
 nnoremap gn :GitGutterNextHunk<CR>
-nnoremap gr :GitGutterRevertHunk<CR>
+nnoremap gr :GitGutterUndoHunk<CR>
 " 一个命令切换高亮行
 func! CustomGitGutterLineHights()
     if g:gitgutter_highlight_lines is 1

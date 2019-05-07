@@ -656,6 +656,7 @@ nnoremap sk :lprevious<cr>
 
 " 双击跳转
 map <2-LeftMouse> <C-]>
+map <2-RightMouse> <C-o>
 map <C-RightMouse> <C-o>
 map <leader><LeftMouse> <C-i>
 
@@ -666,7 +667,8 @@ nnoremap oo <C-o>
 fun! B_JsonFormat()
     exe "set filetype=json"
     exe "%!python -m json.tool"
-    echom ":call B_JsonFormat() { :set filetype=json  :%!python -m json.tool }"
+    exe '%!python2.7 -c "import re,sys;sys.stdout.write(re.sub(r\"\\\u[0-9a-f]{4}\", lambda m:m.group().decode(\"unicode_escape\").encode(\"utf-8\"), sys.stdin.read()))"'
+    " echom ":call B_JsonFormat() { :set filetype=json  :%!python -m json.tool }"
 endfun
 nmap <leader>jf :call B_JsonFormat()<cr>
 " nmap <leader>jf :%!python -m json.tool<cr>

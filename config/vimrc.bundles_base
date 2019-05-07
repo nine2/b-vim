@@ -39,7 +39,7 @@ colorscheme molokai
 " 主题. 状态栏
 " Bundle 'Lokaltog/vim-powerline'
 Bundle 'vim-airline/vim-airline'
-set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
+" set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
 " Bundle 'gcmt/taboo.vim'
 " let g:taboo_tab_format = " %N.[%f %m] "
 " let g:taboo_modified_tab_flag = "+"
@@ -95,19 +95,19 @@ let g:airline_powerline_fonts = 1
 " endfunction
 
 " 状态栏布局
-let g:airline#extensions#default#layout = [
-      \ [ 'a', 'b', 'c' ],
-      \ [ 'x', 'y', 'warning', 'error' ]
-      \ ]
-      " \ [ 'x', 'y', 'z', 'warning', 'error' ]
+"let g:airline#extensions#default#layout = [
+"      \ [ 'a', 'b', 'c' ],
+"      \ [ 'x', 'y', 'z', 'warning', 'error' ]
+"      \ ]
 " %B:ANSII码，%l:行号, %c:列号, %P:当前文件的百分比行, filetype:文件类型
-let g:airline_section_x = airline#section#create_right([' %B│ %lL:%cC│ %p%%│ ', 'filetype'])
+" let g:airline_section_x = airline#section#create_right([' %B│ %lL:%cC│ %p%%│ ', 'filetype'])
+let g:airline_section_z = airline#section#create_right(['%lL:%cC│ %p%%/%LL'])
 
 " let g:airline#extensions#taboo#enabled = 0
 " let g:airline#extensions#bufferline#enabled = 1
 " let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#fugitiveline#enabled = 1
-" let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#hunks#enabled = 1
 " let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#wordcount#enabled = 1
@@ -161,63 +161,66 @@ Bundle "nine2/vim-custom-syntax"
 " 可使用此配置关闭语法高亮
 " let g:custom_syntax_hightlight_enable= 0
 " ###### 多语言语法检查
-Bundle 'scrooloose/syntastic'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" to see error location list
-let g:syntastic_always_populate_loc_list = 1
-" 当第一行是报错时，自动跳转过去，否则，不自动跳转
-" let g:syntastic_auto_jump = 2
-" 默认为 2, 表示发现错误时不自动打开,当修正以后没有再发现错误时自动关闭
-" 1表示自动打开自动关闭
-" 0表示关闭自动打开和自动关闭
-" 3表示自动打开,但不自动关闭
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_loc_list_height = 5
-let g:syntastic_check_on_open=1
-let g:syntastic_check_on_wq=1
-let g:syntastic_error_symbol='✘✘'
-let g:syntastic_warning_symbol='➤➤'
-let g:syntastic_enable_highlighting=1
-" 使用pyflakes,速度比pylint快
-let g:syntastic_python_checkers=['pep8', 'pyflakes']
-let g:syntastic_python_pep8_args='--ignore=E501,E225'
-" 修改高亮的背景色, 适应主题
-highlight SyntasticErrorSign guifg=white guibg=black
-nnoremap ew :SyntasticCheck<cr>:Errors<cr>
-" nnoremap ee :SyntasticCheck<cr>
-nmap <silent> ee :lr 1<cr>
-nmap <silent> e1 :lr 1<cr>
-nmap <silent> e2 :lr 2<cr>
-nmap <silent> e3 :lr 3<cr>
-nmap <silent> e4 :lr 4<cr>
-nmap <silent> e5 :lr 5<cr>
-nmap <silent> e6 :lr 6<cr>
-nmap <silent> e7 :lr 7<cr>
-nmap <silent> e8 :lr 8<cr>
-nmap <silent> e9 :lr 9<cr>
-nmap <silent> e0 :lla<cr>
-" autocmd FileType go let g:syntastic_auto_loc_list = 0
-" autocmd VimEnter go SyntasticCheck
-"syntastic 保存检查代码时候传入参数, 可以解决 java 文件第三方包有 语法报警问题
-let g:syntastic_java_javac_args="-cp ../../lib:../../bin -sourcepath ../../bin -Djava.ext.dirs=../../lib -d ../../bin"
+"Bundle 'scrooloose/syntastic'
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"" to see error location list
+"let g:syntastic_always_populate_loc_list = 1
+"" 当第一行是报错时，自动跳转过去，否则，不自动跳转
+"" let g:syntastic_auto_jump = 2
+"" 默认为 2, 表示发现错误时不自动打开,当修正以后没有再发现错误时自动关闭
+"" 1表示自动打开自动关闭
+"" 0表示关闭自动打开和自动关闭
+"" 3表示自动打开,但不自动关闭
+"let g:syntastic_auto_loc_list = 2
+"let g:syntastic_loc_list_height = 5
+"let g:syntastic_check_on_open=1
+"let g:syntastic_check_on_wq=1
+"let g:syntastic_error_symbol='✘✘'
+"let g:syntastic_warning_symbol='➤➤'
+"let g:syntastic_enable_highlighting=1
+"" 使用pyflakes,速度比pylint快
+"let g:syntastic_python_checkers=['pep8', 'pyflakes']
+"let g:syntastic_python_pep8_args='--ignore=E501,E225'
+"" 修改高亮的背景色, 适应主题
+"highlight SyntasticErrorSign guifg=white guibg=black
+"nnoremap ew :SyntasticCheck<cr>:Errors<cr>
+"" nnoremap ee :SyntasticCheck<cr>
+"nmap <silent> ee :lr 1<cr>
+"nmap <silent> e1 :lr 1<cr>
+"nmap <silent> e2 :lr 2<cr>
+"nmap <silent> e3 :lr 3<cr>
+"nmap <silent> e4 :lr 4<cr>
+"nmap <silent> e5 :lr 5<cr>
+"nmap <silent> e6 :lr 6<cr>
+"nmap <silent> e7 :lr 7<cr>
+"nmap <silent> e8 :lr 8<cr>
+"nmap <silent> e9 :lr 9<cr>
+"nmap <silent> e0 :lla<cr>
+"" autocmd FileType go let g:syntastic_auto_loc_list = 0
+"" autocmd VimEnter go SyntasticCheck
+""syntastic 保存检查代码时候传入参数, 可以解决 java 文件第三方包有 语法报警问题
+"let g:syntastic_java_javac_args="-cp ../../lib:../../bin -sourcepath ../../bin -Djava.ext.dirs=../../lib -d ../../bin"
 
-" Bundle 'w0rp/ale'
-" let g:ale_sign_error = '✘✘'
-" let g:ale_sign_warning = '➤➤'
-" highlight clear ALEErrorSign
-" highlight clear ALEWarningSign
-" let g:ale_list_window_size = 5
-" " let g:ale_fix_on_save = 0
-" " let g:ale_go_staticcheck_lint_package = 0
-" " let g:ale_go_gometalinter_lint_package = 0
-" let g:ale_echo_msg_error_str = 'E'
-" let g:ale_echo_msg_warning_str = 'W'
-" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+Bundle 'w0rp/ale'
+let g:ale_sign_error = '✘✘'
+let g:ale_sign_warning = '➤➤'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+let g:ale_list_window_size = 5
+" let g:ale_fix_on_save = 0
+let g:ale_go_staticcheck_lint_package = 1
+" let g:ale_go_gometalinter_lint_package = 0
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " let g:ale_linters = {'go': ['go vet', 'gofmt', 'golint']}
-" nmap <silent> ek <Plug>(ale_previous_wrap)
-" nmap <silent> ej <Plug>(ale_next_wrap)
+let g:ale_linters = {'go': ['go vet', 'gofmt']}
+nmap <silent> ek <Plug>(ale_previous_wrap)
+nmap <silent> ej <Plug>(ale_next_wrap)
+nmap <silent> eh <Plug>(ale_first)
+nmap <silent> el <Plug>(ale_last)
 
 " 给 typedef 和 enum 配色
 " 需要使用到 ctags
@@ -295,7 +298,7 @@ let g:SignatureMap = {
         \ 'GotoPrevMarkerAny'  :  "[=",
         \ 'ListLocalMarks'     :  "ms",
         \ 'ListLocalMarkers'   :  "m?"
-        \ }"]]]']"}
+        \ }
 
 
 " ##### 选中区块
@@ -652,6 +655,7 @@ nmap <leader>a :Ag '
 
 " Vim Workspace Controller
 Bundle 'szw/vim-ctrlspace'
+nmap b<space> :CtrlSpace<cr>
 set hidden
 """"""
 hi CtrlSpaceSelected guifg=#586e75 guibg=#eee8d5 guisp=#839496 gui=reverse,bold ctermfg=10 ctermbg=7 cterm=reverse,bold
