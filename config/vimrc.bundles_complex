@@ -63,6 +63,7 @@ let g:ycm_warning_symbol = '❥➤' " 警告符号
 let g:ycm_min_num_identifier_candidate_chars = 2
 " 定位当前函数、变量的定义处
 nnoremap ff :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap fr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>[ :YcmCompleter GoToDeclaration<CR>

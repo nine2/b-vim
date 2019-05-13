@@ -399,6 +399,7 @@ nnoremap <leader>x :x<CR>
 " 快速保存 快捷键
 nnoremap <silent> ss :w<CR>
 nnoremap qq :q<CR>
+nnoremap er :e<CR>
 
 " Swap implementations of ` and ' jump to markers
 " By default, ' jumps to the marked line, ` jumps to the marked line and
