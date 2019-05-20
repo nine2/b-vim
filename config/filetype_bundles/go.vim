@@ -82,7 +82,8 @@ func! Nine2GoBenchmarkFunc()
     let line = getline(bench)
     let name = split(split(line, " ")[1], "(")[0]
     echo "Run Benchmarking ".name." ....."
-    echo 'go test -v -benchmem -test.bench '.name."'"
+    " echo 'go test -v -benchmem -test.bench '.name."'"
+    echo 'go test -v -benchmem -test.bench "'.name.'$"'
     " 防止运行到其他函数
     echo "函数名字  循环次数  (ns/op)平均每次执行时间  (b/op)每个操作分配字节  （allocs/op)每个操作分配内存"
     echo system('go test -v -benchmem -test.bench "'.name.'$"')
