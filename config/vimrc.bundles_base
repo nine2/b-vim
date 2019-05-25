@@ -612,33 +612,6 @@ let g:tagbar_type_go = {
 \ }
 
 
-" 去除taglist =>原因: 使用tagbar和ctrlp-funky可以直接快速跳转函数和变量位置,taglist有些多余
-
-" autocmd vimenter * NERDTreeFind
-" let g:tagbar_vertical = 25
-" autocmd VimEnter * nested :TagbarOpen
-
-"  Bundle 'vim-scripts/winmanager'
-"  let g:winManagerWindowLayout='NERDTree|Tagbar'
-" " let g:winManagerWidth=30
-" " let g:AutoOpenWinManager = 1 "这里要配合修改winmanager.vim文件，见下方说明"u  let g:NERDTree_title = "[NERDTree]"
-"   function! NERDTree_Start()
-"       exe 'NERDTreeFind'
-"   endfunction
-"   function! NERDTree_IsValid()
-"     return 1
-"   endfunction
-"  " noremap  :NERDTreeFindu  let g:Tagbar_title = "[Tagbar]"
-"  function! Tagbar_Start()
-"   " exe 'q' "执行一个退出命令，关闭自动出现的窗口"
-"      exe 'TagbarOpen'
-"  endfunction
-"  function! Tagbar_IsValid()
-"      return 1
-"  endfunction
-"  nmap <silent> mt :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR>
-"  nmap wm :WMToggle<CR>
-
 Bundle "rking/ag.vim"
 " let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
 let g:ag_working_path_mode="r"
@@ -696,14 +669,6 @@ let g:file_copyright_email = "bbxytl@gmail.com"
 let g:file_copyright_auto_filetypes = ['sh', 'plx', 'pl', 'pm', 'py', 'python', 'h', 'hpp', 'c', 'cpp', 'java']
 map uh :CopyrightUpdate<cr>
 
-" Bundle "vim-scripts/DoxygenToolkit.vim"
-" let s:licenseTag = "Copyright(C)\<enter>"
-" let s:licenseTag = s:licenseTag . "For free\<enter>"
-" let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
-" let g:DoxygenToolkit_licenseTag = s:licenseTag
-" let g:DoxygenToolkit_briefTag_funcName="yes"
-" let g:doxygen_enhanced_color=1
-
 
 " ####################################
 " 加载 不同文件 配置
@@ -732,6 +697,25 @@ Bundle "guns/xterm-color-table.vim"
 " let g:auto_save = 1
 " let g:auto_save_in_insert_mode = 0
 " let g:auto_save_silent = 1
+
+" A vim plugin that simplifies the transition between multiline and
+" single-line code
+Bundle 'AndrewRadev/splitjoin.vim'
+nmap sj :SplitjoinSplit<cr>
+nmap sk :SplitjoinJoin<cr>
+
+set encoding=UTF-8
+" 显示文件类型图标
+" https://github.com/ryanoasis/vim-devicons
+" 需要安装 https://github.com/ryanoasis/nerd-fonts#glyph-sets, 才会正常显示图标
+Bundle 'ryanoasis/vim-devicons'
+
+Bundle 'rhysd/github-complete.vim'
+" Disable overwriting 'omnifunc'
+let g:github_complete_enable_omni_completion = 0
+" <C-x><C-x> invokes completions of github-complete.vim
+" autocmd FileType markdown,gitcommit,mkd
+imap <C-k><C-o> <Plug>(github-complete-manual-completion)
 
 " ################## 插件配置结束 ###########################
 filetype plugin indent on     " required!

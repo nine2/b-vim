@@ -1,0 +1,74 @@
+" ====================================================
+"   Copyright (C)2018 All rights reserved.
+"
+"   Author        : bbxytl
+"   Email         : bbxytl@gmail.com
+"   File Name     : vimrc.bundles_coc
+"   Last Modified : 2019-05-24 18:17
+"   Describe      :
+"
+" ====================================================
+
+Bundle 'neoclide/coc.nvim'
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <space>fr coc#refresh()
+
+" Remap keys for gotos
+nmap <silent> ff <Plug>(coc-definition)
+nmap <silent> fy <Plug>(coc-type-definition)
+nmap <silent> fi <Plug>(coc-implementation)
+nmap <silent> fr <Plug>(coc-references)
+nmap <buffer> <silent> <C-]>  <Plug>(coc-definition)
+
+" Use K to show documentation in preview window
+nnoremap <silent> C :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? coc#_select_confirm() :
+"      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"      \ <SID>check_back_space() ? "\<TAB>" :
+"      \ coc#refresh()
+"
+"function! s:check_back_space() abort
+"  let col = col('.') - 1
+"  return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
+
+" let g:coc_snippet_next = '<tab>'
+
+Bundle 'tenfyzhong/CompleteParameter.vim'
+inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+
+" 快速补全, 需要 vim 支持 python
+Bundle 'SirVer/ultisnips'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" 列出匹配的所有 snippets
+let g:UltiSnipsListSnippets="<c-a>"
+" let g:UltiSnipsSnippetDirectories=[$VIM_CONFIG_PATH.'/projects/UltiSnips/']
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" github 上的 snippets 集合
+Bundle 'bbxytl/vim-snippets'
+

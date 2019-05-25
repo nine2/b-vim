@@ -112,9 +112,9 @@ let g:go_list_type = "quickfix"
 " Bundle 'nsf/gocode'
 " Bundle 'stamblerre/gocode'
 " 使用了 YCM, 这个就不需要用了，YCM 里使用的是这个
-Bundle 'mdempsky/gocode'
+" Bundle 'mdempsky/gocode'
 " au FileType go map <C-Z> <C-X><C-O>
-Bundle 'Blackrush/vim-gocode'
+" Bundle 'Blackrush/vim-gocode'
 
 " ###############################
 " vim-shell
