@@ -108,6 +108,7 @@ let g:airline_section_z = airline#section#create_right(['%lL:%cC│ %p%%/%LL'])
 " let g:airline#extensions#csv#enabled = 1
 let g:airline#extensions#fugitiveline#enabled = 1
 let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#coc#enabled = 1
 " let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#wordcount#enabled = 1
@@ -160,6 +161,8 @@ let g:NERDSpaceDelims=1
 Bundle "nine2/vim-custom-syntax"
 " 可使用此配置关闭语法高亮
 " let g:custom_syntax_hightlight_enable= 0
+" 语法高亮
+" let g:custom_syntax_hightlight_macro= 1
 " ###### 多语言语法检查
 "Bundle 'scrooloose/syntastic'
 "set statusline+=%#warningmsg#
@@ -233,6 +236,7 @@ Bundle 'vim-scripts/TagHighlight'
 Bundle 'Raimondi/delimitMate'
 " for python docstring ,优化输入
 au FileType python let b:delimitMate_nesting_quotes = ['"']
+au FileType markdown let b:delimitMate_nesting_quotes = ['`']
 
 "Displays function signatures from completions in the command line.
 "When you accept a completion for a function with <c-y>, echodoc will display
@@ -689,9 +693,6 @@ else
     endif
 endif
 
-" xterm 颜色(256色)
-Bundle "guns/xterm-color-table.vim"
-
 " 自动保存
 " Bundle 'vim-scripts/vim-auto-save'
 " let g:auto_save = 1
@@ -705,17 +706,6 @@ nmap sj :SplitjoinSplit<cr>
 nmap sk :SplitjoinJoin<cr>
 
 set encoding=UTF-8
-" 显示文件类型图标
-" https://github.com/ryanoasis/vim-devicons
-" 需要安装 https://github.com/ryanoasis/nerd-fonts#glyph-sets, 才会正常显示图标
-Bundle 'ryanoasis/vim-devicons'
-
-Bundle 'rhysd/github-complete.vim'
-" Disable overwriting 'omnifunc'
-let g:github_complete_enable_omni_completion = 0
-" <C-x><C-x> invokes completions of github-complete.vim
-" autocmd FileType markdown,gitcommit,mkd
-imap <C-k><C-o> <Plug>(github-complete-manual-completion)
 
 " ################## 插件配置结束 ###########################
 filetype plugin indent on     " required!

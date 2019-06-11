@@ -19,3 +19,5 @@ let g:vim_markdown_frontmatter=1
 let g:vim_markdown_no_default_key_mappings=1
 " https://github.com/suan/vim-instant-markdown
 " npm -g install instant-markdown-d
+"
+Bundle 'joker1007/vim-markdown-quote-syntax'

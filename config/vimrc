@@ -20,6 +20,16 @@ if !isdirectory(expand("$VIM_TMP_PATH"))
     let g:cust_vim_tmp_path = 0
 endif
 
+" ##### 基本配置
+if filereadable(expand("$VIM_CONFIG_PATH/vimrc.config_base"))
+    source $VIM_CONFIG_PATH/vimrc.config_base
+endif
+
+" #####  文件类型设置
+if filereadable(expand("$VIM_CONFIG_PATH/vimrc.config_filetype"))
+    source $VIM_CONFIG_PATH/vimrc.config_filetype
+endif
+
 
 " ##### 插件配置
 if g:cust_vim_config_path is 1
@@ -31,16 +41,6 @@ else
     if filereadable(expand("$HOME/.vimrc.bundles"))
         source $HOME/.vimrc.bundles
     endif
-endif
-
-" ##### 基本配置
-if filereadable(expand("$VIM_CONFIG_PATH/vimrc.config_base"))
-    source $VIM_CONFIG_PATH/vimrc.config_base
-endif
-
-" #####  文件类型设置
-if filereadable(expand("$VIM_CONFIG_PATH/vimrc.config_filetype"))
-    source $VIM_CONFIG_PATH/vimrc.config_filetype
 endif
 
 " ##### 本地自定义配置

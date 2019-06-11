@@ -32,7 +32,7 @@ set shortmess=atI
 set cursorline
 "设置 退出vim后，内容显示在终端屏幕, 可以用于查看和复制
 "好处：误删什么的，如果以前屏幕打开，可以找回
-set t_ti= t_te=
+" set t_ti= t_te=
 "- 则点击光标不会换,用于复制
 " 鼠标暂不启用, 键盘党....
 " set mouse-=a
@@ -60,6 +60,7 @@ set magic
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
+set cmdheight=2
 
 
 "==========================================
@@ -460,7 +461,7 @@ highlight PmenuSel guibg=lightgrey guifg=black
 highlight Pmenu    ctermbg=darkgrey  ctermfg=black
 highlight PmenuSel ctermbg=lightgrey ctermfg=black
 
-set term=screen-256color
+" set term=screen-256color
 
 " 设置快捷键将选中文本块复制至系统剪贴板
 nmap ,y "+y
@@ -682,3 +683,4 @@ set lazyredraw
 " 高亮当前单词，同时光标停留在当前单词不跳转，可能需要先使用 gd 高亮一次才会生效
 nmap wh :let @/=expand('<cword>')<cr>
 
+" set noimdisable

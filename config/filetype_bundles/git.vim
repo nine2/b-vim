@@ -35,11 +35,17 @@ endfunc
 nnoremap gh :call CustomGitGutterLineHights()<CR>
 
 " ##### 使用 git blame 等功能
-Bundle "tpope/vim-fugitive"
+Bundle 'tpope/vim-fugitive'
 " 使用命令
 " Gblame, Gstatue, help fugitive
 " 使用 Glog 可查看历史版本文件
 nnoremap gb :Gblame<CR>
+" 查看 bitbucket
+Bundle 'nine2/vim-fubitive'
+" :Gbrowse
+nnoremap g<space> :Gbrowse<CR>
+" rhubarb.vim: GitHub extension for fugitive.vim
+Bundle 'tpope/vim-rhubarb'
 
 " 在vim中使用 git 命令
 Bundle 'motemen/git-vim'
