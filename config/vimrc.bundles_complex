@@ -6,6 +6,8 @@
 "   File Name     : vimrc.bundles_complex
 "   Last Modified : 2018-12-07 18:30
 "   Describe      :
+"       默认补全工具使用 ycm, 可通过在 bundle 目录下建立
+"       软连接 vimrc.bundles_completion 来修改补全工具
 "
 " ====================================================
 
@@ -80,4 +82,7 @@ else
     endif
 endif
 
-
+highlight Pmenu    guibg=darkgrey  guifg=black
+highlight PmenuSel guibg=lightgrey guifg=black
+highlight Pmenu    ctermbg=darkgrey  ctermfg=black
+highlight PmenuSel ctermbg=lightgrey ctermfg=black

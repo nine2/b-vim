@@ -124,7 +124,3 @@ nnoremap <silent> ,k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> ,p  :<C-u>CocListResume<CR>
 
-highlight Pmenu    guibg=darkgrey  guifg=black
-highlight PmenuSel guibg=lightgrey guifg=black
-highlight Pmenu    ctermbg=darkgrey  ctermfg=black
-highlight PmenuSel ctermbg=lightgrey ctermfg=black

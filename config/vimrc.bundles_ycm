@@ -1,3 +1,27 @@
+" ====================================================
+"   Copyright (C)2019 All rights reserved.
+"
+"   Author        : bbxytl
+"   Email         : bbxytl@gmail.com
+"   File Name     : vimrc.bundles_ycm
+"   Last Modified : 2019-06-12 21:40
+"   Describe      :
+"       ycm 在补全 go 语言时，gocode 可能会出现新写的函数或变量
+"   找不到的情况，可以将 ycm 的 go 补全引擎修改为 gopls。
+"   （至少当前写此记录时还未支持)
+"   修改步骤如下：
+"       1. 进入目录：cd YouCompleteMe/third_party/ycmd
+"       2. 切成master: git checkout master && git pull
+"       3. 如果本地已经拉取了 go 的一些工具，如 x/tools 等，
+"       则可以直接将其链接过来，不用再拉一遍：
+"           ln -s ~/go/src/golang.org YouCompleteMe/third_party/ycmd/third_party/go/src/golang.org
+"         如果本地没有这些，则可以直接使用脚本:
+"         https://github.com/bbxytl/b-dotfiles/blob/master/b-go/install-go-tools.sh
+"         拉取【此脚本是为了解决 直接从 golang.org 拉取失败】
+"       4. 在YouCompleteMe目录下执行 ./install.py --go-completer 启用 go 支持
+"           运行好后，ycm即可支持 gopls。
+" ====================================================
+
 
 " ###############################
 " 自动补全
