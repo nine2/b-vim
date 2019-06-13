@@ -38,6 +38,7 @@ let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
+" let g:go_highlight_function_parameters = 1
 " let g:go_highlight_operators = 1
 " let g:custom_syntax_hightlight_operators= 1
 let g:go_highlight_extra_types = 1
@@ -54,6 +55,7 @@ au FileType go nmap <leader><F7> :GoReferrers<cr>
 au FileType go nmap <Space> :GoInfo<cr>
 au FileType go nmap <Leader>d :GoDoc<cr>
 au FileType go nmap wh :GoSameIds<cr>
+au FileType go nmap whc :GoSameIdsClear<cr>
 
 " 自动导入包, 格式化 imports
 au FileType go nmap ga :GoAddTag json

@@ -19,7 +19,7 @@
 "
 "
 " 格式化工具
-Bundle "Chiel92/vim-autoformat"
+Bundle 'Chiel92/vim-autoformat'
 " noremap <F8> :Autoformat<CR>
 let g:autoformat_verbosemode=1
 let g:autoformat_autoindent = 0
@@ -68,7 +68,8 @@ imap <C-k><C-o> <Plug>(github-complete-manual-completion)
 
 
 " xterm 颜色(256色)
-Bundle "guns/xterm-color-table.vim"
+Bundle 'guns/xterm-color-table.vim'
+" :XtermColorTable
 
 
 let g:cur_bundle_file_path = expand("$VIM_TMP_PATH/vimrc.bundles_completion")

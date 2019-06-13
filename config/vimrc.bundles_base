@@ -158,7 +158,7 @@ let g:NERDSpaceDelims=1
 " ###############################
 " 语法高亮
 " 针对项目设置的自定义语法，参考 README
-Bundle "nine2/vim-custom-syntax"
+Bundle 'nine2/vim-custom-syntax'
 " 可使用此配置关闭语法高亮
 " let g:custom_syntax_hightlight_enable= 0
 " 语法高亮
@@ -274,7 +274,7 @@ map <Leader><leader>. <Plug>(easymotion-repeat)
 " ##### 显示marks - 方便自己进行标记和跳转
 " m[a-zA-Z] add mark
 " '[a-zA-Z] go to mark
-Bundle "kshenoy/vim-signature"
+Bundle 'kshenoy/vim-signature'
 " 书签设定。mx，设定/取消当前行名为 x 的标签；m,，自动设定下一个可用书签名，
 "   前面提说，独立书签名是不能重复的，在你已经有了多个独立书签，
 "   当想再设置书签时，需要记住已经设定的所有书签名，否则很可能会将已有的书签冲掉，这可不好，
@@ -354,7 +354,7 @@ let g:ctrlp_mruf_default_order = 1
 "  endif
 
 " ##### 类似sublimetext的搜索
-Bundle "dyng/ctrlsf.vim"
+Bundle 'dyng/ctrlsf.vim'
 """"""
 " In CtrlSF window:
 " 回车/o, 打开
@@ -621,7 +621,7 @@ let g:tagbar_type_go = {
 \ }
 
 
-Bundle "rking/ag.vim"
+Bundle 'rking/ag.vim'
 " let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
 let g:ag_working_path_mode="r"
 let g:ag_highlight=0
