@@ -219,7 +219,9 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " let g:ale_linters = {'go': ['go vet', 'gofmt', 'golint']}
-let g:ale_linters = {'go': ['go vet', 'gofmt']}
+let g:ale_linters = {'go': ['gopls', 'go vet', 'gofmt']}
+let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_insert_leave = 1
 nmap <silent> ek <Plug>(ale_previous_wrap)
 nmap <silent> ej <Plug>(ale_next_wrap)
 nmap <silent> eh <Plug>(ale_first)
@@ -243,6 +245,8 @@ au FileType markdown let b:delimitMate_nesting_quotes = ['`']
 "the function signature in the command line and highlight the argument
 "position your cursor
 Bundle 'Shougo/echodoc.vim'
+" set cmdheight=3
+let g:echodoc_enable_at_startup = 1
 
 
 " ###############################

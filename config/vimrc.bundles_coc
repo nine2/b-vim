@@ -14,7 +14,7 @@ set hidden
 set nobackup
 set nowritebackup
 " Better display for messages
-set cmdheight=2
+" set cmdheight=3
 set updatetime=300
 " don't give |ins-completion-menu| messages.
 " set shortmess+=c

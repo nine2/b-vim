@@ -21,11 +21,11 @@ let g:go_fmt_fail_silently = 1
 let g:go_metalinter_enabled = 0
 let g:go_list_type = "quickfix"
 " let g:go_auto_type_info = 1
-" let g:go_info_mode = 'gopls'
+let g:go_info_mode = 'gopls'
 " let g:go_info_mode = 'gocode'
 " let g:go_auto_sameids = 1
 " let g:go_updatetime = 300
-" let g:go_def_mode = 'gopls'
+let g:go_def_mode = 'gopls'
 let g:go_decls_mode = 'ctrlp.vim'
 let g:go_decls_includes = 'func,type'
 let g:go_fold_enable = ['import']
@@ -52,6 +52,7 @@ au FileType go nnoremap <buffer> <silent> <leader>v :<C-u>call go#def#Jump("vspl
 au FileType go nnoremap <buffer> <silent> <leader>t :<C-u>call go#def#Jump("tab")<CR>
 au FileType go nmap <leader><F7> :GoReferrers<cr>
 au FileType go nmap <Space> :GoInfo<cr>
+au FileType go nmap <Leader>d :GoDoc<cr>
 au FileType go nmap wh :GoSameIds<cr>
 
 " 自动导入包, 格式化 imports
@@ -60,7 +61,6 @@ au FileType go nmap gaj :GoAddTag json<CR>
 au FileType go nmap gar :GoAddTag schema json<CR>
 au FileType go nmap gad :GoAddTag db json<CR>
 
-" au FileType go nmap <Leader>d <Plug>(go-doc)
 au FileType go nmap <Leader>tt :call Nine2GoTest()<cr>
 au FileType go nmap <Leader>tb :call Nine2GoBench()<cr>
 au FileType go nmap <Leader>tf :call Nine2GoTestFunc()<cr>
