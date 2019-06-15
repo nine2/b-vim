@@ -653,11 +653,11 @@ nnoremap ck :cprevious<cr>
 nnoremap cc :cclose<cr>
 
 " Location
-nnoremap so :lopen<cr>
-nnoremap sc :lclose<cr>
+nnoremap lo :lopen<cr>
+nnoremap lc :lclose<cr>
 " 跳转到不同的错误
-nnoremap sj :lnext<cr>
-nnoremap sk :lprevious<cr>
+nnoremap lj :lnext<cr>
+nnoremap lk :lprevious<cr>
 
 " 双击跳转
 map <2-LeftMouse> <C-]>

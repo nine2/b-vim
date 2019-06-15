@@ -272,6 +272,11 @@ map <Leader><leader>. <Plug>(easymotion-repeat)
 
 
 " ##### 显示marks - 方便自己进行标记和跳转
+" mm 按顺序自动标示
+" m/ 显示所有的标记
+" lj, mn 跳转到下一项
+" lk, mp 跳转到上一项
+" md 删除当前行标示
 " m[a-zA-Z] add mark
 " '[a-zA-Z] go to mark
 Bundle 'kshenoy/vim-signature'
@@ -285,11 +290,13 @@ Bundle 'kshenoy/vim-signature'
 "   mp，按行号前后顺序，跳转至前个独立书签。
 "   书签跳转方式很多，除了这里说的行号前后顺序，
 "   还可以基于书签名字母顺序跳转、分类书签同类跳转、分类书签不同类间跳转等等。
+        " \ 'PlaceNextMark'      :  "m,",
+        " \ 'PurgeMarksAtLine'   :  "m-",
 let g:SignatureMap = {
         \ 'Leader'             :  "m",
-        \ 'PlaceNextMark'      :  "m,",
+        \ 'PlaceNextMark'      :  "mm",
         \ 'ToggleMarkAtLine'   :  "m.",
-        \ 'PurgeMarksAtLine'   :  "m-",
+        \ 'PurgeMarksAtLine'   :  "md",
         \ 'DeleteMark'         :  "dm",
         \ 'PurgeMarks'         :  "mda",
         \ 'PurgeMarkers'       :  "m<BS>",
@@ -305,7 +312,7 @@ let g:SignatureMap = {
         \ 'GotoPrevMarker'     :  "[-",
         \ 'GotoNextMarkerAny'  :  "]=",
         \ 'GotoPrevMarkerAny'  :  "[=",
-        \ 'ListLocalMarks'     :  "ms",
+        \ 'ListLocalMarks'     :  "m/",
         \ 'ListLocalMarkers'   :  "m?"
         \ }
 
