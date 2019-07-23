@@ -212,7 +212,8 @@ let g:ale_sign_warning = '➤➤'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 " 使用 quickfix 替换 location 窗口
-let g:ale_set_quickfix = 1
+" let g:ale_set_quickfix = 1
+" let g:ale_set_location = 1
 let g:ale_list_window_size = 5
 " let g:ale_fix_on_save = 0
 let g:ale_go_staticcheck_lint_package = 1
