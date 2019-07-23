@@ -23,7 +23,8 @@ let fileList = [
     \ "git.vim",
     \ "yaml.vim",
     \ "markdown.vim",
-    \ "protobuf.vim"
+    \ "protobuf.vim",
+    \ "uml.vim"
     \ ]
 
 for fl in fileList

@@ -21,3 +21,6 @@ let g:vim_markdown_no_default_key_mappings=1
 " npm -g install instant-markdown-d
 "
 Bundle 'joker1007/vim-markdown-quote-syntax'
+
+" 在tagbar显示目录
+Bundle 'lvht/tagbar-markdown'

@@ -16,6 +16,7 @@
 " for # indent, python文件中输入新行时#号注释不切回行首
 autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
 
+autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown
 autocmd BufRead,BufNew *.pike setfiletype pike
 autocmd BufRead,BufNew *.decl setfiletype cpp
 autocmd BufRead,BufNew *.pl setfiletype perl
@@ -23,7 +24,6 @@ autocmd BufRead,BufNew *.pm setfiletype perl
 autocmd BufRead,BufNew *.plx setfiletype perl
 autocmd BufRead,BufNewFile *.go setfiletype go
 
-autocmd BufRead,BufNew *.md,*.mkd,*.markdown  set filetype=markdown
 " autocmd FileType python,py,c,cpp,java,javascript,go,php,ruby,xml,yml,perl set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType python,py set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai

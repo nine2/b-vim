@@ -9,6 +9,8 @@
 "
 " ====================================================
 
+" go 文件配置
+autocmd BufRead,BufNewFile *.go set filetype=go
 
 " ###############################
 " Golang
@@ -16,9 +18,14 @@ Bundle "fatih/vim-go"
 " 保存时自动使用 gofmt 格式代码，使用 goimports 格式 import 部分，
 " 同时自动导入缺少的import
 let g:go_fmt_command = "goimports"
-let g:go_fmt_fail_silently = 1
 " 取消每次有错都弹出报错框，如果希望看到所有报错，可使用 :lopen 打开报错框
-let g:go_metalinter_enabled = 0
+let g:go_fmt_fail_silently = 1
+" let g:go_metalinter_enabled = 0
+" 需要安装 golangci-lint: go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
+" 命令 :GoMetaLinter
+let g:go_metalinter_command = "golangci-lint"
+" Use this option to auto :GoMetaLinter on save.
+" let g:go_metalinter_autosave = 1
 let g:go_list_type = "quickfix"
 " let g:go_auto_type_info = 1
 let g:go_info_mode = 'gopls'
@@ -26,6 +33,7 @@ let g:go_info_mode = 'gopls'
 " let g:go_auto_sameids = 1
 " let g:go_updatetime = 300
 let g:go_def_mode = 'gopls'
+" let g:go_def_mode = 'godef'
 let g:go_decls_mode = 'ctrlp.vim'
 let g:go_decls_includes = 'func,type'
 let g:go_fold_enable = ['import']
@@ -56,6 +64,7 @@ au FileType go nmap <Space> :GoInfo<cr>
 au FileType go nmap <Leader>d :GoDoc<cr>
 au FileType go nmap wh :GoSameIds<cr>
 au FileType go nmap whc :GoSameIdsClear<cr>
+au FileType go map <leader>rn :GoRename<cr>
 
 " 自动导入包, 格式化 imports
 au FileType go nmap ga :GoAddTag json
@@ -63,6 +72,11 @@ au FileType go nmap gaj :GoAddTag json<CR>
 au FileType go nmap gar :GoAddTag schema json<CR>
 au FileType go nmap gad :GoAddTag db json<CR>
 
+" go build 检查错误
+au FileType go nmap <F10> :GoBuild<cr>
+au FileType go nmap <Leader>gb :GoBuild<cr>
+au FileType go nmap gch :GoMetaLinter<cr>
+" 运行测试函数
 au FileType go nmap <Leader>tt :call Nine2GoTest()<cr>
 au FileType go nmap <Leader>tb :call Nine2GoBench()<cr>
 au FileType go nmap <Leader>tf :call Nine2GoTestFunc()<cr>
@@ -158,7 +172,7 @@ au FileType godoc set filetype=go
 " 生成 函数 test
 Bundle 'buoto/gotests-vim'
 let g:gotests_bin = expand('$HOME/go/bin/gotests')
-au FileType go map <leader>T :GoTests<cr>
+au FileType go map <leader>gt :GoTests<cr>
 
 " au FileType go let g:nerdtree_tabs_open_on_console_startup = 1
 

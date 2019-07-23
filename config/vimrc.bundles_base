@@ -211,6 +211,8 @@ let g:ale_sign_error = '✘✘'
 let g:ale_sign_warning = '➤➤'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
+" 使用 quickfix 替换 location 窗口
+let g:ale_set_quickfix = 1
 let g:ale_list_window_size = 5
 " let g:ale_fix_on_save = 0
 let g:ale_go_staticcheck_lint_package = 1
@@ -218,9 +220,17 @@ let g:ale_go_staticcheck_lint_package = 1
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" go 文件配置
+let g:ale_go_golangci_lint_executable  = "golangci-lint"
+let g:ale_go_golangci_lint_package = 1
 " 需要安装 gopls 工具
 " let g:ale_linters = {'go': ['go vet', 'gofmt', 'golint']}
-let g:ale_linters = {'go': ['gopls']}
+" let g:ale_linters = {'go': ['gopls']}
+let g:ale_linters = {'go': ['gopls'], 'python':['pep8', 'pyflakes']}
+" 需要安装 golangci-lint ，速度快，比 gopls 占用内存少,
+" 静态检查足够了（检查的非常细）
+" let g:ale_linters = {'go': ['golangci-lint'], 'python':['pep8', 'pyflakes']}
+
 let g:ale_lint_on_text_changed = 1
 let g:ale_lint_on_insert_leave = 1
 nmap <silent> ek <Plug>(ale_previous_wrap)
@@ -448,7 +458,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " s/v 分屏打开文件
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
-let g:NERDTreeMouseMode = 2
+let g:NERDTreeMouseMode = 3
 let g:NERDTreeWinSize = 50
 let g:NERDTreeDirArrows=1
 let g:NERDTreeChDirMode=2
@@ -682,7 +692,7 @@ map <F10> :QuickRun<CR>
 Bundle "nine2/vim-copyright"
 let g:file_copyright_name = "bbxytl"
 let g:file_copyright_email = "bbxytl@gmail.com"
-let g:file_copyright_auto_filetypes = ['sh', 'plx', 'pl', 'pm', 'py', 'python', 'h', 'hpp', 'c', 'cpp', 'java']
+" let g:file_copyright_auto_filetypes = ['sh', 'plx', 'pl', 'pm', 'py', 'python', 'h', 'hpp', 'c', 'cpp', 'java']
 map uh :CopyrightUpdate<cr>
 
 

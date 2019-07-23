@@ -192,6 +192,16 @@ endfunc
 nnoremap <silent> <C-n> :call NumberToggle()<cr>
 
 
+" 切换只读模式, 当前可写转换为只读，当前只读转换为可写
+function! ChangeReadOnly()
+    if(&readonly == 1)
+        set noreadonly
+    else
+        set readonly
+    endif
+endfunc
+nnoremap <leader>rw :call ChangeReadOnly()<cr>
+
 "==========================================
 " FileEncode Settings 文件编码,格式
 "==========================================
