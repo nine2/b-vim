@@ -76,6 +76,7 @@ au FileType go nmap gad :GoAddTag db json<CR>
 au FileType go nmap <F10> :GoBuild<cr>
 au FileType go nmap <Leader>gb :GoBuild<cr>
 au FileType go nmap gch :GoMetaLinter<cr>
+au FileType go nmap <Leader>e :GoBuild<CR>
 " 运行测试函数
 au FileType go nmap <Leader>tt :call Nine2GoTest()<cr>
 au FileType go nmap <Leader>tb :call Nine2GoBench()<cr>

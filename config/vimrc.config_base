@@ -661,6 +661,8 @@ nnoremap co :copen<cr>
 nnoremap cj :cnext<cr>
 nnoremap ck :cprevious<cr>
 nnoremap cc :cclose<cr>
+nnoremap ca :cr<cr>
+nnoremap ce :cla<cr>
 
 " Location
 nnoremap lo :lopen<cr>
@@ -668,6 +670,8 @@ nnoremap lc :lclose<cr>
 " 跳转到不同的错误
 nnoremap lj :lnext<cr>
 nnoremap lk :lprevious<cr>
+nnoremap la :lr<cr>
+nnoremap le :lla<cr>
 
 " 双击跳转
 map <2-LeftMouse> <C-]>

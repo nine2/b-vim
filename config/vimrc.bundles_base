@@ -114,6 +114,7 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#wordcount#enabled = 1
 let b:airline_whitespace_checks = [ 'indent', 'trailing' ]
 " let b:airline_whitespace_checks = [ 'trailing' ]
+let g:airline#extensions#ycm#enabled = 1
 " Always show the status line - use 2 lines for the status bar
 set laststatus=2
 
@@ -207,6 +208,7 @@ Bundle 'nine2/vim-custom-syntax'
 "let g:syntastic_java_javac_args="-cp ../../lib:../../bin -sourcepath ../../bin -Djava.ext.dirs=../../lib -d ../../bin"
 
 Bundle 'w0rp/ale'
+" let g:ale_enabled= 0
 let g:ale_sign_error = '✘✘'
 let g:ale_sign_warning = '➤➤'
 highlight clear ALEErrorSign

@@ -18,22 +18,23 @@
 " #############################
 "
 "
-" 格式化工具
+" 格式化工具, https://github.com/Chiel92/vim-autoformat
+" 需要安装格式化使用的工具，参考github的说明
 Bundle 'Chiel92/vim-autoformat'
-" noremap <F8> :Autoformat<CR>
+noremap <F8> :Autoformat<CR>
 let g:autoformat_verbosemode=1
 let g:autoformat_autoindent = 0
-" 格式化shell
-Bundle 'z0mbix/vim-shfmt', { 'for': 'sh' }
+" 格式化shell, vim-autoformat 包含了此功能
+" Bundle 'z0mbix/vim-shfmt', { 'for': 'sh' }
 " 根据文件调用不同的插件
-function! F8FormatFile()
-    if &filetype == 'sh'
-        Shfmt -p
-    else
-        Autoformat
-    endif
-endfunction
-noremap <F8> :call F8FormatFile()<CR>
+"function! F8FormatFile()
+"    if &filetype == 'sh'
+"        Shfmt -p
+"    else
+"        Autoformat
+"    endif
+"endfunction
+" noremap <F8> :call F8FormatFile()<CR>
 
 " 快速补全, 需要 vim 支持 python
 Bundle 'SirVer/ultisnips'
