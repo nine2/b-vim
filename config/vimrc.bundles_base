@@ -229,10 +229,13 @@ let g:ale_go_golangci_lint_package = 1
 " 需要安装 gopls 工具
 " let g:ale_linters = {'go': ['go vet', 'gofmt', 'golint']}
 " let g:ale_linters = {'go': ['gopls']}
-let g:ale_linters = {'go': ['gopls'], 'python':['pep8', 'pyflakes']}
+" let g:ale_linters = {'go': ['gopls'], 'python':['pep8', 'pyflakes']}
 " 需要安装 golangci-lint ，速度快，比 gopls 占用内存少,
 " 静态检查足够了（检查的非常细）
 " let g:ale_linters = {'go': ['golangci-lint'], 'python':['pep8', 'pyflakes']}
+autocmd FileType python,py let g:ale_linters = {'python':['pep8', 'pyflakes']}
+autocmd FileType go let g:ale_linters = {'go': ['golangci-lint']}
+
 
 let g:ale_lint_on_text_changed = 1
 let g:ale_lint_on_insert_leave = 1
