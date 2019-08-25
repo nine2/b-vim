@@ -44,7 +44,8 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " 列出匹配的所有 snippets
 let g:UltiSnipsListSnippets="<c-a>"
-" let g:UltiSnipsSnippetDirectories=[$VIM_CONFIG_PATH.'/projects/UltiSnips/']
+" let g:UltiSnipsSnippetDirectories=[$VIM_CONFIG_PATH.'/projects/snips/']
+let g:UltiSnipsSnippetDirectories=['UltiSnips', expand("$VIM_CONFIG_PATH/projects/snips")]
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"

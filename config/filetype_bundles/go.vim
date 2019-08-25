@@ -52,6 +52,8 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_generate_tags = 1
+" 无 model 不报警
+let g:go_null_module_warning = 0
 
 " au FileType go nnoremap <buffer> <silent> gs :<C-u>call go#def#Jump("split")<CR>
 au FileType go nnoremap <buffer> <silent> <C-]> :GoDef<cr>
@@ -59,6 +61,9 @@ au FileType go nnoremap <buffer> <silent> <C-]> :GoDef<cr>
 au FileType go nnoremap <buffer> <silent> <leader>s :<C-u>call go#def#Jump("split")<CR>
 au FileType go nnoremap <buffer> <silent> <leader>v :<C-u>call go#def#Jump("vsplit")<CR>
 au FileType go nnoremap <buffer> <silent> <leader>t :<C-u>call go#def#Jump("tab")<CR>
+au FileType go nnoremap ff :GoDef<CR>
+au FileType go nnoremap fi :GoImplements<CR>
+au FileType go nnoremap fr :GoReferrers<CR>
 au FileType go nmap <leader><F7> :GoReferrers<cr>
 au FileType go nmap <Space> :GoInfo<cr>
 au FileType go nmap <Leader>d :GoDoc<cr>
@@ -140,6 +145,14 @@ func! Nine2GoBenchmarkFunc()
     exe ":Rooter"
     echo system('pwd')
 endfunc
+
+
+"" 语言高亮配色
+" hi def link   goSimpleParams      FunctionArgument
+" hi def link   goParamName         FunctionArgument
+hi def link   goBuiltins          Builtins
+hi def link   goField             Field
+hi def link   goSameId            SameId
 
 " Bundle 'nsf/gocode'
 " Bundle 'stamblerre/gocode'

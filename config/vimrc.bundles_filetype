@@ -24,6 +24,7 @@ let fileList = [
     \ "yaml.vim",
     \ "markdown.vim",
     \ "protobuf.vim",
+    \ "nginx.vim",
     \ "uml.vim"
     \ ]
 

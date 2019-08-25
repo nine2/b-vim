@@ -43,7 +43,7 @@ inoremap <silent><expr> <space>fr coc#refresh()
 nmap <silent> ff <Plug>(coc-definition)
 nmap <silent> fy <Plug>(coc-type-definition)
 nmap <silent> fi <Plug>(coc-implementation)
-nmap <silent> fr <Plug>(coc-references)
+nmap <silent> f<space> <Plug>(coc-references)
 nmap <buffer> <silent> <C-]>  <Plug>(coc-definition)
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)

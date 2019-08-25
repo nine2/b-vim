@@ -1,0 +1,36 @@
+# Snippets for plantuml
+
+priority -50
+
+snippet uml
+@startuml
+${0:${VISUAL}}
+@enduml
+endsnippet
+
+snippet note "add note"
+note ${1:right}
+    ${2:note}${0:${VISUAL}}
+end note
+endsnippet
+
+snippet --- "大类分隔注释"
+/'#################################
+${1:分隔说明}
+###################'/
+endsnippet
+
+snippet -- "小类分隔注释"
+/'------------------------------------'/
+endsnippet
+
+
+snippet // "单行注释"
+/' ${1:commit} '/
+endsnippet
+
+snippet /// "多行注释"
+/' ${1:commit}
+'/
+endsnippet
+
