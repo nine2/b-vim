@@ -64,6 +64,8 @@ au FileType go nnoremap <buffer> <silent> <leader>t :<C-u>call go#def#Jump("tab"
 au FileType go nnoremap ff :GoDef<CR>
 au FileType go nnoremap fi :GoImplements<CR>
 au FileType go nnoremap fr :GoReferrers<CR>
+" 自动导入结构体字段
+au FileType go nnoremap fs :GoFillStruct<cr>
 au FileType go nmap <leader><F7> :GoReferrers<cr>
 au FileType go nmap <Space> :GoInfo<cr>
 au FileType go nmap <Leader>d :GoDoc<cr>
@@ -74,8 +76,8 @@ au FileType go map <leader>rn :GoRename<cr>
 " 自动导入包, 格式化 imports
 au FileType go nmap ga :GoAddTag json
 au FileType go nmap gaj :GoAddTag json<CR>
-au FileType go nmap gar :GoAddTag schema json<CR>
-au FileType go nmap gad :GoAddTag db json<CR>
+au FileType go nmap gas :GoAddTag schema<CR>
+au FileType go nmap gad :GoAddTag db<CR>
 
 " go build 检查错误
 au FileType go nmap <F10> :GoBuild<cr>

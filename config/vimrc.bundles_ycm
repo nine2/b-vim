@@ -112,7 +112,7 @@ let g:ycm_semantic_triggers =  {
 
 Bundle 'tdcdev/ycm_simple_conf'
 
-Bundle 'tenfyzhong/CompleteParameter.vim'
+Bundle 'bbxytl/CompleteParameter.vim'
 inoremap <silent><expr> ( complete_parameter#pre_complete("()")
 smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
 imap <c-j> <Plug>(complete_parameter#goto_next_parameter)

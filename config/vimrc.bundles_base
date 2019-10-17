@@ -358,7 +358,7 @@ map <leader>b :CtrlPBuffer<CR>
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*        " Linux/MacOSX
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|a)$|tags',
     \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
     \ }
 let g:ctrlp_working_path_mode=0
@@ -405,6 +405,11 @@ let g:ctrlsf_mapping = {
     \ "pquit" : "q",
     \ }
 nnoremap <leader>sp :CtrlSF<CR>
+
+" Asynchronously fly grep in vim
+Bundle 'wsdjeg/FlyGrep.vim'
+nnoremap <leader>\ :FlyGrep<CR>
+
 
 " 强大的模糊搜索, CtrlP 比它更强大
 " 默认：
@@ -722,16 +727,23 @@ else
 endif
 
 " 自动保存
-" Bundle 'vim-scripts/vim-auto-save'
-" let g:auto_save = 1
-" let g:auto_save_in_insert_mode = 0
-" let g:auto_save_silent = 1
+Bundle 'vim-scripts/vim-auto-save'
+let g:auto_save = 0
+let g:auto_save_in_insert_mode = 0
+let g:auto_save_silent = 1
 
 " A vim plugin that simplifies the transition between multiline and
 " single-line code
 Bundle 'AndrewRadev/splitjoin.vim'
 nmap sj :SplitjoinSplit<cr>
 nmap sk :SplitjoinJoin<cr>
+
+" color hex codes and color names
+Bundle 'chrisbra/Colorizer'
+" :Colorizer
+" :RGB2Term
+" :Term2RGB
+let g:colorizer_auto_color = 1
 
 set encoding=UTF-8
 
