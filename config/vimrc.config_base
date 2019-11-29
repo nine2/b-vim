@@ -698,6 +698,6 @@ set ttyfast
 set lazyredraw
 
 " 高亮当前单词，同时光标停留在当前单词不跳转，可能需要先使用 gd 高亮一次才会生效
-nmap wh :let @/=expand('<cword>')<cr>
+nmap hw :let @/=expand('<cword>')<cr>
 
 " set noimdisable

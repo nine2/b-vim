@@ -306,15 +306,13 @@ Bundle 'kshenoy/vim-signature'
 "   mp，按行号前后顺序，跳转至前个独立书签。
 "   书签跳转方式很多，除了这里说的行号前后顺序，
 "   还可以基于书签名字母顺序跳转、分类书签同类跳转、分类书签不同类间跳转等等。
-        " \ 'PlaceNextMark'      :  "m,",
-        " \ 'PurgeMarksAtLine'   :  "m-",
 let g:SignatureMap = {
         \ 'Leader'             :  "m",
-        \ 'PlaceNextMark'      :  "mm",
-        \ 'ToggleMarkAtLine'   :  "m.",
-        \ 'PurgeMarksAtLine'   :  "md",
+        \ 'PlaceNextMark'      :  "m,",
+        \ 'ToggleMarkAtLine'   :  "mm",
+        \ 'PurgeMarksAtLine'   :  "m-",
         \ 'DeleteMark'         :  "dm",
-        \ 'PurgeMarks'         :  "mda",
+        \ 'PurgeMarks'         :  "m<Space>",
         \ 'PurgeMarkers'       :  "m<BS>",
         \ 'GotoNextLineAlpha'  :  "']",
         \ 'GotoPrevLineAlpha'  :  "'[",
@@ -725,6 +723,15 @@ else
         exec "so  ".g:cur_bundle_file_path
     endif
 endif
+
+" 补全参数
+Bundle 'bbxytl/CompleteParameter.vim'
+inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+
 
 " 自动保存
 Bundle 'vim-scripts/vim-auto-save'

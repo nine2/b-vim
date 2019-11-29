@@ -23,7 +23,7 @@
 Bundle 'Chiel92/vim-autoformat'
 noremap <F8> :Autoformat<CR>
 let g:autoformat_verbosemode=1
-let g:autoformat_autoindent = 0
+let g:autoformat_autoindent = 1
 " 格式化shell, vim-autoformat 包含了此功能
 " Bundle 'z0mbix/vim-shfmt', { 'for': 'sh' }
 " 根据文件调用不同的插件

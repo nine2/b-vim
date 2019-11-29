@@ -34,6 +34,7 @@ let g:go_info_mode = 'gopls'
 " let g:go_updatetime = 300
 let g:go_def_mode = 'gopls'
 " let g:go_def_mode = 'godef'
+let g:go_gopls_complete_unimported = 1
 let g:go_decls_mode = 'ctrlp.vim'
 let g:go_decls_includes = 'func,type'
 let g:go_fold_enable = ['import']
@@ -54,6 +55,9 @@ let g:go_highlight_methods = 1
 let g:go_highlight_generate_tags = 1
 " 无 model 不报警
 let g:go_null_module_warning = 0
+
+" 修改补全触发
+inoremap <C-n> <C-x><C-o>
 
 " au FileType go nnoremap <buffer> <silent> gs :<C-u>call go#def#Jump("split")<CR>
 au FileType go nnoremap <buffer> <silent> <C-]> :GoDef<cr>
@@ -84,6 +88,10 @@ au FileType go nmap <F10> :GoBuild<cr>
 au FileType go nmap <Leader>gb :GoBuild<cr>
 au FileType go nmap gch :GoMetaLinter<cr>
 au FileType go nmap <Leader>e :GoBuild<CR>
+nmap <silent> ek :cprevious<cr>
+nmap <silent> ej :cnext<cr>
+nmap <silent> eh :cr<cr>
+nmap <silent> el :cla<cr>
 " 运行测试函数
 au FileType go nmap <Leader>tt :call Nine2GoTest()<cr>
 au FileType go nmap <Leader>tb :call Nine2GoBench()<cr>
