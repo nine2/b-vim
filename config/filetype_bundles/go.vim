@@ -84,10 +84,10 @@ au FileType go nmap gas :GoAddTag schema<CR>
 au FileType go nmap gad :GoAddTag db<CR>
 
 " go build 检查错误
-au FileType go nmap <F10> :GoBuild<cr>
+au FileType go nmap <Leader>e :GoBuild<cr>
 au FileType go nmap <Leader>gb :GoBuild<cr>
-au FileType go nmap gch :GoMetaLinter<cr>
-au FileType go nmap <Leader>e :GoBuild<CR>
+au FileType go nmap cl :GoMetaLinter<cr>
+au FileType go nmap <F10> :GoMetaLinter<CR>
 nmap <silent> ek :cprevious<cr>
 nmap <silent> ej :cnext<cr>
 nmap <silent> eh :cr<cr>
