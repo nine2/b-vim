@@ -695,7 +695,7 @@ nmap <leader>jf :call B_JsonFormat()<cr>
 " 防止vim卡顿
 set re=1
 set ttyfast
-set lazyredraw
+" set lazyredraw
 
 " 高亮当前单词，同时光标停留在当前单词不跳转，可能需要先使用 gd 高亮一次才会生效
 nmap hw :let @/=expand('<cword>')<cr>

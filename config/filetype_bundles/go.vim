@@ -73,6 +73,7 @@ au FileType go nnoremap fs :GoFillStruct<cr>
 au FileType go nmap <leader><F7> :GoReferrers<cr>
 au FileType go nmap <Space> :GoInfo<cr>
 au FileType go nmap <Leader>d :GoDoc<cr>
+" SameIds 配色： hi CursorColumn ctermbg=26
 au FileType go nmap wh :GoSameIds<cr>
 au FileType go nmap whc :GoSameIdsClear<cr>
 au FileType go map <leader>rn :GoRename<cr>
@@ -88,10 +89,10 @@ au FileType go nmap <Leader>e :GoBuild<cr>
 au FileType go nmap <Leader>gb :GoBuild<cr>
 au FileType go nmap cl :GoMetaLinter<cr>
 au FileType go nmap <F10> :GoMetaLinter<CR>
-nmap <silent> ek :cprevious<cr>
-nmap <silent> ej :cnext<cr>
-nmap <silent> eh :cr<cr>
-nmap <silent> el :cla<cr>
+au FileType go nmap <silent> ek :cprevious<cr>
+au FileType go nmap <silent> ej :cnext<cr>
+au FileType go nmap <silent> eh :cr<cr>
+au FileType go nmap <silent> el :cla<cr>
 " 运行测试函数
 au FileType go nmap <Leader>tt :call Nine2GoTest()<cr>
 au FileType go nmap <Leader>tb :call Nine2GoBench()<cr>

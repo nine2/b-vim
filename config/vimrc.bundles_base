@@ -236,7 +236,7 @@ let g:ale_go_golangci_lint_package = 1
 autocmd FileType python,py let g:ale_linters = {'python':['pep8', 'pyflakes']}
 autocmd FileType go let g:ale_linters = {'go': ['golangci-lint']}
 
-
+let g:airline#extensions#ale#enabled = 1
 let g:ale_lint_on_text_changed = 1
 let g:ale_lint_on_insert_leave = 1
 nmap <silent> ek <Plug>(ale_previous_wrap)
@@ -413,7 +413,14 @@ nnoremap <leader>\ :FlyGrep<CR>
 " 默认：
 " <leader>f 查找文件
 " <leader>b 查找buffer
-" Bundle 'Yggdroot/LeaderF'
+"Bundle 'Yggdroot/LeaderF'
+"let g:Lf_WildIgnore = {
+"    \ 'dir': ['.svn','.git','.hg','vendor'],
+"    \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+"    \}
+"let g:Lf_PreviewCode = 1
+"let g:Lf_PreviewInPopup = 1
+
 
 " 查看所有 tab 页内容
 " 默认快捷键
@@ -467,7 +474,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " s/v 分屏打开文件
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
-let g:NERDTreeMouseMode = 3
+let g:NERDTreeMouseMode = 2 " 单击开目录，双击开文件
 let g:NERDTreeWinSize = 50
 let g:NERDTreeDirArrows=1
 let g:NERDTreeChDirMode=2
@@ -753,6 +760,8 @@ Bundle 'chrisbra/Colorizer'
 let g:colorizer_auto_color = 1
 
 set encoding=UTF-8
+
+Bundle 'psliwka/vim-smoothie'
 
 " ################## 插件配置结束 ###########################
 filetype plugin indent on     " required!
