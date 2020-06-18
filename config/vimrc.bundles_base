@@ -505,7 +505,7 @@ nmap <leader>m :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_sort = 0
 let g:tagbar_show_linenumbers = 0
-let g:tagbar_singleclick = 1
+" let g:tagbar_singleclick = 1
 let g:tagbar_left = 0
 let g:tagbar_map_zoomwin = "A"
 let g:tagbar_map_togglefold = "x"
@@ -762,6 +762,23 @@ let g:colorizer_auto_color = 1
 set encoding=UTF-8
 
 Bundle 'psliwka/vim-smoothie'
+Bundle 'bfrg/vim-qf-preview'
+augroup qfpreview
+  autocmd!
+  autocmd FileType qf nmap <buffer> p <plug>(qf-preview-open)
+augroup END
+let g:qfpreview = #{
+            \ scrolldown: 'j',
+            \ scrollup: 'k',
+            \ halfpagedown: 'd',
+            \ halfpageup: 'u',
+            \ fullpagedown: 'f',
+            \ fullpageup: 'b',
+            \ close: 'q',
+            \ height: 20
+            \ }
+
+
 
 " ################## 插件配置结束 ###########################
 filetype plugin indent on     " required!

@@ -159,8 +159,8 @@ endfunc
 
 
 "" 语言高亮配色
-" hi def link   goSimpleParams      FunctionArgument
-" hi def link   goParamName         FunctionArgument
+hi def link   goSimpleParams      FunctionArgument
+hi def link   goParamName         FunctionArgument
 hi def link   goBuiltins          Builtins
 hi def link   goField             Field
 hi def link   goSameId            SameId

@@ -75,3 +75,5 @@ hi link gitmessengerHash Special
 " History number at 'History:' header with 'Title' highlight group
 hi link gitmessengerHistory Title
 
+let g:git_messenger_always_into_popup = v:true
+
