@@ -23,13 +23,16 @@ autocmd BufRead,BufNew *.pl setfiletype perl
 autocmd BufRead,BufNew *.pm setfiletype perl
 autocmd BufRead,BufNew *.plx setfiletype perl
 autocmd BufRead,BufNewFile *.go setfiletype go
+autocmd BufRead,BufNewFile *.uml setfiletype plantuml
+autocmd BufRead,BufNewFile *.puml setfiletype plantuml
+autocmd BufRead,BufNewFile *.plantuml setfiletype plantuml
 au BufRead,BufNewFile */nginx/* set ft=nginx
 
 " autocmd FileType python,py,c,cpp,java,javascript,go,php,ruby,xml,yml,perl set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType python,py set tabstop=4 shiftwidth=4 expandtab ai
 autocmd FileType ruby set tabstop=2 shiftwidth=2 softtabstop=2 expandtab ai
 autocmd FileType pike set tabstop=4 shiftwidth=4 expandtab ai
-autocmd FileType uml,plantuml set tabstop=4 shiftwidth=4 noexpandtab ai
+autocmd FileType uml,puml,plantuml set tabstop=4 shiftwidth=4 noexpandtab ai
 
 
 " 保存文件时删除多余空格

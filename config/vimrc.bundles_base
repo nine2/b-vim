@@ -150,6 +150,7 @@ Bundle 'scrooloose/nerdcommenter'
 " <leader>c$ 从当前光标开始到行尾注释掉
 let g:NERDCustomDelimiters = {
     \ 'c': { 'leftAlt': '/*','rightAlt': '*/', 'left': '//', 'right': '' },
+    \ 'plantuml': { 'leftAlt': "/'",'rightAlt': "'/", 'left': "'", 'right': '' },
     \ }
 let NERD_cpp_alt_style=1
 let NERD_c_alt_style=1
