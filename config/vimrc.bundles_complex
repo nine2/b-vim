@@ -85,7 +85,8 @@ else
     endif
 endif
 
-highlight Pmenu    guibg=darkgrey  guifg=black
-highlight PmenuSel guibg=lightgrey guifg=black
-highlight Pmenu    ctermbg=darkgrey  ctermfg=black
-highlight PmenuSel ctermbg=lightgrey ctermfg=black
+" highlight Pmenu    guibg=darkgrey  guifg=black
+" highlight PmenuSel guibg=lightgrey guifg=black
+" highlight Pmenu    ctermbg=darkgrey  ctermfg=black
+" highlight PmenuSel ctermbg=lightgrey ctermfg=black
+

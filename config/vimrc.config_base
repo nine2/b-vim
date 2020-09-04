@@ -472,10 +472,11 @@ highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
 
 " ===============================
-highlight Pmenu    guibg=darkgrey  guifg=black
-highlight PmenuSel guibg=lightgrey guifg=black
-highlight Pmenu    ctermbg=darkgrey  ctermfg=black
-highlight PmenuSel ctermbg=lightgrey ctermfg=black
+" highlight Pmenu    guibg=darkgrey  guifg=black
+" highlight PmenuSel guibg=lightgrey guifg=black
+" highlight Pmenu    ctermbg=darkgrey  ctermfg=black
+" highlight PmenuSel ctermbg=lightgrey ctermfg=black
+
 
 " set term=screen-256color
 
@@ -704,3 +705,7 @@ set ttyfast
 nmap hw :let @/=expand('<cword>')<cr>
 
 " set noimdisable
+" 下划线转驼峰
+map tu :'<,'> s/_\(\w\)/\u\1/g<cr>
+map tU :'<,'> s/^\(\w\)/\U\1/g<cr>
+
