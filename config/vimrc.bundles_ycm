@@ -60,8 +60,29 @@ nnoremap fr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>[ :YcmCompleter GoToDeclaration<CR>
-nmap <leader>e :YcmDiags<CR>
 nnoremap <buffer> <silent> <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nmap <leader>e :YcmDiags<CR>
+let g:ycm_auto_hover=''
+" nmap <leader>d <plug>(YCMHover)
+nmap <Space> <plug>(YCMHover)
+
+" 获取变量文档信息
+  let s:ycm_hover_popup = -1
+  function s:Hover()
+    let response = youcompleteme#GetCommandResponse( 'GetDoc' )
+    if response == ''
+      return
+    endif
+
+    call popup_hide( s:ycm_hover_popup )
+    let s:ycm_hover_popup = popup_atcursor( balloon_split( response ), {} )
+  endfunction
+
+  " CursorHold triggers in normal mode after a delay
+  " autocmd CursorHold * call s:Hover()
+  " Or, if you prefer, a mapping:
+  " nnoremap <silent> <leader>D :call <SID>Hover()<CR>
+
 " 引入，可以补全系统，以及python的第三方包 针对新老版本YCM做了兼容
 " old version
 "" if !empty(glob("$VIM_TMP_PATH/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"))
