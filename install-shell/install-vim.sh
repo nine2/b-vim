@@ -102,6 +102,8 @@ grep "^Bundle [',\"]\S*/" $VIM_BUNDLE_FILE \
 		echo "git clone --depth 1 --recursive $line  $VIM_TMP_PATH/bundle/$dirname"; \
 		git clone --depth 1 --recursive $line  $VIM_TMP_PATH/bundle/$dirname; \
 	done
+
+cat ./vim_config_bashrc.sh >> ~/.bashrc.local
 # system_shell=$SHELLL
 # export SHELL="/bin/sh"
 # vim +BundleInstall! +BundleClean +qall
