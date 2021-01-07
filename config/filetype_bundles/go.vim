@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : go.vim
-"   Last Modified : 2018-12-07 18:29
+"   Last Modified : 2021-01-07 16:19
 "   Describe      :
 "
 " ====================================================
@@ -85,6 +85,9 @@ au FileType go nmap ga :GoAddTag json
 au FileType go nmap gaj :GoAddTag json<CR>
 au FileType go nmap gas :GoAddTag schema<CR>
 au FileType go nmap gad :GoAddTag db<CR>
+au FileType go nmap grt :GoRemoveTags db
+au FileType go nmap grj :GoRemoveTags json<CR>
+au FileType go nmap grd :GoRemoveTags db<CR>
 
 " go build 检查错误
 au FileType go nmap <Leader>e :GoBuild<cr>

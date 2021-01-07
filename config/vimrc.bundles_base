@@ -347,7 +347,6 @@ let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
-
 " ##### 文件搜索 change to https://github.com/ctrlpvim/ctrlp.vim
 Bundle 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<leader>f'
@@ -707,10 +706,26 @@ map <F10> :QuickRun<CR>
 
 " 文件头增加 copyright
 Bundle "nine2/vim-copyright"
-let g:file_copyright_name = "bbxytl"
-let g:file_copyright_email = "bbxytl@gmail.com"
+" let g:file_copyright_company = 'Company'
+" let g:file_copyright_rights= 'My Rights'
+let g:file_copyright_auto_update = 1
+let g:file_copyright_name = 'bbxytl'
+let g:file_copyright_email = 'bbxytl@gmail.com'
 " let g:file_copyright_auto_filetypes = ['sh', 'plx', 'pl', 'pm', 'py', 'python', 'h', 'hpp', 'c', 'cpp', 'java']
+
+let g:file_copyright_comment_mid_prefix_map = {
+      \"python": "\#", "py":"\#",
+      \"cpp":"\+", "c":"\#", "h":"\+", "hpp":"\#",
+      \"go":"\^",
+      \"vim":"\"",
+      \"sh":"\#", "shell":"\#",
+      \"ruby":"\#", "rb":"\#", "rake":"\#",
+      \"uml":"'", "plantuml":"'",
+\}
+
 map uh :CopyrightUpdate<cr>
+
+
 
 
 " ####################################
