@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : git.vim
-"   Last Modified : 2018-12-07 18:29
+"   Last Modified : 2021-01-28 14:55
 "   Describe      :
 "
 " ====================================================
@@ -49,6 +49,9 @@ Bundle 'tpope/vim-rhubarb'
 
 " 在vim中使用 git 命令
 Bundle 'motemen/git-vim'
+nnoremap <Leader>gal :GitAdd .<CR>
+" nnoremap <Leader>gc :GitCommit<CR>
+" nnoremap <Leader>gs :GitStatus<CR>
 
 " ##### 可以查看回到某个历史状态
 Bundle 'sjl/gundo.vim'

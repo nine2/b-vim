@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : go.vim
-"   Last Modified : 2021-01-07 16:19
+"   Last Modified : 2021-01-28 15:43
 "   Describe      :
 "
 " ====================================================
@@ -62,18 +62,19 @@ let g:go_null_module_warning = 0
 inoremap <C-n> <C-x><C-o>
 
 " au FileType go nnoremap <buffer> <silent> gs :<C-u>call go#def#Jump("split")<CR>
-au FileType go nnoremap <buffer> <silent> <C-]> :GoDef<cr>
+" au FileType go nnoremap <buffer> <silent> <C-]> :GoDef<cr>
 
 au FileType go nnoremap <buffer> <silent> <leader>s :<C-u>call go#def#Jump("split")<CR>
 au FileType go nnoremap <buffer> <silent> <leader>v :<C-u>call go#def#Jump("vsplit")<CR>
 au FileType go nnoremap <buffer> <silent> <leader>t :<C-u>call go#def#Jump("tab")<CR>
-au FileType go nnoremap ff :GoDef<CR>
+" 使用 ycm 的配置
+" au FileType go nnoremap ff :GoDef<CR>
 au FileType go nnoremap fi :GoImplements<CR>
 au FileType go nnoremap fr :GoReferrers<CR>
 " 自动导入结构体字段
 au FileType go nnoremap fs :GoFillStruct<cr>
-au FileType go nmap <leader><F7> :GoReferrers<cr>
-au FileType go nmap <Space> :GoInfo<cr>
+" au FileType go nmap <leader><F7> :GoReferrers<cr>
+" au FileType go nmap <Space> :GoInfo<cr>
 au FileType go nmap <Leader>d :GoDoc<cr>
 " SameIds 配色： hi CursorColumn ctermbg=26
 au FileType go nmap wh :GoSameIds<cr>

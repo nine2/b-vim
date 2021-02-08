@@ -471,13 +471,19 @@ let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * silent NERDTreeMirror
+" Start NERDTree. If a file is specified, move the cursor to its window.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 " s/v 分屏打开文件
 let g:NERDTreeMapOpenSplit = 's'
 let g:NERDTreeMapOpenVSplit = 'v'
 let g:NERDTreeMouseMode = 2 " 单击开目录，双击开文件
-let g:NERDTreeWinSize = 50
+let g:NERDTreeWinSize = 30
 let g:NERDTreeDirArrows=1
 let g:NERDTreeChDirMode=2
+let g:NERDTreeShowLineNumbers=0
 "打开NERDTree,定位到当前文件
 noremap <silent> <Leader>nf :NERDTreeFind<cr>
 " autocmd vimenter *.go NERDTreeFind
@@ -496,7 +502,9 @@ let g:nerdtree_tabs_open_on_console_startup = 0
 let g:nerdtree_tabs_focus_on_files = 1
 
 " ##### NerdTree文件类型高亮
-Bundle 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Bundle 'tiagofumo/vim-nerdtree-syntax-highlight'
+" 1) Highlights open files in a different color. 2) Closes a buffer directly from NERDTree.
+" Bundle 'PhilRunninger/nerdtree-buffer-ops'
 
 " 标签导航
 Bundle 'majutsushi/tagbar'
@@ -794,6 +802,11 @@ let g:qfpreview = #{
             \ height: 20
             \ }
 
+" Bundle 'terryma/vim-smooth-scroll'
+" noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+" noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+" noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+" noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 
 " ################## 插件配置结束 ###########################

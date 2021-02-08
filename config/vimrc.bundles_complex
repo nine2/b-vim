@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_complex
-"   Last Modified : 2018-12-07 18:30
+"   Last Modified : 2021-02-08 15:42
 "   Describe      :
 "       默认补全工具使用 ycm, 可通过在 bundle 目录下建立
 "       软连接 vimrc.bundles_completion 来修改补全工具
@@ -59,7 +59,7 @@ map <leader>ds :Dash<cr>
 " 显示文件类型图标图
 " https://github.com/ryanoasis/vim-devicons
 " 需要安装 https://github.com/ryanoasis/nerd-fonts#glyph-sets, 才会正常显示图标
-Bundle 'ryanoasis/vim-devicons'
+" Bundle 'ryanoasis/vim-devicons'
 
 Bundle 'rhysd/github-complete.vim'
 " Disable overwriting 'omnifunc'

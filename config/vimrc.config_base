@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.config_base
-"   Last Modified : 2018-12-07 18:30
+"   Last Modified : 2021-02-03 14:26
 "   Describe      :
 "
 " ====================================================
@@ -40,6 +40,8 @@ set cursorline
 set mouse=a
 " Hide the mouse cursor while typing
 " set mousehide
+ map <ScrollWheelUp> <C-Y><C-Y><C-Y>
+ map <ScrollWheelDown> <C-E><C-E><C-E>
 " 修复ctrl+m 多光标操作选择的bug，但是改变了ctrl+v进行字符选中时将包含光标下的字符
 "set selection=exclusive
 set selection=inclusive

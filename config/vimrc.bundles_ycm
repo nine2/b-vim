@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_ycm
-"   Last Modified : 2019-06-12 21:40
+"   Last Modified : 2021-02-08 16:24
 "   Describe      :
 "       ycm 在补全 go 语言时，gocode 可能会出现新写的函数或变量
 "   找不到的情况，可以将 ycm 的 go 补全引擎修改为 gopls。
@@ -27,7 +27,7 @@
 " 自动补全
 
 " ##### 重量级补全
-Bundle 'Valloric/YouCompleteMe'
+Bundle 'nine2/YouCompleteMe'
 " let g:ycm_key_list_select_completion = ['<Down>', '<Tab>']   " C-j 同时可用
 let g:ycm_register_as_syntastic_checker = 1
 let g:ycm_key_list_select_completion = ['<Down>']   " C-n 同时可用, Tab 给 ultisnips 使用
@@ -60,7 +60,7 @@ nnoremap fr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>[ :YcmCompleter GoToDeclaration<CR>
-nnoremap <buffer> <silent> <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <leader>e :YcmDiags<CR>
 let g:ycm_auto_hover=''
 " nmap <leader>d <plug>(YCMHover)

@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_filetype
-"   Last Modified : 2018-12-07 18:30
+"   Last Modified : 2021-02-08 16:30
 "   Describe      :
 "
 " ====================================================
@@ -15,6 +15,7 @@ if filereadable(expand(g:bundle_filetype_dir)."go.vim")
     " exec "so  ".g:bundle_filetype_dir."go.vim"
 endif
 
+" \ "leetcode.vim",
 let fileList = [
     \ "go.vim",
     \ "cpp.vim",
