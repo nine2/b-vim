@@ -382,13 +382,19 @@ Bundle 'dyng/ctrlsf.vim'
 " t       在tab中打开(建议)
 " T - Lkie t but focus CtrlSF window instead of opened new tab.
 " q - Quit CtrlSF window.
-nmap \ <Plug>CtrlSFCwordPath<CR>
-" let g:ctrlsf_position = 'below'
+let g:ctrlsf_position = 'right'
 " let g:ctrlsf_winsize = '30%'
 let g:ctrlsf_auto_close = 0
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_indent = 2
+let g:ctrlsf_regex_pattern = 1
+let g:ctrlsf_selected_line_hl = 'op'
 " let g:ctrlsf_ignore_dir = ['bower_components', 'npm_modules']
+" ignore file
+" https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage
+" By default, Ag will read the patterns in .gitignore and .hgignore files in directories it searches.
+" You can also create .ignore files to ignore things that are in your source repository. .ignore uses the same patterns as .gitignore and .hgignore.
+"
 " Note: cannot use <CR> or <C-m> for open
 " Use : <sapce> or <tab>
 let g:ctrlsf_mapping = {
@@ -402,11 +408,32 @@ let g:ctrlsf_mapping = {
     \ "prev"  : "<C-K>",
     \ "pquit" : "q",
     \ }
+
+let g:ctrlsf_extra_backend_args = {
+    \ 'pt': '--home-ptignore',
+    \ 'ag': '--path-to-ignore ~/.ag_ignore'
+    \ }
+
+" 切换显示模式
+let g:ctrlsf_default_view_mode = 'compact'
+map <leader>\ :call CtrlsfViewMode()<cr>
+fun! CtrlsfViewMode()
+    if g:ctrlsf_default_view_mode == 'normal'
+        let g:ctrlsf_default_view_mode = 'compact'
+    else
+        let g:ctrlsf_default_view_mode = 'normal'
+    endif
+endfun
+
 nnoremap <leader>sp :CtrlSF<CR>
+nmap \ <Plug>CtrlSFCwordPath<CR>
+nmap <F7> :CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>
+nmap <leader>aa :CtrlSF -R '\W<c-r>=expand("<cword>")<cr>'<cr>
+nmap <leader>a :CtrlSF -W '
 
 " Asynchronously fly grep in vim
-Bundle 'wsdjeg/FlyGrep.vim'
-nnoremap <leader>\ :FlyGrep<CR>
+" Bundle 'wsdjeg/FlyGrep.vim'
+" nnoremap <leader>\ :FlyGrep<CR>
 
 
 " 强大的模糊搜索, CtrlP 比它更强大
@@ -662,18 +689,18 @@ let g:tagbar_type_go = {
 \ }
 
 
-Bundle 'rking/ag.vim'
+" Bundle 'rking/ag.vim'
 " let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
-let g:ag_working_path_mode="r"
-let g:ag_highlight=0
+" let g:ag_working_path_mode="r"
+" let g:ag_highlight=1
 " nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr>
 " 查找函数调用
-nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr> \| grep '<c-r>=expand("<cword>")<cr>[(,)]'<cr>
+" nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr> \| grep '<c-r>=expand("<cword>")<cr>[(,)]'<cr>
 " 查询当前单词, 立刻查询
-nmap <leader>aa :Ag -w <c-r>=expand("<cword>")<cr><cr>
+" nmap <leader>aa :Ag -w <c-r>=expand("<cword>")<cr><cr>
 " Ag 默认查找当前单词，可修改, 不立刻查询
 " nmap <leader>a :Ag <c-r>=expand("<cword>")<cr>
-nmap <leader>a :Ag '
+" nmap <leader>a :Ag '
 
 
 " Vim Workspace Controller
