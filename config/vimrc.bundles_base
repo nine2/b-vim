@@ -499,7 +499,8 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 " Open the existing NERDTree on each new tab.
-autocmd BufWinEnter * silent NERDTreeMirror
+" 此配置会导致打开 quickfix 窗口时报错, 建议不要开启
+" autocmd BufWinEnter * silent NERDTreeMirror
 " Start NERDTree. If a file is specified, move the cursor to its window.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * NERDTreeFind | if argc() > 0 || exists("s:std_in") | wincmd p | endif
@@ -689,15 +690,15 @@ let g:tagbar_type_go = {
 \ }
 
 
-" Bundle 'rking/ag.vim'
-" let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
-" let g:ag_working_path_mode="r"
-" let g:ag_highlight=1
+Bundle 'rking/ag.vim'
+let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
+let g:ag_working_path_mode="r"
+let g:ag_highlight=1
 " nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr>
 " 查找函数调用
-" nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr> \| grep '<c-r>=expand("<cword>")<cr>[(,)]'<cr>
+nmap ag :Ag -w <c-r>=expand("<cword>")<cr> \| grep '<c-r>=expand("<cword>")<cr>('<cr>
 " 查询当前单词, 立刻查询
-" nmap <leader>aa :Ag -w <c-r>=expand("<cword>")<cr><cr>
+nmap <leader>ag :Ag -w <c-r>=expand("<cword>")<cr><cr>
 " Ag 默认查找当前单词，可修改, 不立刻查询
 " nmap <leader>a :Ag <c-r>=expand("<cword>")<cr>
 " nmap <leader>a :Ag '
