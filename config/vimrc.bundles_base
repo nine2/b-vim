@@ -389,6 +389,7 @@ let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_indent = 2
 let g:ctrlsf_regex_pattern = 1
 let g:ctrlsf_selected_line_hl = 'op'
+" Defines whether CtrlSF will feed quickfix and location list with search result.
 " let g:ctrlsf_ignore_dir = ['bower_components', 'npm_modules']
 " ignore file
 " https://github.com/ggreer/the_silver_searcher/wiki/Advanced-Usage
@@ -398,7 +399,7 @@ let g:ctrlsf_selected_line_hl = 'op'
 " Note: cannot use <CR> or <C-m> for open
 " Use : <sapce> or <tab>
 let g:ctrlsf_mapping = {
-    \ "open"  : "<Space>",
+    \ "open"  : "<Space>o",
     \ "openb" : "O",
     \ "tab"   : "t",
     \ "tabb"  : "T",
@@ -420,8 +421,10 @@ map <leader>\ :call CtrlsfViewMode()<cr>
 fun! CtrlsfViewMode()
     if g:ctrlsf_default_view_mode == 'normal'
         let g:ctrlsf_default_view_mode = 'compact'
+        let g:ctrlsf_populate_qflist = 1
     else
         let g:ctrlsf_default_view_mode = 'normal'
+        let g:ctrlsf_populate_qflist = 0
     endif
 endfun
 
@@ -499,8 +502,8 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 " Open the existing NERDTree on each new tab.
-" 此配置会导致打开 quickfix 窗口时报错, 建议不要开启
-" autocmd BufWinEnter * silent NERDTreeMirror
+" autocmd BufWinEnter go,c,c++,py,pytho,h,hpp silent NERDTreeMirror
+autocmd bufenter * if &filetype != "qf" || &filetype != "loclist" || &filetype != "ctrlsf" | silent NERDTreeMirror | end
 " Start NERDTree. If a file is specified, move the cursor to its window.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * NERDTreeFind | if argc() > 0 || exists("s:std_in") | wincmd p | endif
