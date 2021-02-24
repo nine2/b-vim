@@ -417,7 +417,6 @@ let g:ctrlsf_extra_backend_args = {
 
 " 切换显示模式
 let g:ctrlsf_default_view_mode = 'compact'
-map <leader>\ :call CtrlsfViewMode()<cr>
 fun! CtrlsfViewMode()
     if g:ctrlsf_default_view_mode == 'normal'
         let g:ctrlsf_default_view_mode = 'compact'
@@ -428,11 +427,29 @@ fun! CtrlsfViewMode()
     endif
 endfun
 
-nnoremap <leader>sp :CtrlSF<CR>
+map <leader>\ :call CtrlsfViewMode()<cr>
 nmap \ <Plug>CtrlSFCwordPath<CR>
+
+" 使用 normal 方式搜索
+nmap \\ :let g:ctrlsf_default_view_mode_last = g:ctrlsf_default_view_mode<CR> :let g:ctrlsf_default_view_mode='normal'<CR> <Plug>CtrlSFCwordPath<CR> :let g:ctrlsf_default_view_mode = g:ctrlsf_default_view_mode_last<CR>
+
 nmap <F7> :CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>
+nnoremap sp :CtrlSF<CR>
 nmap <leader>aa :CtrlSF -R '\W<c-r>=expand("<cword>")<cr>'<cr>
-nmap <leader>a :CtrlSF -W '
+
+Bundle 'rking/ag.vim'
+let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
+let g:ag_working_path_mode="r"
+let g:ag_highlight=1
+" nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr>
+" 查找函数调用
+nmap ag :Ag -w <c-r>=expand("<cword>")<cr> \| grep '<c-r>=expand("<cword>")<cr>('<cr>
+" 查询当前单词, 立刻查询
+nmap <leader>ag :Ag -w <c-r>=expand("<cword>")<cr><cr>
+" Ag 默认查找当前单词，可修改, 不立刻查询
+" nmap <leader>a :Ag <c-r>=expand("<cword>")<cr>
+nmap <leader>a :Ag '
+
 
 " Asynchronously fly grep in vim
 " Bundle 'wsdjeg/FlyGrep.vim'
@@ -691,20 +708,6 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
-
-
-Bundle 'rking/ag.vim'
-let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
-let g:ag_working_path_mode="r"
-let g:ag_highlight=1
-" nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr>
-" 查找函数调用
-nmap ag :Ag -w <c-r>=expand("<cword>")<cr> \| grep '<c-r>=expand("<cword>")<cr>('<cr>
-" 查询当前单词, 立刻查询
-nmap <leader>ag :Ag -w <c-r>=expand("<cword>")<cr><cr>
-" Ag 默认查找当前单词，可修改, 不立刻查询
-" nmap <leader>a :Ag <c-r>=expand("<cword>")<cr>
-" nmap <leader>a :Ag '
 
 
 " Vim Workspace Controller
