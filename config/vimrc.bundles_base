@@ -234,7 +234,7 @@ let g:ale_go_golangci_lint_package = 1
 " 需要安装 golangci-lint ，速度快，比 gopls 占用内存少,
 " 静态检查足够了（检查的非常细）
 " let g:ale_linters = {'go': ['golangci-lint'], 'python':['pep8', 'pyflakes']}
-autocmd FileType python,py let g:ale_linters = {'python':['pep8', 'pyflakes']}
+autocmd FileType python,py let g:ale_linters = {'python':['pep8', 'flake8']}
 autocmd FileType go let g:ale_linters = {'go': ['golangci-lint']}
 
 let g:airline#extensions#ale#enabled = 1
@@ -520,7 +520,8 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
 " Open the existing NERDTree on each new tab.
 " autocmd BufWinEnter go,c,c++,py,pytho,h,hpp silent NERDTreeMirror
-autocmd bufenter * if &filetype != "qf" || &filetype != "loclist" || &filetype != "ctrlsf" | silent NERDTreeMirror | end
+" autocmd bufenter * if &filetype != "qf" || &filetype != "loclist" || &filetype != "ctrlsf" | silent NERDTreeMirror | end
+autocmd BufEnter * if !argc() | NERDTreeMirror | endif
 " Start NERDTree. If a file is specified, move the cursor to its window.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * NERDTreeFind | if argc() > 0 || exists("s:std_in") | wincmd p | endif
