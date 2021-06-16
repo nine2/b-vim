@@ -27,22 +27,6 @@ uml() {
 }
 
 
-######### go 文件和 cpp 文件的 ycm 切换
-ycmcpp() {
-    ycm_now="$VIM_TMP_PATH/bundle/YouCompleteMe"
-    ycm_cur="$VIM_TMP_PATH/bundle/YouCompleteMe.cpp"
-    [ -L $ycmdir ] && unlink $ycm_now
-    ln -s $ycm_cur $ycm_now
-    cat $ycm_now/version.txt
-}
-ycmgo() {
-    ycm_now="$VIM_TMP_PATH/bundle/YouCompleteMe"
-    ycm_cur="$VIM_TMP_PATH/bundle/YouCompleteMe.go"
-    [ -L $ycmdir ] && unlink $ycm_now
-    ln -s $ycm_cur $ycm_now
-    cat $ycm_now/version.txt
-}
-
 # 使用coc补全
 vimcoc(){
     linkfile="$VIM_TMP_PATH/vimrc.bundles_completion"
