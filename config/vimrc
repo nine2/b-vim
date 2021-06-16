@@ -3,6 +3,7 @@ let mapleader = "\<space>"
 let g:mapleader ="\<space>"
         " ,, 替换 Esc
 inoremap ,, <Esc>
+noremap <C-,> <Esc>
         " 将 ; 绑定到 : 用于快速进入命令行
 nnoremap ; :
 " 保证工作目录为当前目录
