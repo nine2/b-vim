@@ -4,14 +4,10 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.config_filetype
-"   Last Modified : 2018-12-07 18:30
+"   Last Modified : 2021-06-22 16:41
 "   Describe      :
-"
+"       FileType Settings  文件类型设置
 " ====================================================
-
-"==========================================
-" FileType Settings  文件类型设置
-"==========================================
 
 " for # indent, python文件中输入新行时#号注释不切回行首
 autocmd BufNewFile,BufRead *.py inoremap # X<c-h>#
@@ -26,6 +22,7 @@ autocmd BufRead,BufNewFile *.go setfiletype go
 autocmd BufRead,BufNewFile *.uml setfiletype plantuml
 autocmd BufRead,BufNewFile *.puml setfiletype plantuml
 autocmd BufRead,BufNewFile *.plantuml setfiletype plantuml
+autocmd BufRead,BufNew *.jsondiff setfiletype diff
 au BufRead,BufNewFile */nginx/* set ft=nginx
 
 " autocmd FileType python,py,c,cpp,java,javascript,go,php,ruby,xml,yml,perl set tabstop=4 shiftwidth=4 expandtab ai

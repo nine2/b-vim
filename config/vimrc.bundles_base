@@ -1,4 +1,12 @@
-" ==========================================
+" ====================================================
+"   Copyright (C) 2021  All rights reserved.
+"
+"   Author        : bbxytl
+"   Email         : bbxytl@gmail.com
+"   File Name     : vimrc.bundles_base
+"   Last Modified : 2021-06-22 16:42
+"   Describe      :
+"
 "  bundle 插件管理和配置项
 " -----------------#github
 "   插件来自 github，只需要 ： 作者名/项目名
@@ -12,6 +20,7 @@
 "  Bundle 'file:///Users/gmarik/path/to/plugin'
 "
 " ==========================================
+
 set nocompatible               " be iMproved
 filetype off " required! turn off
 set rtp+=$VIM_TMP_PATH/bundle/vundle/
@@ -535,7 +544,7 @@ let g:NERDTreeChDirMode=2
 let g:NERDTreeShowLineNumbers=0
 "打开NERDTree,定位到当前文件
 noremap <silent> <Leader>nf :NERDTreeFind<cr>
-" autocmd vimenter *.go NERDTreeFind
+autocmd vimenter *.jsondiff NERDTreeClose
 " 选中目录，按 ma 可以在目录中新建文件
 
 
