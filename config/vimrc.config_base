@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.config_base
-"   Last Modified : 2021-02-03 14:26
+"   Last Modified : 2021-07-15 12:38
 "   Describe      :
 "
 " ====================================================
@@ -132,13 +132,16 @@ set foldlevelstart=99       " 打开文件是默认不折叠代码
 " set foldclose=all          " 设置为自动关闭折叠
 
 " 代码折叠自定义快捷键
+" https://zhuanlan.zhihu.com/p/27473875
 " 折叠整个文件
 " za/zA: 折叠展开单个函数
 " zM: 折叠所有函数
 " zR: 展开所有函数
 let g:FoldMethod = 0
 map <leader>zz :call ToggleFold()<cr>
-map zz zA
+map zz za
+" 会导致原有 zf  失效 (在 foldmethod=manual 时有效)
+map zf zA
 fun! ToggleFold()
     if g:FoldMethod == 0
         exe "normal! zM"

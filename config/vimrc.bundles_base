@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_base
-"   Last Modified : 2021-06-22 16:42
+"   Last Modified : 2021-07-29 11:51
 "   Describe      :
 "
 "  bundle 插件管理和配置项
@@ -244,7 +244,7 @@ let g:ale_go_golangci_lint_package = 1
 " 静态检查足够了（检查的非常细）
 " let g:ale_linters = {'go': ['golangci-lint'], 'python':['pep8', 'pyflakes']}
 autocmd FileType python,py let g:ale_linters = {'python':['pep8', 'flake8']}
-autocmd FileType go let g:ale_linters = {'go': ['golangci-lint']}
+" autocmd FileType go let g:ale_linters = {'go': ['golangci-lint']}
 
 let g:airline#extensions#ale#enabled = 1
 let g:ale_lint_on_text_changed = 1
@@ -392,10 +392,11 @@ Bundle 'dyng/ctrlsf.vim'
 " T - Lkie t but focus CtrlSF window instead of opened new tab.
 " q - Quit CtrlSF window.
 let g:ctrlsf_position = 'right'
-" let g:ctrlsf_winsize = '30%'
+let g:ctrlsf_winsize = '22'
 let g:ctrlsf_auto_close = 0
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_indent = 2
+let g:ctrlsf_auto_preview = 0
 let g:ctrlsf_regex_pattern = 1
 let g:ctrlsf_selected_line_hl = 'op'
 " Defines whether CtrlSF will feed quickfix and location list with search result.
@@ -408,9 +409,9 @@ let g:ctrlsf_selected_line_hl = 'op'
 " Note: cannot use <CR> or <C-m> for open
 " Use : <sapce> or <tab>
 let g:ctrlsf_mapping = {
-    \ "open"  : "<Space>o",
+    \ "open"  : ["<Space>o", "<CR>", "<LeftMouse>"],
     \ "openb" : "O",
-    \ "tab"   : "t",
+    \ "tab"   : ["t", "<2-LeftMouse>"],
     \ "tabb"  : "T",
     \ "prevw" : "p",
     \ "quit"  : "q",
@@ -423,6 +424,11 @@ let g:ctrlsf_extra_backend_args = {
     \ 'pt': '--home-ptignore',
     \ 'ag': '--path-to-ignore ~/.ag_ignore'
     \ }
+
+    let g:ctrlsf_auto_focus = {
+        \ "at" : "done",
+        \ "duration_less_than": 1000
+        \ }
 
 " 切换显示模式
 let g:ctrlsf_default_view_mode = 'compact'
@@ -767,8 +773,8 @@ let g:file_copyright_email = 'bbxytl@gmail.com'
 
 let g:file_copyright_comment_mid_prefix_map = {
       \"python": "\#", "py":"\#",
-      \"cpp":"\+", "c":"\#", "h":"\+", "hpp":"\#",
-      \"go":"\^",
+      \"cpp":"\#", "c":"\#", "h":"\#", "hpp":"\#",
+      \"go":"",
       \"vim":"\"",
       \"sh":"\#", "shell":"\#",
       \"ruby":"\#", "rb":"\#", "rake":"\#",
