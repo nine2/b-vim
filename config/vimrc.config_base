@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.config_base
-"   Last Modified : 2021-07-15 12:38
+"   Last Modified : 2021-12-16 11:58
 "   Describe      :
 "
 " ====================================================
@@ -275,12 +275,22 @@ nnoremap j gj
 " <leader><F6> 切换十六进制
 " <leader><leader><F6> 切换回文本模式
 
+" 获取当前文件的完整路径 到系统剪切板
+function GetCurFileFullPath()
+    let cur_dir=getcwd()
+    let cur_file_name=getreg('%')
+    let dir_filename=cur_dir.'\'.cur_file_name
+    echo dir_filename
+    call setreg('+',dir_filename)
+endfunction
+nnoremap <leader><F1> : call GetCurFileFullPath()<cr>
+
 " noremap <F1> <Esc>"
 " 显示文件相对路径
 " nnoremap <F1> :file<CR>
-nnoremap <Space> :file<CR>
+" nnoremap <Space> :file<CR>
 " 显示文件的绝对路径
-nnoremap <leader><F1> :echo expand('%:p')<CR>
+" nnoremap <leader><F0> :echo expand('%:p')<CR>
 nnoremap <F1> :file<CR>
 " 设置文件类型 filetype
 nnoremap ft :set filetype=
