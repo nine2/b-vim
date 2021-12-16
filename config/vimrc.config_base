@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.config_base
-"   Last Modified : 2021-12-16 11:58
+"   Last Modified : 2021-12-16 12:03
 "   Describe      :
 "
 " ====================================================
@@ -279,7 +279,7 @@ nnoremap j gj
 function GetCurFileFullPath()
     let cur_dir=getcwd()
     let cur_file_name=getreg('%')
-    let dir_filename=cur_dir.'\'.cur_file_name
+    let dir_filename='"'.cur_dir.'/'.cur_file_name.'"'
     echo dir_filename
     call setreg('+',dir_filename)
 endfunction
