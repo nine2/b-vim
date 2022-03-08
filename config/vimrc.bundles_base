@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_base
-"   Last Modified : 2022-03-08 12:38
+"   Last Modified : 2022-03-08 12:46
 "   Describe      :
 "
 "  bundle 插件管理和配置项
@@ -342,10 +342,6 @@ map <Leader><leader>. <Plug>(easymotion-repeat)
 
 
 " 书签
-Bundle 'MattesGroeger/vim-bookmarks'
-let g:bookmark_auto_save = 1
-let g:bookmark_save_per_working_dir = 1
-
 " Usage : https://github.com/MattesGroeger/vim-bookmarks#usage
 " After installation you can directly start using it. You can do this by either using the default shortcuts or the commands:
 "
@@ -362,6 +358,36 @@ let g:bookmark_save_per_working_dir = 1
 " Move bookmark at current line to another line	[count]mg	:BookmarkMoveToLine <LINE>
 " Save all bookmarks to a file		:BookmarkSave <FILE_PATH>
 " Load bookmarks from a file		:BookmarkLoad <FILE_PATH>
+
+Bundle 'MattesGroeger/vim-bookmarks'
+let g:bookmark_auto_save = 1
+let g:bookmark_save_per_working_dir = 1
+" You could unbind the keys whenever Nerdtree becomes active (thanks to @Nitive).
+let g:bookmark_no_default_key_mappings = 1
+function! BookmarkMapKeys()
+    nmap mm :BookmarkToggle<CR>
+    nmap mi :BookmarkAnnotate<CR>
+    nmap mn :BookmarkNext<CR>
+    nmap mp :BookmarkPrev<CR>
+    nmap ma :BookmarkShowAll<CR>
+    nmap mc :BookmarkClear<CR>
+    nmap mx :BookmarkClearAll<CR>
+    nmap mkk :BookmarkMoveUp
+    nmap mjj :BookmarkMoveDown
+endfunction
+function! BookmarkUnmapKeys()
+    unmap mm
+    unmap mi
+    unmap mn
+    unmap mp
+    unmap ma
+    unmap mc
+    unmap mx
+    unmap mkk
+    unmap mjj
+endfunction
+autocmd BufEnter * :call BookmarkMapKeys()
+autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 
 " ##### 选中区块
 Bundle 'terryma/vim-expand-region'
