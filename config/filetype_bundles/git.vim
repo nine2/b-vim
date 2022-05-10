@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : git.vim
-"   Last Modified : 2021-01-28 14:55
+"   Last Modified : 2022-05-10 18:55
 "   Describe      :
 "
 " ====================================================
@@ -37,13 +37,14 @@ nnoremap gh :call CustomGitGutterLineHights()<CR>
 " ##### 使用 git blame 等功能
 Bundle 'tpope/vim-fugitive'
 " 使用命令
-" Gblame, Gstatue, help fugitive
+" GStatue, help fugitive
 " 使用 Glog 可查看历史版本文件
-nnoremap gb :Gblame<CR>
+nnoremap gb :G blame<CR>
+nnoremap gs :G status<CR>
 " 查看 bitbucket
 Bundle 'nine2/vim-fubitive'
 " :Gbrowse
-nnoremap g<space> :Gbrowse<CR>
+nnoremap g<space> :GBrowse<CR>
 " rhubarb.vim: GitHub extension for fugitive.vim
 Bundle 'tpope/vim-rhubarb'
 

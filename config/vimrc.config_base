@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.config_base
-"   Last Modified : 2021-12-16 12:03
+"   Last Modified : 2022-04-26 15:35
 "   Describe      :
 "
 " ====================================================
@@ -93,6 +93,10 @@ set number
 set nowrap
 " 按词换行
 set lbr
+" 行宽
+set cc=110
+" 自动换行宽度, 也可用 set tw=110
+set textwidth=110
 " 括号配对情况,跳转并高亮一下匹配的括号
 set showmatch
 set matchtime=2
@@ -285,13 +289,48 @@ function GetCurFileFullPath()
 endfunction
 nnoremap <leader><F1> : call GetCurFileFullPath()<cr>
 
+" 获取当前文件名:行号 到系统剪切板
+function GetCurFileName()
+    let cur_dir=getcwd()
+    let cur_file_name=getreg('%')
+    let parent_dirs = split(cur_dir, '/')
+    while len(parent_dirs)
+      let cur_dir = remove(parent_dirs, -1)
+      break
+    endwhile
+    let line = line('.')
+    let dir_filename=cur_dir.'/'.cur_file_name.':'.line
+    echo dir_filename
+    call setreg('+',dir_filename)
+endfunction
+nnoremap <F1> : call GetCurFileName()<cr>
+
+" 获取当前文件名:行号 当前行文本 到系统剪切板
+function GetCurFileNameAndText()
+    let cur_dir=getcwd()
+    let cur_file_name=getreg('%')
+    let parent_dirs = split(cur_dir, '/')
+    while len(parent_dirs)
+      let cur_dir = remove(parent_dirs, -1)
+      break
+    endwhile
+    let line = line('.')
+    let txt = substitute(getline(line(".")), '^\s*', '', '')
+    let dir_filename='"'.cur_dir.'/'.cur_file_name.':'.line.'" '.txt
+    echo dir_filename
+    call setreg('+',dir_filename)
+endfunction
+nnoremap <F1><F1> : call GetCurFileNameAndText()<cr>
+
+
+
 " noremap <F1> <Esc>"
 " 显示文件相对路径
 " nnoremap <F1> :file<CR>
 " nnoremap <Space> :file<CR>
 " 显示文件的绝对路径
 " nnoremap <leader><F0> :echo expand('%:p')<CR>
-nnoremap <F1> :file<CR>
+" nnoremap <F1> :file<CR>
 " 设置文件类型 filetype
 nnoremap ft :set filetype=
 " 根据是否有行号来决定是否显示 tab 标示符，用来方便 copy
@@ -721,6 +760,8 @@ nmap hw :let @/=expand('<cword>')<cr>
 
 " set noimdisable
 " 下划线转驼峰
-map tu :'<,'> s/_\(\w\)/\u\1/g<cr>
-map tU :'<,'> s/^\(\w\)/\U\1/g<cr>
+map tu :'<,'> s/_\(\w\)/\u\1/g<cr>:'<,'> s/^\(\w\)/\U\1/g<cr>
+" 驼峰转下划线
+map tU :%s/\([^ .*+-]\)\([A-Z].\)/\1_\2/g<cr>ggguG
+" map tU :%s/\([^ .*+-]\)\([A-Z].\)/\1_\2/g<cr>:echo "use [gu] next"<cr>
 
