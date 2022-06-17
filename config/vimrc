@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc
-"   Last Modified : 2021-06-22 16:42
+"   Last Modified : 2022-06-17 18:19
 "   Describe      :
 "       vim 配置入口 文件
 " ====================================================
@@ -85,11 +85,11 @@ else
     set undodir=$HOME/.vim/vimundo
 endif
 " 备份防相同文件名：
-autocmd BufWritePre *
-    \ let s:cmd = 'echo '. '"' . expand("%:p") . '"|base64' |
-    \ let s:cmd = substitute(system(s:cmd),"\n","","") |
-    \ let &bex = '_' . strftime("%Y%m%d") . '_' . s:cmd |
-    \ exe ":mkview"
+"autocmd BufWritePre *
+"    \ let s:cmd = 'echo '. '"' . expand("%:p") . '"|base64' |
+"    \ let s:cmd = substitute(system(s:cmd),"\n","","") |
+"    \ let &bex = '_' . strftime("%Y%m%d") . '_' . s:cmd |
+"    \ exe ":mkview"
 " 查找备份的解码, 放在 bash_alias.sh 中
 " alias lsvimbak="ls*|rev|cut -d_  -f1 |rev|base64 -D"
 

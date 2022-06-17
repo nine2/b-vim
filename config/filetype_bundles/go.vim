@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : go.vim
-"   Last Modified : 2021-01-28 15:43
+"   Last Modified : 2022-06-17 14:51
 "   Describe      :
 "
 " ====================================================
@@ -68,7 +68,8 @@ au FileType go nnoremap <buffer> <silent> <leader>s :<C-u>call go#def#Jump("spli
 au FileType go nnoremap <buffer> <silent> <leader>v :<C-u>call go#def#Jump("vsplit")<CR>
 au FileType go nnoremap <buffer> <silent> <leader>t :<C-u>call go#def#Jump("tab")<CR>
 " 使用 ycm 的配置
-" au FileType go nnoremap ff :GoDef<CR>
+au FileType go nnoremap ff :GoDef<CR>
+au FileType go nnoremap <2-LeftMouse> :GoDef<CR>
 au FileType go nnoremap fi :GoImplements<CR>
 au FileType go nnoremap fr :GoReferrers<CR>
 " 自动导入结构体字段

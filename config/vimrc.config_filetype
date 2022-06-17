@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.config_filetype
-"   Last Modified : 2021-06-22 16:41
+"   Last Modified : 2022-06-17 16:41
 "   Describe      :
 "       FileType Settings  文件类型设置
 " ====================================================
@@ -19,6 +19,8 @@ autocmd BufRead,BufNew *.pl setfiletype perl
 autocmd BufRead,BufNew *.pm setfiletype perl
 autocmd BufRead,BufNew *.plx setfiletype perl
 autocmd BufRead,BufNewFile *.go setfiletype go
+autocmd BufRead,BufNewFile go.mod setfiletype gomod
+autocmd BufRead,BufNewFile go.sum setfiletype gosum
 autocmd BufRead,BufNewFile *.uml setfiletype plantuml
 autocmd BufRead,BufNewFile *.puml setfiletype plantuml
 autocmd BufRead,BufNewFile *.plantuml setfiletype plantuml

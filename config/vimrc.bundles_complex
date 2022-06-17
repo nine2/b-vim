@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_complex
-"   Last Modified : 2021-02-08 15:42
+"   Last Modified : 2022-06-16 12:44
 "   Describe      :
 "       默认补全工具使用 ycm, 可通过在 bundle 目录下建立
 "       软连接 vimrc.bundles_completion 来修改补全工具
@@ -18,12 +18,13 @@
 " #############################
 "
 "
-" 格式化工具, https://github.com/Chiel92/vim-autoformat
+" 格式化工具, https://github.com/vim-autoformat/vim-autoformat
 " 需要安装格式化使用的工具，参考github的说明
-Bundle 'Chiel92/vim-autoformat'
+Bundle 'vim-autoformat/vim-autoformat'
 noremap <F8> :Autoformat<CR>
-let g:autoformat_verbosemode=1
-let g:autoformat_autoindent = 1
+" au BufWrite * :Autoformat
+" let g:autoformat_verbosemode=1
+" let g:autoformat_autoindent = 1
 " 格式化shell, vim-autoformat 包含了此功能
 " Bundle 'z0mbix/vim-shfmt', { 'for': 'sh' }
 " 根据文件调用不同的插件

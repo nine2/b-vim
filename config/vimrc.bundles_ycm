@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_ycm
-"   Last Modified : 2021-02-08 16:24
+"   Last Modified : 2022-06-16 12:27
 "   Describe      :
 "       ycm 在补全 go 语言时，gocode 可能会出现新写的函数或变量
 "   找不到的情况，可以将 ycm 的 go 补全引擎修改为 gopls。
@@ -20,8 +20,19 @@
 "         拉取【此脚本是为了解决 直接从 golang.org 拉取失败】
 "       4. 在YouCompleteMe目录下执行 ./install.py --go-completer 启用 go 支持
 "           运行好后，ycm即可支持 gopls。
+"
+" git clone --depth 1 --recursive git@github.com:nine2/YouCompleteMe.git YouCompleteMe.191017
+" Merge from ycm-core/YouCompleteMe
+" $ git checkout -b ycm-core-master master
+" $ git pull git@github.com:ycm-core/YouCompleteMe.git master
+" Merge info
+" $ git checkout master
+" $ git merge --no-ff ycm-core-master
+" $ git tag 20220616_mac_12.4_21F79
+" $ git push
+" $ git push --tags
+"
 " ====================================================
-
 
 " ###############################
 " 自动补全
@@ -56,10 +67,12 @@ let g:ycm_min_num_identifier_candidate_chars = 2
 " 定位当前函数、变量的定义处
 nnoremap ff :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap fi :YcmCompleter GoToImplementation<CR>
+nnoremap <leader>fi :YcmCompleter GoToImplementation<CR>
 nnoremap fr :YcmCompleter GoToReferences<CR>
-nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>[ :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>fr :YcmCompleter GoToReferences<CR>
+" nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+" nnoremap <leader>[ :YcmCompleter GoToDeclaration<CR>
 nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <leader>e :YcmDiags<CR>
 let g:ycm_auto_hover=''
