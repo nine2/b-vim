@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.config_base
-"   Last Modified : 2022-04-26 15:35
+"   Last Modified : 2022-08-11 11:50
 "   Describe      :
 "
 " ====================================================
@@ -470,6 +470,7 @@ nnoremap <leader>x :x<CR>
 " 快速保存 快捷键
 nnoremap <silent> ss :w<CR>
 nnoremap qq :q<CR>
+nnoremap qa :qa<CR>
 nnoremap er :e<CR>
 
 " Swap implementations of ` and ' jump to markers
@@ -764,4 +765,20 @@ map tu :'<,'> s/_\(\w\)/\u\1/g<cr>:'<,'> s/^\(\w\)/\U\1/g<cr>
 " 驼峰转下划线
 map tU :%s/\([^ .*+-]\)\([A-Z].\)/\1_\2/g<cr>ggguG
 " map tU :%s/\([^ .*+-]\)\([A-Z].\)/\1_\2/g<cr>:echo "use [gu] next"<cr>
+
+
+
+map st :call GetCurTmpFileFullPath()<CR>
+" 设置临时文件的完整路径 到系统剪切板
+function GetCurTmpFileFullPath()
+    let cur_dir="~"
+    if has("mac")
+        let cur_dir="~/Desktop"
+    endif
+    let cur_file_name=strftime("%Y-%m-%d_%H:%M:%S")
+    let dir_filename=''.cur_dir.'/'.cur_file_name.'.txt'
+    echo dir_filename
+    call setreg('+',dir_filename)
+endfunction
+
 

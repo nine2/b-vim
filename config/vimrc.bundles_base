@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_base
-"   Last Modified : 2022-03-08 12:46
+"   Last Modified : 2022-09-09 20:08
 "   Describe      :
 "
 "  bundle 插件管理和配置项
@@ -600,6 +600,11 @@ let g:NERDTreeShowLineNumbers=0
 "打开NERDTree,定位到当前文件
 noremap <silent> <Leader>nf :NERDTreeFind<cr>
 autocmd vimenter *.jsondiff NERDTreeClose
+" 调整窗口大小
+" http://129.226.226.195/post/22725.html
+au FileType nerdtree map <silent> <c-i> :vertical resize 30<cr>
+au FileType nerdtree map <silent> <c-l> :vertical resize +10<cr>
+au FileType nerdtree map <silent> <c-h> :vertical resize -10<cr>
 " 选中目录，按 ma 可以在目录中新建文件
 
 

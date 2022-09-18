@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_filetype
-"   Last Modified : 2022-06-16 12:28
+"   Last Modified : 2022-09-09 11:45
 "   Describe      :
 "
 " ====================================================
@@ -18,7 +18,8 @@ endif
 " \ "leetcode.vim",
 " \ "java.vim",
 " \ "cpp.vim",
-let fileList = [
+" \ "quickui.vim",
+let s:wkfileList = [
     \ "go.vim",
     \ "python.vim",
     \ "git.vim",
@@ -30,7 +31,21 @@ let fileList = [
     \ "uml.vim"
     \ ]
 
-for fl in fileList
+let s:vimfileList = [
+    \ "git.vim",
+    \ "quickui.vim",
+    \ "markdown.vim"
+    \ ]
+
+let s:fileList = s:wkfileList
+"echo &filetype
+"if &filetype == 'vim'
+"    let s:fileList = s:vimfileList
+"    echo s:fileList
+"endif
+
+for fl in s:fileList
+    " echo fl
     let item = "$VIM_CONFIG_PATH/filetype_bundles/".fl
     let bundle_filetype_dir= expand(item)
     if filereadable(expand(bundle_filetype_dir))
