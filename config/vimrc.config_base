@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.config_base
-"   Last Modified : 2022-08-11 11:50
+"   Last Modified : 2022-10-18 14:35
 "   Describe      :
 "
 " ====================================================
@@ -779,6 +779,7 @@ function GetCurTmpFileFullPath()
     let dir_filename=''.cur_dir.'/'.cur_file_name.'.txt'
     echo dir_filename
     call setreg('+',dir_filename)
+    " exe "w ".dir_filename
 endfunction
 
 
