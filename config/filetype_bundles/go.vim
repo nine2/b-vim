@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : go.vim
-"   Last Modified : 2022-06-17 14:51
+"   Last Modified : 2023-01-29 11:18
 "   Describe      :
 "
 " ====================================================
@@ -66,7 +66,7 @@ inoremap <C-n> <C-x><C-o>
 
 au FileType go nnoremap <buffer> <silent> <leader>s :<C-u>call go#def#Jump("split")<CR>
 au FileType go nnoremap <buffer> <silent> <leader>v :<C-u>call go#def#Jump("vsplit")<CR>
-au FileType go nnoremap <buffer> <silent> <leader>t :<C-u>call go#def#Jump("tab")<CR>
+" au FileType go nnoremap <buffer> <silent> <leader>t :<C-u>call go#def#Jump("tab")<CR>
 " 使用 ycm 的配置
 au FileType go nnoremap ff :GoDef<CR>
 au FileType go nnoremap <2-LeftMouse> :GoDef<CR>

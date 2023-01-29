@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_filetype
-"   Last Modified : 2022-09-09 11:45
+"   Last Modified : 2023-01-29 11:13
 "   Describe      :
 "
 " ====================================================
@@ -20,11 +20,12 @@ endif
 " \ "cpp.vim",
 " \ "quickui.vim",
 let s:wkfileList = [
+    \ "dependout.vim",
     \ "go.vim",
     \ "python.vim",
     \ "git.vim",
-    \ "yaml.vim",
     \ "markdown.vim",
+    \ "yaml.vim",
     \ "protobuf.vim",
     \ "nginx.vim",
     \ "xml.vim",
