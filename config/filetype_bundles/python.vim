@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : python.vim
-"   Last Modified : 2021-03-03 17:46
+"   Last Modified : 2024-02-22 17:41
 "   Describe      :
 "
 " ====================================================
@@ -35,4 +35,7 @@ let python_highlight_all = 1
 " let g:jedi#completions_command = "<C-Tab>"
 " let g:jedi#rename_command = "jr"
 
-
+Bundle 'tell-k/vim-autopep8'
+let g:autopep8_max_line_length=1000
+let g:autopep8_disable_show_diff=1
+let g:autopep8_on_save = 1
