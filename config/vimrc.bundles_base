@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_base
-"   Last Modified : 2023-01-03 12:22
+"   Last Modified : 2024-04-02 19:38
 "   Describe      :
 "
 "  bundle 插件管理和配置项
@@ -244,6 +244,10 @@ let g:ale_go_golangci_lint_package = 1
 " 静态检查足够了（检查的非常细）
 " let g:ale_linters = {'go': ['golangci-lint'], 'python':['pep8', 'pyflakes']}
 autocmd FileType python,py let g:ale_linters = {'python':['pep8', 'flake8']}
+autocmd FileType python,py let g:ale_type_map = {
+      \ 'pycodestyle' : {'ES' : 'WS', 'E': 'W'},
+      \ 'flake8' : {'E': 'W'}
+      \}
 " autocmd FileType go let g:ale_linters = {'go': ['golangci-lint']}
 
 let g:airline#extensions#ale#enabled = 1
@@ -440,14 +444,16 @@ Bundle 'dyng/ctrlsf.vim'
 " t       在tab中打开(建议)
 " T - Lkie t but focus CtrlSF window instead of opened new tab.
 " q - Quit CtrlSF window.
-let g:ctrlsf_position = 'right'
+" let g:ctrlsf_position = 'right'
+let g:ctrlsf_position = 'bottom'
 let g:ctrlsf_winsize = '22'
 let g:ctrlsf_auto_close = 0
 let g:ctrlsf_confirm_save = 0
 let g:ctrlsf_indent = 2
 let g:ctrlsf_auto_preview = 0
 let g:ctrlsf_regex_pattern = 1
-let g:ctrlsf_selected_line_hl = 'op'
+let g:ctrlsf_selected_line_hl = ''
+" let g:ctrlsf_selected_line_hl = 'op'
 " Defines whether CtrlSF will feed quickfix and location list with search result.
 " let g:ctrlsf_ignore_dir = ['bower_components', 'npm_modules']
 " ignore file

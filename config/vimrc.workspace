@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.workspace
-"   Last Modified : 2018-12-07 18:30
+"   Last Modified : 2025-03-17 18:28
 "   Describe      :
 "
 " ====================================================
@@ -12,6 +12,13 @@
 
 " ##### 如果当前项目文件内有关于 vim  的特殊配置，
 " 则加载此配置，实现自定义化.
+"
+let ws_item = "$HOME/.workspace.vim"
+let ws_bundle_filetype_dir= expand(ws_item)
+if filereadable(expand(ws_bundle_filetype_dir))
+    " echo ws_bundle_filetype_dir
+    exec "so  ".ws_bundle_filetype_dir
+endif
 " if filereadable(expand(".workspace.vim"))
     " source .workspace.vim
 " endif
