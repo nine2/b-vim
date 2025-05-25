@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.config_base
-"   Last Modified : 2022-10-18 14:35
+"   Last Modified : 2025-05-14 12:43
 "   Describe      :
 "
 " ====================================================
@@ -782,4 +782,6 @@ function GetCurTmpFileFullPath()
     " exe "w ".dir_filename
 endfunction
 
+" nmap <leader>so :silent !open % > /dev/null 2>&1<CR>
+nmap <leader>so :!open %<CR>
 
