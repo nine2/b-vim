@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : vimrc.bundles_complex
-"   Last Modified : 2024-02-22 17:07
+"   Last Modified : 2026-04-24 17:27
 "   Describe      :
 "       默认补全工具使用 ycm, 可通过在 bundle 目录下建立
 "       软连接 vimrc.bundles_completion 来修改补全工具
@@ -75,6 +75,25 @@ imap <C-k><C-o> <Plug>(github-complete-manual-completion)
 " xterm 颜色(256色)
 Bundle 'guns/xterm-color-table.vim'
 " :XtermColorTable
+
+Bundle 'github/copilot.vim'
+" 启用 Copilot
+let g:copilot_enabled = v:true
+
+" 设置 Tab 键接受建议
+" imap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
+" imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+" imap <silent><script><expr> <C-H> copilot#Accept("\<CR>")
+" imap <silent><script><expr> <C-,> copilot#Next("\<CR>")
+" imap <silent><script><expr> <C-.> copilot#Previous("\<CR>")
+" imap <silent><script><expr> <C-\> copilot#Suggest("\<CR>")
+" 或者使用 Ctrl+Space 接受建议
+" 拒绝当前建议
+" imap <C-L> <Plug>(copilot-dismiss)
+" inoremap <C-G> <Plug>(copilot-suggest)
+
+" 显示建议面板
+nnoremap <Leader>cp :Copilot panel<CR>
 
 
 let g:cur_bundle_file_path = expand("$VIM_TMP_PATH/vimrc.bundles_completion")

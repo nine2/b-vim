@@ -4,7 +4,7 @@
 "   Author        : bbxytl
 "   Email         : bbxytl@gmail.com
 "   File Name     : go.vim
-"   Last Modified : 2023-01-29 11:18
+"   Last Modified : 2026-04-24 17:28
 "   Describe      :
 "
 " ====================================================
@@ -71,7 +71,10 @@ au FileType go nnoremap <buffer> <silent> <leader>v :<C-u>call go#def#Jump("vspl
 au FileType go nnoremap ff :GoDef<CR>
 au FileType go nnoremap <2-LeftMouse> :GoDef<CR>
 au FileType go nnoremap fi :GoImplements<CR>
+au FileType go nnoremap <F6> :GoImplements<CR>:cfirst<CR>
 au FileType go nnoremap fr :GoReferrers<CR>
+" go 文件下, F8 不做 Format 使用, go 有自己的 fmt
+au FileType go nnoremap <F8> :GoReferrers<CR>
 " 自动导入结构体字段
 au FileType go nnoremap fs :GoFillStruct<cr>
 " au FileType go nmap <leader><F7> :GoReferrers<cr>
