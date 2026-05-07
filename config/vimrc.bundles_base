@@ -527,17 +527,7 @@ nmap <leader>a :Ag '
 "let g:Lf_PreviewInPopup = 1
 
 
-" 查看所有 tab 页内容
-" 默认快捷键
-" <leader>mf
-Bundle 'kien/tabman.vim'
-" 查看所有buffer
-" 默认快捷键
-" <leader>be
-" <leader>bs
-Bundle 'jlanzarotta/bufexplorer'
-let g:bufExplorerShowNoName=1
-
+" Ch.4 删除：tabman.vim + bufexplorer（与 NERDTree 重叠，已归档）
 
 " ##### 括号显示增强
 Bundle 'kien/rainbow_parentheses.vim'
@@ -777,15 +767,9 @@ let g:tagbar_type_go = {
 \ }
 
 
-" Vim Workspace Controller
-Bundle 'szw/vim-ctrlspace'
-nmap b<space> :CtrlSpace<cr>
+" Ch.4 删除：vim-ctrlspace（启动 ~414ms，与 NERDTree 重叠，已归档）
+" 仍保留 set hidden（vim 多 buffer 不强制保存）
 set hidden
-""""""
-hi CtrlSpaceSelected guifg=#586e75 guibg=#eee8d5 guisp=#839496 gui=reverse,bold ctermfg=10 ctermbg=7 cterm=reverse,bold
-hi CtrlSpaceNormal   guifg=#839496 guibg=#021B25 guisp=#839496 gui=NONE ctermfg=12 ctermbg=0 cterm=NONE
-hi CtrlSpaceSearch   guifg=#cb4b16 guibg=NONE gui=bold ctermfg=9 ctermbg=NONE term=bold cterm=bold
-hi CtrlSpaceStatus   guifg=#839496 guibg=#002b36 gui=reverse term=reverse cterm=reverse ctermfg=12 ctermbg=8
 
 Bundle 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>lt'
