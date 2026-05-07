@@ -394,32 +394,29 @@ let g:multi_cursor_skip_key='<C-x>'
 
 let g:multi_cursor_quit_key='<Esc>'
 
-" ##### 文件搜索 change to https://github.com/ctrlpvim/ctrlp.vim
-Bundle 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<leader>f'
-let g:ctrlp_cmd = 'CtrlP'
-" map <leader>f :CtrlP<CR>
-map <leader>b :CtrlPBuffer<CR>
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*        " Linux/MacOSX
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc|a)$|tags',
-    \ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+" ##### 文件搜索 LeaderF（Ch.5 替代 ctrlp.vim，Python + C 扩展，5-10x 快）
+Bundle 'Yggdroot/LeaderF'
+" 复用 ctrlp 时代的快捷键（保留 muscle memory）
+let g:Lf_ShortcutF = '<leader>f'             " 替代 :CtrlP（文件搜索）
+let g:Lf_ShortcutB = '<leader>b'             " 替代 :CtrlPBuffer（buffer 搜索）
+" 显示形态
+let g:Lf_WindowPosition = 'popup'            " 浮窗
+let g:Lf_PreviewInPopup = 1
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+let g:Lf_UseVersionControlTool = 0           " 不强依赖 VCS
+let g:Lf_DefaultExternalTool = 'rg'          " ripgrep 后端
+" 文件忽略（迁移自 ctrlp_custom_ignore）
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+let g:Lf_WildIgnore = {
+    \ 'dir':  ['.git', '.hg', '.svn', '.rvm'],
+    \ 'file': ['*.exe', '*.so', '*.dll', '*.zip', '*.tar', '*.tar.gz', '*.pyc', '*.a', 'tags'],
     \ }
-let g:ctrlp_working_path_mode=0
-let g:ctrlp_match_window_bottom=1
-let g:ctrlp_max_height=15
-let g:ctrlp_match_window_reversed=0
-let g:ctrlp_mruf_max=500
-let g:ctrlp_follow_symlinks=1
-let g:ctrlp_mruf_default_order = 1
-" " 如果安装了ag, 使用ag
-"  if executable('ag')
-"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-"   " ag is fast enough that CtrlP doesn't need to cache
-"    let g:ctrlp_use_caching = 0
-"  endif
+let g:Lf_FollowLinks = 1                     " 等价 ctrlp_follow_symlinks=1
+let g:Lf_MruMaxFiles = 500                   " 等价 ctrlp_mruf_max=500
+" 进阶：函数 / 行 / rg 搜索（按需打开）
+" nnoremap <leader>j :LeaderfFunction<CR>
+" nnoremap <leader>L :LeaderfLine<CR>
+" nnoremap <leader>r :Leaderf rg<CR>
 
 " ##### 类似sublimetext的搜索
 Bundle 'dyng/ctrlsf.vim'
@@ -509,10 +506,7 @@ nmap <leader>ag :Ag -w <c-r>=expand("<cword>")<cr><cr>
 nmap <leader>a :Ag '
 
 
-" Asynchronously fly grep in vim
-" Bundle 'wsdjeg/FlyGrep.vim'
-" nnoremap <leader>\ :FlyGrep<CR>
-
+" Ch.5 删除：FlyGrep.vim（已归档）
 
 " 强大的模糊搜索, CtrlP 比它更强大
 " 默认：
