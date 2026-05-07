@@ -35,7 +35,4 @@ let python_highlight_all = 1
 " let g:jedi#completions_command = "<C-Tab>"
 " let g:jedi#rename_command = "jr"
 
-Bundle 'tell-k/vim-autopep8'
-let g:autopep8_max_line_length=1000
-let g:autopep8_disable_show_diff=1
-let g:autopep8_on_save = 1
+" Ch.7 删除：vim-autopep8（已被 ALE fixers 替代，已归档）
