@@ -59,10 +59,7 @@ Bundle 'bbxytl/vim-snippets'
 Bundle 'rizzatti/dash.vim'
 map <leader>ds :Dash<cr>
 
-" 显示文件类型图标图
-" https://github.com/ryanoasis/vim-devicons
-" 需要安装 https://github.com/ryanoasis/nerd-fonts#glyph-sets, 才会正常显示图标
-" Bundle 'ryanoasis/vim-devicons'
+" Ch.10 删除：vim-devicons 段（散兵，已归档）
 
 Bundle 'rhysd/github-complete.vim'
 " Disable overwriting 'omnifunc'

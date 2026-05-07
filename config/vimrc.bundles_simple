@@ -16,31 +16,7 @@
 " #############################
 "
 "
-Bundle "rhysd/vim-clang-format"
-" noremap <F8> :ClangFormat<CR>
-let g:clang_format#style_options = {
-            \ "AccessModifierOffset" : -4,
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11",
-            \ "AllowShortLoopsOnASingleLine": "false",
-            \ "AllowShortIfStatementsOnASingleLine": "false",
-            \ "ColumnLimit": 150,
-            \ "BreakBeforeBraces": "Linux"}
-" 格式化shell
-Bundle 'z0mbix/vim-shfmt', { 'for': 'sh' }
-" 根据文件调用不同的插件
-if !exists(":F8FormatFile")
-    if &filetype == 'sh'
-        command! -range=% -nargs=0 F8FormatFile Shfmt -p
-    else
-        command! -range=% -nargs=0 F8FormatFile call clang_format#replace(<line1>, <line2>)
-    endif
-endif
-map <F8> :F8FormatFile<CR>
-
-
-" Ch.2 删除：neocomplcache + Pydiction（已归档至 .vim/vimrc.archive/vimrc.bundles_simple）
-
-" #### 主要用于 C/C++ 代码补全，需要 ctag 支持
-Bundle 'vim-scripts/OmniCppComplete'
+" Ch.2 删除：neocomplcache + Pydiction（已归档）
+" Ch.10 删除：vim-clang-format + vim-shfmt + F8FormatFile + OmniCppComplete（已归档）
+" 整个文件已无 Bundle 声明；保留版权与文件结构以备 fallback 重启使用
 

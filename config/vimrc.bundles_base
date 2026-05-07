@@ -285,48 +285,7 @@ map <Leader><leader>. <Plug>(easymotion-repeat)
 " Bundle 'vim-scripts/matchit.zip'
 
 
-" ##### 显示marks - 方便自己进行标记和跳转
-" mm 按顺序自动标示
-" m/ 显示所有的标记
-" lj, mn 跳转到下一项
-" lk, mp 跳转到上一项
-" md 删除当前行标示
-" m[a-zA-Z] add mark
-" '[a-zA-Z] go to mark
-" 书签设定。mx，设定/取消当前行名为 x 的标签；m,，自动设定下一个可用书签名，
-"   前面提说，独立书签名是不能重复的，在你已经有了多个独立书签，
-"   当想再设置书签时，需要记住已经设定的所有书签名，否则很可能会将已有的书签冲掉，这可不好，
-"   所以，vim-signature 为你提供了 m, 快捷键，
-"   自动帮你选定下一个可用独立书签名；mda，删除当前文件中所有独立书签。
-" 书签罗列。ms，罗列出当前文件中所有书签，选中后回车可直接跳转；
-" 书签跳转。mn，按行号前后顺序，跳转至下个独立书签；
-"   mp，按行号前后顺序，跳转至前个独立书签。
-"   书签跳转方式很多，除了这里说的行号前后顺序，
-"   还可以基于书签名字母顺序跳转、分类书签同类跳转、分类书签不同类间跳转等等。
-" Bundle 'kshenoy/vim-signature'
-" let g:SignatureMap = {
-"       \ 'Leader'             :  "m",
-"       \ 'PlaceNextMark'      :  "m,",
-"       \ 'ToggleMarkAtLine'   :  "mm",
-"       \ 'PurgeMarksAtLine'   :  "m-",
-"       \ 'DeleteMark'         :  "dm",
-"       \ 'PurgeMarks'         :  "m<Space>",
-"       \ 'PurgeMarkers'       :  "m<BS>",
-"       \ 'GotoNextLineAlpha'  :  "']",
-"       \ 'GotoPrevLineAlpha'  :  "'[",
-"       \ 'GotoNextSpotAlpha'  :  "`]",
-"       \ 'GotoPrevSpotAlpha'  :  "`[",
-"       \ 'GotoNextLineByPos'  :  "]'",
-"       \ 'GotoPrevLineByPos'  :  "['",
-"       \ 'GotoNextSpotByPos'  :  "mn",
-"       \ 'GotoPrevSpotByPos'  :  "mp",
-"       \ 'GotoNextMarker'     :  "[+",
-"       \ 'GotoPrevMarker'     :  "[-",
-"       \ 'GotoNextMarkerAny'  :  "]=",
-"       \ 'GotoPrevMarkerAny'  :  "[=",
-"       \ 'ListLocalMarks'     :  "m/",
-"       \ 'ListLocalMarkers'   :  "m?"
-"       \ }
+" Ch.10 删除：vim-signature 段（散兵，整段已注释，已归档）
 
 
 " 书签
@@ -843,11 +802,7 @@ smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
 imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
 
 
-" 自动保存
-" Bundle 'vim-scripts/vim-auto-save'
-" let g:auto_save = 0
-" let g:auto_save_in_insert_mode = 0
-" let g:auto_save_silent = 1
+" Ch.10 删除：vim-auto-save 段（散兵，已归档）
 
 " A vim plugin that simplifies the transition between multiline and
 " single-line code
