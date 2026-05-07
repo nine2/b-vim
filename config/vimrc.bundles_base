@@ -183,48 +183,7 @@ Bundle 'nine2/vim-custom-syntax'
 " let g:custom_syntax_hightlight_enable= 0
 " 语法高亮
 " let g:custom_syntax_hightlight_macro= 1
-" ###### 多语言语法检查
-"Bundle 'scrooloose/syntastic'
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"" to see error location list
-"let g:syntastic_always_populate_loc_list = 1
-"" 当第一行是报错时，自动跳转过去，否则，不自动跳转
-"" let g:syntastic_auto_jump = 2
-"" 默认为 2, 表示发现错误时不自动打开,当修正以后没有再发现错误时自动关闭
-"" 1表示自动打开自动关闭
-"" 0表示关闭自动打开和自动关闭
-"" 3表示自动打开,但不自动关闭
-"let g:syntastic_auto_loc_list = 2
-"let g:syntastic_loc_list_height = 5
-"let g:syntastic_check_on_open=1
-"let g:syntastic_check_on_wq=1
-"let g:syntastic_error_symbol='✘✘'
-"let g:syntastic_warning_symbol='➤➤'
-"let g:syntastic_enable_highlighting=1
-"" 使用pyflakes,速度比pylint快
-"let g:syntastic_python_checkers=['pep8', 'pyflakes']
-"let g:syntastic_python_pep8_args='--ignore=E501,E225'
-"" 修改高亮的背景色, 适应主题
-"highlight SyntasticErrorSign guifg=white guibg=black
-"nnoremap ew :SyntasticCheck<cr>:Errors<cr>
-"" nnoremap ee :SyntasticCheck<cr>
-"nmap <silent> ee :lr 1<cr>
-"nmap <silent> e1 :lr 1<cr>
-"nmap <silent> e2 :lr 2<cr>
-"nmap <silent> e3 :lr 3<cr>
-"nmap <silent> e4 :lr 4<cr>
-"nmap <silent> e5 :lr 5<cr>
-"nmap <silent> e6 :lr 6<cr>
-"nmap <silent> e7 :lr 7<cr>
-"nmap <silent> e8 :lr 8<cr>
-"nmap <silent> e9 :lr 9<cr>
-"nmap <silent> e0 :lla<cr>
-"" autocmd FileType go let g:syntastic_auto_loc_list = 0
-"" autocmd VimEnter go SyntasticCheck
-""syntastic 保存检查代码时候传入参数, 可以解决 java 文件第三方包有 语法报警问题
-"let g:syntastic_java_javac_args="-cp ../../lib:../../bin -sourcepath ../../bin -Djava.ext.dirs=../../lib -d ../../bin"
+" Ch.3 删除：syntastic（已归档至 .vim/vimrc.archive/vimrc.bundles_base）
 
 Bundle 'w0rp/ale'
 " let g:ale_enabled= 0
