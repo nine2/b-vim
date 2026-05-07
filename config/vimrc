@@ -18,7 +18,8 @@ noremap <C-,> <Esc>
         " 将 ; 绑定到 : 用于快速进入命令行
 nnoremap ; :
 " 保证工作目录为当前目录
-autocmd BufEnter * lcd %:p:h
+" silent! 避免 lcd 失败时弹出 "Press ENTER" 阻塞 ~2s（E344/E472）
+autocmd BufEnter * silent! lcd %:p:h
 
 " ########### 没设置 环境变量时使用 默认的 $HOME 下的
 let g:cust_vim_config_path = 1

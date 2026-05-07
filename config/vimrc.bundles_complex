@@ -41,8 +41,8 @@ noremap <F8> :Autoformat<CR>
 
 " 快速补全, 需要 vim 支持 python
 Bundle 'SirVer/ultisnips'
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+" Tab 统一由下方 SmartTab 路由（snippet > YCM popup > Copilot），此处不绑定避免冲突
+let g:UltiSnipsExpandTrigger="<nop>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " 列出匹配的所有 snippets
@@ -79,6 +79,22 @@ Bundle 'guns/xterm-color-table.vim'
 Bundle 'github/copilot.vim'
 " 启用 Copilot
 let g:copilot_enabled = v:true
+" 禁用 Copilot 默认 Tab 映射，由 SmartTab 统一路由
+let g:copilot_no_tab_map = 1
+
+" Tab 路由：UltiSnips 展开 → YCM popup 导航 → Copilot 接受
+" 优先级：snippet > 补全菜单 > AI ghost text > 普通 Tab
+function! s:SmartTab()
+    call UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+        return ""
+    endif
+    if pumvisible()
+        return "\<C-n>"
+    endif
+    return copilot#Accept("\<Tab>")
+endfunction
+imap <silent><expr> <Tab> <SID>SmartTab()
 
 " 设置 Tab 键接受建议
 " imap <silent><script><expr> <Tab> copilot#Accept("\<CR>")

@@ -47,7 +47,7 @@ let g:ycm_complete_in_comments = 1  "在注释输入中也能补全
 let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
 let g:ycm_filepath_completion_use_working_dir = 1
 let g:ycm_use_ultisnips_completer = 1 "提示UltiSnips
-let g:ycm_always_populate_location_list = 1
+let g:ycm_always_populate_location_list = 0  " 原为 1，每次 gopls 推送诊断都更新 location list 触发重绘
 let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
@@ -138,8 +138,10 @@ let g:ycm_filetype_whitelist = {
     \ "java":1,
     \ }
 
+" go: 原为 re!\w{2}，每 2 字符就调 gopls；改为 . 后或 4+ 字符才触发
 let g:ycm_semantic_triggers =  {
-    \ 'c,cpp,sh,zsh,python,java,go,erlang,perl,snippets': ['re!\w{2}'],
+    \ 'c,cpp,sh,zsh,python,java,erlang,perl,snippets': ['re!\w{2}'],
+    \ 'go': ['.', 're!\w{4}'],
     \ 'cs,lua,vim,javascript': ['re!\w{2}'],
     \ }
 

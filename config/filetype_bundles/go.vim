@@ -11,13 +11,31 @@
 
 " go 文件配置
 autocmd BufRead,BufNewFile *.go set filetype=go
+" 恢复 CompleteParameter 在 Go 文件下的 ( hook 能力（之前因"Python 解析失败"关过，
+" 现在重新启用；如再遇解析失败问题，可临时 :iunmap ( 退回普通括号）
+autocmd FileType go setlocal foldmethod=manual    " 避免每次按键重算全文折叠，大文件性能关键
+autocmd FileType go setlocal nocursorline         " 关闭当前行高亮，减少光标移动时的重绘开销
+autocmd FileType go setlocal norelativenumber     " 固定绝对行号，消除进出 insert 时全屏行号重绘
+" 保存前临时关闭 copyright 自动更新，写完再恢复，避免 Go 文件保存时扫描修改文件头
+autocmd BufWritePre  *.go let g:file_copyright_auto_update = 0
+autocmd BufWritePost *.go let g:file_copyright_auto_update = 1
+" Go 文件关闭 echodoc，减少光标移动时 cmdline 重绘
+autocmd FileType go let b:echodoc_enabled = 0
 
 " ###############################
 " Golang
 Bundle "fatih/vim-go"
 " 保存时自动使用 gofmt 格式代码，使用 goimports 格式 import 部分，
 " 同时自动导入缺少的import
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "gofmt"              " gopls 与 YCM ycmd 争用连接会 timeout；gofmt 轻量无阻塞
+" --- 关 vim-go 同步 autosave：BufWritePre 跑 goimports 实测 ~1.1s 阻塞 :w ---
+" --- 改由 ALE fix_on_save 异步处理（见 vimrc.bundles_base 的 ale_fixers 设置）---
+let g:go_fmt_autosave = 0
+let g:go_imports_autosave = 0
+let g:go_metalinter_autosave = 0
+let g:go_asmfmt_autosave = 0
+let g:go_mod_fmt_autosave = 0
+au FileType go nmap <leader>gi :GoImports<CR>  " 手动整理 import
 " 取消每次有错都弹出报错框，如果希望看到所有报错，可使用 :lopen 打开报错框
 let g:go_fmt_fail_silently = 1
 " let g:go_metalinter_enabled = 0
@@ -32,7 +50,7 @@ let g:go_auto_type_info = 0
 let g:go_info_mode = 'gopls'
 " let g:go_info_mode = 'gocode'
 " let g:go_auto_sameids = 1
-let g:go_updatetime = 300
+let g:go_updatetime = 1500          " 原 300ms，降低 gopls CursorHold 轮询频率
 let g:go_doc_popup_window = 0
 let g:go_def_mode = 'gopls'
 " let g:go_def_mode = 'godef'

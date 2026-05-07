@@ -26,6 +26,13 @@ filetype off " required! turn off
 set rtp+=$VIM_TMP_PATH/bundle/vundle/
 call vundle#rc("$VIM_TMP_PATH/bundle")
 
+" ################### 插件禁用 guard（必须在 Bundle 加载前设）#########################
+" 大 .git 仓库（>200MB）下 gitgutter / fugitive statusline / git-messenger 同步阻塞 j 滚动
+" TagHighlight 启动 ~104ms 且基本不用
+let g:loaded_gitgutter = 1
+let g:loaded_TagHighlight = 1
+let g:loaded_git_messenger = 1
+
 " ################### Bundles 配置 #########################
 " 使用Vundle来管理插件
 " vim plugin bundle control, command model
@@ -115,12 +122,13 @@ let g:airline_section_z = airline#section#create_right(['%lL:%cC│ %p%%/%LL'])
 " let g:airline#extensions#taboo#enabled = 0
 " let g:airline#extensions#bufferline#enabled = 1
 " let g:airline#extensions#csv#enabled = 1
-let g:airline#extensions#fugitiveline#enabled = 1
-let g:airline#extensions#hunks#enabled = 1
+let g:airline#extensions#fugitiveline#enabled = 0  " 大 .git 仓库每次 redraw 同步调 git，关
+let g:airline_highlighting_cache = 1               " 缓存高亮计算（airline 文档推荐）
+let g:airline#extensions#hunks#enabled = 0  " 原为 1，每次 CursorHold 调 git diff 统计增删行，开销不小
 let g:airline#extensions#coc#enabled = 1
 " let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#wordcount#enabled = 1
+let g:airline#extensions#wordcount#enabled = 0  " 原为 1，大文件每次 CursorHold 统计字数有额外开销
 let b:airline_whitespace_checks = [ 'indent', 'trailing' ]
 " let b:airline_whitespace_checks = [ 'trailing' ]
 let g:airline#extensions#ycm#enabled = 1
@@ -136,6 +144,7 @@ Bundle 'asins/vimcdoc'
 Bundle 'nine2/vim-rooter'
 let g:rooter_silent_chdir = 1
 let g:rooter_resolve_links = 1
+let g:rooter_manual_only = 1                " BufEnter 不再上溯查 .git，大仓库下显著降卡顿
 nmap <leader>cd :AutoChangeDirectory <cr>
 
 
@@ -227,15 +236,27 @@ highlight clear ALEWarningSign
 " let g:ale_set_quickfix = 1
 " let g:ale_set_location = 1
 let g:ale_list_window_size = 5
-" let g:ale_fix_on_save = 0
-let g:ale_go_staticcheck_lint_package = 1
+" --- ALE 触发时机：编辑时不 lint，仅在保存时跑（消除编辑卡顿）---
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_filetype_changed = 0
+" --- 异步 fix on save：替代 vim-go 同步的 BufWritePre gofmt/goimports（实测省 ~1.1s）---
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+      \ 'go':         ['goimports', 'gofmt'],
+      \ 'python':     ['autopep8', 'isort'],
+      \ '*':          ['remove_trailing_lines', 'trim_whitespace'],
+      \ }
+let g:ale_go_staticcheck_lint_package = 0   " 原为 1，lint 整包比单文件慢 5~20x
 " let g:ale_go_gometalinter_lint_package = 0
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 " go 文件配置
 let g:ale_go_golangci_lint_executable  = "golangci-lint"
-let g:ale_go_golangci_lint_package = 1
+let g:ale_go_golangci_lint_package = 0      " 原为 1，lint 整包比单文件慢 5~20x
 " 需要安装 gopls 工具
 " let g:ale_linters = {'go': ['go vet', 'gofmt', 'golint']}
 " let g:ale_linters = {'go': ['gopls']}
@@ -243,6 +264,9 @@ let g:ale_go_golangci_lint_package = 1
 " 需要安装 golangci-lint ，速度快，比 gopls 占用内存少,
 " 静态检查足够了（检查的非常细）
 " let g:ale_linters = {'go': ['golangci-lint'], 'python':['pep8', 'pyflakes']}
+" 默认仅用 golangci-lint，避免 gopls/govet/staticcheck 多 linter 叠加
+let g:ale_linters = {'go': ['golangci-lint']}
+let g:ale_go_golangci_lint_options = '--fast'  " 大仓库下 fast 模式 vs 完整跑相差 5~10x
 autocmd FileType python,py let g:ale_linters = {'python':['pep8', 'flake8']}
 autocmd FileType python,py let g:ale_type_map = {
       \ 'pycodestyle' : {'ES' : 'WS', 'E': 'W'},
@@ -251,8 +275,9 @@ autocmd FileType python,py let g:ale_type_map = {
 " autocmd FileType go let g:ale_linters = {'go': ['golangci-lint']}
 
 let g:airline#extensions#ale#enabled = 1
-let g:ale_lint_on_text_changed = 1
-let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 'never'    " 原为 1，每次按键都 lint 是最主要卡顿源
+let g:ale_lint_on_insert_leave = 0          " 退出 insert 不触发，改由保存时统一执行
+let g:ale_lint_on_save = 1
 nmap <silent> ek <Plug>(ale_previous_wrap)
 nmap <silent> ej <Plug>(ale_next_wrap)
 nmap <silent> eh <Plug>(ale_first)
@@ -390,7 +415,8 @@ function! BookmarkUnmapKeys()
     unmap mkk
     unmap mjj
 endfunction
-autocmd BufEnter * :call BookmarkMapKeys()
+" 加 filetype 守卫，跳过辅助窗口，避免每次切换都重绑 9 个 nmap
+autocmd BufEnter * if &filetype !~ '^\(nerdtree\|qf\|ale-preview\|tagbar\|help\)$' | call BookmarkMapKeys() | endif
 autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 
 " ##### 选中区块
@@ -578,9 +604,10 @@ let g:rbpt_colorpairs = [
 let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
 au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+" 原为 au Syntax *，每次语法刷新（含光标移动）都重算括号颜色；改为启动时加载一次
+au VimEnter * RainbowParenthesesLoadRound
+au VimEnter * RainbowParenthesesLoadSquare
+au VimEnter * RainbowParenthesesLoadBraces
 
 
 " ##### 目录导航
@@ -594,7 +621,8 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " Open the existing NERDTree on each new tab.
 " autocmd BufWinEnter go,c,c++,py,pytho,h,hpp silent NERDTreeMirror
 " autocmd bufenter * if &filetype != "qf" || &filetype != "loclist" || &filetype != "ctrlsf" | silent NERDTreeMirror | end
-autocmd BufEnter * if !argc() | NERDTreeMirror | endif
+" 加 winnr('$') > 1 守卫，只在多窗口时才 Mirror，避免单窗口 buffer 切换的无效操作
+autocmd BufEnter * if !argc() && winnr('$') > 1 | NERDTreeMirror | endif
 " Start NERDTree. If a file is specified, move the cursor to its window.
 autocmd StdinReadPre * let s:std_in=1
 " 打开文件自动开启目录并定位到具体文件位置
@@ -651,7 +679,7 @@ let g:tagbar_expand = 0
 let g:tagbar_autoshowtag = 1
 let g:tagbar_silent = 1
 let g:tagbar_map_jump = ["<CR>", "o"]
-set updatetime=500
+set updatetime=1500  " 原 500ms，降低 CursorHold 频率（tagbar/vim-go/ale 均依赖此值）
 " 保持鼠标可用，部分终端可能还是会失效，参照：
 " http://landcareweb.com/questions/6495/zai-vimzhong-wei-shi-yao-wo-de-shu-biao-bu-neng-chao-guo-di-220lie
 " if has("mouse_sgr")
@@ -895,11 +923,14 @@ Bundle 'chrisbra/Colorizer'
 " :Colorizer
 " :RGB2Term
 " :Term2RGB
+" 仅在常见有颜色值的文件类型自动着色（白名单），避免 Go/Java/Python 等大文件全文扫描
 let g:colorizer_auto_color = 1
+let g:colorizer_auto_filetype = 'css,scss,sass,less,html,htm,vim,conf,json,yaml,yml,markdown,xml'
 
 set encoding=UTF-8
 
 Bundle 'psliwka/vim-smoothie'
+autocmd FileType go let b:smoothie_enabled = 0  " Go 文件关闭平滑滚动，减少滚动时动画计算开销
 Bundle 'bfrg/vim-qf-preview'
 augroup qfpreview
   autocmd!

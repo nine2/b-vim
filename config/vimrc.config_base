@@ -124,9 +124,10 @@ set foldenable
 " syntax    使用语法定义折叠
 " diff      对没有更改的文本进行折叠
 " marker    使用标记进行折叠, 默认标记是 {{{ 和 }}}
-set foldmethod=indent
+" 改为 manual：indent/syntax 折叠在大文件 j/k 移动时反复重算，性能差
+set foldmethod=manual
+" set foldmethod=indent
 " set foldmethod=syntax
-" set foldmethod=manual
 " set foldlevel=99
 " set foldenable              " 开始折叠
 " set foldmethod=indent       " 设置语法折叠
@@ -188,12 +189,14 @@ set nrformats=
 
 " Vim 7.3以上版本才支持，7.3一下版本不支持 relativenumber
 " ##### 相对行号 行号变成相对，可以用 nj  nk   进行跳转 5j   5k 上下跳5行
-set relativenumber number
-au FocusLost * :set norelativenumber number
-au FocusGained * :set relativenumber
+" relativenumber 在 j/k 移动时会重画整个行号列，大文件下"一卡一卡"
+" 默认改成绝对行号；NumberToggle (<C-n>) 仍可手动切换
+set number norelativenumber
+" au FocusLost * :set norelativenumber number
+" au FocusGained * :set relativenumber
 " 插入模式下用绝对行号, 普通模式下用相对
-autocmd InsertEnter * :set norelativenumber number
-autocmd InsertLeave * :set relativenumber
+" autocmd InsertEnter * :set norelativenumber number
+" autocmd InsertLeave * :set relativenumber
 function! NumberToggle()
     if(&relativenumber == 1)
         set norelativenumber number
@@ -751,10 +754,11 @@ endfun
 nmap <leader>jf :call B_JsonFormat()<cr>
 " nmap <leader>jf :%!python -m json.tool<cr>
 
-" 防止vim卡顿
-set re=1
+" re=0 自动选引擎；原 re=1 旧引擎对 vim-go 复杂语法规则反而更慢
+set re=0
 set ttyfast
-" set lazyredraw
+set lazyredraw      " 批量操作时不逐帧刷屏，减少补全/格式化等多步操作的重绘次数
+set synmaxcol=1000  " 默认 3000，超长行全量渲染开销大；生成代码长行只渲染前 1000 字符
 
 " 高亮当前单词，同时光标停留在当前单词不跳转，可能需要先使用 gd 高亮一次才会生效
 nmap hw :let @/=expand('<cword>')<cr>
