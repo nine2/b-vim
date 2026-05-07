@@ -48,11 +48,7 @@ nnoremap g<space> :GBrowse<CR>
 " rhubarb.vim: GitHub extension for fugitive.vim
 Bundle 'tpope/vim-rhubarb'
 
-" 在vim中使用 git 命令
-Bundle 'motemen/git-vim'
-nnoremap <Leader>gal :GitAdd .<CR>
-" nnoremap <Leader>gc :GitCommit<CR>
-" nnoremap <Leader>gs :GitStatus<CR>
+" Ch.6 删除：git-vim（已被 vim-fugitive 取代，已归档）
 
 " ##### 可以查看回到某个历史状态
 Bundle 'sjl/gundo.vim'
