@@ -17,9 +17,24 @@ inoremap ,, <Esc>
 noremap <C-,> <Esc>
         " 将 ; 绑定到 : 用于快速进入命令行
 nnoremap ; :
-" 保证工作目录为当前目录
+" 保证工作目录跟随文件 — 优先 git 仓库根（让 quickfix/GoReferrers 显示相对路径）
+" 找不到 git 根时退化到文件父目录；buffer-local 缓存避免每次 BufEnter 跑 git
+function! g:LcdGitRootOrParent() abort
+    if !exists('b:_lcd_root')
+        let l:dir = expand('%:p:h')
+        if empty(l:dir) || !isdirectory(l:dir)
+            let b:_lcd_root = ''
+            return
+        endif
+        let l:root = trim(system('git -C ' . shellescape(l:dir) . ' rev-parse --show-toplevel 2>/dev/null'))
+        let b:_lcd_root = (v:shell_error == 0 && !empty(l:root)) ? l:root : l:dir
+    endif
+    if !empty(b:_lcd_root)
+        execute 'lcd ' . fnameescape(b:_lcd_root)
+    endif
+endfunction
 " silent! 避免 lcd 失败时弹出 "Press ENTER" 阻塞 ~2s（E344/E472）
-autocmd BufEnter * silent! lcd %:p:h
+autocmd BufEnter * silent! call g:LcdGitRootOrParent()
 
 " ########### 没设置 环境变量时使用 默认的 $HOME 下的
 let g:cust_vim_config_path = 1
