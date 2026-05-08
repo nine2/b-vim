@@ -7,17 +7,17 @@
 "   Last Modified : 2025-10-09 15:55
 "   Describe      :
 "
-"  bundle 插件管理和配置项
+"  vim-plug 插件管理和配置项（2026-05-08 从 Vundle 迁移）
 " -----------------#github
 "   插件来自 github，只需要 ： 作者名/项目名
-"  Bundle 'tomasr/molokai'
+"  Plug 'tomasr/molokai'
 "   插件来自 vim-scripts，直接写插件名就行了
-"  Bundle 'L9'
+"  Plug 'L9'
 "   如使用自己的git库的插件，像下面这样做
-"  Bundle 'git://git.wincent.com/command-t.git'
+"  Plug 'git://git.wincent.com/command-t.git'
 " ---------------#git库在本地机器的情况
 "   如使用自己的git库在本地机器，像下面这样做
-"  Bundle 'file:///Users/gmarik/path/to/plugin'
+"  Plug 'file:///Users/gmarik/path/to/plugin'
 "
 " ==========================================
 
@@ -61,8 +61,8 @@ let g:gitgutter_show_msg_on_hunk_jumping = 0  " 跳转时不打印 hunk 信息
 Plug 'nine2/molokai'
 let g:molokai_original = 1
 set t_Co=256
-" vim-plug: 用 VimEnter 延迟（plug#end 在文件末尾，此时 molokai 还未加入 rtp）
-autocmd VimEnter * colorscheme molokai
+" colorscheme molokai 不在此处执行 —— 移至 plug#end() 之后立即设置
+" 因为 vim-plug 仅在 plug#end() 时把插件加入 rtp，此时 molokai 还未可用
 
 " ###############################
 " 主题. 状态栏
@@ -130,8 +130,8 @@ let g:airline_powerline_fonts = 1
 "      \ ]
 " %B:ANSII码，%l:行号, %c:列号, %P:当前文件的百分比行, filetype:文件类型
 " let g:airline_section_x = airline#section#create_right([' %B│ %lL:%cC│ %p%%│ ', 'filetype'])
-" vim-plug: 用 VimEnter 延迟，airline 函数需要插件加载完成
-autocmd VimEnter * let g:airline_section_z = airline#section#create_right(['%lL:%cC│ %p%%/%LL'])
+" airline_section_z 不在此处执行 —— 移至 plug#end() 之后立即设置
+" 因为 airline#section#create_right 需要 vim-airline 已加入 rtp
 
 " let g:airline#extensions#taboo#enabled = 0
 " let g:airline#extensions#bufferline#enabled = 1
@@ -908,3 +908,11 @@ call plug#end()    " 内含 filetype plugin indent on
 set rtp+=$VIM_TMP_PATH/bundle/YouCompleteMe
 set rtp+=$VIM_TMP_PATH/bundle/vim-go
 set rtp+=$VIM_TMP_PATH/bundle/ycm_simple_conf
+
+" === 依赖插件已加入 rtp 的命令（必须在 plug#end 之后立即执行）===
+" 配色方案
+silent! colorscheme molokai
+" airline section（需要 vim-airline 加载完成）
+if exists('*airline#section#create_right')
+    let g:airline_section_z = airline#section#create_right(['%lL:%cC│ %p%%/%LL'])
+endif
