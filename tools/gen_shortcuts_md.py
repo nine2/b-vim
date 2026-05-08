@@ -66,6 +66,221 @@ def normalize_lhs(lhs):
     # 普通字符
     return ('a', sort_key, lhs)
 
+# 命令字典：RHS 主命令 → 说明
+CMD_DESC = {
+    # NERDTree / 文件树
+    ':NERDTreeToggle': '切换文件树侧边栏',
+    ':NERDTreeFind': '在文件树中定位当前文件',
+    # vim-go
+    ':GoBuild': 'Go 编译当前包',
+    ':GoTest': '运行 Go 测试',
+    ':GoTestFunc': '运行光标下的测试函数',
+    ':GoDef': '跳到定义（gopls）',
+    ':GoDoc': '查看文档',
+    ':GoReferrers': '找所有引用（gopls）',
+    ':GoImplements': '找接口实现',
+    ':GoRename': '重命名符号',
+    ':GoFillStruct': '自动填充 struct 字段',
+    ':GoImports': '整理 import',
+    ':GoMetaLinter': '运行 Go metalinter',
+    ':GoInfo': '显示 Go 类型信息',
+    ':GoFmt': '格式化（gofmt）',
+    ':GoSameIds': '高亮当前作用域同名标识符',
+    ':GoSameIdsClear': '清除同名高亮',
+    ':GoAddTag': '为 struct 字段添加 tag',
+    ':GoRemoveTags': '移除 struct tag',
+    # GitGutter
+    ':GitGutterToggle': '切换 hunk 标记列',
+    ':GitGutterNextHunk': '跳到下一个变更 hunk',
+    ':GitGutterPrevHunk': '跳到上一个变更 hunk',
+    ':GitGutterUndoHunk': '撤销当前 hunk',
+    ':GitGutterStageHunk': '暂存当前 hunk',
+    ':GitGutterPreviewHunk': '预览 hunk diff',
+    ':GitGutterLineHighlightsDisable': '关闭行高亮',
+    ':GitGutterLineHighlightsEnable': '开启行高亮',
+    # CtrlSF / 搜索
+    ':CtrlSF': '项目级 grep 搜索（侧边栏）',
+    ':Ag': 'silver-searcher 搜索',
+    # CtrlP（已迁移到 LeaderF，但仍可能在备用配置里）
+    ':CtrlP': '模糊搜索文件',
+    ':CtrlPBuffer': '模糊搜索 buffer',
+    # LeaderF
+    'Leaderf': '调用 LeaderF',
+    'Leaderf gtags': 'LeaderF gtags 跨语言代码索引',
+    # 通用 vim
+    ':cclose': '关闭 quickfix 窗口',
+    ':lclose': '关闭 location list 窗口',
+    ':pclose': '关闭 preview 窗口',
+    ':q': '关闭当前窗口',
+    ':x': '保存并退出',
+    ':wa': '保存所有 buffer',
+    ':bd': '关闭当前 buffer',
+    ':tabnew': '新建 tab',
+    ':tabnext': '下一个 tab',
+    ':tabprevious': '上一个 tab',
+    ':tabclose': '关闭当前 tab',
+    ':tabfirst': '第一个 tab',
+    ':tablast': '最后一个 tab',
+    ':bn': '下一个 buffer',
+    ':bp': '上一个 buffer',
+    # vim-fugitive
+    ':G blame': 'git blame',
+    ':G status': 'git status',
+    ':Gdiff': 'git diff 当前文件',
+    ':GMove': 'git mv',
+    ':GBrowse': '在浏览器打开 GitHub/Bitbucket',
+    # 其他
+    ':TagbarToggle': '切换 Tagbar 大纲',
+    ':Tagbar': '打开 Tagbar 大纲',
+    ':GundoToggle': '切换 undo tree',
+    ':Autoformat': '通用格式化（vim-autoformat）',
+    ':Dash': '在 Dash 中查文档',
+    ':Translate': '翻译光标下文本',
+    ':TranslateW': '翻译并显示窗口',
+    ':TranslateX': '翻译并替换',
+    ':DlvAddBreakpoint': 'delve 添加断点',
+    ':DlvDebug': 'delve 启动调试',
+    ':DlvToggleTracepoint': 'delve toggle tracepoint',
+    ':DlvRemoveBreakpoint': 'delve 删除断点',
+    ':DlvClearAll': 'delve 清除所有断点',
+    ':GoTests': '生成测试函数（gotests-vim）',
+    ':NumberToggle': '切换相对/绝对行号',
+    ':FixWhitespace': '清除尾部空白',
+    ':SplitjoinSplit': '把单行拆成多行',
+    ':SplitjoinJoin': '把多行合成单行',
+    ':TableModeToggle': '切换表格模式',
+    ':Colorizer': '渲染 hex/rgb 颜色',
+    ':RGB2Term': '转换 RGB 到终端色',
+    ':Term2RGB': '转换终端色到 RGB',
+    ':MarkdownPreview': 'Markdown 浏览器预览',
+    ':GenTocGFM': '生成 GitHub Markdown 目录',
+    ':GenTocRedcarpet': '生成 Redcarpet 目录',
+    ':TableFormat': '格式化表格',
+    ':BookmarkToggle': '切换书签',
+    ':BookmarkAnnotate': '为书签加注释',
+    ':BookmarkNext': '下一个书签',
+    ':BookmarkPrev': '上一个书签',
+    ':BookmarkClear': '清空当前 buffer 书签',
+    ':BookmarkClearAll': '清空所有书签',
+    ':BookmarkShowAll': '显示所有书签',
+    ':SyntasticCheck': 'syntastic 检查（已弃用）',
+    ':Errors': '显示 syntastic 错误（已弃用）',
+    ':lopen': '打开 location list',
+    ':copen': '打开 quickfix',
+    ':cprevious': 'quickfix 上一个',
+    ':cnext': 'quickfix 下一个',
+    ':cfirst': 'quickfix 第一个',
+    ':cla': 'quickfix 显示全部',
+    ':cr': 'quickfix 跳指定项',
+    ':lla': 'location list 显示全部',
+    ':lr': 'location list 跳指定项',
+    ':NERDComToggleComment': 'NERDCommenter 切换注释',
+    'YcmCompleter GoTo': 'YCM 跳定义',
+    'YcmCompleter GoToReferences': 'YCM 找引用',
+    'YcmCompleter GoToType': 'YCM 跳类型',
+    ':YcmCompleter': 'YouCompleteMe 命令',
+    'CocActionAsync': 'coc.nvim 异步动作',
+    ':PlantumlOpen': '在浏览器预览 PlantUML',
+    ':JavaImport': 'Java 导入',
+    'UltiSnips#ExpandSnippetOrJump': 'UltiSnips 展开/跳转',
+    'UltiSnips#JumpForwards': 'UltiSnips 下一占位符',
+    'UltiSnips#JumpBackwards': 'UltiSnips 上一占位符',
+}
+
+# Plug 字典
+PLUG_DESC = {
+    'EasyAlign': '对齐选区/动作（vim-easy-align）',
+    '(coc-codeaction-selected)': 'coc 对选区执行 code action',
+    '(coc-codeaction)': 'coc code action',
+    'TranslateX': '翻译并替换',
+    'TranslateW': '翻译显示窗口',
+    'Translate': '翻译',
+    '(quickrun)': 'QuickRun 执行',
+    '(qf-preview-open)': 'QuickFix 预览打开',
+    '(complete_parameter#goto_next_parameter)': 'CompleteParameter 下一参数',
+    '(complete_parameter#goto_previous_parameter)': 'CompleteParameter 上一参数',
+}
+
+def cmd_desc_lookup(rhs):
+    """从 RHS 中查命令字典获取说明。"""
+    s = rhs.strip()
+    # 去掉尾部 <CR> <cr>
+    s = re.sub(r'<[Cc][Rr]>\s*$', '', s).strip()
+    # 截短
+    s_short = s[:80]
+    # 直接精确匹配
+    for k, v in CMD_DESC.items():
+        if s_short.startswith(k):
+            return v
+    # Plug 匹配
+    m = re.search(r'<Plug>\(?([^()<>]+)\)?', s)
+    if m:
+        plug_name = m.group(1)
+        for k, v in PLUG_DESC.items():
+            if k in plug_name or k == plug_name:
+                return v
+        return f'Plug 触发：{plug_name}'
+    # call 函数
+    m = re.match(r':?call\s+(\w[\w#]+)', s)
+    if m:
+        return f'调用：{m.group(1)}()'
+    # 简单命令
+    m = re.match(r':(\w+)', s)
+    if m:
+        return f'执行 :{m.group(1)}'
+    # ctrl-命令组合
+    if s.startswith('<C-') or '<C-' in s:
+        return ''
+    # 其他短小 RHS
+    if len(s) < 20:
+        return f'即 `{s}`'
+    return ''
+
+def above_comment(lines, line_no, max_back=3):
+    """获取 line_no 上方相邻的注释行内容。"""
+    desc_parts = []
+    i = line_no - 2  # 0-indexed, 上一行
+    back = 0
+    while i >= 0 and back < max_back:
+        ln = lines[i].rstrip('\n').strip()
+        if not ln:
+            # 空行，停止往上找
+            break
+        if ln.startswith('"'):
+            # 注释行
+            comment = ln.lstrip('"').strip()
+            if comment and not re.match(r'^=+$|^-+$|^#+$', comment):
+                desc_parts.insert(0, comment)
+            i -= 1
+            back += 1
+        else:
+            break
+    if desc_parts:
+        # 去掉过于细节的（包含数字行号、纯路径）
+        joined = ' / '.join(desc_parts)
+        if len(joined) > 100:
+            joined = joined[:97] + '...'
+        return joined
+    return ''
+
+def derive_desc(lines, line_no, lhs, rhs):
+    """从注释 + 命令字典 + RHS 推断说明。"""
+    # 1) 优先取上方注释
+    desc = above_comment(lines, line_no)
+    # 注释中如果有 LHS 出现，多半是说明这个 mapping
+    # 但很多注释是泛泛说 "##### 标题"
+    if desc:
+        # 太长截断
+        if len(desc) > 80:
+            desc = desc[:77] + '...'
+        return desc
+    # 2) 命令字典
+    cmd = cmd_desc_lookup(rhs)
+    if cmd:
+        return cmd
+    # 3) 兜底
+    return ''
+
 # 收集
 SKIP_FILES = {"vimrc.lite"}
 entries = []
@@ -83,9 +298,8 @@ for root, dirs, files in os.walk(CONFIG_DIR):
             res = parse_map_line(line)
             if res:
                 au_prefix, mode, opts, lhs, rhs = res
-                # 跳过 <Plug>(...)
-                # 不跳过——<Plug> 本身就是一种 mapping
                 rel_file = str(path.relative_to(CONFIG_DIR.parent))
+                desc = derive_desc(lines, i, lhs, rhs)
                 entries.append({
                     'file': rel_file,
                     'line': i,
@@ -94,6 +308,7 @@ for root, dirs, files in os.walk(CONFIG_DIR):
                     'lhs': lhs,
                     'rhs': rhs,
                     'au': au_prefix,
+                    'desc': desc,
                 })
 
 # 同时扫描变量赋值形式的快捷键
@@ -140,6 +355,7 @@ for root, dirs, files in os.walk(CONFIG_DIR):
                     'file': rel, 'line': line_no, 'mode': mode,
                     'opts': '', 'lhs': lhs, 'rhs': desc,
                     'au': f'(via {var_name})',
+                    'desc': desc,
                 })
 
 # 去重（同一 lhs+file+line）
@@ -216,15 +432,23 @@ OUT.append("")
 OUT.append("---")
 OUT.append("")
 
+def fmt_desc(d):
+    if not d:
+        return '—'
+    d = d.replace('|', '\\|').strip()
+    if len(d) > 60:
+        d = d[:57] + '...'
+    return d
+
 # 表 A
 OUT.append("## 一、全局快捷键（按字母排序）")
 OUT.append("")
-OUT.append("> 排序键：`<leader>X` 取 X，`gd` 取 g，`<F8>` 排到最后。")
+OUT.append("> 排序键：`<leader>X` 取 X，`gd` 取 g，`<F8>` 排到最后。说明列优先取上方注释，否则查命令字典。")
 OUT.append("")
-OUT.append("| 按键 | 模式 | 命令 | 文件 |")
-OUT.append("|------|:----:|------|------|")
+OUT.append("| 按键 | 模式 | 说明 | 命令 | 来源 |")
+OUT.append("|------|:----:|------|------|------|")
 for e in global_entries:
-    OUT.append(f"| {fmt_lhs(e['lhs'])} | {fmt_mode(e['mode'], e['opts'])} | {fmt_rhs(e['rhs'])} | `{e['file'].replace('config/','')}:{e['line']}` |")
+    OUT.append(f"| {fmt_lhs(e['lhs'])} | {fmt_mode(e['mode'], e['opts'])} | {fmt_desc(e.get('desc',''))} | {fmt_rhs(e['rhs'])} | `{e['file'].replace('config/','')}:{e['line']}` |")
 OUT.append("")
 OUT.append("---")
 OUT.append("")
@@ -239,15 +463,14 @@ for fkey, label in FILE_GROUPS.items():
         continue
     OUT.append(f"### {label}")
     OUT.append("")
-    OUT.append("| 按键 | 模式 | 命令 | 行号 |")
-    OUT.append("|------|:----:|------|------|")
+    OUT.append("| 按键 | 模式 | 说明 | 命令 | 行号 |")
+    OUT.append("|------|:----:|------|------|------|")
     for e in sorted(by_file[fkey], key=lambda e: e['line']):
-        scope = '🔵' if e['au'] else ''  # buffer-local 标记
         if e['au']:
             scope_note = f" *{e['au']}*"
         else:
             scope_note = ''
-        OUT.append(f"| {fmt_lhs(e['lhs'])} | {fmt_mode(e['mode'], e['opts'])} | {fmt_rhs(e['rhs'])}{scope_note} | {e['line']} |")
+        OUT.append(f"| {fmt_lhs(e['lhs'])} | {fmt_mode(e['mode'], e['opts'])} | {fmt_desc(e.get('desc',''))} | {fmt_rhs(e['rhs'])}{scope_note} | {e['line']} |")
     OUT.append("")
 
 # filetype 分组
@@ -260,10 +483,10 @@ for fkey, label in filetype_groups.items():
         continue
     OUT.append(f"### {label}")
     OUT.append("")
-    OUT.append("| 按键 | 模式 | 命令 | 行号 |")
-    OUT.append("|------|:----:|------|------|")
+    OUT.append("| 按键 | 模式 | 说明 | 命令 | 行号 |")
+    OUT.append("|------|:----:|------|------|------|")
     for e in sorted(by_file[fkey], key=lambda e: e['line']):
-        OUT.append(f"| {fmt_lhs(e['lhs'])} | {fmt_mode(e['mode'], e['opts'])} | {fmt_rhs(e['rhs'])} | {e['line']} |")
+        OUT.append(f"| {fmt_lhs(e['lhs'])} | {fmt_mode(e['mode'], e['opts'])} | {fmt_desc(e.get('desc',''))} | {fmt_rhs(e['rhs'])} | {e['line']} |")
     OUT.append("")
 
 OUT.append("---")
