@@ -364,6 +364,11 @@ let g:Lf_PreviewInPopup = 1
 let g:Lf_StlSeparator = { 'left': '', 'right': '' }
 let g:Lf_UseVersionControlTool = 0           " 不强依赖 VCS
 let g:Lf_DefaultExternalTool = 'rg'          " ripgrep 后端
+" 关闭 Gtags 自动更新：BufWritePost 触发跑 Python 脚本，
+" 在 Python 3.12+ 下还会刷出大量 SyntaxWarning。无 gtags 需求直接禁用
+let g:Lf_GtagsAutoGenerate = 0
+let g:Lf_GtagsAutoUpdate = 0
+let g:Lf_Gtagslabel = ''
 " 文件忽略（迁移自 ctrlp_custom_ignore）
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 let g:Lf_WildIgnore = {
