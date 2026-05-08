@@ -355,9 +355,19 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " ##### 文件搜索 LeaderF（Ch.5 替代 ctrlp.vim，Python + C 扩展，5-10x 快）
 Bundle 'Yggdroot/LeaderF'
+" ============================================================
+" 快捷键速查（按使用频率排序，全部进入浮窗后输入关键字过滤，<CR> 选中跳转）
+"   <leader>f   按文件名【模糊搜索项目内所有文件】 → 类似 VSCode Cmd+P
+"   <leader>b   按文件名【模糊搜索已打开的 buffer】（在多个文件间快速切换）
+"   <leader>gd  跳到光标下符号的【定义】(gtags -d) — 跨语言主用
+"   <leader>gr  找光标下符号的所有【引用】(gtags -r)
+"   <leader>gs  找符号的所有【出现位置】(gtags -s) — 含字符串/注释中的字面量
+"   <leader>go  重新打开【上次搜索结果】(gtags --recall)
+"   <leader>cq  一键关闭辅助窗口（quickfix + location list + preview）
+" ============================================================
 " 复用 ctrlp 时代的快捷键（保留 muscle memory）
-let g:Lf_ShortcutF = '<leader>f'             " 替代 :CtrlP（文件搜索）
-let g:Lf_ShortcutB = '<leader>b'             " 替代 :CtrlPBuffer（buffer 搜索）
+let g:Lf_ShortcutF = '<leader>f'             " 模糊搜索项目文件（替代 :CtrlP）
+let g:Lf_ShortcutB = '<leader>b'             " 模糊搜索已打开 buffer（替代 :CtrlPBuffer）
 " 显示形态
 let g:Lf_WindowPosition = 'popup'            " 浮窗
 let g:Lf_PreviewInPopup = 1
@@ -383,9 +393,13 @@ let g:Lf_GtagsAutoUpdate = 1                 " 保存时自动增量更新
 let g:Lf_Gtagslabel = 'native-pygments'      " native(C/C++/Java/PHP) + pygments(其他)
 let g:Lf_GtagsStoreInProject = 0             " 索引存 ~/.LfCache/，不污染项目
 " 跳转快捷键 — --auto-jump=1：仅当结果只有 1 个时自动跳转，不再弹浮窗
+" <leader>gd: 跳到光标下符号的【定义】（最常用，跨语言代码导航）
 nnoremap <leader>gd :<C-U>Leaderf gtags --auto-jump=1 -d <C-R><C-W><CR>
+" <leader>gr: 找光标下符号的所有【引用】（哪些地方调用了它）
 nnoremap <leader>gr :<C-U>Leaderf gtags --auto-jump=1 -r <C-R><C-W><CR>
+" <leader>gs: 找符号的所有【出现位置】（包括字符串字面量、注释中的同名出现）
 nnoremap <leader>gs :<C-U>Leaderf gtags --auto-jump=1 -s <C-R><C-W><CR>
+" <leader>go: 重新打开【上次的搜索结果】，无需重跑
 nnoremap <leader>go :<C-U>Leaderf gtags --recall<CR>
 " 文件忽略（迁移自 ctrlp_custom_ignore）
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
@@ -748,8 +762,12 @@ let g:tagbar_type_go = {
 set hidden
 
 Bundle 'Valloric/ListToggle'
-let g:lt_location_list_toggle_map = '<leader>lt'
-let g:lt_quickfix_list_toggle_map = '<leader>qt'
+let g:lt_location_list_toggle_map = '<leader>lt'    " toggle location list（开/关）
+let g:lt_quickfix_list_toggle_map = '<leader>qt'    " toggle quickfix（开/关）
+" 一键关闭所有辅助窗口（quickfix + location list + preview）
+" 适用场景：在主代码 buffer 中按 :GoReferrers / :GoBuild 后弹出 quickfix，
+" 想关掉时无需切到 quickfix 窗口再 :q —— 直接 <leader>cq 全部关掉
+nnoremap <silent> <leader>cq :cclose<bar>lclose<bar>pclose<CR>
 " ##### 快速赋值语句对齐
 Bundle 'junegunn/vim-easy-align'
 vmap ga <Plug>(EasyAlign)
