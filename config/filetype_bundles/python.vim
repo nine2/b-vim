@@ -13,7 +13,7 @@
 " ###############################
 " python
 " ##### Python 快捷操作
-Bundle 'yssource/python.vim'
+Plug 'yssource/python.vim'
 
 
 " ##### python fly check, 弥补syntastic只能打开和保存才检查语法的不足
@@ -23,7 +23,7 @@ Bundle 'yssource/python.vim'
 
 
 " ##### pythgon的语法高亮 for python.vim syntax highlight
-Bundle 'hdima/python-syntax'
+Plug 'hdima/python-syntax'
 let python_highlight_all = 1
 
 " Bundle 'davidhalter/jedi-vim'

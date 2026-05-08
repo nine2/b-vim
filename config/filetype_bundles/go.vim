@@ -24,7 +24,9 @@ autocmd FileType go let b:echodoc_enabled = 0
 
 " ###############################
 " Golang
-Bundle "fatih/vim-go"
+" vim-go 通过软链 bundle/vim-go → bundle/vim-go.250925 + 在 vimrc.bundles_base
+" 末尾 set rtp+= 加载，不纳入 vim-plug 管理（避免 :PlugClean 误删软链）
+" Plug 'fatih/vim-go'
 " 保存时自动使用 gofmt 格式代码，使用 goimports 格式 import 部分，
 " 同时自动导入缺少的import
 let g:go_fmt_command = "gofmt"              " gopls 与 YCM ycmd 争用连接会 timeout；gofmt 轻量无阻塞
@@ -202,14 +204,14 @@ hi def link   goSameId            SameId
 
 " ###############################
 " vim-shell
-Bundle 'Shougo/vimproc.vim'
-Bundle 'Shougo/vimshell.vim'
+Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimshell.vim'
 let g:vimshell_prompt_expr =
         \ 'escape(fnamemodify(getcwd(), ":~").">", "\\[]()?! ")." "'
 let g:vimshell_prompt_pattern = '^\%(\f\|\\.\)\+> '
 
 " go debug
-Bundle 'sebdah/vim-delve'
+Plug 'sebdah/vim-delve'
 " let g:delve_backend = "native"
 au FileType go map <leader>bb :DlvAddBreakpoint<cr>
 au FileType go map <leader>ba :DlvToggleTracepoint<cr>
@@ -223,13 +225,13 @@ au FileType go map <leader>bd :DlvDebug<cr>
 au FileType godoc set filetype=go
 
 " 生成 函数 test
-Bundle 'buoto/gotests-vim'
+Plug 'buoto/gotests-vim'
 let g:gotests_bin = expand('$HOME/go/bin/gotests')
 au FileType go map <leader>gt :GoTests<cr>
 
 " au FileType go let g:nerdtree_tabs_open_on_console_startup = 1
 
-Bundle 'tenfyzhong/golint-fixer.vim'
+Plug 'tenfyzhong/golint-fixer.vim'
 " let g:golint_fixer_use_default_mapping = 1
 " Default: 1
 " Map <leader>lf to fix warning.

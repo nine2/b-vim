@@ -14,5 +14,5 @@
 " nginx
 
 " ##### 显示nginx语言高亮
-Bundle 'chr4/nginx.vim'
+Plug 'chr4/nginx.vim'
 

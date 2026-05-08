@@ -12,7 +12,7 @@
 
 " ###############################
 " Markdown
-Bundle 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown'
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_math=1
 let g:vim_markdown_frontmatter=1
@@ -20,12 +20,12 @@ let g:vim_markdown_no_default_key_mappings=1
 " https://github.com/suan/vim-instant-markdown
 " npm -g install instant-markdown-d
 "
-Bundle 'joker1007/vim-markdown-quote-syntax'
+Plug 'joker1007/vim-markdown-quote-syntax'
 
 " 在tagbar显示目录
-Bundle 'lvht/tagbar-markdown'
+Plug 'lvht/tagbar-markdown'
 " 生成 toc
-Bundle 'mzlogin/vim-markdown-toc'
+Plug 'mzlogin/vim-markdown-toc'
 
 """ VIM Table Mode for instant table creation.
 " https://github.com/dhruvasagar/vim-table-mode
@@ -46,7 +46,7 @@ Bundle 'mzlogin/vim-markdown-toc'
 " g:table_mode_delete_column_map to delete the entire current column (provided
 " you are within a table row), this can also be preceeded with a [count] to
 " delete multiple columns.
-Bundle 'dhruvasagar/vim-table-mode'
+Plug 'dhruvasagar/vim-table-mode'
 " use :TableModeToggle mapped to <Leader>tm to enable this plugin
 function! s:isAtStartOfLine(mapping)
   let text_before_cursor = getline('.')[0 : col('.')-1]

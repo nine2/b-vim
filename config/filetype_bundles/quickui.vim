@@ -12,7 +12,7 @@
 " ###############################
 " Google's Protocol Buffers
 
-Bundle 'skywind3000/vim-quickui'
+Plug 'skywind3000/vim-quickui'
 " clear all the menus
 call quickui#menu#reset()
 

@@ -9,7 +9,7 @@
 "
 " ====================================================
 
-Bundle 'aklt/plantuml-syntax'
+Plug 'aklt/plantuml-syntax'
 " 参考文档：http://plantuml.com/zh/starting
 " plantuml 为自定义的可执行文件，内容为：
 " #!/bin/bash
@@ -22,8 +22,8 @@ let g:plantuml_set_makeprg = 1
 " au FileType uml,plantuml inoremap <F10> <Esc>:w<CR> :!plantuml %<CR>
 " autocmd InsertLeave * :w<CR>
 "
-Bundle 'tyru/open-browser.vim'
-Bundle 'nine2/plantuml-previewer.vim'
+Plug 'tyru/open-browser.vim'
+Plug 'nine2/plantuml-previewer.vim'
 let g:plantuml_previewer#save_format='svg'
 au FileType uml,plantuml nnoremap <F10> :w<CR> :PlantumlOpenSVG<CR>
 au FileType uml,plantuml inoremap <F10> <Esc>:w<CR> :PlantumlOpenSVG<CR>

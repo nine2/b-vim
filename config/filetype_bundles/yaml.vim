@@ -13,4 +13,4 @@
 " ###############################
 " Yaml
 
-Bundle 'stephpy/vim-yaml'
+Plug 'stephpy/vim-yaml'

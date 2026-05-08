@@ -10,7 +10,7 @@
 " ====================================================
 
 " https://github.com/ianding1/leetcode.vim
-Bundle 'ianding1/leetcode.vim'
+Plug 'ianding1/leetcode.vim'
 let g:leetcode_china=1
 let g:leetcode_solution_filetype='golang'
 let g:leetcode_browser='chrome'

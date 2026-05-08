@@ -12,4 +12,4 @@
 
 " ###############################
 " Google's Protocol Buffers
-Bundle 'uarun/vim-protobuf'
+Plug 'uarun/vim-protobuf'

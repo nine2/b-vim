@@ -13,7 +13,7 @@
 " ##### Asynchronous & mutithreading translating
 " https://github.com/nine2/vim-translator
 """ Configuration example
-Bundle 'nine2/vim-translator'
+Plug 'nine2/vim-translator'
 " Echo translation in the cmdline
 nmap <silent> <Leader>t <Plug>Translate
 vmap <silent> <Leader>t <Plug>TranslateV
