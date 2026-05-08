@@ -7,6 +7,25 @@ vim.config
 
 使用后，会自动生成一个 .vim 目录，用来存放相关插件等，即为 runtimepath。
 
+## 参考文档
+
+| 文档 | 内容 |
+|---|---|
+| [`SHORTCUTS.md`](./SHORTCUTS.md) | 全部快捷键速查表（按字母排序 + 按文件分组），由 `tools/gen_shortcuts_md.py` 自动生成 |
+| [`PLUGIN_DEPENDENCIES.md`](./PLUGIN_DEPENDENCIES.md) | 插件外部依赖配置表（系统命令 / 二进制 / 字体等的安装命令） |
+
+## 工具脚本（`tools/`）
+
+| 脚本 | 用途 | 触发时机 |
+|---|---|---|
+| `tools/gen_shortcuts_md.py` | 扫描 `config/` 生成 `SHORTCUTS.md` | 新增/修改快捷键后重跑 |
+
+执行：
+
+```bash
+python3 ~/mydotfiles/b-dotfiles/b-vim/tools/gen_shortcuts_md.py
+```
+
 # 安装说明
 
 - 可参考文档说明: [vim极简完美配置b-vim（一）安装教程及目录说明][jianshu-vim-doc]

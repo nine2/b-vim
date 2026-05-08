@@ -583,11 +583,15 @@
 
 ## 维护
 
-本表由 `tools/scan_keys.py`（如有）或手动 grep 生成；新增/修改快捷键时请重新生成本表。
+本表由 `tools/gen_shortcuts_md.py` 自动扫描 `config/` 下所有配置生成。
+**新增 / 修改 / 删除快捷键后，请重新生成本表**：
 
-生成命令（参考）：
 ```bash
-python3 /tmp/gen_keys_md.py
+python3 ~/mydotfiles/b-dotfiles/b-vim/tools/gen_shortcuts_md.py
+# 或在仓库目录内：
+# cd ~/mydotfiles/b-dotfiles/b-vim && python3 tools/gen_shortcuts_md.py
 ```
+
+脚本依赖：仅 Python 3 标准库，无外部依赖。
 
 **最后更新**: 2026-05-08
