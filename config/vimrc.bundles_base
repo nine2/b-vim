@@ -23,8 +23,11 @@
 
 set nocompatible               " be iMproved
 filetype off " required! turn off
-set rtp+=$VIM_TMP_PATH/bundle/vundle/
-call vundle#rc("$VIM_TMP_PATH/bundle")
+" === vim-plug 初始化 ===（替代原 vundle，详见 VIM_PLUG_MIGRATION_PLAN.md）
+" 复用 bundle/ 目录路径，兼容现有软链 + 归档目录
+" vim-plug 自身位于 $VIM_TMP_PATH/autoload/plug.vim，需把 $VIM_TMP_PATH 加入 rtp
+set rtp+=$VIM_TMP_PATH
+call plug#begin($VIM_TMP_PATH . '/bundle')
 
 " ################### 插件禁用 guard（必须在 Bundle 加载前设）#########################
 " TagHighlight 启动 ~104ms 且基本不用；git-messenger 默认 CursorHold 弹 blame
@@ -52,25 +55,27 @@ let g:gitgutter_show_msg_on_hunk_jumping = 0  " 跳转时不打印 hunk 信息
 "     :BundleClean       remove plugin not in list 删除本地无用插件
 
 " ##### 插件管理工具
-Bundle 'gmarik/vundle'
+" 已迁移到 vim-plug，vundle 不再需要由插件管理器管理（其本身就是插件管理器）
+" Plug 'gmarik/vundle'
 
 
 " ###############################
 " 主题 molokai
-Bundle 'nine2/molokai'
+Plug 'nine2/molokai'
 let g:molokai_original = 1
 set t_Co=256
-colorscheme molokai
+" vim-plug: 用 VimEnter 延迟（plug#end 在文件末尾，此时 molokai 还未加入 rtp）
+autocmd VimEnter * colorscheme molokai
 
 " ###############################
 " 主题. 状态栏
 " Bundle 'Lokaltog/vim-powerline'
-Bundle 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 " set statusline=%<%f\ %h%m%r%=%k[%{(&fenc==\"\")?&enc:&fenc}%{(&bomb?\",BOM\":\"\")}]\ %-14.(%l,%c%V%)\ %P
 " Bundle 'gcmt/taboo.vim'
 " let g:taboo_tab_format = " %N.[%f %m] "
 " let g:taboo_modified_tab_flag = "+"
-Bundle 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 let g:airline_theme='molokai'
 " let g:airline_theme='powerlineish'
 " let g:airline_theme='monochrome'
@@ -128,7 +133,8 @@ let g:airline_powerline_fonts = 1
 "      \ ]
 " %B:ANSII码，%l:行号, %c:列号, %P:当前文件的百分比行, filetype:文件类型
 " let g:airline_section_x = airline#section#create_right([' %B│ %lL:%cC│ %p%%│ ', 'filetype'])
-let g:airline_section_z = airline#section#create_right(['%lL:%cC│ %p%%/%LL'])
+" vim-plug: 用 VimEnter 延迟，airline 函数需要插件加载完成
+autocmd VimEnter * let g:airline_section_z = airline#section#create_right(['%lL:%cC│ %p%%/%LL'])
 
 " let g:airline#extensions#taboo#enabled = 0
 " let g:airline#extensions#bufferline#enabled = 1
@@ -148,11 +154,11 @@ set laststatus=2
 
 
 " ###### 中文 vim 帮助
-Bundle 'asins/vimcdoc'
+Plug 'asins/vimcdoc'
 
 
 " ##### 自动根据当前打开文件切换工作目录
-Bundle 'nine2/vim-rooter'
+Plug 'nine2/vim-rooter'
 let g:rooter_silent_chdir = 1
 let g:rooter_resolve_links = 1
 let g:rooter_manual_only = 1                " BufEnter 不再上溯查 .git，大仓库下显著降卡顿
@@ -162,18 +168,18 @@ nmap <leader>cd :AutoChangeDirectory <cr>
 " ###############################
 " 代码格式管理
 " ##### 缩进标识, 这块通过设置 list 在文件 vimrc.config_base 里有些函数实现
-Bundle 'nine2/vim-indent-guides'
+Plug 'nine2/vim-indent-guides'
 map <leader>i :Nine2IndentGuides<cr>
 
 " ##### 快速去行尾空格
-Bundle 'bronson/vim-trailing-whitespace'
+Plug 'bronson/vim-trailing-whitespace'
 " 下列文件类型中的行尾空格tab不高亮显示
 let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd', 'diff', 'ctrlsf', 'git', 'qf']
 map <leader>, :FixWhitespace<cr>
 
 
 " ###### 快速注释
-Bundle 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 " <leader>cc 注释选中内容
 " <leader>cu 取消选中注释
 " <leader>c$ 从当前光标开始到行尾注释掉
@@ -189,14 +195,14 @@ let g:NERDSpaceDelims=1
 " ###############################
 " 语法高亮
 " 针对项目设置的自定义语法，参考 README
-Bundle 'nine2/vim-custom-syntax'
+Plug 'nine2/vim-custom-syntax'
 " 可使用此配置关闭语法高亮
 " let g:custom_syntax_hightlight_enable= 0
 " 语法高亮
 " let g:custom_syntax_hightlight_macro= 1
 " Ch.3 删除：syntastic（已归档至 .vim/vimrc.archive/vimrc.bundles_base）
 
-Bundle 'w0rp/ale'
+Plug 'w0rp/ale'
 " let g:ale_enabled= 0
 let g:ale_sign_error = '✘✘'
 let g:ale_sign_warning = '➤➤'
@@ -255,13 +261,13 @@ nmap <silent> el <Plug>(ale_last)
 
 " 给 typedef 和 enum 配色
 " 需要使用到 ctags
-Bundle 'vim-scripts/TagHighlight'
+Plug 'vim-scripts/TagHighlight'
 
 " ###############################
 " 自动补全
 
 " ###### 自动补全单引号，双引号等
-Bundle 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 " for python docstring ,优化输入
 au FileType python let b:delimitMate_nesting_quotes = ['"']
 au FileType markdown let b:delimitMate_nesting_quotes = ['`']
@@ -270,7 +276,7 @@ au FileType markdown let b:delimitMate_nesting_quotes = ['`']
 "When you accept a completion for a function with <c-y>, echodoc will display
 "the function signature in the command line and highlight the argument
 "position your cursor
-Bundle 'Shougo/echodoc.vim'
+Plug 'Shougo/echodoc.vim'
 " set cmdheight=3
 let g:echodoc_enable_at_startup = 1
 
@@ -278,7 +284,7 @@ let g:echodoc_enable_at_startup = 1
 " ###############################
 " Vim 快捷操作
 " ##### 更高效的移动 [,, + w/fx]
-Bundle 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 let g:EasyMotion_smartcase = 1
 "let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
 map fh <Plug>(easymotion-linebackward)
@@ -317,7 +323,7 @@ map <Leader><leader>. <Plug>(easymotion-repeat)
 " Save all bookmarks to a file		:BookmarkSave <FILE_PATH>
 " Load bookmarks from a file		:BookmarkLoad <FILE_PATH>
 
-Bundle 'MattesGroeger/vim-bookmarks'
+Plug 'MattesGroeger/vim-bookmarks'
 let g:bookmark_auto_save = 1
 let g:bookmark_save_per_working_dir = 1
 " You could unbind the keys whenever Nerdtree becomes active (thanks to @Nitive).
@@ -349,13 +355,13 @@ autocmd BufEnter * if &filetype !~ '^\(nerdtree\|qf\|ale-preview\|tagbar\|help\)
 autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 
 " ##### 选中区块
-Bundle 'terryma/vim-expand-region'
+Plug 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 
 
 " ##### 多光标选中编辑
-Bundle 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_use_default_mapping=0
 " Default mapping
 let g:multi_cursor_next_key='<C-m>'
@@ -365,7 +371,7 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " ##### 文件搜索 LeaderF（Ch.5 替代 ctrlp.vim，Python + C 扩展，5-10x 快）
-Bundle 'Yggdroot/LeaderF'
+Plug 'Yggdroot/LeaderF'
 " ============================================================
 " 快捷键速查（按使用频率排序，全部进入浮窗后输入关键字过滤，<CR> 选中跳转）
 "   <leader>f   按文件名【模糊搜索项目内所有文件】 → 类似 VSCode Cmd+P
@@ -429,7 +435,7 @@ let g:Lf_MruMaxFiles = 500                   " 等价 ctrlp_mruf_max=500
 " nnoremap <leader>r :Leaderf rg<CR>
 
 " ##### 类似sublimetext的搜索
-Bundle 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim'
 """"""
 " In CtrlSF window:
 " 回车/o, 打开
@@ -502,7 +508,7 @@ nmap sf   :CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>
 nnoremap sp :CtrlSF<CR>
 nmap <leader>aa :CtrlSF -R '\W<c-r>=expand("<cword>")<cr>'<cr>
 
-Bundle 'rking/ag.vim'
+Plug 'rking/ag.vim'
 let g:ag_prg="ag --vimgrep --smart-case  --column --nogroup --noheading"
 let g:ag_working_path_mode="r"
 let g:ag_highlight=1
@@ -534,7 +540,7 @@ nmap <leader>a :Ag '
 " Ch.4 删除：tabman.vim + bufexplorer（与 NERDTree 重叠，已归档）
 
 " ##### 括号显示增强
-Bundle 'kien/rainbow_parentheses.vim'
+Plug 'kien/rainbow_parentheses.vim'
 " 不加入这行, 防止黑色括号出现, 很难识别
 " \ ['black',       'SeaGreen3'],
 let g:rbpt_colorpairs = [
@@ -564,7 +570,7 @@ au VimEnter * RainbowParenthesesLoadBraces
 
 
 " ##### 目录导航
-Bundle 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " map <leader>n :NERDTreeToggle<CR>
 noremap <silent> <Leader>n :NERDTreeFind<cr>
 let NERDTreeHighlightCursorline=1
@@ -600,7 +606,7 @@ au FileType nerdtree map <silent> <C-h> :vertical resize -10<cr>
 
 
 " ##### 目录导航
-Bundle 'jistr/vim-nerdtree-tabs'
+Plug 'jistr/vim-nerdtree-tabs'
 """"""
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 " 关闭同步
@@ -616,7 +622,7 @@ let g:nerdtree_tabs_focus_on_files = 1
 " Bundle 'PhilRunninger/nerdtree-buffer-ops'
 
 " 标签导航
-Bundle 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 " nmap <F9> :TagbarToggle<CR>
 nmap <leader>m :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
@@ -775,7 +781,7 @@ let g:tagbar_type_go = {
 " 仍保留 set hidden（vim 多 buffer 不强制保存）
 set hidden
 
-Bundle 'Valloric/ListToggle'
+Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>lt'    " toggle location list（开/关）
 let g:lt_quickfix_list_toggle_map = '<leader>qt'    " toggle quickfix（开/关）
 " 一键关闭所有辅助窗口（quickfix + location list + preview）
@@ -783,7 +789,7 @@ let g:lt_quickfix_list_toggle_map = '<leader>qt'    " toggle quickfix（开/关�
 " 想关掉时无需切到 quickfix 窗口再 :q —— 直接 <leader>cq 全部关掉
 nnoremap <silent> <leader>cq :cclose<bar>lclose<bar>pclose<CR>
 " ##### 快速赋值语句对齐
-Bundle 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 vmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 if !exists('g:easy_align_delimiters')
@@ -793,7 +799,7 @@ let g:easy_align_delimiters['='] = { 'pattern': '=', 'ignore_groups': ['String']
 
 
 " ##### quickrun
-Bundle 'thinca/vim-quickrun'
+Plug 'thinca/vim-quickrun'
 """"""
 let g:quickrun_config = {
 \   "_" : {
@@ -806,7 +812,7 @@ map <F10> :QuickRun<CR>
 
 
 " 文件头增加 copyright
-Bundle "nine2/vim-copyright"
+Plug 'nine2/vim-copyright'
 " let g:file_copyright_company = 'Company'
 " let g:file_copyright_rights= 'My Rights'
 let g:file_copyright_auto_update = 1
@@ -849,7 +855,7 @@ else
 endif
 
 " 补全参数
-Bundle 'bbxytl/CompleteParameter.vim'
+Plug 'bbxytl/CompleteParameter.vim'
 inoremap <silent><expr> ( complete_parameter#pre_complete("()")
 smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
 imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
@@ -861,12 +867,12 @@ imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
 
 " A vim plugin that simplifies the transition between multiline and
 " single-line code
-Bundle 'AndrewRadev/splitjoin.vim'
+Plug 'AndrewRadev/splitjoin.vim'
 nmap sj :SplitjoinSplit<cr>
 nmap sk :SplitjoinJoin<cr>
 
 " color hex codes and color names
-Bundle 'chrisbra/Colorizer'
+Plug 'chrisbra/Colorizer'
 " :Colorizer
 " :RGB2Term
 " :Term2RGB
@@ -876,9 +882,9 @@ let g:colorizer_auto_filetype = 'css,scss,sass,less,html,htm,vim,conf,json,yaml,
 
 set encoding=UTF-8
 
-Bundle 'psliwka/vim-smoothie'
+Plug 'psliwka/vim-smoothie'
 autocmd FileType go let b:smoothie_enabled = 0  " Go 文件关闭平滑滚动，减少滚动时动画计算开销
-Bundle 'bfrg/vim-qf-preview'
+Plug 'bfrg/vim-qf-preview'
 augroup qfpreview
   autocmd!
   autocmd FileType qf nmap <buffer> p <plug>(qf-preview-open)
@@ -898,4 +904,10 @@ let g:qfpreview = #{
 
 
 " ################## 插件配置结束 ###########################
-filetype plugin indent on     " required!
+call plug#end()    " 内含 filetype plugin indent on
+
+" === 软链特例（不纳入 vim-plug 管理，避免 :PlugClean 误删）===
+" 这些通过软链指向具体版本目录，由 plug#end 之后手动 set rtp+= 加载
+set rtp+=$VIM_TMP_PATH/bundle/YouCompleteMe
+set rtp+=$VIM_TMP_PATH/bundle/vim-go
+set rtp+=$VIM_TMP_PATH/bundle/ycm_simple_conf
