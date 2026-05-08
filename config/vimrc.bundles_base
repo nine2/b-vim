@@ -54,9 +54,7 @@ let g:gitgutter_show_msg_on_hunk_jumping = 0  " 跳转时不打印 hunk 信息
 "     :BundleInstall!    update  更新
 "     :BundleClean       remove plugin not in list 删除本地无用插件
 
-" ##### 插件管理工具
-" 已迁移到 vim-plug，vundle 不再需要由插件管理器管理（其本身就是插件管理器）
-" Plug 'gmarik/vundle'
+" 已迁移到 vim-plug：vundle 自身已归档至 .vim/bundle.archive/vundle/
 
 
 " ###############################
