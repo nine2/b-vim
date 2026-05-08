@@ -53,7 +53,10 @@ let g:ycm_always_populate_location_list = 0  " 原为 1，每次 gopls 推送诊
 let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax=1   "语言关键字补全, 不过python关键字都很短，所以，需要的自己打开
-let g:ycm_key_detailed_diagnostics = '<leader>d'    " 查看当前光标下标识符的详细信息
+" g:ycm_key_detailed_diagnostics 设为空避免与 go.vim 的 <Leader>d (:GoDoc) 冲突
+" 触发 E227 致整个 YCM 加载链断裂（含 :YcmCompleter 命令未注册）
+" 需要时改用命令：:YcmShowDetailedDiagnostic
+let g:ycm_key_detailed_diagnostics = ''
 " 下面的preview生效需要设置
 " set completeopt=menu,preview
 " let g:ycm_add_preview_to_completeopt = 0

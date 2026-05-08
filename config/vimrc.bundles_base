@@ -905,10 +905,20 @@ let g:qfpreview = #{
 call plug#end()    " 内含 filetype plugin indent on
 
 " === 软链特例（不纳入 vim-plug 管理，避免 :PlugClean 误删）===
-" 这些通过软链指向具体版本目录，由 plug#end 之后手动 set rtp+= 加载
+" 这些通过软链指向具体版本目录，plug#end 之后手动 set rtp+= 加载
 set rtp+=$VIM_TMP_PATH/bundle/YouCompleteMe
 set rtp+=$VIM_TMP_PATH/bundle/vim-go
 set rtp+=$VIM_TMP_PATH/bundle/ycm_simple_conf
+
+" plug#end 已完成 plugin/ 扫描；上面 set rtp+= 后加入的目录需要手动 source 其 plugin/
+" 否则 YouCompleteMe / vim-go 的 plugin/*.vim 不会被加载，命令未注册
+runtime! plugin/youcompleteme.vim
+runtime! plugin/go.vim
+
+" YCM 默认通过 'autocmd VimEnter * call youcompleteme#Enable()' 启用，
+" 但在 set rtp+= 后手动 runtime! 时机会让 VimEnter autocmd 注册时序错乱，
+" 直接在 VimEnter 时手动调用 Enable()，确保命令注册（:YcmCompleter 等）
+autocmd VimEnter * silent! call youcompleteme#Enable()
 
 " === 依赖插件已加入 rtp 的命令（必须在 plug#end 之后立即执行）===
 " 配色方案
