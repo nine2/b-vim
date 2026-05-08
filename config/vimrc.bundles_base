@@ -376,7 +376,7 @@ Bundle 'Yggdroot/LeaderF'
 "   go          重新打开【上次搜索结果】(gtags --recall)
 "   <leader>cq  一键关闭辅助窗口（quickfix + location list + preview）
 " 命名空间冲突已迁移（让出短键给 LeaderF）：
-"   gr 原 GitGutterUndoHunk → gu（git.vim）
+"   gr 原 GitGutterUndoHunk → gz（git.vim，gz 在 vim 中无任何内置含义）
 "   gs 原 :G status         → <leader>gst（git.vim）
 " ============================================================
 " 复用 ctrlp 时代的快捷键（保留 muscle memory）

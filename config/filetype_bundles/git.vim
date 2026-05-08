@@ -23,9 +23,9 @@ let g:gitgutter_highlight_lines = 0
 nnoremap gt :GitGutterToggle<CR>
 nnoremap gp :GitGutterPrevHunk<CR>
 nnoremap gn :GitGutterNextHunk<CR>
-" gu: 撤销当前 hunk（让出 gr 给 LeaderF gtags -r）
-"     注意：覆盖 vim 内置 gu operator（转小写）；用 :s/A-Z/\L&/g 或 visual+u 替代
-nnoremap gu :GitGutterUndoHunk<CR>
+" gz: 撤销当前 hunk（让出 gr 给 LeaderF gtags -r）
+"     选 gz 因为 g+z 在 vim 中无任何内置含义，覆盖零代价
+nnoremap gz :GitGutterUndoHunk<CR>
 " 一个命令切换高亮行
 func! CustomGitGutterLineHights()
     if g:gitgutter_highlight_lines is 1
