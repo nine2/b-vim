@@ -147,12 +147,18 @@ map <leader>zz :call ToggleFold()<cr>
 map zz za
 " 会导致原有 zf  失效 (在 foldmethod=manual 时有效)
 map zf zA
+" 智能折叠：默认 foldmethod=manual（避免 j 滚动重算开销），
+" 按 <leader>zz 时临时切到 indent 折叠所有，再按 <leader>zz 展开后切回 manual
 fun! ToggleFold()
     if g:FoldMethod == 0
+        " 折叠 → 切 indent，然后折所有
+        setlocal foldmethod=indent
         exe "normal! zM"
         let g:FoldMethod = 1
     else
+        " 展开 → 全部展开，恢复 manual（释放折叠重算开销）
         exe "normal! zR"
+        setlocal foldmethod=manual
         let g:FoldMethod = 0
     endif
 endfun
