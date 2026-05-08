@@ -20,7 +20,7 @@
 "
 " 格式化工具, https://github.com/vim-autoformat/vim-autoformat
 " 需要安装格式化使用的工具，参考github的说明
-Bundle 'vim-autoformat/vim-autoformat'
+Plug 'vim-autoformat/vim-autoformat'
 noremap <F8> :Autoformat<CR>
 " au BufWrite * :Autoformat
 " let g:autoformat_verbosemode=1
@@ -40,7 +40,7 @@ noremap <F8> :Autoformat<CR>
 " noremap <F8> :call F8FormatFile()<CR>
 
 " 快速补全, 需要 vim 支持 python
-Bundle 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 " Tab 统一由下方 SmartTab 路由（snippet > YCM popup > Copilot），此处不绑定避免冲突
 let g:UltiSnipsExpandTrigger="<nop>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -54,14 +54,14 @@ let g:UltiSnipsSnippetDirectories=['UltiSnips', expand("$VIM_CONFIG_PATH/project
 let g:UltiSnipsEditSplit="vertical"
 
 " github 上的 snippets 集合
-Bundle 'bbxytl/vim-snippets'
+Plug 'bbxytl/vim-snippets'
 
-Bundle 'rizzatti/dash.vim'
+Plug 'rizzatti/dash.vim'
 map <leader>ds :Dash<cr>
 
 " Ch.10 删除：vim-devicons 段（散兵，已归档）
 
-Bundle 'rhysd/github-complete.vim'
+Plug 'rhysd/github-complete.vim'
 " Disable overwriting 'omnifunc'
 let g:github_complete_enable_omni_completion = 0
 " <C-x><C-x> invokes completions of github-complete.vim
@@ -70,10 +70,10 @@ imap <C-k><C-o> <Plug>(github-complete-manual-completion)
 
 
 " xterm 颜色(256色)
-Bundle 'guns/xterm-color-table.vim'
+Plug 'guns/xterm-color-table.vim'
 " :XtermColorTable
 
-Bundle 'github/copilot.vim'
+Plug 'github/copilot.vim'
 " 启用 Copilot
 let g:copilot_enabled = v:true
 " 禁用 Copilot 默认 Tab 映射，由 SmartTab 统一路由

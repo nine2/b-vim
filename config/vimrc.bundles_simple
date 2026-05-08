@@ -19,7 +19,7 @@
 " Ch.2 删除：neocomplcache + Pydiction（已归档）
 " Ch.10 删除：OmniCppComplete（已归档）
 
-Bundle "rhysd/vim-clang-format"
+Plug 'rhysd/vim-clang-format'
 " noremap <F8> :ClangFormat<CR>
 let g:clang_format#style_options = {
             \ "AccessModifierOffset" : -4,
@@ -30,7 +30,7 @@ let g:clang_format#style_options = {
             \ "ColumnLimit": 150,
             \ "BreakBeforeBraces": "Linux"}
 " 格式化shell
-Bundle 'z0mbix/vim-shfmt', { 'for': 'sh' }
+Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
 " 根据文件调用不同的插件
 if !exists(":F8FormatFile")
     if &filetype == 'sh'
