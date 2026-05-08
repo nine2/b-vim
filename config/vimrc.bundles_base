@@ -47,14 +47,13 @@ let g:gitgutter_realtime = 0               " 不在 TextChanged 实时 diff（�
 let g:gitgutter_max_signs = 500            " 限制 sign 数量，超过则不显示标记
 let g:gitgutter_show_msg_on_hunk_jumping = 0  " 跳转时不打印 hunk 信息
 
-" ################### Bundles 配置 #########################
-" 使用Vundle来管理插件
-" vim plugin bundle control, command model
-"     :BundleInstall     install 安装配置的插件
-"     :BundleInstall!    update  更新
-"     :BundleClean       remove plugin not in list 删除本地无用插件
-
-" 已迁移到 vim-plug：vundle 自身已归档至 .vim/bundle.archive/vundle/
+" ################### Plugins 配置 #########################
+" 使用 vim-plug 管理插件（2026-05-08 从 Vundle 迁移）
+"     :PlugInstall       安装新增插件
+"     :PlugUpdate        更新所有插件
+"     :PlugStatus        查看插件状态
+"     :PlugClean         ⚠️ 不要使用（会误删 YCM/vim-go 软链）
+" vundle 已归档至 .vim/bundle.archive/vundle/
 
 
 " ###############################
