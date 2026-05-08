@@ -23,7 +23,9 @@ let g:gitgutter_highlight_lines = 0
 nnoremap gt :GitGutterToggle<CR>
 nnoremap gp :GitGutterPrevHunk<CR>
 nnoremap gn :GitGutterNextHunk<CR>
-nnoremap gr :GitGutterUndoHunk<CR>
+" gu: 撤销当前 hunk（让出 gr 给 LeaderF gtags -r）
+"     注意：覆盖 vim 内置 gu operator（转小写）；用 :s/A-Z/\L&/g 或 visual+u 替代
+nnoremap gu :GitGutterUndoHunk<CR>
 " 一个命令切换高亮行
 func! CustomGitGutterLineHights()
     if g:gitgutter_highlight_lines is 1
@@ -40,7 +42,8 @@ Bundle 'tpope/vim-fugitive'
 " GStatue, help fugitive
 " 使用 Glog 可查看历史版本文件
 nnoremap gb :G blame<CR>
-nnoremap gs :G status<CR>
+" <leader>gst: git status（让出 gs 给 LeaderF gtags -s）
+nnoremap <leader>gst :G status<CR>
 " 查看 bitbucket
 Bundle 'nine2/vim-fubitive'
 " :Gbrowse
