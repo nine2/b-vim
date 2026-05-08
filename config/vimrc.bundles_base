@@ -377,7 +377,7 @@ Plug 'Yggdroot/LeaderF'
 "   gr          找光标下符号的所有【引用】(gtags -r)
 "   gs          找符号的所有【出现位置】(gtags -s) — 含字符串/注释中的字面量
 "   go          重新打开【上次搜索结果】(gtags --recall)
-"   <leader>cq  一键关闭辅助窗口（quickfix + location list + preview）
+"   cq          一键关闭辅助窗口（quickfix + location list + preview）
 " 命名空间冲突已迁移（让出短键给 LeaderF）：
 "   gr 原 GitGutterUndoHunk → gz（git.vim，gz 在 vim 中无任何内置含义）
 "   gs 原 :G status         → <leader>gst（git.vim）
@@ -781,10 +781,11 @@ set hidden
 Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>lt'    " toggle location list（开/关）
 let g:lt_quickfix_list_toggle_map = '<leader>qt'    " toggle quickfix（开/关）
-" 一键关闭所有辅助窗口（quickfix + location list + preview）
-" 适用场景：在主代码 buffer 中按 :GoReferrers / :GoBuild 后弹出 quickfix，
-" 想关掉时无需切到 quickfix 窗口再 :q —— 直接 <leader>cq 全部关掉
-nnoremap <silent> <leader>cq :cclose<bar>lclose<bar>pclose<CR>
+" cq: 一键关闭所有辅助窗口（quickfix + location list + preview）
+" 适用：在主代码 buffer 中按 :GoReferrers / :GoBuild 后弹出 quickfix，
+" 想关掉时无需切到 quickfix 窗口再 :q —— 直接 cq 全部关掉
+" 注：c 是 change operator，但 cq 不是有效 motion 组合，绑此键安全
+nnoremap <silent> cq :cclose<bar>lclose<bar>pclose<CR>
 " ##### 快速赋值语句对齐
 Plug 'junegunn/vim-easy-align'
 vmap ga <Plug>(EasyAlign)
