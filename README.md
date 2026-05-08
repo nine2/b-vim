@@ -41,13 +41,23 @@ cd b-vim/install-shell
 - 如果使用 complex 版，需要编译安装 [YouCompleteMe][YouCompleteMe] 时，如果失败，请查看 **[文档][YCM-doc]** ;
 
 
-插件管理使用 Vundle, 插件管理使用 Vundle 的方式。
-插件命令使用的是 Bundle，因此新增插件时使用 Bundle, 如：
-加入插件 "github/eg"，则在 vimrc.bundles_base 里增加：
+插件管理使用 [vim-plug](https://github.com/junegunn/vim-plug)（2026-05-08 从 Vundle 迁移）。
+插件命令使用 `Plug`，新增插件时在 vimrc.bundles_base 里增加：
 ```
-Bundle "github/eg"
+Plug 'github/eg'
 ```
-然后 打开 vim, 使用命令 `:BundleInstall` 安装插件，安装后重新打开 vim 即可使用。
+然后打开 vim 执行 `:PlugInstall` 安装插件，安装后重新打开 vim 即可使用。
+
+vim-plug 常用命令：
+- `:PlugInstall`  安装新增插件
+- `:PlugUpdate`   更新所有插件
+- `:PlugStatus`   查看插件状态
+- `:PlugClean`    ⚠️ **不要使用**（会误删 YouCompleteMe / vim-go 软链）
+
+> 软链特例（`YouCompleteMe`、`vim-go`、`ycm_simple_conf`）通过 vimrc.bundles_base 末尾
+> 的 `set rtp+=` 加载，不纳入 vim-plug 管理；以保护其软链结构不被 :PlugClean 误删。
+
+> vundle 历史目录已归档至 `.vim/bundle.archive/vundle/`，可随时恢复。
 
 # workspace.vim 使用说明
 

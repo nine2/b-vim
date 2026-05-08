@@ -332,7 +332,7 @@ echo "=== Vim 编译 ===";    vim --version | grep -oE '\+python3|\+lua|\+ruby' 
 
 新增插件时：
 1. 评估外部依赖（如有 → 加入本表对应章节）
-2. 在 `vimrc.bundles_*` 的 `Bundle 'foo/bar'` 上方注释中**简短标注依赖**（如 `" 依赖：brew install xxx`）
+2. 在 `vimrc.bundles_*` 的 `Plug 'foo/bar'` 上方注释中**简短标注依赖**（如 `" 依赖：brew install xxx`）
 3. 更新本表 TL;DR 段的"一键装齐"命令
 
 删除插件时（按 `bundle.archive/` 流程）：

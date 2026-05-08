@@ -20,7 +20,7 @@
 | `'` | N | Swap implementations of ` and ' jump to markers / By defa... | ``` | `vimrc.config_base:482` |
 | `*` | N sil | 即 `*zz` | `*zz` | `vimrc.config_base:401` |
 | `*` | N | 即 `#` | `#` | `vimrc.config_base:406` |
-| `<leader>,` |  | 清除尾部空白 | `:FixWhitespace<cr>` | `vimrc.bundles_base:172` |
+| `<leader>,` |  | 清除尾部空白 | `:FixWhitespace<cr>` | `vimrc.bundles_base:176` |
 | `,,` | I | ,, 替换 Esc | `<Esc>` | `vimrc:16` |
 | `,d` | V | 即 `"+d` | `"+d` | `vimrc.config_base:544` |
 | `,P` | N | 即 `"+p` | `"+p` | `vimrc.config_base:547` |
@@ -44,63 +44,63 @@
 | `<leader>=` |  | 执行 :tabedit | `:tabedit<cr>` | `vimrc.config_base:446` |
 | `>` | V | 即 `>gv` | `>gv` | `vimrc.config_base:459` |
 | `[b` | N | ##### tab/buffer相关 / :b1 :b2   :bf :bl | `:bprevious<cr>` | `vimrc.config_base:413` |
-| `<leader>\` |  | 调用：CtrlsfViewMode() | `:call CtrlsfViewMode()<cr>` | `vimrc.bundles_base:494` |
-| `\` | N | Plug 触发：CtrlSFCwordPath | `<Plug>CtrlSFCwordPath<CR>` | `vimrc.bundles_base:495` |
-| `\\` | N | 使用 normal 方式搜索 | `:let g:ctrlsf_default_view_mode_last = g:ctrlsf_default_view_mode<CR> :let g:...` | `vimrc.bundles_base:498` |
+| `<leader>\` |  | 调用：CtrlsfViewMode() | `:call CtrlsfViewMode()<cr>` | `vimrc.bundles_base:498` |
+| `\` | N | Plug 触发：CtrlSFCwordPath | `<Plug>CtrlSFCwordPath<CR>` | `vimrc.bundles_base:499` |
+| `\\` | N | 使用 normal 方式搜索 | `:let g:ctrlsf_default_view_mode_last = g:ctrlsf_default_view_mode<CR> :let g:...` | `vimrc.bundles_base:502` |
 | `]b` | N | 下一个 buffer | `:bnext<cr>` | `vimrc.config_base:414` |
 | ``` | N | 即 `'` | `'` | `vimrc.config_base:483` |
-| `<leader>a` | N | Ag 默认查找当前单词，可修改, 不立刻查询 / nmap <leader>a :Ag <c-r>=expand(... | `:Ag '` | `vimrc.bundles_base:516` |
-| `<leader>aa` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>'<cr>` | `vimrc.bundles_base:503` |
-| `<leader>ag` | N | 查询当前单词, 立刻查询 | `:Ag -w <c-r>=expand("<cword>")<cr><cr>` | `vimrc.bundles_base:513` |
-| `ag` | N | nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr> / 查找函数调用 | `:Ag -w <c-r>=expand("<cword>")<cr> \\| grep '<c-r>=expand("<cword>")<cr>('<cr>` | `vimrc.bundles_base:511` |
+| `<leader>a` | N | Ag 默认查找当前单词，可修改, 不立刻查询 / nmap <leader>a :Ag <c-r>=expand(... | `:Ag '` | `vimrc.bundles_base:520` |
+| `<leader>aa` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>'<cr>` | `vimrc.bundles_base:507` |
+| `<leader>ag` | N | 查询当前单词, 立刻查询 | `:Ag -w <c-r>=expand("<cword>")<cr><cr>` | `vimrc.bundles_base:517` |
+| `ag` | N | nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr> / 查找函数调用 | `:Ag -w <c-r>=expand("<cword>")<cr> \\| grep '<c-r>=expand("<cword>")<cr>('<cr>` | `vimrc.bundles_base:515` |
 | `bd` | N | 关闭当前 buffer | `:bdelete<cr>` | `vimrc.config_base:417` |
 | `bj` | N | 上一个 buffer | `:bprevious<cr>` | `vimrc.config_base:415` |
 | `bk` | N | 下一个 buffer | `:bnext<cr>` | `vimrc.config_base:416` |
 | `bw` | N | 执行 :bwipeout | `:bwipeout<cr>` | `vimrc.config_base:418` |
 | `ca` | N | quickfix 跳指定项 | `:cr<cr>` | `vimrc.config_base:726` |
 | `cc` | N | 关闭 quickfix 窗口 | `:cclose<cr>` | `vimrc.config_base:725` |
-| `<leader>cd` | N | 执行 :AutoChangeDirectory | `:AutoChangeDirectory <cr>` | `vimrc.bundles_base:159` |
+| `<leader>cd` | N | 执行 :AutoChangeDirectory | `:AutoChangeDirectory <cr>` | `vimrc.bundles_base:163` |
 | `ce` | N | quickfix 显示全部 | `:cla<cr>` | `vimrc.config_base:727` |
 | `<Leader>ch` | N | 执行 :AS | `:AS<CR>` | `filetype_bundles/cpp.vim:18` |
 | `cj` | N | quickfix 下一个 | `:cnext<cr>` | `vimrc.config_base:723` |
 | `ck` | N | quickfix 上一个 | `:cprevious<cr>` | `vimrc.config_base:724` |
 | `co` | N | Quick | `:copen<cr>` | `vimrc.config_base:722` |
 | `<Leader>cp` | N | 显示建议面板 | `:Copilot panel<CR>` | `vimrc.bundles_complex:109` |
-| `<leader>cq` | N sil | 一键关闭所有辅助窗口（quickfix + location list + preview） / 适用场景：在主代... | `:cclose<bar>lclose<bar>pclose<CR>` | `vimrc.bundles_base:784` |
+| `<leader>cq` | N sil | 一键关闭所有辅助窗口（quickfix + location list + preview） / 适用场景：在主代... | `:cclose<bar>lclose<bar>pclose<CR>` | `vimrc.bundles_base:788` |
 | `<leader>ds` |  | 在 Dash 中查文档 | `:Dash<cr>` | `vimrc.bundles_complex:60` |
-| `<leader>e` | N | 执行 :YcmDiags | `:YcmDiags<CR>` | `vimrc.bundles_ycm:77` |
-| `eh` | N sil | Plug 触发：ale_first | `<Plug>(ale_first)` | `vimrc.bundles_base:253` |
-| `ej` | N sil | Plug 触发：ale_next_wrap | `<Plug>(ale_next_wrap)` | `vimrc.bundles_base:252` |
-| `ek` | N sil | Plug 触发：ale_previous_wrap | `<Plug>(ale_previous_wrap)` | `vimrc.bundles_base:251` |
-| `el` | N sil | Plug 触发：ale_last | `<Plug>(ale_last)` | `vimrc.bundles_base:254` |
+| `<leader>e` | N | 执行 :YcmDiags | `:YcmDiags<CR>` | `vimrc.bundles_ycm:79` |
+| `eh` | N sil | Plug 触发：ale_first | `<Plug>(ale_first)` | `vimrc.bundles_base:257` |
+| `ej` | N sil | Plug 触发：ale_next_wrap | `<Plug>(ale_next_wrap)` | `vimrc.bundles_base:256` |
+| `ek` | N sil | Plug 触发：ale_previous_wrap | `<Plug>(ale_previous_wrap)` | `vimrc.bundles_base:255` |
+| `el` | N sil | Plug 触发：ale_last | `<Plug>(ale_last)` | `vimrc.bundles_base:258` |
 | `er` | N | 执行 :e | `:e<CR>` | `vimrc.config_base:477` |
 | `<leader>ev` | N sil | Quickly edit/reload the vimrc file | `:e $MYVIMRC<CR>` | `vimrc.config_base:488` |
 | `f` |  | 调用：ShowFuncName() | `:call ShowFuncName() <CR>` | `vimrc.config_base:713` |
-| `ff` | N | 定位当前函数、变量的定义处 | `:YcmCompleter GoToDefinitionElseDeclaration<CR>` | `vimrc.bundles_ycm:68` |
-| `fh` |  | let g:EasyMotion_startofline = 0 " keep cursor colum when... | `<Plug>(easymotion-linebackward)` | `vimrc.bundles_base:284` |
-| `<leader>fi` | N | YouCompleteMe 命令 | `:YcmCompleter GoToImplementation<CR>` | `vimrc.bundles_ycm:70` |
-| `fi` | N | YouCompleteMe 命令 | `:YcmCompleter GoToImplementation<CR>` | `vimrc.bundles_ycm:69` |
-| `fj` |  | Plug 触发：easymotion-e | `<Plug>(easymotion-e)` | `vimrc.bundles_base:286` |
-| `fk` |  | Plug 触发：easymotion-b | `<Plug>(easymotion-b)` | `vimrc.bundles_base:287` |
-| `fl` |  | Plug 触发：easymotion-lineforward | `<Plug>(easymotion-lineforward)` | `vimrc.bundles_base:288` |
-| `<leader>fr` | N | YouCompleteMe 命令 | `:YcmCompleter GoToReferences<CR>` | `vimrc.bundles_ycm:72` |
-| `fr` | N | YouCompleteMe 命令 | `:YcmCompleter GoToReferences<CR>` | `vimrc.bundles_ycm:71` |
+| `ff` | N | 定位当前函数、变量的定义处 | `:YcmCompleter GoToDefinitionElseDeclaration<CR>` | `vimrc.bundles_ycm:70` |
+| `fh` |  | let g:EasyMotion_startofline = 0 " keep cursor colum when... | `<Plug>(easymotion-linebackward)` | `vimrc.bundles_base:288` |
+| `<leader>fi` | N | YouCompleteMe 命令 | `:YcmCompleter GoToImplementation<CR>` | `vimrc.bundles_ycm:72` |
+| `fi` | N | YouCompleteMe 命令 | `:YcmCompleter GoToImplementation<CR>` | `vimrc.bundles_ycm:71` |
+| `fj` |  | Plug 触发：easymotion-e | `<Plug>(easymotion-e)` | `vimrc.bundles_base:290` |
+| `fk` |  | Plug 触发：easymotion-b | `<Plug>(easymotion-b)` | `vimrc.bundles_base:291` |
+| `fl` |  | Plug 触发：easymotion-lineforward | `<Plug>(easymotion-lineforward)` | `vimrc.bundles_base:292` |
+| `<leader>fr` | N | YouCompleteMe 命令 | `:YcmCompleter GoToReferences<CR>` | `vimrc.bundles_ycm:74` |
+| `fr` | N | YouCompleteMe 命令 | `:YcmCompleter GoToReferences<CR>` | `vimrc.bundles_ycm:73` |
 | `fs` | N | 在当前文件中快速查找光标下的单词 / nmap <leader>s :lv /<c-r>=expand("<cwo... | `:lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>` | `vimrc.config_base:600` |
 | `ft` | N | nnoremap <leader><F0> :echo expand('%:p')<CR> / nnoremap ... | `:set filetype=` | `vimrc.config_base:338` |
-| `fw` |  | Plug 触发：easymotion-w | `<Plug>(easymotion-w)` | `vimrc.bundles_base:285` |
+| `fw` |  | Plug 触发：easymotion-w | `<Plug>(easymotion-w)` | `vimrc.bundles_base:289` |
 | `g*` | N sil | 即 `g*zz` | `g*zz` | `vimrc.config_base:403` |
 | `g<space>` | N | :Gbrowse | `:GBrowse<CR>` | `filetype_bundles/git.vim:50` |
-| `ga` | V | 对齐选区/动作（vim-easy-align） | `<Plug>(EasyAlign)` | `vimrc.bundles_base:787` |
-| `ga` | N | 对齐选区/动作（vim-easy-align） | `<Plug>(EasyAlign)` | `vimrc.bundles_base:788` |
+| `ga` | V | 对齐选区/动作（vim-easy-align） | `<Plug>(EasyAlign)` | `vimrc.bundles_base:791` |
+| `ga` | N | 对齐选区/动作（vim-easy-align） | `<Plug>(EasyAlign)` | `vimrc.bundles_base:792` |
 | `gb` | N | 使用命令 / GStatue, help fugitive / 使用 Glog 可查看历史版本文件 | `:G blame<CR>` | `filetype_bundles/git.vim:44` |
-| `gd` | N | 跳转快捷键 — --auto-jump=1：仅当结果只有 1 个时自动跳转，不再弹浮窗 / gd: 跳到光标下符号... | `:<C-U>Leaderf gtags --auto-jump=1 -d <C-R><C-W><CR>` | `vimrc.bundles_base:411` |
+| `gd` | N | 跳转快捷键 — --auto-jump=1：仅当结果只有 1 个时自动跳转，不再弹浮窗 / gd: 跳到光标下符号... | `:<C-U>Leaderf gtags --auto-jump=1 -d <C-R><C-W><CR>` | `vimrc.bundles_base:415` |
 | `gh` | N | 调用：CustomGitGutterLineHights() | `:call CustomGitGutterLineHights()<CR>` | `filetype_bundles/git.vim:37` |
 | `gm` |  | 执行 :GitMessenger | `:GitMessenger<CR>` | `filetype_bundles/git.vim:67` |
 | `gn` | N | 跳到下一个变更 hunk | `:GitGutterNextHunk<CR>` | `filetype_bundles/git.vim:25` |
-| `go` | N | go: 重新打开【上次的搜索结果】，无需重跑 | `:<C-U>Leaderf gtags --recall<CR>` | `vimrc.bundles_base:417` |
+| `go` | N | go: 重新打开【上次的搜索结果】，无需重跑 | `:<C-U>Leaderf gtags --recall<CR>` | `vimrc.bundles_base:421` |
 | `gp` | N | 跳到上一个变更 hunk | `:GitGutterPrevHunk<CR>` | `filetype_bundles/git.vim:24` |
-| `gr` | N | gr: 找光标下符号的所有【引用】（哪些地方调用了它） | `:<C-U>Leaderf gtags --auto-jump=1 -r <C-R><C-W><CR>` | `vimrc.bundles_base:413` |
-| `gs` | N | gs: 找符号的所有【出现位置】（包括字符串字面量、注释中的同名出现） | `:<C-U>Leaderf gtags --auto-jump=1 -s <C-R><C-W><CR>` | `vimrc.bundles_base:415` |
+| `gr` | N | gr: 找光标下符号的所有【引用】（哪些地方调用了它） | `:<C-U>Leaderf gtags --auto-jump=1 -r <C-R><C-W><CR>` | `vimrc.bundles_base:417` |
+| `gs` | N | gs: 找符号的所有【出现位置】（包括字符串字面量、注释中的同名出现） | `:<C-U>Leaderf gtags --auto-jump=1 -s <C-R><C-W><CR>` | `vimrc.bundles_base:419` |
 | `<leader>gst` | N | <leader>gst: git status（让出 gs 给 LeaderF gtags -s） | `:G status<CR>` | `filetype_bundles/git.vim:46` |
 | `gt` | N | 切换 hunk 标记列 | `:GitGutterToggle<CR>` | `filetype_bundles/git.vim:23` |
 | `gz` | N | gz: 撤销当前 hunk（让出 gr 给 LeaderF gtags -r） / 选 gz 因为 g+z 在 v... | `:GitGutterUndoHunk<CR>` | `filetype_bundles/git.vim:28` |
@@ -108,7 +108,7 @@
 | `H` |  | 行首行尾 | `^` | `vimrc.config_base:376` |
 | `<leader>ht` |  | 切换 undo tree | `:GundoToggle<CR>` | `filetype_bundles/git.vim:59` |
 | `hw` | N | 高亮当前单词，同时光标停留在当前单词不跳转，可能需要先使用 gd 高亮一次才会生效 | `:let @/=expand('<cword>')<cr>` | `vimrc.config_base:764` |
-| `<leader>i` |  | 执行 :Nine2IndentGuides | `:Nine2IndentGuides<cr>` | `vimrc.bundles_base:166` |
+| `<leader>i` |  | 执行 :Nine2IndentGuides | `:Nine2IndentGuides<cr>` | `vimrc.bundles_base:170` |
 | `<leader>j` |  | ##### 分屏窗口移动 在vim的各个窗口间切换 | `<C-W>j` | `vimrc.config_base:371` |
 | `J` |  | 即 `10j` | `10j` | `vimrc.config_base:381` |
 | `j` | N | nnoremap gk k | `gj` | `vimrc.config_base:270` |
@@ -128,37 +128,37 @@
 | `lo` | N | Location | `:lopen<cr>` | `vimrc.config_base:730` |
 | `<leader>ls` | N | 执行 :LeetCodeSubmit | `:LeetCodeSubmit<cr>` | `filetype_bundles/leetcode.vim:19` |
 | `<leader>lt` | N | 执行 :LeetCodeTest | `:LeetCodeTest<cr>` | `filetype_bundles/leetcode.vim:18` |
-| `<leader>m` | N | nmap <F9> :TagbarToggle<CR> | `:TagbarToggle<CR>` | `vimrc.bundles_base:621` |
-| `ma` | N | 显示所有书签 | `:BookmarkShowAll<CR>` | `vimrc.bundles_base:330` |
-| `mc` | N | 清空当前 buffer 书签 | `:BookmarkClear<CR>` | `vimrc.bundles_base:331` |
-| `mi` | N | 为书签加注释 | `:BookmarkAnnotate<CR>` | `vimrc.bundles_base:327` |
-| `mjj` | N | 执行 :BookmarkMoveDown | `:BookmarkMoveDown` | `vimrc.bundles_base:334` |
-| `mkk` | N | 执行 :BookmarkMoveUp | `:BookmarkMoveUp` | `vimrc.bundles_base:333` |
-| `mm` | N | 切换书签 | `:BookmarkToggle<CR>` | `vimrc.bundles_base:326` |
-| `mn` | N | 下一个书签 | `:BookmarkNext<CR>` | `vimrc.bundles_base:328` |
-| `mp` | N | 上一个书签 | `:BookmarkPrev<CR>` | `vimrc.bundles_base:329` |
-| `mx` | N | 清空当前 buffer 书签 | `:BookmarkClearAll<CR>` | `vimrc.bundles_base:332` |
-| `<Leader>n` | sil | map <leader>n :NERDTreeToggle<CR> | `:NERDTreeFind<cr>` | `vimrc.bundles_base:569` |
-| `<Leader>n` |  | — | `<plug>NERDTreeTabsToggle<CR>` | `vimrc.bundles_base:605` |
+| `<leader>m` | N | nmap <F9> :TagbarToggle<CR> | `:TagbarToggle<CR>` | `vimrc.bundles_base:625` |
+| `ma` | N | 显示所有书签 | `:BookmarkShowAll<CR>` | `vimrc.bundles_base:334` |
+| `mc` | N | 清空当前 buffer 书签 | `:BookmarkClear<CR>` | `vimrc.bundles_base:335` |
+| `mi` | N | 为书签加注释 | `:BookmarkAnnotate<CR>` | `vimrc.bundles_base:331` |
+| `mjj` | N | 执行 :BookmarkMoveDown | `:BookmarkMoveDown` | `vimrc.bundles_base:338` |
+| `mkk` | N | 执行 :BookmarkMoveUp | `:BookmarkMoveUp` | `vimrc.bundles_base:337` |
+| `mm` | N | 切换书签 | `:BookmarkToggle<CR>` | `vimrc.bundles_base:330` |
+| `mn` | N | 下一个书签 | `:BookmarkNext<CR>` | `vimrc.bundles_base:332` |
+| `mp` | N | 上一个书签 | `:BookmarkPrev<CR>` | `vimrc.bundles_base:333` |
+| `mx` | N | 清空当前 buffer 书签 | `:BookmarkClearAll<CR>` | `vimrc.bundles_base:336` |
+| `<Leader>n` | sil | map <leader>n :NERDTreeToggle<CR> | `:NERDTreeFind<cr>` | `vimrc.bundles_base:573` |
+| `<Leader>n` |  | — | `<plug>NERDTreeTabsToggle<CR>` | `vimrc.bundles_base:609` |
 | `N` | N sil | 即 `Nzz` | `Nzz` | `vimrc.config_base:400` |
 | `n` | N sil | ##### 搜索相关 / Keep search pattern at the center of the scr... | `nzz` | `vimrc.config_base:399` |
-| `<Leader>nf` | sil | 打开NERDTree,定位到当前文件 | `:NERDTreeFind<cr>` | `vimrc.bundles_base:592` |
+| `<Leader>nf` | sil | 打开NERDTree,定位到当前文件 | `:NERDTreeFind<cr>` | `vimrc.bundles_base:596` |
 | `O` |  | 一次跨10行 / 保留原来的 J 的功能 | `J` | `vimrc.config_base:380` |
 | `oo` | N | — | `<C-o>` | `vimrc.config_base:744` |
 | `<leader>q` | N | Quickly close the current window | `:q<CR>` | `vimrc.config_base:471` |
 | `qa` | N | 关闭当前窗口 | `:qa<CR>` | `vimrc.config_base:476` |
 | `qq` | N | 关闭当前窗口 | `:q<CR>` | `vimrc.config_base:475` |
-| `<Leader>r` | N | Plug 触发：quickrun | `<Plug>(quickrun)` | `vimrc.bundles_base:804` |
+| `<Leader>r` | N | Plug 触发：quickrun | `<Plug>(quickrun)` | `vimrc.bundles_base:808` |
 | `<Leader>r` | N sil | Replace the text with translation | `<Plug>TranslateR` | `filetype_bundles/dependout.vim:24` |
 | `<Leader>r` | V sil | 翻译 | `<Plug>TranslateRV` | `filetype_bundles/dependout.vim:25` |
 | `<leader>rw` | N | 调用：ChangeReadOnly() | `:call ChangeReadOnly()<cr>` | `vimrc.config_base:218` |
 | `<Leader>sa` |  | select all 全选 | `ggVG"` | `vimrc.config_base:464` |
 | `<Leader>sch` | N | 子窗口中显示 *.cpp 或 *.h | `:A<CR>` | `filetype_bundles/cpp.vim:20` |
-| `sf` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>` | `vimrc.bundles_base:501` |
-| `sj` | N | 把单行拆成多行 | `:SplitjoinSplit<cr>` | `vimrc.bundles_base:865` |
-| `sk` | N | 把多行合成单行 | `:SplitjoinJoin<cr>` | `vimrc.bundles_base:866` |
+| `sf` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>` | `vimrc.bundles_base:505` |
+| `sj` | N | 把单行拆成多行 | `:SplitjoinSplit<cr>` | `vimrc.bundles_base:869` |
+| `sk` | N | 把多行合成单行 | `:SplitjoinJoin<cr>` | `vimrc.bundles_base:870` |
 | `<leader>so` | N | nmap <leader>so :silent !open % > /dev/null 2>&1<CR> | `:!open %<CR>` | `vimrc.config_base:790` |
-| `sp` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF<CR>` | `vimrc.bundles_base:502` |
+| `sp` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF<CR>` | `vimrc.bundles_base:506` |
 | `ss` | N sil | 快速保存 快捷键 | `:w<CR>` | `vimrc.config_base:474` |
 | `st` |  | 调用：GetCurTmpFileFullPath() | `:call GetCurTmpFileFullPath()<CR>` | `vimrc.config_base:775` |
 | `<leader>sv` | N sil | 执行 :so | `:so $MYVIMRC<CR>` | `vimrc.config_base:489` |
@@ -174,10 +174,10 @@
 | `tU` |  | 驼峰转下划线 | `:%s/\([^ .*+-]\)\([A-Z].\)/\1_\2/g<cr>ggguG` | `vimrc.config_base:770` |
 | `tu` |  | set noimdisable / 下划线转驼峰 | `:'<,'> s/_\(\w\)/\u\1/g<cr>:'<,'> s/^\(\w\)/\U\1/g<cr>` | `vimrc.config_base:768` |
 | `U` | N | remap U to <C-r> for easier redo | `<C-r>` | `vimrc.config_base:486` |
-| `uh` |  | 执行 :CopyrightUpdate | `:CopyrightUpdate<cr>` | `vimrc.bundles_base:827` |
+| `uh` |  | 执行 :CopyrightUpdate | `:CopyrightUpdate<cr>` | `vimrc.bundles_base:831` |
 | `<leader>v` | N | select block | `V`}` | `vimrc.config_base:466` |
-| `V` | V | Plug 触发：expand_region_shrink | `<Plug>(expand_region_shrink)` | `vimrc.bundles_base:354` |
-| `v` | V | Plug 触发：expand_region_expand | `<Plug>(expand_region_expand)` | `vimrc.bundles_base:353` |
+| `V` | V | Plug 触发：expand_region_shrink | `<Plug>(expand_region_shrink)` | `vimrc.bundles_base:358` |
+| `v` | V | Plug 触发：expand_region_expand | `<Plug>(expand_region_expand)` | `vimrc.bundles_base:357` |
 | `<Leader>w` | N sil | Display translation in a window | `<Plug>TranslateW` | `filetype_bundles/dependout.vim:21` |
 | `<Leader>w` | V sil | 翻译显示窗口 | `<Plug>TranslateWV` | `filetype_bundles/dependout.vim:22` |
 | `w!!` | C | w!! to sudo & write a file | `w !sudo tee >/dev/null %` | `vimrc.config_base:468` |
@@ -197,13 +197,13 @@
 | `<leader>zz` |  | 调用：ToggleFold() | `:call ToggleFold()<cr>` | `vimrc.config_base:146` |
 | `zz` |  | 即 `za` | `za` | `vimrc.config_base:147` |
 | `<C-,>` |  | 即 `<Esc>` | `<Esc>` | `vimrc:17` |
-| `<C-]>` | N | nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclar... | `:YcmCompleter GoToDefinitionElseDeclaration<CR>` | `vimrc.bundles_ycm:76` |
-| `<c-j>` | S | Plug 触发：complete_parameter#goto_next_parameter | `<Plug>(complete_parameter#goto_next_parameter)` | `vimrc.bundles_base:854` |
-| `<c-j>` | I | Plug 触发：complete_parameter#goto_next_parameter | `<Plug>(complete_parameter#goto_next_parameter)` | `vimrc.bundles_base:855` |
-| `<c-k>` | S | Plug 触发：complete_parameter#goto_previous_parameter | `<Plug>(complete_parameter#goto_previous_parameter)` | `vimrc.bundles_base:856` |
-| `<c-k>` | I | Plug 触发：complete_parameter#goto_previous_parameter | `<Plug>(complete_parameter#goto_previous_parameter)` | `vimrc.bundles_base:857` |
+| `<C-]>` | N | nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclar... | `:YcmCompleter GoToDefinitionElseDeclaration<CR>` | `vimrc.bundles_ycm:78` |
+| `<c-j>` | S | Plug 触发：complete_parameter#goto_next_parameter | `<Plug>(complete_parameter#goto_next_parameter)` | `vimrc.bundles_base:858` |
+| `<c-j>` | I | Plug 触发：complete_parameter#goto_next_parameter | `<Plug>(complete_parameter#goto_next_parameter)` | `vimrc.bundles_base:859` |
+| `<c-k>` | S | Plug 触发：complete_parameter#goto_previous_parameter | `<Plug>(complete_parameter#goto_previous_parameter)` | `vimrc.bundles_base:860` |
+| `<c-k>` | I | Plug 触发：complete_parameter#goto_previous_parameter | `<Plug>(complete_parameter#goto_previous_parameter)` | `vimrc.bundles_base:861` |
 | `<C-n>` | N sil | 调用：NumberToggle() | `:call NumberToggle()<cr>` | `vimrc.config_base:207` |
-| `<C-n>` | I | 修改补全触发 | `<C-x><C-o>` | `filetype_bundles/go.vim:80` |
+| `<C-n>` | I | 修改补全触发 | `<C-x><C-o>` | `filetype_bundles/go.vim:82` |
 | `<F1>` | N | — | `: call GetCurFileName()<cr>` | `vimrc.config_base:309` |
 | `<leader><F1>` | N | — | `: call GetCurFileFullPath()<cr>` | `vimrc.config_base:293` |
 | `<F2>` | N | 调用：HideNumber() | `:call HideNumber()<CR>` | `vimrc.config_base:359` |
@@ -211,26 +211,26 @@
 | `<F4>` | N | 执行 :set | `:set wrap! wrap?<CR>` | `vimrc.config_base:362` |
 | `<F6>` | N | 执行 :exec | `:exec exists('syntax_on') ? 'syn off' : 'syn on'<CR>` | `vimrc.config_base:366` |
 | `<leader><F6>` | N | 即 `:%!xxd -g 2` | `:%!xxd -g 2<CR>` | `vimrc.config_base:367` |
-| `<F7>` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>` | `vimrc.bundles_base:500` |
+| `<F7>` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>` | `vimrc.bundles_base:504` |
 | `<F8>` |  | 通用格式化（vim-autoformat） | `:Autoformat<CR>` | `vimrc.bundles_complex:24` |
 | `<F8>` |  | 执行 :F8FormatFile | `:F8FormatFile<CR>` | `vimrc.bundles_simple:42` |
-| `<F10>` |  | 执行 :QuickRun | `:QuickRun<CR>` | `vimrc.bundles_base:805` |
+| `<F10>` |  | 执行 :QuickRun | `:QuickRun<CR>` | `vimrc.bundles_base:809` |
 | `<` | V | ##### 选中及操作改键 / 调整缩进后自动选中，方便再次操作 | `<gv` | `vimrc.config_base:458` |
 | `<2-LeftMouse>` |  | 双击跳转 | `<C-]>` | `vimrc.config_base:739` |
 | `<2-RightMouse>` |  | — | `<C-o>` | `vimrc.config_base:740` |
 | `<C-k><C-o>` | I | <C-x><C-x> invokes completions of github-complete.vim / a... | `<Plug>(github-complete-manual-completion)` | `vimrc.bundles_complex:69` |
 | `<C-RightMouse>` |  | — | `<C-o>` | `vimrc.config_base:741` |
 | `<F1><F1>` | N | — | `: call GetCurFileNameAndText()<cr>` | `vimrc.config_base:326` |
-| `<Leader><leader>.` |  | map fb <Plug>(easymotion-b) / map fe <Plug>(easymotion-e)... | `<Plug>(easymotion-repeat)` | `vimrc.bundles_base:292` |
+| `<Leader><leader>.` |  | map fb <Plug>(easymotion-b) / map fe <Plug>(easymotion-e)... | `<Plug>(easymotion-repeat)` | `vimrc.bundles_base:296` |
 | `<leader><leader><F6>` | N | 即 `:%!xxd -r` | `:%!xxd -r<CR>` | `vimrc.config_base:368` |
 | `<leader><leader>T` |  | set tags+=~/.vim/systags / set tags+=~/.vim/systags_local... | `:call Do_CsTag_Sys()<CR>` | `vimrc.config_base:556` |
 | `<leader><LeftMouse>` |  | — | `<C-i>` | `vimrc.config_base:742` |
 | `<ScrollWheelDown>` |  | — | `<C-E><C-E><C-E>` | `vimrc.config_base:44` |
 | `<ScrollWheelUp>` |  | Hide the mouse cursor while typing / set mousehide | `<C-Y><C-Y><C-Y>` | `vimrc.config_base:43` |
-| `<silent><expr>` | I | — | `( complete_parameter#pre_complete("()")` | `vimrc.bundles_base:853` |
+| `<silent><expr>` | I | — | `( complete_parameter#pre_complete("()")` | `vimrc.bundles_base:857` |
 | `<silent><expr>` | I | — | `<Tab> <SID>SmartTab()` | `vimrc.bundles_complex:94` |
 | `<silent><leader>/` |  | 去掉搜索高亮 | `:nohls<CR>` | `vimrc.config_base:409` |
-| `<Space>` | N | nmap <leader>d <plug>(YCMHover) | `<plug>(YCMHover)` | `vimrc.bundles_ycm:80` |
+| `<Space>` | N | nmap <leader>d <plug>(YCMHover) | `<plug>(YCMHover)` | `vimrc.bundles_ycm:82` |
 | `<space><F2>` |  | hit space twice to open menu | `:call quickui#menu#open()<cr>` | `filetype_bundles/quickui.vim:60` |
 
 ---
@@ -375,72 +375,72 @@
 
 | 按键 | 模式 | 说明 | 命令 | 行号 |
 |------|:----:|------|------|------|
-| `<leader>cd` | N | 执行 :AutoChangeDirectory | `:AutoChangeDirectory <cr>` | 159 |
-| `<leader>i` |  | 执行 :Nine2IndentGuides | `:Nine2IndentGuides<cr>` | 166 |
-| `<leader>,` |  | 清除尾部空白 | `:FixWhitespace<cr>` | 172 |
-| `ek` | N sil | Plug 触发：ale_previous_wrap | `<Plug>(ale_previous_wrap)` | 251 |
-| `ej` | N sil | Plug 触发：ale_next_wrap | `<Plug>(ale_next_wrap)` | 252 |
-| `eh` | N sil | Plug 触发：ale_first | `<Plug>(ale_first)` | 253 |
-| `el` | N sil | Plug 触发：ale_last | `<Plug>(ale_last)` | 254 |
-| `fh` |  | let g:EasyMotion_startofline = 0 " keep cursor colum when... | `<Plug>(easymotion-linebackward)` | 284 |
-| `fw` |  | Plug 触发：easymotion-w | `<Plug>(easymotion-w)` | 285 |
-| `fj` |  | Plug 触发：easymotion-e | `<Plug>(easymotion-e)` | 286 |
-| `fk` |  | Plug 触发：easymotion-b | `<Plug>(easymotion-b)` | 287 |
-| `fl` |  | Plug 触发：easymotion-lineforward | `<Plug>(easymotion-lineforward)` | 288 |
-| `<Leader><leader>.` |  | map fb <Plug>(easymotion-b) / map fe <Plug>(easymotion-e)... | `<Plug>(easymotion-repeat)` | 292 |
-| `mm` | N | 切换书签 | `:BookmarkToggle<CR>` | 326 |
-| `mi` | N | 为书签加注释 | `:BookmarkAnnotate<CR>` | 327 |
-| `mn` | N | 下一个书签 | `:BookmarkNext<CR>` | 328 |
-| `mp` | N | 上一个书签 | `:BookmarkPrev<CR>` | 329 |
-| `ma` | N | 显示所有书签 | `:BookmarkShowAll<CR>` | 330 |
-| `mc` | N | 清空当前 buffer 书签 | `:BookmarkClear<CR>` | 331 |
-| `mx` | N | 清空当前 buffer 书签 | `:BookmarkClearAll<CR>` | 332 |
-| `mkk` | N | 执行 :BookmarkMoveUp | `:BookmarkMoveUp` | 333 |
-| `mjj` | N | 执行 :BookmarkMoveDown | `:BookmarkMoveDown` | 334 |
-| `v` | V | Plug 触发：expand_region_expand | `<Plug>(expand_region_expand)` | 353 |
-| `V` | V | Plug 触发：expand_region_shrink | `<Plug>(expand_region_shrink)` | 354 |
-| `<C-m>` | N | MultiCursor next | `MultiCursor next` *(via g:multi_cursor_next_key)* | 361 |
-| `<C-p>` | N | MultiCursor prev | `MultiCursor prev` *(via g:multi_cursor_prev_key)* | 362 |
-| `<C-x>` | N | MultiCursor skip | `MultiCursor skip` *(via g:multi_cursor_skip_key)* | 363 |
-| `<leader>f` | N | Leaderf <CR> | `Leaderf <CR>` *(via g:Lf_ShortcutF)* | 383 |
-| `<leader>b` | N | Leaderf buffer<CR> | `Leaderf buffer<CR>` *(via g:Lf_ShortcutB)* | 384 |
-| `gd` | N | 跳转快捷键 — --auto-jump=1：仅当结果只有 1 个时自动跳转，不再弹浮窗 / gd: 跳到光标下符号... | `:<C-U>Leaderf gtags --auto-jump=1 -d <C-R><C-W><CR>` | 411 |
-| `gr` | N | gr: 找光标下符号的所有【引用】（哪些地方调用了它） | `:<C-U>Leaderf gtags --auto-jump=1 -r <C-R><C-W><CR>` | 413 |
-| `gs` | N | gs: 找符号的所有【出现位置】（包括字符串字面量、注释中的同名出现） | `:<C-U>Leaderf gtags --auto-jump=1 -s <C-R><C-W><CR>` | 415 |
-| `go` | N | go: 重新打开【上次的搜索结果】，无需重跑 | `:<C-U>Leaderf gtags --recall<CR>` | 417 |
-| `<leader>\` |  | 调用：CtrlsfViewMode() | `:call CtrlsfViewMode()<cr>` | 494 |
-| `\` | N | Plug 触发：CtrlSFCwordPath | `<Plug>CtrlSFCwordPath<CR>` | 495 |
-| `\\` | N | 使用 normal 方式搜索 | `:let g:ctrlsf_default_view_mode_last = g:ctrlsf_default_view_mode<CR> :let g:...` | 498 |
-| `<F7>` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>` | 500 |
-| `sf` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>` | 501 |
-| `sp` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF<CR>` | 502 |
-| `<leader>aa` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>'<cr>` | 503 |
-| `ag` | N | nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr> / 查找函数调用 | `:Ag -w <c-r>=expand("<cword>")<cr> \\| grep '<c-r>=expand("<cword>")<cr>('<cr>` | 511 |
-| `<leader>ag` | N | 查询当前单词, 立刻查询 | `:Ag -w <c-r>=expand("<cword>")<cr><cr>` | 513 |
-| `<leader>a` | N | Ag 默认查找当前单词，可修改, 不立刻查询 / nmap <leader>a :Ag <c-r>=expand(... | `:Ag '` | 516 |
-| `<Leader>n` | sil | map <leader>n :NERDTreeToggle<CR> | `:NERDTreeFind<cr>` | 569 |
-| `<Leader>nf` | sil | 打开NERDTree,定位到当前文件 | `:NERDTreeFind<cr>` | 592 |
-| `<C-d>` | sil | 调整窗口大小 / http://129.226.226.195/post/22725.html | `:vertical resize 30<cr>` *au FileType nerdtree* | 596 |
-| `<C-l>` | sil | 执行 :vertical | `:vertical resize +10<cr>` *au FileType nerdtree* | 597 |
-| `<C-h>` | sil | 执行 :vertical | `:vertical resize -10<cr>` *au FileType nerdtree* | 598 |
-| `<Leader>n` |  | — | `<plug>NERDTreeTabsToggle<CR>` | 605 |
-| `<leader>m` | N | nmap <F9> :TagbarToggle<CR> | `:TagbarToggle<CR>` | 621 |
-| `<leader>lt` | N | LocListToggle (ListToggle) | `LocListToggle (ListToggle)` *(via g:lt_location...)* | 779 |
-| `<leader>qt` | N | QFixToggle (ListToggle) | `QFixToggle (ListToggle)` *(via g:lt_quickfix...)* | 780 |
-| `<leader>cq` | N sil | 一键关闭所有辅助窗口（quickfix + location list + preview） / 适用场景：在主代... | `:cclose<bar>lclose<bar>pclose<CR>` | 784 |
-| `ga` | V | 对齐选区/动作（vim-easy-align） | `<Plug>(EasyAlign)` | 787 |
-| `ga` | N | 对齐选区/动作（vim-easy-align） | `<Plug>(EasyAlign)` | 788 |
-| `<Leader>r` | N | Plug 触发：quickrun | `<Plug>(quickrun)` | 804 |
-| `<F10>` |  | 执行 :QuickRun | `:QuickRun<CR>` | 805 |
-| `uh` |  | 执行 :CopyrightUpdate | `:CopyrightUpdate<cr>` | 827 |
-| `<silent><expr>` | I | — | `( complete_parameter#pre_complete("()")` | 853 |
-| `<c-j>` | S | Plug 触发：complete_parameter#goto_next_parameter | `<Plug>(complete_parameter#goto_next_parameter)` | 854 |
-| `<c-j>` | I | Plug 触发：complete_parameter#goto_next_parameter | `<Plug>(complete_parameter#goto_next_parameter)` | 855 |
-| `<c-k>` | S | Plug 触发：complete_parameter#goto_previous_parameter | `<Plug>(complete_parameter#goto_previous_parameter)` | 856 |
-| `<c-k>` | I | Plug 触发：complete_parameter#goto_previous_parameter | `<Plug>(complete_parameter#goto_previous_parameter)` | 857 |
-| `sj` | N | 把单行拆成多行 | `:SplitjoinSplit<cr>` | 865 |
-| `sk` | N | 把多行合成单行 | `:SplitjoinJoin<cr>` | 866 |
-| `p` | N buf | — | `<plug>(qf-preview-open)` *autocmd FileType qf* | 884 |
+| `<leader>cd` | N | 执行 :AutoChangeDirectory | `:AutoChangeDirectory <cr>` | 163 |
+| `<leader>i` |  | 执行 :Nine2IndentGuides | `:Nine2IndentGuides<cr>` | 170 |
+| `<leader>,` |  | 清除尾部空白 | `:FixWhitespace<cr>` | 176 |
+| `ek` | N sil | Plug 触发：ale_previous_wrap | `<Plug>(ale_previous_wrap)` | 255 |
+| `ej` | N sil | Plug 触发：ale_next_wrap | `<Plug>(ale_next_wrap)` | 256 |
+| `eh` | N sil | Plug 触发：ale_first | `<Plug>(ale_first)` | 257 |
+| `el` | N sil | Plug 触发：ale_last | `<Plug>(ale_last)` | 258 |
+| `fh` |  | let g:EasyMotion_startofline = 0 " keep cursor colum when... | `<Plug>(easymotion-linebackward)` | 288 |
+| `fw` |  | Plug 触发：easymotion-w | `<Plug>(easymotion-w)` | 289 |
+| `fj` |  | Plug 触发：easymotion-e | `<Plug>(easymotion-e)` | 290 |
+| `fk` |  | Plug 触发：easymotion-b | `<Plug>(easymotion-b)` | 291 |
+| `fl` |  | Plug 触发：easymotion-lineforward | `<Plug>(easymotion-lineforward)` | 292 |
+| `<Leader><leader>.` |  | map fb <Plug>(easymotion-b) / map fe <Plug>(easymotion-e)... | `<Plug>(easymotion-repeat)` | 296 |
+| `mm` | N | 切换书签 | `:BookmarkToggle<CR>` | 330 |
+| `mi` | N | 为书签加注释 | `:BookmarkAnnotate<CR>` | 331 |
+| `mn` | N | 下一个书签 | `:BookmarkNext<CR>` | 332 |
+| `mp` | N | 上一个书签 | `:BookmarkPrev<CR>` | 333 |
+| `ma` | N | 显示所有书签 | `:BookmarkShowAll<CR>` | 334 |
+| `mc` | N | 清空当前 buffer 书签 | `:BookmarkClear<CR>` | 335 |
+| `mx` | N | 清空当前 buffer 书签 | `:BookmarkClearAll<CR>` | 336 |
+| `mkk` | N | 执行 :BookmarkMoveUp | `:BookmarkMoveUp` | 337 |
+| `mjj` | N | 执行 :BookmarkMoveDown | `:BookmarkMoveDown` | 338 |
+| `v` | V | Plug 触发：expand_region_expand | `<Plug>(expand_region_expand)` | 357 |
+| `V` | V | Plug 触发：expand_region_shrink | `<Plug>(expand_region_shrink)` | 358 |
+| `<C-m>` | N | MultiCursor next | `MultiCursor next` *(via g:multi_cursor_next_key)* | 365 |
+| `<C-p>` | N | MultiCursor prev | `MultiCursor prev` *(via g:multi_cursor_prev_key)* | 366 |
+| `<C-x>` | N | MultiCursor skip | `MultiCursor skip` *(via g:multi_cursor_skip_key)* | 367 |
+| `<leader>f` | N | Leaderf <CR> | `Leaderf <CR>` *(via g:Lf_ShortcutF)* | 387 |
+| `<leader>b` | N | Leaderf buffer<CR> | `Leaderf buffer<CR>` *(via g:Lf_ShortcutB)* | 388 |
+| `gd` | N | 跳转快捷键 — --auto-jump=1：仅当结果只有 1 个时自动跳转，不再弹浮窗 / gd: 跳到光标下符号... | `:<C-U>Leaderf gtags --auto-jump=1 -d <C-R><C-W><CR>` | 415 |
+| `gr` | N | gr: 找光标下符号的所有【引用】（哪些地方调用了它） | `:<C-U>Leaderf gtags --auto-jump=1 -r <C-R><C-W><CR>` | 417 |
+| `gs` | N | gs: 找符号的所有【出现位置】（包括字符串字面量、注释中的同名出现） | `:<C-U>Leaderf gtags --auto-jump=1 -s <C-R><C-W><CR>` | 419 |
+| `go` | N | go: 重新打开【上次的搜索结果】，无需重跑 | `:<C-U>Leaderf gtags --recall<CR>` | 421 |
+| `<leader>\` |  | 调用：CtrlsfViewMode() | `:call CtrlsfViewMode()<cr>` | 498 |
+| `\` | N | Plug 触发：CtrlSFCwordPath | `<Plug>CtrlSFCwordPath<CR>` | 499 |
+| `\\` | N | 使用 normal 方式搜索 | `:let g:ctrlsf_default_view_mode_last = g:ctrlsf_default_view_mode<CR> :let g:...` | 502 |
+| `<F7>` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>` | 504 |
+| `sf` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>` | 505 |
+| `sp` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF<CR>` | 506 |
+| `<leader>aa` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>'<cr>` | 507 |
+| `ag` | N | nmap <F7> :Ag -w <c-r>=expand("<cword>")<cr><cr> / 查找函数调用 | `:Ag -w <c-r>=expand("<cword>")<cr> \\| grep '<c-r>=expand("<cword>")<cr>('<cr>` | 515 |
+| `<leader>ag` | N | 查询当前单词, 立刻查询 | `:Ag -w <c-r>=expand("<cword>")<cr><cr>` | 517 |
+| `<leader>a` | N | Ag 默认查找当前单词，可修改, 不立刻查询 / nmap <leader>a :Ag <c-r>=expand(... | `:Ag '` | 520 |
+| `<Leader>n` | sil | map <leader>n :NERDTreeToggle<CR> | `:NERDTreeFind<cr>` | 573 |
+| `<Leader>nf` | sil | 打开NERDTree,定位到当前文件 | `:NERDTreeFind<cr>` | 596 |
+| `<C-d>` | sil | 调整窗口大小 / http://129.226.226.195/post/22725.html | `:vertical resize 30<cr>` *au FileType nerdtree* | 600 |
+| `<C-l>` | sil | 执行 :vertical | `:vertical resize +10<cr>` *au FileType nerdtree* | 601 |
+| `<C-h>` | sil | 执行 :vertical | `:vertical resize -10<cr>` *au FileType nerdtree* | 602 |
+| `<Leader>n` |  | — | `<plug>NERDTreeTabsToggle<CR>` | 609 |
+| `<leader>m` | N | nmap <F9> :TagbarToggle<CR> | `:TagbarToggle<CR>` | 625 |
+| `<leader>lt` | N | LocListToggle (ListToggle) | `LocListToggle (ListToggle)` *(via g:lt_location...)* | 783 |
+| `<leader>qt` | N | QFixToggle (ListToggle) | `QFixToggle (ListToggle)` *(via g:lt_quickfix...)* | 784 |
+| `<leader>cq` | N sil | 一键关闭所有辅助窗口（quickfix + location list + preview） / 适用场景：在主代... | `:cclose<bar>lclose<bar>pclose<CR>` | 788 |
+| `ga` | V | 对齐选区/动作（vim-easy-align） | `<Plug>(EasyAlign)` | 791 |
+| `ga` | N | 对齐选区/动作（vim-easy-align） | `<Plug>(EasyAlign)` | 792 |
+| `<Leader>r` | N | Plug 触发：quickrun | `<Plug>(quickrun)` | 808 |
+| `<F10>` |  | 执行 :QuickRun | `:QuickRun<CR>` | 809 |
+| `uh` |  | 执行 :CopyrightUpdate | `:CopyrightUpdate<cr>` | 831 |
+| `<silent><expr>` | I | — | `( complete_parameter#pre_complete("()")` | 857 |
+| `<c-j>` | S | Plug 触发：complete_parameter#goto_next_parameter | `<Plug>(complete_parameter#goto_next_parameter)` | 858 |
+| `<c-j>` | I | Plug 触发：complete_parameter#goto_next_parameter | `<Plug>(complete_parameter#goto_next_parameter)` | 859 |
+| `<c-k>` | S | Plug 触发：complete_parameter#goto_previous_parameter | `<Plug>(complete_parameter#goto_previous_parameter)` | 860 |
+| `<c-k>` | I | Plug 触发：complete_parameter#goto_previous_parameter | `<Plug>(complete_parameter#goto_previous_parameter)` | 861 |
+| `sj` | N | 把单行拆成多行 | `:SplitjoinSplit<cr>` | 869 |
+| `sk` | N | 把多行合成单行 | `:SplitjoinJoin<cr>` | 870 |
+| `p` | N buf | — | `<plug>(qf-preview-open)` *autocmd FileType qf* | 888 |
 
 ### 补全相关（vimrc.bundles_complex）
 
@@ -458,14 +458,14 @@
 
 | 按键 | 模式 | 说明 | 命令 | 行号 |
 |------|:----:|------|------|------|
-| `ff` | N | 定位当前函数、变量的定义处 | `:YcmCompleter GoToDefinitionElseDeclaration<CR>` | 68 |
-| `fi` | N | YouCompleteMe 命令 | `:YcmCompleter GoToImplementation<CR>` | 69 |
-| `<leader>fi` | N | YouCompleteMe 命令 | `:YcmCompleter GoToImplementation<CR>` | 70 |
-| `fr` | N | YouCompleteMe 命令 | `:YcmCompleter GoToReferences<CR>` | 71 |
-| `<leader>fr` | N | YouCompleteMe 命令 | `:YcmCompleter GoToReferences<CR>` | 72 |
-| `<C-]>` | N | nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclar... | `:YcmCompleter GoToDefinitionElseDeclaration<CR>` | 76 |
-| `<leader>e` | N | 执行 :YcmDiags | `:YcmDiags<CR>` | 77 |
-| `<Space>` | N | nmap <leader>d <plug>(YCMHover) | `<plug>(YCMHover)` | 80 |
+| `ff` | N | 定位当前函数、变量的定义处 | `:YcmCompleter GoToDefinitionElseDeclaration<CR>` | 70 |
+| `fi` | N | YouCompleteMe 命令 | `:YcmCompleter GoToImplementation<CR>` | 71 |
+| `<leader>fi` | N | YouCompleteMe 命令 | `:YcmCompleter GoToImplementation<CR>` | 72 |
+| `fr` | N | YouCompleteMe 命令 | `:YcmCompleter GoToReferences<CR>` | 73 |
+| `<leader>fr` | N | YouCompleteMe 命令 | `:YcmCompleter GoToReferences<CR>` | 74 |
+| `<C-]>` | N | nnoremap <leader>] :YcmCompleter GoToDefinitionElseDeclar... | `:YcmCompleter GoToDefinitionElseDeclaration<CR>` | 78 |
+| `<leader>e` | N | 执行 :YcmDiags | `:YcmDiags<CR>` | 79 |
+| `<Space>` | N | nmap <leader>d <plug>(YCMHover) | `<plug>(YCMHover)` | 82 |
 
 ### 备用（vimrc.bundles_simple）
 
@@ -515,47 +515,47 @@
 
 | 按键 | 模式 | 说明 | 命令 | 行号 |
 |------|:----:|------|------|------|
-| `<leader>gi` | N | 整理 import | `:GoImports<CR>` | 38 |
-| `<C-n>` | I | 修改补全触发 | `<C-x><C-o>` | 80 |
-| `<leader>s` | N buf sil | — | `:<C-u>call go#def#Jump("split")<CR>` | 85 |
-| `<leader>v` | N buf sil | — | `:<C-u>call go#def#Jump("vsplit")<CR>` | 86 |
-| `ff` | N | au FileType go nnoremap <buffer> <silent> <leader>t :<C-u... | `:GoDef<CR>` | 89 |
-| `<2-LeftMouse>` | N | 跳到定义（gopls） | `:GoDef<CR>` | 90 |
-| `fi` | N | 找接口实现 | `:GoImplements<CR>` | 91 |
-| `<F6>` | N | 找接口实现 | `:GoImplements<CR>:cfirst<CR>` | 92 |
-| `fr` | N | 找所有引用（gopls） | `:GoReferrers<CR>` | 93 |
-| `<F8>` | N | go 文件下, F8 不做 Format 使用, go 有自己的 fmt | `:GoReferrers<CR>` | 95 |
-| `fs` | N | 自动导入结构体字段 | `:GoFillStruct<cr>` | 97 |
-| `<Leader>d` | N | au FileType go nmap <leader><F7> :GoReferrers<cr> / au Fi... | `:GoDoc<cr>` | 100 |
-| `wh` | N | SameIds 配色： hi CursorColumn ctermbg=26 | `:GoSameIds<cr>` | 102 |
-| `whc` | N | 高亮当前作用域同名标识符 | `:GoSameIdsClear<cr>` | 103 |
-| `<leader>rn` |  | 重命名符号 | `:GoRename<cr>` | 104 |
-| `ga` | N | 自动导入包, 格式化 imports | `:GoAddTag json` | 107 |
-| `gaj` | N | 为 struct 字段添加 tag | `:GoAddTag json<CR>` | 108 |
-| `gas` | N | 为 struct 字段添加 tag | `:GoAddTag schema<CR>` | 109 |
-| `gad` | N | 为 struct 字段添加 tag | `:GoAddTag db<CR>` | 110 |
-| `grt` | N | 移除 struct tag | `:GoRemoveTags db` | 111 |
-| `grj` | N | 移除 struct tag | `:GoRemoveTags json<CR>` | 112 |
-| `grd` | N | 移除 struct tag | `:GoRemoveTags db<CR>` | 113 |
-| `<Leader>e` | N | go build 检查错误 | `:GoBuild<cr>` | 116 |
-| `<Leader>gb` | N | Go 编译当前包 | `:GoBuild<cr>` | 117 |
-| `cl` | N | 运行 Go metalinter | `:GoMetaLinter<cr>` | 118 |
-| `<F10>` | N | 运行 Go metalinter | `:GoMetaLinter<CR>` | 119 |
-| `ek` | N sil | quickfix 上一个 | `:cprevious<cr>` | 120 |
-| `ej` | N sil | quickfix 下一个 | `:cnext<cr>` | 121 |
-| `eh` | N sil | quickfix 跳指定项 | `:cr<cr>` | 122 |
-| `el` | N sil | quickfix 显示全部 | `:cla<cr>` | 123 |
-| `<Leader>tt` | N | 运行测试函数 | `:call Nine2GoTest()<cr>` | 125 |
-| `<Leader>tb` | N | 调用：Nine2GoBench() | `:call Nine2GoBench()<cr>` | 126 |
-| `<Leader>tf` | N | 调用：Nine2GoTestFunc() | `:call Nine2GoTestFunc()<cr>` | 127 |
-| `<F9>` | N | 调用：Nine2GoTestFunc() | `:call Nine2GoTestFunc()<CR>` | 128 |
-| `<leader><F9>` | N | 调用：Nine2GoBenchmarkFunc() | `:call Nine2GoBenchmarkFunc()<CR>` | 129 |
-| `<leader>bb` |  | let g:delve_backend = "native" | `:DlvAddBreakpoint<cr>` | 214 |
-| `<leader>ba` |  | delve toggle tracepoint | `:DlvToggleTracepoint<cr>` | 215 |
-| `<leader>br` |  | delve 删除断点 | `:DlvRemoveBreakpoint<cr>` | 216 |
-| `<leader>bc` |  | au FileType go map <leader>be :DlvRemoveTracepoint<cr> | `:DlvClearAll<cr>` | 218 |
-| `<leader>bd` |  | au FileType go map <leader>bt :DlvTest<cr> | `:DlvDebug<cr>` | 220 |
-| `<leader>gt` |  | 运行 Go 测试 | `:GoTests<cr>` | 228 |
+| `<leader>gi` | N | 整理 import | `:GoImports<CR>` | 40 |
+| `<C-n>` | I | 修改补全触发 | `<C-x><C-o>` | 82 |
+| `<leader>s` | N buf sil | — | `:<C-u>call go#def#Jump("split")<CR>` | 87 |
+| `<leader>v` | N buf sil | — | `:<C-u>call go#def#Jump("vsplit")<CR>` | 88 |
+| `ff` | N | au FileType go nnoremap <buffer> <silent> <leader>t :<C-u... | `:GoDef<CR>` | 91 |
+| `<2-LeftMouse>` | N | 跳到定义（gopls） | `:GoDef<CR>` | 92 |
+| `fi` | N | 找接口实现 | `:GoImplements<CR>` | 93 |
+| `<F6>` | N | 找接口实现 | `:GoImplements<CR>:cfirst<CR>` | 94 |
+| `fr` | N | 找所有引用（gopls） | `:GoReferrers<CR>` | 95 |
+| `<F8>` | N | go 文件下, F8 不做 Format 使用, go 有自己的 fmt | `:GoReferrers<CR>` | 97 |
+| `fs` | N | 自动导入结构体字段 | `:GoFillStruct<cr>` | 99 |
+| `<Leader>d` | N | au FileType go nmap <leader><F7> :GoReferrers<cr> / au Fi... | `:GoDoc<cr>` | 102 |
+| `wh` | N | SameIds 配色： hi CursorColumn ctermbg=26 | `:GoSameIds<cr>` | 104 |
+| `whc` | N | 高亮当前作用域同名标识符 | `:GoSameIdsClear<cr>` | 105 |
+| `<leader>rn` |  | 重命名符号 | `:GoRename<cr>` | 106 |
+| `ga` | N | 自动导入包, 格式化 imports | `:GoAddTag json` | 109 |
+| `gaj` | N | 为 struct 字段添加 tag | `:GoAddTag json<CR>` | 110 |
+| `gas` | N | 为 struct 字段添加 tag | `:GoAddTag schema<CR>` | 111 |
+| `gad` | N | 为 struct 字段添加 tag | `:GoAddTag db<CR>` | 112 |
+| `grt` | N | 移除 struct tag | `:GoRemoveTags db` | 113 |
+| `grj` | N | 移除 struct tag | `:GoRemoveTags json<CR>` | 114 |
+| `grd` | N | 移除 struct tag | `:GoRemoveTags db<CR>` | 115 |
+| `<Leader>e` | N | go build 检查错误 | `:GoBuild<cr>` | 118 |
+| `<Leader>gb` | N | Go 编译当前包 | `:GoBuild<cr>` | 119 |
+| `cl` | N | 运行 Go metalinter | `:GoMetaLinter<cr>` | 120 |
+| `<F10>` | N | 运行 Go metalinter | `:GoMetaLinter<CR>` | 121 |
+| `ek` | N sil | quickfix 上一个 | `:cprevious<cr>` | 122 |
+| `ej` | N sil | quickfix 下一个 | `:cnext<cr>` | 123 |
+| `eh` | N sil | quickfix 跳指定项 | `:cr<cr>` | 124 |
+| `el` | N sil | quickfix 显示全部 | `:cla<cr>` | 125 |
+| `<Leader>tt` | N | 运行测试函数 | `:call Nine2GoTest()<cr>` | 127 |
+| `<Leader>tb` | N | 调用：Nine2GoBench() | `:call Nine2GoBench()<cr>` | 128 |
+| `<Leader>tf` | N | 调用：Nine2GoTestFunc() | `:call Nine2GoTestFunc()<cr>` | 129 |
+| `<F9>` | N | 调用：Nine2GoTestFunc() | `:call Nine2GoTestFunc()<CR>` | 130 |
+| `<leader><F9>` | N | 调用：Nine2GoBenchmarkFunc() | `:call Nine2GoBenchmarkFunc()<CR>` | 131 |
+| `<leader>bb` |  | let g:delve_backend = "native" | `:DlvAddBreakpoint<cr>` | 216 |
+| `<leader>ba` |  | delve toggle tracepoint | `:DlvToggleTracepoint<cr>` | 217 |
+| `<leader>br` |  | delve 删除断点 | `:DlvRemoveBreakpoint<cr>` | 218 |
+| `<leader>bc` |  | au FileType go map <leader>be :DlvRemoveTracepoint<cr> | `:DlvClearAll<cr>` | 220 |
+| `<leader>bd` |  | au FileType go map <leader>bt :DlvTest<cr> | `:DlvDebug<cr>` | 222 |
+| `<leader>gt` |  | 运行 Go 测试 | `:GoTests<cr>` | 230 |
 
 ### 文件类型：leetcode
 
