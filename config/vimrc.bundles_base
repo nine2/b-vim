@@ -30,12 +30,14 @@ call vundle#rc("$VIM_TMP_PATH/bundle")
 " TagHighlight 启动 ~104ms 且基本不用；git-messenger 默认 CursorHold 弹 blame
 let g:loaded_TagHighlight = 1
 let g:loaded_git_messenger = 1
-" gitgutter 性能化配置（恢复 ]c/[c 跳变更行、行首 hunk 标记，关闭主动轮询）
+" gitgutter 性能化配置（恢复跳变更行、行首 hunk 标记，关闭主动轮询）
 " --------------------------------------------------------------
-"   ]c / [c     跳到下/上一个变更 hunk
-"   <leader>hp  预览 hunk diff
-"   <leader>hu  撤销当前 hunk
-"   <leader>hs  stage 当前 hunk
+" 自定义快捷键见 filetype_bundles/git.vim:23-26
+"   gt    toggle 显示 sign 列
+"   gn    跳到【下一个】变更 hunk
+"   gp    跳到【上一个】变更 hunk
+"   gr    undo 当前 hunk（注意：跟 <leader>gr=LeaderF gtags 不冲突，前者两键后者三键）
+" 默认快捷键（]c/[c/<leader>h*）已被 g:gitgutter_map_keys = 0 全部禁用
 let g:gitgutter_async = 1                  " 异步 git diff，不阻塞 UI（默认）
 let g:gitgutter_eager = 0                  " 不在 BufEnter/TabEnter/FocusGained 主动触发
 let g:gitgutter_realtime = 0               " 不在 TextChanged 实时 diff（仅保存时更新）
