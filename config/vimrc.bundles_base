@@ -364,11 +364,29 @@ let g:Lf_PreviewInPopup = 1
 let g:Lf_StlSeparator = { 'left': '', 'right': '' }
 let g:Lf_UseVersionControlTool = 0           " 不强依赖 VCS
 let g:Lf_DefaultExternalTool = 'rg'          " ripgrep 后端
-" 关闭 Gtags 自动更新：BufWritePost 触发跑 Python 脚本，
-" 在 Python 3.12+ 下还会刷出大量 SyntaxWarning。无 gtags 需求直接禁用
-let g:Lf_GtagsAutoGenerate = 0
-let g:Lf_GtagsAutoUpdate = 0
-let g:Lf_Gtagslabel = ''
+" Gtags 跨语言代码索引（定义 / 引用 / 调用关系）
+" ============================================================
+" 系统依赖（必装，否则 :w 会报错且不工作）：
+"   brew install global    # gtags 主体（GLOBAL 项目）
+"   brew install pygments  # 启用 native-pygments 模式后扩展到 30+ 语言
+" ============================================================
+" 用法：
+"   :Leaderf gtags --update    # 手动重建索引（首次进项目会自动建）
+"   :Leaderf gtags -d <符号>   # 跳到定义
+"   :Leaderf gtags -r <符号>   # 找所有引用
+"   :Leaderf gtags -s <符号>   # 找所有出现位置
+"   :Leaderf gtags --recall    # 重新打开上次搜索结果
+" 索引文件：默认存于 ~/.LfCache/，不污染项目目录
+" ============================================================
+let g:Lf_GtagsAutoGenerate = 1               " 进入项目自动生成 GTAGS
+let g:Lf_GtagsAutoUpdate = 1                 " 保存时自动增量更新
+let g:Lf_Gtagslabel = 'native-pygments'      " native(C/C++/Java/PHP) + pygments(其他)
+let g:Lf_GtagsStoreInProject = 0             " 索引存 ~/.LfCache/，不污染项目
+" 跳转快捷键
+nnoremap <leader>gd :<C-U>Leaderf gtags -d <C-R><C-W><CR>
+nnoremap <leader>gr :<C-U>Leaderf gtags -r <C-R><C-W><CR>
+nnoremap <leader>gs :<C-U>Leaderf gtags -s <C-R><C-W><CR>
+nnoremap <leader>go :<C-U>Leaderf gtags --recall<CR>
 " 文件忽略（迁移自 ctrlp_custom_ignore）
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
 let g:Lf_WildIgnore = {
