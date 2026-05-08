@@ -382,10 +382,10 @@ let g:Lf_GtagsAutoGenerate = 1               " 进入项目自动生成 GTAGS
 let g:Lf_GtagsAutoUpdate = 1                 " 保存时自动增量更新
 let g:Lf_Gtagslabel = 'native-pygments'      " native(C/C++/Java/PHP) + pygments(其他)
 let g:Lf_GtagsStoreInProject = 0             " 索引存 ~/.LfCache/，不污染项目
-" 跳转快捷键
-nnoremap <leader>gd :<C-U>Leaderf gtags -d <C-R><C-W><CR>
-nnoremap <leader>gr :<C-U>Leaderf gtags -r <C-R><C-W><CR>
-nnoremap <leader>gs :<C-U>Leaderf gtags -s <C-R><C-W><CR>
+" 跳转快捷键 — --auto-jump=1：仅当结果只有 1 个时自动跳转，不再弹浮窗
+nnoremap <leader>gd :<C-U>Leaderf gtags --auto-jump=1 -d <C-R><C-W><CR>
+nnoremap <leader>gr :<C-U>Leaderf gtags --auto-jump=1 -r <C-R><C-W><CR>
+nnoremap <leader>gs :<C-U>Leaderf gtags --auto-jump=1 -s <C-R><C-W><CR>
 nnoremap <leader>go :<C-U>Leaderf gtags --recall<CR>
 " 文件忽略（迁移自 ctrlp_custom_ignore）
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
