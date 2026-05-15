@@ -34,7 +34,8 @@ func! CustomGitGutterLineHights()
         exe ":GitGutterLineHighlightsEnable"
     endif
 endfunc
-nnoremap gh :call CustomGitGutterLineHights()<CR>
+" 让出 gh 给 YCMHover；GitGutter 行高亮迁到 <leader>gh（git highlight）
+nnoremap <leader>gh :call CustomGitGutterLineHights()<CR>
 
 " ##### 使用 git blame 等功能
 Plug 'tpope/vim-fugitive'

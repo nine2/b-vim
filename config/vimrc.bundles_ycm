@@ -82,7 +82,8 @@ nnoremap <C-]> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <leader>e :YcmDiags<CR>
 let g:ycm_auto_hover=''
 " nmap <leader>d <plug>(YCMHover)
-nmap <Space> <plug>(YCMHover)
+" 绑 gh（g-hover）：单键直接触发，不占用 <Space>/<leader> 命名空间，避免 leader 组合键的 timeout 等待
+nmap gh <plug>(YCMHover)
 
 " 获取变量文档信息
   let s:ycm_hover_popup = -1

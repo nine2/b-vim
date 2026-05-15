@@ -373,10 +373,11 @@ Plug 'Yggdroot/LeaderF'
 " 快捷键速查（按使用频率排序，全部进入浮窗后输入关键字过滤，<CR> 选中跳转）
 "   <leader>f   按文件名【模糊搜索项目内所有文件】 → 类似 VSCode Cmd+P
 "   <leader>b   按文件名【模糊搜索已打开的 buffer】（在多个文件间快速切换）
-"   gd          跳到光标下符号的【定义】(gtags -d) — 跨语言主用
+"   gl          跳到光标下符号的【定义】(gtags -d) — 跨语言主用（让出 gd 给 vim 内置）
 "   gr          找光标下符号的所有【引用】(gtags -r)
 "   gs          找符号的所有【出现位置】(gtags -s) — 含字符串/注释中的字面量
 "   go          重新打开【上次搜索结果】(gtags --recall)
+"   gd          vim 内置：跳本地声明 + 顺带高亮当前词（自定义映射已让出）
 "   cq          一键关闭辅助窗口（quickfix + location list + preview）
 " 命名空间冲突已迁移（让出短键给 LeaderF）：
 "   gr 原 GitGutterUndoHunk → gz（git.vim，gz 在 vim 中无任何内置含义）
@@ -410,8 +411,9 @@ let g:Lf_GtagsAutoUpdate = 1                 " 保存时自动增量更新
 let g:Lf_Gtagslabel = 'native-pygments'      " native(C/C++/Java/PHP) + pygments(其他)
 let g:Lf_GtagsStoreInProject = 0             " 索引存 ~/.LfCache/，不污染项目
 " 跳转快捷键 — --auto-jump=1：仅当结果只有 1 个时自动跳转，不再弹浮窗
-" gd: 跳到光标下符号的【定义】（最常用，跨语言代码导航）
-nnoremap gd :<C-U>Leaderf gtags --auto-jump=1 -d <C-R><C-W><CR>
+" gl: 跳到光标下符号的【定义】(gtags -d)
+" gd 让回 vim 内置（跳本地声明 + 顺带把 cword 写入 / 寄存器实现全文高亮）
+nnoremap gl :<C-U>Leaderf gtags --auto-jump=1 -d <C-R><C-W><CR>
 " gr: 找光标下符号的所有【引用】（哪些地方调用了它）
 nnoremap gr :<C-U>Leaderf gtags --auto-jump=1 -r <C-R><C-W><CR>
 " gs: 找符号的所有【出现位置】（包括字符串字面量、注释中的同名出现）

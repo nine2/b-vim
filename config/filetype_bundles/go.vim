@@ -75,6 +75,15 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_generate_tags = 1
+
+" === Go syntax 颜色微调 ===
+" molokai 主题有 Field group（#00afaf 青绿加粗），但 vim-go 的 goField 默认未 link 到它
+" 用 ColorScheme/Syntax 双钩子确保 colorscheme reload 或 .go buffer 进入时都能生效
+" （本文件在 colorscheme molokai 之前被 source，直接 hi link 会被覆盖，必须走 autocmd）
+augroup go_color_fix
+    autocmd!
+    autocmd ColorScheme,Syntax * highlight! link goField Field
+augroup END
 " 无 model 不报警
 let g:go_null_module_warning = 0
 
@@ -98,7 +107,8 @@ au FileType go nnoremap <F8> :GoReferrers<CR>
 " 自动导入结构体字段
 au FileType go nnoremap fs :GoFillStruct<cr>
 " au FileType go nmap <leader><F7> :GoReferrers<cr>
-" au FileType go nmap <Space> :GoInfo<cr>
+" GoInfo 用 gy（go type info）；vim 内置 gy 完全空闲，避开 <Space>/<leader> 等待 timeout
+au FileType go nmap gy :GoInfo<cr>
 au FileType go nmap <Leader>d :GoDoc<cr>
 " SameIds 配色： hi CursorColumn ctermbg=26
 au FileType go nmap wh :GoSameIds<cr>

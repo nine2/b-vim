@@ -766,8 +766,7 @@ set ttyfast
 set lazyredraw      " 批量操作时不逐帧刷屏，减少补全/格式化等多步操作的重绘次数
 set synmaxcol=1000  " 默认 3000，超长行全量渲染开销大；生成代码长行只渲染前 1000 字符
 
-" 高亮当前单词，同时光标停留在当前单词不跳转，可能需要先使用 gd 高亮一次才会生效
-nmap hw :let @/=expand('<cword>')<cr>
+" 高亮当前单词：使用 vim 内置 gd（跳本地声明 + 顺带把 cword 写入 / 寄存器实现 hlsearch 全文高亮）
 
 " set noimdisable
 " 下划线转驼峰
@@ -780,10 +779,14 @@ map tU :%s/\([^ .*+-]\)\([A-Z].\)/\1_\2/g<cr>ggguG
 
 map st :call GetCurTmpFileFullPath()<CR>
 " 设置临时文件的完整路径 到系统剪切板
+" 路径可在 ~/.vimrc.local 中通过 g:cust_tmp_dir 覆盖（如 let g:cust_tmp_dir = "~/data/tmp/xxx"）
 function GetCurTmpFileFullPath()
-    let cur_dir="~"
-    if has("mac")
+    if exists("g:cust_tmp_dir") && !empty(g:cust_tmp_dir)
+        let cur_dir=g:cust_tmp_dir
+    elseif has("mac")
         let cur_dir="~/Desktop"
+    else
+        let cur_dir="~"
     endif
     let cur_file_name=strftime("%Y-%m-%d_%H:%M:%S")
     let dir_filename=''.cur_dir.'/'.cur_file_name.'.txt'
