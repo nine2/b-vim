@@ -131,6 +131,10 @@ let g:ycm_filetype_blacklist = {
     \ 'mail' : 1,
     \}
 
+" go 从 whitelist 移除：改用 vim-go 自身 gopls 通道 + asyncomplete 做补全弹窗，
+" 避免 YCM 对 go 文件重复起 ycmd/gopls 通信，具体见 filetype_bundles/go.vim
+" 原 go 配置注释保留，供后续参考/回退：
+" \ "go":1,
 let g:ycm_filetype_whitelist = {
     \ "c":1,
     \ "cpp":1,
@@ -139,15 +143,15 @@ let g:ycm_filetype_whitelist = {
     \ "sh":1,
     \ "zsh":1,
     \ "vim":1,
-    \ "go":1,
     \ "python":1,
     \ "java":1,
     \ }
 
-" go: 原为 re!\w{2}，每 2 字符就调 gopls；改为 . 后或 4+ 字符才触发
+" go: 原为 re!\w{2}，每 2 字符就调 gopls；后改为 . 后或 4+ 字符才触发
+" 现 go 已从 whitelist 移除，此条不再生效，注释保留供参考/回退：
+" \ 'go': ['.', 're!\w{4}'],
 let g:ycm_semantic_triggers =  {
     \ 'c,cpp,sh,zsh,python,java,erlang,perl,snippets': ['re!\w{2}'],
-    \ 'go': ['.', 're!\w{4}'],
     \ 'cs,lua,vim,javascript': ['re!\w{2}'],
     \ }
 
