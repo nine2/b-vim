@@ -909,7 +909,14 @@ call plug#end()    " 内含 filetype plugin indent on
 " === 软链特例（不纳入 vim-plug 管理，避免 :PlugClean 误删）===
 " 这些通过软链指向具体版本目录，plug#end 之后手动 set rtp+= 加载
 set rtp+=$VIM_TMP_PATH/bundle/YouCompleteMe
-set rtp+=$VIM_TMP_PATH/bundle/vim-go
+" vim-go 用 rtp^=（前插）而非 rtp+=：$VIMRUNTIME 早已在 rtp 中，
+" 若用 rtp+= 追加到最后，:runtime! ftplugin/go.vim 会先命中 Vim 自带的
+" 精简版 ftplugin/go.vim（它会 let b:did_ftplugin=1），导致 vim-go 自己
+" 那份 ftplugin/go.vim 被同名 guard 挡住直接 finish——omnifunc、
+" go_def_mapping_enabled 相关的 <C-]>/gd 映射等都不会被设置。
+" 前插到 rtp 最前，让 vim-go 的 ftplugin 先跑、自己置位 guard，
+" Vim 自带那份随后命中 guard 正常跳过，不受影响。
+set rtp^=$VIM_TMP_PATH/bundle/vim-go
 set rtp+=$VIM_TMP_PATH/bundle/ycm_simple_conf
 
 " plug#end 已完成 plugin/ 扫描；上面 set rtp+= 后加入的目录需要手动 source 其 plugin/
