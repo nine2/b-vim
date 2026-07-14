@@ -144,7 +144,7 @@ set foldlevelstart=99       " 打开文件是默认不折叠代码
 " zR: 展开所有函数
 let g:FoldMethod = 0
 map <leader>zz :call ToggleFold()<cr>
-map zz za
+nnoremap <silent> zz :call SmartZA()<cr>
 " 会导致原有 zf  失效 (在 foldmethod=manual 时有效)
 map zf zA
 " 智能折叠：默认 foldmethod=manual（避免 j 滚动重算开销），
@@ -160,6 +160,17 @@ fun! ToggleFold()
         exe "normal! zR"
         setlocal foldmethod=manual
         let g:FoldMethod = 0
+    endif
+endfun
+" zz：manual 模式下光标行没有折叠信息时（foldlevel=0），临时切 indent 算出折叠再 za，
+" 随后立刻切回 manual 保留刚算出的折叠状态（避免长期停留 indent 导致 j/k 重算卡顿）
+fun! SmartZA() abort
+    if &foldmethod ==# 'manual' && foldlevel(line('.')) == 0
+        setlocal foldmethod=indent
+        normal! za
+        setlocal foldmethod=manual
+    else
+        normal! za
     endif
 endfun
 
