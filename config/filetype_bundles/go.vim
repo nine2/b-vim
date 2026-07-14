@@ -53,15 +53,17 @@ let g:go_info_mode = 'gopls'
 " let g:go_info_mode = 'gocode'
 " let g:go_auto_sameids = 1
 let g:go_updatetime = 1500          " 原 300ms，降低 gopls CursorHold 轮询频率
-let g:go_doc_popup_window = 0
+" go 文件不再走 YCM（见 vimrc.bundles_ycm 的 ycm_filetype_whitelist），
+" 开 popup 让 :GoDoc 承担 hover 角色（gh 映射见下）
+let g:go_doc_popup_window = 1
 let g:go_def_mode = 'gopls'
 " let g:go_def_mode = 'godef'
 let g:go_gopls_complete_unimported = 1
 let g:go_decls_mode = 'ctrlp.vim'
 let g:go_decls_includes = 'func,type'
 let g:go_fold_enable = ['import']
-" 此行会导致 C-] 失效, 同时禁用了 go 的 gd 指令，使用下面的 gs 代替
-let g:go_def_mapping_enabled = 0
+" 原为 0，把 C-]/gd 让给 YCM；go 文件不再用 YCM，改回 vim-go 自己的 gopls 跳转
+let g:go_def_mapping_enabled = 1
 " 取消绑定K, 使用 <leader>gd 代替
 let g:go_doc_keywordprg_enabled = 0
 " 高亮
@@ -90,6 +92,23 @@ let g:go_null_module_warning = 0
 " 修改补全触发
 inoremap <C-n> <C-x><C-o>
 
+" ###############################
+" 补全弹窗（替代 YCM 对 go 的补全）
+" asyncomplete.vim 本体 + asyncomplete-omni.vim（omni source，核心包不内置，
+" 需单独装）；不装 asyncomplete-lsp.vim，不额外起 LSP client——
+" 补全数据直接走 vim-go 自己已经设置好的 omnifunc=go#complete#Complete
+" （其内部调用 go#lsp#Completion，用的是 vim-go 自身维护的那一个 gopls 连接），
+" 物理上不存在第二个 gopls 进程，也就无需依赖 g:go_gopls_options 的
+" -remote=auto 共享机制去"去重"。
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'yami-beta/asyncomplete-omni.vim'
+let g:asyncomplete_auto_popup = 1
+au FileType go call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+    \ 'name': 'go-gopls',
+    \ 'whitelist': ['go'],
+    \ 'completor': function('asyncomplete#sources#omni#completor'),
+    \ }))
+
 " au FileType go nnoremap <buffer> <silent> gs :<C-u>call go#def#Jump("split")<CR>
 " au FileType go nnoremap <buffer> <silent> <C-]> :GoDef<cr>
 
@@ -110,6 +129,8 @@ au FileType go nnoremap fs :GoFillStruct<cr>
 " GoInfo 用 gy（go type info）；vim 内置 gy 完全空闲，避开 <Space>/<leader> 等待 timeout
 au FileType go nmap gy :GoInfo<cr>
 au FileType go nmap <Leader>d :GoDoc<cr>
+" gh：go 文件下的 hover，替代原来落在这个键上的 YCMHover（其它文件类型 gh 仍走 YCM，见 vimrc.bundles_ycm）
+au FileType go nmap gh :GoDoc<cr>
 " SameIds 配色： hi CursorColumn ctermbg=26
 au FileType go nmap wh :GoSameIds<cr>
 au FileType go nmap whc :GoSameIdsClear<cr>
