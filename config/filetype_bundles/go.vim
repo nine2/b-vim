@@ -62,8 +62,9 @@ let g:go_gopls_complete_unimported = 1
 let g:go_decls_mode = 'ctrlp.vim'
 let g:go_decls_includes = 'func,type'
 let g:go_fold_enable = ['import']
-" 原为 0，把 C-]/gd 让给 YCM；go 文件不再用 YCM，改回 vim-go 自己的 gopls 跳转
-let g:go_def_mapping_enabled = 1
+" 改回 0：ff 已绑定 :GoDef 承担跳转到定义（go.vim:119），gd 无需再重复绑定同一功能，
+" 让回 vim 内置 gd（跳本地声明 + 顺带把 cword 写入 / 寄存器实现全文高亮同名词）
+let g:go_def_mapping_enabled = 0
 " 取消绑定K, 使用 <leader>gd 代替
 let g:go_doc_keywordprg_enabled = 0
 " 高亮
