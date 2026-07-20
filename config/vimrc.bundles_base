@@ -39,7 +39,7 @@ let g:loaded_git_messenger = 1
 "   gt    toggle 显示 sign 列
 "   gn    跳到【下一个】变更 hunk
 "   gp    跳到【上一个】变更 hunk
-"   gr    undo 当前 hunk（注意：跟 <leader>gr=LeaderF gtags 不冲突，前者两键后者三键）
+"   gz    undo 当前 hunk（gr 已让给 LeaderF gtags -r，见下方 nnoremap gr）
 " 默认快捷键（]c/[c/<leader>h*）已被 g:gitgutter_map_keys = 0 全部禁用
 let g:gitgutter_async = 1                  " 异步 git diff，不阻塞 UI（默认）
 let g:gitgutter_eager = 0                  " 不在 BufEnter/TabEnter/FocusGained 主动触发

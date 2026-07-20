@@ -21,7 +21,10 @@ nnoremap ; :
 " 找不到 git 根时退化到文件父目录；buffer-local 缓存避免每次 BufEnter 跑 git
 function! g:LcdGitRootOrParent() abort
     if !exists('b:_lcd_root')
-        let l:dir = expand('%:p:h')
+        " resolve() 解析符号链接：不少 dotfile（如 ~/.tmux.conf）本身是软链，
+        " 若不解析，git rev-parse 会以 $HOME 为父目录而失败，进而 lcd 到 $HOME，
+        " 连带导致 LeaderF gtags 把项目根误判成 $HOME（见 %Users%long 报错）
+        let l:dir = fnamemodify(resolve(expand('%:p')), ':h')
         if empty(l:dir) || !isdirectory(l:dir)
             let b:_lcd_root = ''
             return
