@@ -271,3 +271,12 @@ enddef
 export def DebugSetSuggestion(lines: list<string>)
   suggestionLines = lines
 enddef
+
+export def Toggle()
+  g:gemini_complete_enabled = !get(g:, 'gemini_complete_enabled', 1)
+  if !g:gemini_complete_enabled
+    CancelPending()
+    Dismiss()
+  endif
+  echom $'Gemini completion: {g:gemini_complete_enabled ? "ON" : "OFF"}'
+enddef

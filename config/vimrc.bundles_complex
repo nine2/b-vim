@@ -41,7 +41,7 @@ noremap <F8> :Autoformat<CR>
 
 " 快速补全, 需要 vim 支持 python
 Plug 'SirVer/ultisnips'
-" Tab 统一由下方 SmartTab 路由（snippet > YCM popup > Copilot），此处不绑定避免冲突
+" Tab 统一由下方 SmartTab 路由（snippet > YCM popup > 普通 Tab，Copilot 已禁用），此处不绑定避免冲突
 let g:UltiSnipsExpandTrigger="<nop>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -73,13 +73,16 @@ imap <C-k><C-o> <Plug>(github-complete-manual-completion)
 Plug 'guns/xterm-color-table.vim'
 " :XtermColorTable
 
-Plug 'github/copilot.vim'
-" 启用 Copilot
-let g:copilot_enabled = v:true
-" 禁用 Copilot 默认 Tab 映射，由 SmartTab 统一路由
-let g:copilot_no_tab_map = 1
+" Copilot 已禁用（组织策略），旧配置保留在 git 历史里；改用自研 Gemini 补全替代，
+" 设计文档见 b-vim/docs/superpowers/specs/2026-08-05-vim-gemini-completion-design.md
+set rtp+=$VIM_CONFIG_PATH/gemini-complete
+" gemini-complete 的 set rtp+= 发生在本文件（vimrc.bundles_complex 经由 vimrc.bundles_base
+" 在 call plug#end() 之前 source），理论上 plug#end() 的运行时扫描会覆盖到它；显式 runtime!
+" 一次是防御性写法，避免依赖 vim-plug 内部扫描时机的隐性假设（同一文件里 YCM/vim-go 那种
+" plug#end() 之后才 rtp+= 的情形必须手动 runtime!，这里保留同样的显式声明更稳妥）
+runtime! plugin/gemini_complete.vim
 
-" Tab 路由：UltiSnips 展开 → YCM popup 导航 → Copilot 接受
+" Tab 路由：UltiSnips 展开 → YCM popup 导航 → Gemini 建议接受 > 普通 Tab
 " 优先级：snippet > 补全菜单 > AI ghost text > 普通 Tab
 function! s:SmartTab()
     call UltiSnips#ExpandSnippetOrJump()
@@ -89,24 +92,15 @@ function! s:SmartTab()
     if pumvisible()
         return "\<C-n>"
     endif
-    return copilot#Accept("\<Tab>")
+    if gemini_complete#HasSuggestion()
+        return gemini_complete#Accept()
+    endif
+    return "\<Tab>"
 endfunction
 imap <silent><expr> <Tab> <SID>SmartTab()
 
-" 设置 Tab 键接受建议
-" imap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
-" imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-" imap <silent><script><expr> <C-H> copilot#Accept("\<CR>")
-" imap <silent><script><expr> <C-,> copilot#Next("\<CR>")
-" imap <silent><script><expr> <C-.> copilot#Previous("\<CR>")
-" imap <silent><script><expr> <C-\> copilot#Suggest("\<CR>")
-" 或者使用 Ctrl+Space 接受建议
-" 拒绝当前建议
-" imap <C-L> <Plug>(copilot-dismiss)
-" inoremap <C-G> <Plug>(copilot-suggest)
-
-" 显示建议面板
-nnoremap <Leader>cp :Copilot panel<CR>
+" 开关 Gemini 自动补全
+nnoremap <Leader>cp :GeminiToggle<CR>
 
 
 let g:cur_bundle_file_path = expand("$VIM_TMP_PATH/vimrc.bundles_completion")
