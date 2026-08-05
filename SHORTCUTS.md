@@ -67,7 +67,8 @@
 | `cj` | N | quickfix 下一个 | `:cnext<cr>` | `vimrc.config_base:740` |
 | `ck` | N | quickfix 上一个 | `:cprevious<cr>` | `vimrc.config_base:741` |
 | `co` | N | Quick | `:copen<cr>` | `vimrc.config_base:739` |
-| `<Leader>cp` | N | 开关 AI 自动补全（替代已禁用的 Copilot，后端 ModelScope/Qwen3-Coder） | `:AICompleteToggle<CR>` | `vimrc.bundles_complex:105` |
+| `<Leader>cp` | N | 开关 AI 自动补全（替代已禁用的 Copilot，后端 ModelScope/Qwen3-Coder） | `:AICompleteToggle<CR>` | `vimrc.bundles_complex:124` |
+| `<C-l>` | I | 接受 AI 补全建议（不受 pum 开关影响；<C-y> 会被 Vim 内置 pum 确认键截走所以不用） | `ai_complete#Accept()` | `vimrc.bundles_complex:121` |
 | `cq` | N sil | 适用：在主代码 buffer 中按 :GoReferrers / :GoBuild 后弹出 quickfix， /... | `:cclose<bar>lclose<bar>pclose<CR>` | `vimrc.bundles_base:790` |
 | `D` | N buf sil | 执行 :PlugDiff | `:PlugDiff<cr>` | `autoload/plug.vim:905` |
 | `d` | N buf sil | 执行 :set | `:set opfunc=<sid>delete_op<cr>g@` | `autoload/plug.vim:2532` |
@@ -246,7 +247,7 @@
 | `<ScrollWheelDown>` |  | — | `<C-E><C-E><C-E>` | `vimrc.config_base:44` |
 | `<ScrollWheelUp>` |  | Hide the mouse cursor while typing / set mousehide | `<C-Y><C-Y><C-Y>` | `vimrc.config_base:43` |
 | `<silent><expr>` | I | — | `( complete_parameter#pre_complete("()")` | `vimrc.bundles_base:859` |
-| `<silent><expr>` | I | — | `<Tab> <SID>SmartTab()` | `vimrc.bundles_complex:102` |
+| `<Tab>` | I | SmartTab 路由：snippet > pum > AI 建议 > 普通 Tab（<C-R>= 绑定，非 <expr>，避免 E565） | `<C-R>=<SID>SmartTab()<CR>` | `vimrc.bundles_complex:112` |
 | `<silent><leader>/` |  | 去掉搜索高亮 | `:nohls<CR>` | `vimrc.config_base:426` |
 | `<space><F2>` |  | hit space twice to open menu | `:call quickui#menu#open()<cr>` | `filetype_bundles/quickui.vim:60` |
 
@@ -467,8 +468,9 @@
 | `<c-k>` | I | UltiSnips JumpBackward | `UltiSnips JumpBackward` *(via g:UltiSnipsJumpBackwardTrigger)* | 47 |
 | `<leader>ds` |  | 在 Dash 中查文档 | `:Dash<cr>` | 60 |
 | `<C-k><C-o>` | I | <C-x><C-x> invokes completions of github-complete.vim / a... | `<Plug>(github-complete-manual-completion)` | 69 |
-| `<silent><expr>` | I | — | `<Tab> <SID>SmartTab()` | 102 |
-| `<Leader>cp` | N | 开关 AI 自动补全（替代已禁用的 Copilot，后端 ModelScope/Qwen3-Coder） | `:AICompleteToggle<CR>` | 105 |
+| `<Tab>` | I | SmartTab 路由：snippet > pum > AI 建议 > 普通 Tab（<C-R>= 绑定，非 <expr>，避免 E565） | `<C-R>=<SID>SmartTab()<CR>` | 112 |
+| `<Leader>cp` | N | 开关 AI 自动补全（替代已禁用的 Copilot，后端 ModelScope/Qwen3-Coder） | `:AICompleteToggle<CR>` | 124 |
+| `<C-l>` | I | 接受 AI 补全建议（不受 pum 开关影响） | `ai_complete#Accept()` | 121 |
 
 ### YouCompleteMe（vimrc.bundles_ycm）
 

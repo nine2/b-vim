@@ -83,24 +83,42 @@ Plug 'nine2/vim-ai-complete'
 
 " Tab 路由：UltiSnips 展开 → YCM popup 导航 → AI 建议接受 > 普通 Tab
 " 优先级：snippet > 补全菜单 > AI ghost text > 普通 Tab
+"
+" ⚠️ 绑定方式必须是 <C-R>=（表达式寄存器），不能用 <expr> 映射：
+" snippet 展开要往 buffer 写入内容，而 <expr> 求值期间 Vim 开启 textlock 禁止改
+" buffer/窗口（E565）。2026-05-07 的 94b53ff 把 UltiSnips 自管的 Tab 触发器
+" （g:UltiSnipsExpandTrigger="<tab>"，内部就是 <C-R>= 绑定，见 ultisnips 的
+" map_keys.vim）改成了 <nop> + 自定义 <expr> SmartTab，从那天起 Tab 展开 snippet
+" 一直是坏的（一按就 E565 双重崩溃：展开写 buffer 先撞 textlock，UltiSnips 报错器
+" 开 scratch 窗口又撞一次，把原始报错盖住）。<C-R>= 求值上下文允许改 buffer，
+" 这也是 UltiSnips 官方文档推荐的自定义 Tab 链集成方式。
+" 按键发送的分支统一走 feedkeys(,'n')（追加到 typeahead，<C-R>= 求值结束后才被
+" 处理，且不再走映射避免递归），不依赖 <C-R>= 对返回串里控制字符的解释语义。
 function! s:SmartTab()
     call UltiSnips#ExpandSnippetOrJump()
     if g:ulti_expand_or_jump_res > 0
         return ""
     endif
     if pumvisible()
-        return "\<C-n>"
+        call feedkeys("\<C-n>", 'n')
+        return ""
     endif
     if ai_complete#HasSuggestion()
         return ai_complete#Accept()
     endif
-    return "\<Tab>"
+    call feedkeys("\<Tab>", 'n')
+    return ""
 endfunction
-imap <silent><expr> <Tab> <SID>SmartTab()
+inoremap <silent> <Tab> <C-R>=<SID>SmartTab()<CR>
 
 " 独立接受 AI 建议的按键，不受 YCM 补全菜单开关影响（Tab 在 pum 打开时优先走 <C-n> 导航，
 " 这个键不管 pum 开没开都能直接接受 AI 建议，两者互不冲突，各自选用）
-imap <silent><expr> <C-y> ai_complete#Accept()
+" 注意：原来用 <C-y>，实测发现 pum 弹出时 <C-y> 是 Vim 内置的"确认弹窗当前选中项"
+" （:help i_CTRL-Y），不是靠 :imap 能覆盖的普通映射冲突，pum 打开时按下去会被 Vim
+" 自己截走去确认补全候选词，跟 AI 完全没关系。<C-l> 不在 Vim 内置 pum 特殊键
+" （CR/C-y/C-e/C-n/C-p/方向键）之列，且本仓库里 <C-l> 只在 NERDTree 的 Normal 模式下
+" 用，跟这里的 Insert 模式映射不冲突
+imap <silent><expr> <C-l> ai_complete#Accept()
 
 " 开关 AI 自动补全
 nnoremap <Leader>cp :AICompleteToggle<CR>
