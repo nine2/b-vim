@@ -29,6 +29,8 @@ if empty(got)
 else
   var beforeAcceptLine = getline(1)
   ai_complete#Accept()
+  # Accept() 的真正 buffer 修改延到 timer_start(0, ...) 异步执行，sleep 一下等它跑完
+  sleep 10m
   var afterAcceptLine = getline(1)
   assert_equal(true, afterAcceptLine != beforeAcceptLine, 'Accept should modify buffer content')
   assert_equal(true, len(afterAcceptLine) > len(beforeAcceptLine), 'Accept should insert non-empty text')

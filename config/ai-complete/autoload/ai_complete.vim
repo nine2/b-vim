@@ -5,7 +5,6 @@ var debounceTimer: number = -1
 var activeJob: job = null_job
 var suggestionLines: list<string> = []
 var suggestionWinid: number = -1
-var acceptingInProgress: bool = false
 var lastRawResponse: string = ''
 var lastExitStatus: number = -999
 
@@ -32,7 +31,7 @@ export def Setup()
     g:ai_complete_max_lines = 12
   endif
   if !exists('g:ai_complete_excluded_ft')
-    g:ai_complete_excluded_ft = ['gitcommit', 'markdown', 'text']
+    g:ai_complete_excluded_ft = ['gitcommit']
   endif
   if !exists('g:ai_complete_debug')
     g:ai_complete_debug = 0
@@ -42,10 +41,11 @@ enddef
 export def BuildPrompt(before: list<string>, after: list<string>, filetype: string): string
   var prefix = join(before, "\n")
   var suffix = join(after, "\n")
-  return "You are a code completion engine. Continue the code exactly at <CURSOR>. " ..
-    $"The file type is {filetype}. Output ONLY the code that comes AFTER <CURSOR> — " ..
-    "do not repeat anything before <CURSOR>, no explanation, no markdown code fences.\n\n" ..
-    $"--- CODE BEFORE CURSOR ---\n{prefix}\n<CURSOR>\n--- CODE AFTER CURSOR ---\n{suffix}"
+  return "You are a text completion engine. Continue the content exactly at <CURSOR>, " ..
+    $"matching its existing style (code, prose, or markdown). The file type is {filetype}. " ..
+    "Output ONLY what comes AFTER <CURSOR> — do not repeat anything before <CURSOR>, " ..
+    "no explanation, no markdown code fences around your output.\n\n" ..
+    $"--- CONTENT BEFORE CURSOR ---\n{prefix}\n<CURSOR>\n--- CONTENT AFTER CURSOR ---\n{suffix}"
 enddef
 
 export def StripCodeFences(text: string): string
@@ -79,8 +79,28 @@ export def ParseAIResponse(jsonBody: string): list<string>
 enddef
 
 export def ShouldRequest(filetype: string): bool
-  var excluded = get(g:, 'ai_complete_excluded_ft', ['gitcommit', 'markdown', 'text'])
+  var excluded = get(g:, 'ai_complete_excluded_ft', ['gitcommit'])
   return index(excluded, filetype) == -1
+enddef
+
+export def StripEchoedPrefix(currentLinePrefix: string, lines: list<string>): list<string>
+  if empty(lines) || empty(currentLinePrefix)
+    return lines
+  endif
+  var first = lines[0]
+  var n = min([len(currentLinePrefix), len(first)])
+  while n > 0
+    if currentLinePrefix[len(currentLinePrefix) - n :] ==# first[0 : n - 1]
+      var trimmed = first[n :]
+      var result = [trimmed] + lines[1 :]
+      if empty(trimmed) && len(result) > 1
+        return result[1 :]
+      endif
+      return result
+    endif
+    n -= 1
+  endwhile
+  return lines
 enddef
 
 export def SplitForInsert(lines: list<string>): dict<any>
@@ -124,7 +144,7 @@ def CancelPending()
   activeJob = null_job
 enddef
 
-def HandleJobExit(cfgFile: string, bodyFile: string, outFile: string, status: number)
+def HandleJobExit(cfgFile: string, bodyFile: string, outFile: string, curLinePrefix: string, status: number)
   var body = ''
   if status == 0 && filereadable(outFile)
     body = join(readfile(outFile), "\n")
@@ -139,6 +159,10 @@ def HandleJobExit(cfgFile: string, bodyFile: string, outFile: string, status: nu
     return
   endif
   var lines = ParseAIResponse(body)
+  if empty(lines)
+    return
+  endif
+  lines = StripEchoedPrefix(curLinePrefix, lines)
   if empty(lines)
     return
   endif
@@ -177,19 +201,14 @@ export def HasSuggestion(): bool
 enddef
 
 export def OnCursorMoved()
-  if acceptingInProgress
-    return
-  endif
   Dismiss()
 enddef
 
-export def Accept(): string
-  if empty(suggestionLines)
-    return ''
-  endif
-  var lines = suggestionLines
-  Dismiss()
-  acceptingInProgress = true
+# 真正落笔的 buffer 修改必须挪到这里，由 timer_start(0, ...) 异步调用。
+# 直接在 Accept() 里调 setline()/append()/cursor() 会在 <expr> 映射求值期间触发
+# E565（不允许在这个上下文里改文本/改窗口）——Accept() 本身只能做纯计算 + 状态清理，
+# 不能有任何会改 buffer/窗口的副作用。
+def DoInsert(lines: list<string>)
   var parts = SplitForInsert(lines)
   var curLine = getline('.')
   var col = col('.')
@@ -202,7 +221,20 @@ export def Accept(): string
   else
     cursor(line('.'), insertCol)
   endif
-  acceptingInProgress = false
+enddef
+
+export def Accept(): string
+  if empty(suggestionLines)
+    return ''
+  endif
+  var lines = suggestionLines
+  suggestionLines = []
+  if suggestionWinid != -1
+    var winToClose = suggestionWinid
+    suggestionWinid = -1
+    timer_start(0, (_) => popup_close(winToClose))
+  endif
+  timer_start(0, (_) => DoInsert(lines))
   return ''
 enddef
 
@@ -222,8 +254,9 @@ def FireRequest(timerId: number)
   var before = getline(beforeStart, line('.'))
   var curLine = getline('.')
   var col = col('.')
+  var curLinePrefix = curLine[0 : col - 2]
   if !empty(before)
-    before[len(before) - 1] = curLine[0 : col - 2]
+    before[len(before) - 1] = curLinePrefix
   endif
   var afterEnd = min([line('$'), line('.') + g:ai_complete_context_after])
   var after = getline(line('.'), afterEnd)
@@ -234,7 +267,7 @@ def FireRequest(timerId: number)
   var cfg = BuildCurlConfig(apiKey, g:ai_complete_model, prompt)
   CancelPending()
   activeJob = job_start(['curl', '-s', '-K', cfg.cfgFile], {
-    exit_cb: (j, status) => HandleJobExit(cfg.cfgFile, cfg.bodyFile, cfg.outFile, status)
+    exit_cb: (j, status) => HandleJobExit(cfg.cfgFile, cfg.bodyFile, cfg.outFile, curLinePrefix, status)
   })
 enddef
 

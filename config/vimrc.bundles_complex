@@ -101,6 +101,10 @@ function! s:SmartTab()
 endfunction
 imap <silent><expr> <Tab> <SID>SmartTab()
 
+" 独立接受 AI 建议的按键，不受 YCM 补全菜单开关影响（Tab 在 pum 打开时优先走 <C-n> 导航，
+" 这个键不管 pum 开没开都能直接接受 AI 建议，两者互不冲突，各自选用）
+imap <silent><expr> <C-y> ai_complete#Accept()
+
 " 开关 AI 自动补全
 nnoremap <Leader>cp :AICompleteToggle<CR>
 
