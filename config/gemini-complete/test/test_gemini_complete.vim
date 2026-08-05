@@ -23,6 +23,15 @@ var fakeJson = '{"candidates":[{"content":{"parts":[{"text":"line1\nline2"}]}}]}
 assert_equal(['line1', 'line2'], gemini_complete#ParseGeminiResponse(fakeJson), 'should parse gemini json')
 assert_equal([], gemini_complete#ParseGeminiResponse('not valid json'), 'invalid json returns empty')
 
+# --- ShouldRequest ---
+g:gemini_complete_excluded_ft = ['markdown', 'gitcommit']
+assert_equal(true, gemini_complete#ShouldRequest('go'), 'go should be allowed')
+assert_equal(false, gemini_complete#ShouldRequest('markdown'), 'markdown should be excluded')
+
+# --- SplitForInsert ---
+assert_equal({'first': 'a', 'rest': ['b', 'c']}, gemini_complete#SplitForInsert(['a', 'b', 'c']), 'split first/rest')
+assert_equal({'first': '', 'rest': []}, gemini_complete#SplitForInsert([]), 'empty input')
+
 var resultFile = getenv('GEMINI_TEST_RESULT_FILE')
 if len(v:errors) > 0
   writefile(v:errors + ['FAIL'], resultFile)

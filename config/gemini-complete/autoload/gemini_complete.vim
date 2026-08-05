@@ -75,3 +75,15 @@ export def ParseGeminiResponse(jsonBody: string): list<string>
     return []
   endtry
 enddef
+
+export def ShouldRequest(filetype: string): bool
+  var excluded = get(g:, 'gemini_complete_excluded_ft', ['gitcommit', 'markdown', 'text'])
+  return index(excluded, filetype) == -1
+enddef
+
+export def SplitForInsert(lines: list<string>): dict<any>
+  if empty(lines)
+    return {first: '', rest: []}
+  endif
+  return {first: lines[0], rest: lines[1 :]}
+enddef
