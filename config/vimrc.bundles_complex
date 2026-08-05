@@ -73,16 +73,18 @@ imap <C-k><C-o> <Plug>(github-complete-manual-completion)
 Plug 'guns/xterm-color-table.vim'
 " :XtermColorTable
 
-" Copilot 已禁用（组织策略），旧配置保留在 git 历史里；改用自研 Gemini 补全替代，
-" 设计文档见 b-vim/docs/superpowers/specs/2026-08-05-vim-gemini-completion-design.md
-set rtp+=$VIM_CONFIG_PATH/gemini-complete
-" gemini-complete 的 set rtp+= 发生在本文件（vimrc.bundles_complex 经由 vimrc.bundles_base
+" Copilot 已禁用（组织策略），旧配置保留在 git 历史里；改用自研 AI 补全替代（后端 ModelScope
+" API-Inference + Qwen3-Coder，国内直连，免费额度 2000 次/天），设计文档见
+" b-vim/docs/superpowers/specs/2026-08-05-vim-gemini-completion-design.md（含 Gemini/Claude/
+" GLM 几轮候选评估过程，最终落地 ModelScope，文档名沿用未改）
+set rtp+=$VIM_CONFIG_PATH/ai-complete
+" ai-complete 的 set rtp+= 发生在本文件（vimrc.bundles_complex 经由 vimrc.bundles_base
 " 在 call plug#end() 之前 source），理论上 plug#end() 的运行时扫描会覆盖到它；显式 runtime!
 " 一次是防御性写法，避免依赖 vim-plug 内部扫描时机的隐性假设（同一文件里 YCM/vim-go 那种
 " plug#end() 之后才 rtp+= 的情形必须手动 runtime!，这里保留同样的显式声明更稳妥）
-runtime! plugin/gemini_complete.vim
+runtime! plugin/ai_complete.vim
 
-" Tab 路由：UltiSnips 展开 → YCM popup 导航 → Gemini 建议接受 > 普通 Tab
+" Tab 路由：UltiSnips 展开 → YCM popup 导航 → AI 建议接受 > 普通 Tab
 " 优先级：snippet > 补全菜单 > AI ghost text > 普通 Tab
 function! s:SmartTab()
     call UltiSnips#ExpandSnippetOrJump()
@@ -92,15 +94,15 @@ function! s:SmartTab()
     if pumvisible()
         return "\<C-n>"
     endif
-    if gemini_complete#HasSuggestion()
-        return gemini_complete#Accept()
+    if ai_complete#HasSuggestion()
+        return ai_complete#Accept()
     endif
     return "\<Tab>"
 endfunction
 imap <silent><expr> <Tab> <SID>SmartTab()
 
-" 开关 Gemini 自动补全
-nnoremap <Leader>cp :GeminiToggle<CR>
+" 开关 AI 自动补全
+nnoremap <Leader>cp :AICompleteToggle<CR>
 
 
 let g:cur_bundle_file_path = expand("$VIM_TMP_PATH/vimrc.bundles_completion")

@@ -100,14 +100,14 @@ python3 install.py --all                  # 一次编译所有语言
 
 > 配置目录 `bundle/ycm_simple_conf/` 是 `.ycm_extra_conf.py` 模板，无需额外安装。
 
-### gemini-complete（自研，替代已被组织禁用的 Copilot）
+### ai-complete（自研，替代已被组织禁用的 Copilot）
 
 | 依赖 | 用途 | 获取方式 |
 |---|---|---|
-| `curl` | 异步调用 Gemini API | macOS 自带 |
-| `$GEMINI_API_KEY` 环境变量 | Gemini API 鉴权 | 在 Google AI Studio 生成后写入 shell profile |
+| `curl` | 异步调用 ModelScope API-Inference | macOS 自带 |
+| `$MODELSCOPE_API_KEY` 环境变量 | ModelScope 鉴权（国内直连，免费额度 2000 次/天） | [modelscope.cn](https://www.modelscope.cn) 绑定阿里云账号后，个人中心 → 访问控制 → 访问令牌 生成 |
 
-> 设计文档：`docs/superpowers/specs/2026-08-05-vim-gemini-completion-design.md`（本仓库内，untracked，仅本地参考）。
+> 设计文档：`docs/superpowers/specs/2026-08-05-vim-gemini-completion-design.md`（本仓库内，untracked，仅本地参考；文档名沿用最初评估 Gemini 时所起，实际后端已迭代为 ModelScope + Qwen3-Coder，过程见文档内 Gemini/Claude/GLM 候选评估记录）。
 
 ### ultisnips + vim-snippets
 
