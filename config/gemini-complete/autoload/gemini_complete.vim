@@ -6,6 +6,8 @@ var activeJob: job = null_job
 var suggestionLines: list<string> = []
 var suggestionWinid: number = -1
 var acceptingInProgress: bool = false
+var lastRawResponse: string = ''
+var lastExitStatus: number = -999
 
 export def Setup()
   if !exists('g:gemini_complete_enabled')
@@ -106,4 +108,100 @@ export def BuildCurlConfig(apiKey: string, model: string, prompt: string): dict<
   writefile(cfgLines, cfgFile)
   setfperm(cfgFile, 'rw-------')
   return {cfgFile: cfgFile, bodyFile: bodyFile, outFile: outFile}
+enddef
+
+def CancelPending()
+  if debounceTimer != -1
+    timer_stop(debounceTimer)
+    debounceTimer = -1
+  endif
+  if activeJob != null_job && job_status(activeJob) == 'run'
+    job_stop(activeJob)
+  endif
+  activeJob = null_job
+enddef
+
+def HandleJobExit(cfgFile: string, bodyFile: string, outFile: string, status: number)
+  var body = ''
+  if status == 0 && filereadable(outFile)
+    body = join(readfile(outFile), "\n")
+  endif
+  delete(cfgFile)
+  delete(bodyFile)
+  delete(outFile)
+  activeJob = null_job
+  lastRawResponse = body
+  lastExitStatus = status
+  if empty(body)
+    return
+  endif
+  var lines = ParseGeminiResponse(body)
+  if empty(lines)
+    return
+  endif
+  suggestionLines = lines
+enddef
+
+def FireRequest(timerId: number)
+  debounceTimer = -1
+  if !get(g:, 'gemini_complete_enabled', 1)
+    return
+  endif
+  if !ShouldRequest(&filetype)
+    return
+  endif
+  var apiKey = get(g:, 'gemini_complete_api_key', '')
+  if empty(apiKey)
+    return
+  endif
+  var beforeStart = max([1, line('.') - g:gemini_complete_context_before])
+  var before = getline(beforeStart, line('.'))
+  var curLine = getline('.')
+  var col = col('.')
+  if !empty(before)
+    before[len(before) - 1] = curLine[0 : col - 2]
+  endif
+  var afterEnd = min([line('$'), line('.') + g:gemini_complete_context_after])
+  var after = getline(line('.'), afterEnd)
+  if !empty(after)
+    after[0] = curLine[col - 1 :]
+  endif
+  var prompt = BuildPrompt(before, after, &filetype)
+  var cfg = BuildCurlConfig(apiKey, g:gemini_complete_model, prompt)
+  CancelPending()
+  activeJob = job_start(['curl', '-s', '-K', cfg.cfgFile], {
+    exit_cb: (j, status) => HandleJobExit(cfg.cfgFile, cfg.bodyFile, cfg.outFile, status)
+  })
+enddef
+
+export def OnTextChanged()
+  CancelPending()
+  suggestionLines = []
+  if !get(g:, 'gemini_complete_enabled', 1)
+    return
+  endif
+  debounceTimer = timer_start(get(g:, 'gemini_complete_debounce_ms', 400), FireRequest)
+enddef
+
+export def DebugPendingCount(): number
+  var n = 0
+  if debounceTimer != -1
+    n += 1
+  endif
+  if activeJob != null_job && job_status(activeJob) == 'run'
+    n += 1
+  endif
+  return n
+enddef
+
+export def DebugSuggestion(): list<string>
+  return suggestionLines
+enddef
+
+export def DebugLastRawResponse(): string
+  return lastRawResponse
+enddef
+
+export def DebugLastExitStatus(): number
+  return lastExitStatus
 enddef
