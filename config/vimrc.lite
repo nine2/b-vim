@@ -68,15 +68,15 @@ if has('persistent_undo')
 endif
 
 if g:cust_vim_tmp_path is 1
-    set backupdir=$VIM_TMP_PATH/vimbackup
-    set viewdir=$VIM_TMP_PATH/vimview
-    set dir=$VIM_TMP_PATH/vimswap
-    set undodir=$VIM_TMP_PATH/vimundo
+    set backupdir=$VIM_TMP_PATH/vimbackup//
+    set viewdir=$VIM_TMP_PATH/vimview//
+    set dir=$VIM_TMP_PATH/vimswap//
+    set undodir=$VIM_TMP_PATH/vimundo//
 else
-    set backupdir=$HOME/.vim/vimbackup
-    set viewdir=$HOME/.vim/vimview
-    set dir=$HOME/.vim/vimswap
-    set undodir=$HOME/.vim/vimundo
+    set backupdir=$HOME/.vim/vimbackup//
+    set viewdir=$HOME/.vim/vimview//
+    set dir=$HOME/.vim/vimswap//
+    set undodir=$HOME/.vim/vimundo//
 endif
 " 备份防相同文件名：
 autocmd BufWritePre *

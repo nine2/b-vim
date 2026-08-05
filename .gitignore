@@ -66,3 +66,5 @@ vendor
 *.bak
 
 b-vim
+docs/superpowers/
+docs/superpowers/*
