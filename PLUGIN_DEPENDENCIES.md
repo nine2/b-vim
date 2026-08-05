@@ -102,6 +102,8 @@ python3 install.py --all                  # 一次编译所有语言
 
 ### ai-complete（自研，替代已被组织禁用的 Copilot）
 
+独立 git 仓库（后续推到 `nine2/ai-complete`），跟 YouCompleteMe/vim-go 一样放在 `$VIM_TMP_PATH/bundle/ai-complete`，不纳入 vim-plug 管理，也不在 b-vim 自己的 git 历史里（`.vim` 目录已在 `.gitignore`）。
+
 | 依赖 | 用途 | 获取方式 |
 |---|---|---|
 | `curl` | 异步调用 ModelScope API-Inference | macOS 自带 |
