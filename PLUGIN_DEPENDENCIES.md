@@ -100,12 +100,14 @@ python3 install.py --all                  # 一次编译所有语言
 
 > 配置目录 `bundle/ycm_simple_conf/` 是 `.ycm_extra_conf.py` 模板，无需额外安装。
 
-### copilot.vim
+### gemini-complete（自研，替代已被组织禁用的 Copilot）
 
-| 依赖 | 用途 | 安装命令 |
+| 依赖 | 用途 | 获取方式 |
 |---|---|---|
-| `node` ≥ 18 | Copilot agent 运行时 | `brew install node` |
-| GitHub Copilot 订阅 | 授权使用 | 在 vim 内执行 `:Copilot setup` 完成 OAuth |
+| `curl` | 异步调用 Gemini API | macOS 自带 |
+| `$GEMINI_API_KEY` 环境变量 | Gemini API 鉴权 | 在 Google AI Studio 生成后写入 shell profile |
+
+> 设计文档：`docs/superpowers/specs/2026-08-05-vim-gemini-completion-design.md`（本仓库内，untracked，仅本地参考）。
 
 ### ultisnips + vim-snippets
 

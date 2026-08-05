@@ -67,7 +67,7 @@
 | `cj` | N | quickfix 下一个 | `:cnext<cr>` | `vimrc.config_base:740` |
 | `ck` | N | quickfix 上一个 | `:cprevious<cr>` | `vimrc.config_base:741` |
 | `co` | N | Quick | `:copen<cr>` | `vimrc.config_base:739` |
-| `<Leader>cp` | N | 显示建议面板 | `:Copilot panel<CR>` | `vimrc.bundles_complex:109` |
+| `<Leader>cp` | N | 开关 Gemini 自动补全（替代已禁用的 Copilot） | `:GeminiToggle<CR>` | `vimrc.bundles_complex:103` |
 | `cq` | N sil | 适用：在主代码 buffer 中按 :GoReferrers / :GoBuild 后弹出 quickfix， /... | `:cclose<bar>lclose<bar>pclose<CR>` | `vimrc.bundles_base:790` |
 | `D` | N buf sil | 执行 :PlugDiff | `:PlugDiff<cr>` | `autoload/plug.vim:905` |
 | `d` | N buf sil | 执行 :set | `:set opfunc=<sid>delete_op<cr>g@` | `autoload/plug.vim:2532` |
@@ -467,8 +467,8 @@
 | `<c-k>` | I | UltiSnips JumpBackward | `UltiSnips JumpBackward` *(via g:UltiSnipsJumpBackwardTrigger)* | 47 |
 | `<leader>ds` |  | 在 Dash 中查文档 | `:Dash<cr>` | 60 |
 | `<C-k><C-o>` | I | <C-x><C-x> invokes completions of github-complete.vim / a... | `<Plug>(github-complete-manual-completion)` | 69 |
-| `<silent><expr>` | I | — | `<Tab> <SID>SmartTab()` | 94 |
-| `<Leader>cp` | N | 显示建议面板 | `:Copilot panel<CR>` | 109 |
+| `<silent><expr>` | I | — | `<Tab> <SID>SmartTab()` | 100 |
+| `<Leader>cp` | N | 开关 Gemini 自动补全（替代已禁用的 Copilot） | `:GeminiToggle<CR>` | 103 |
 
 ### YouCompleteMe（vimrc.bundles_ycm）
 
