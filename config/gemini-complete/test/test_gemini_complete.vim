@@ -32,6 +32,17 @@ assert_equal(false, gemini_complete#ShouldRequest('markdown'), 'markdown should 
 assert_equal({'first': 'a', 'rest': ['b', 'c']}, gemini_complete#SplitForInsert(['a', 'b', 'c']), 'split first/rest')
 assert_equal({'first': '', 'rest': []}, gemini_complete#SplitForInsert([]), 'empty input')
 
+# --- BuildCurlConfig ---
+var cfg = gemini_complete#BuildCurlConfig('MYTESTKEY', 'gemini-2.5-flash-lite', 'hello world prompt')
+var cfgContent = join(readfile(cfg.cfgFile), "\n")
+assert_equal(true, cfgContent =~ 'x-goog-api-key: MYTESTKEY', 'api key must be in header line, not argv')
+assert_equal(true, cfgContent =~ 'gemini-2.5-flash-lite', 'model must be in url')
+assert_equal(true, cfgContent =~ 'data-binary', 'must reference body file')
+var bodyContent = join(readfile(cfg.bodyFile), "\n")
+assert_equal(true, bodyContent =~ 'hello world prompt', 'prompt must be in request body')
+delete(cfg.cfgFile)
+delete(cfg.bodyFile)
+
 var resultFile = getenv('GEMINI_TEST_RESULT_FILE')
 if len(v:errors) > 0
   writefile(v:errors + ['FAIL'], resultFile)

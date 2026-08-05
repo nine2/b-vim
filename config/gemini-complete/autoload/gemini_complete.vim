@@ -87,3 +87,23 @@ export def SplitForInsert(lines: list<string>): dict<any>
   endif
   return {first: lines[0], rest: lines[1 :]}
 enddef
+
+export def BuildCurlConfig(apiKey: string, model: string, prompt: string): dict<string>
+  var url = $'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent'
+  var body = json_encode({contents: [{parts: [{text: prompt}]}]})
+  var bodyFile = tempname()
+  writefile([body], bodyFile)
+  var outFile = tempname()
+  var cfgFile = tempname()
+  var cfgLines = [
+    $'url = "{url}"',
+    'header = "Content-Type: application/json"',
+    $'header = "x-goog-api-key: {apiKey}"',
+    $'data-binary = @{bodyFile}',
+    $'output = "{outFile}"',
+    'silent',
+  ]
+  writefile(cfgLines, cfgFile)
+  setfperm(cfgFile, 'rw-------')
+  return {cfgFile: cfgFile, bodyFile: bodyFile, outFile: outFile}
+enddef
