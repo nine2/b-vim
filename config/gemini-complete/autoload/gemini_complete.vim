@@ -140,6 +140,67 @@ def HandleJobExit(cfgFile: string, bodyFile: string, outFile: string, status: nu
     return
   endif
   suggestionLines = lines
+  RenderSuggestion(lines)
+enddef
+
+def RenderSuggestion(lines: list<string>)
+  if suggestionWinid != -1
+    popup_close(suggestionWinid)
+  endif
+  if empty(lines)
+    suggestionWinid = -1
+    return
+  endif
+  suggestionWinid = popup_create(lines, {
+    line: 'cursor',
+    col: 'cursor',
+    pos: 'topleft',
+    highlight: 'Comment',
+    zindex: 50,
+    wrap: false,
+  })
+enddef
+
+export def Dismiss()
+  if suggestionWinid != -1
+    popup_close(suggestionWinid)
+  endif
+  suggestionWinid = -1
+  suggestionLines = []
+enddef
+
+export def HasSuggestion(): bool
+  return !empty(suggestionLines)
+enddef
+
+export def OnCursorMoved()
+  if acceptingInProgress
+    return
+  endif
+  Dismiss()
+enddef
+
+export def Accept(): string
+  if empty(suggestionLines)
+    return ''
+  endif
+  var lines = suggestionLines
+  Dismiss()
+  acceptingInProgress = true
+  var parts = SplitForInsert(lines)
+  var curLine = getline('.')
+  var col = col('.')
+  var newFirstLine = curLine[0 : col - 2] .. parts.first .. curLine[col - 1 :]
+  setline('.', newFirstLine)
+  var insertCol = col + len(parts.first)
+  if !empty(parts.rest)
+    append('.', parts.rest)
+    cursor(line('.') + len(parts.rest), len(parts.rest[len(parts.rest) - 1]) + 1)
+  else
+    cursor(line('.'), insertCol)
+  endif
+  acceptingInProgress = false
+  return ''
 enddef
 
 def FireRequest(timerId: number)
@@ -204,4 +265,9 @@ enddef
 
 export def DebugLastExitStatus(): number
   return lastExitStatus
+enddef
+
+# 仅供测试注入用：绕开真实网络请求，直接验证 Accept()/HasSuggestion()/Dismiss() 逻辑
+export def DebugSetSuggestion(lines: list<string>)
+  suggestionLines = lines
 enddef

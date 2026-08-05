@@ -43,6 +43,31 @@ assert_equal(true, bodyContent =~ 'hello world prompt', 'prompt must be in reque
 delete(cfg.cfgFile)
 delete(cfg.bodyFile)
 
+# --- Accept()/HasSuggestion()/Dismiss()（不依赖网络，用调试注入函数直接验证） ---
+assert_equal(false, gemini_complete#HasSuggestion(), 'no suggestion initially')
+gemini_complete#DebugSetSuggestion(['foo()', 'bar()'])
+assert_equal(true, gemini_complete#HasSuggestion(), 'suggestion present after inject')
+
+# 光标停在行中间（非行尾），避开 Normal/Insert 模式下 cursor() 钳制行为不一致的问题：
+# Normal 模式的光标不能停在"最后一个字符之后"，只有真正的 Insert 模式才允许，headless
+# batch 脚本很难可靠模拟"真处于 Insert 模式、光标在行尾"这个状态——这部分留给 Task 7
+# 手动验证清单里"真实交互"的一条，这里只验证任意光标位置下的文本拼接逻辑本身是否正确
+new
+setline(1, 'x = END')
+cursor(1, 5)
+gemini_complete#DebugSetSuggestion(['foo()', 'bar()'])
+gemini_complete#Accept()
+assert_equal('x = foo()END', getline(1), 'suggestion should be spliced in at cursor position')
+assert_equal('bar()', getline(2), 'second line should be appended below')
+assert_equal(false, gemini_complete#HasSuggestion(), 'suggestion cleared after accept')
+bwipeout!
+
+new
+setline(1, 'unchanged')
+gemini_complete#Accept()
+assert_equal('unchanged', getline(1), 'Accept with no suggestion should not modify buffer')
+bwipeout!
+
 var resultFile = getenv('GEMINI_TEST_RESULT_FILE')
 if len(v:errors) > 0
   writefile(v:errors + ['FAIL'], resultFile)

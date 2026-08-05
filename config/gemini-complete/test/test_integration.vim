@@ -28,6 +28,14 @@ if empty(got)
   # 诊断信息：区分"插件逻辑有 bug"还是"这台机器的网络/API key 限制导致调不通"
   var diag = $'exit_status={gemini_complete#DebugLastExitStatus()} raw_response={gemini_complete#DebugLastRawResponse()}'
   assert_equal(true, len(got) > 0, $'expected non-empty suggestion from real Gemini API within {waited}ms. {diag}')
+else
+  # 只有真的拿到建议时才能验证 Accept() 的插入效果（本沙箱因 IP 白名单限制通常走不到这里，
+  # 需要在 tianlong 实际使用 vim 的机器上重跑才能覆盖这一段）
+  var beforeAcceptLine = getline(1)
+  gemini_complete#Accept()
+  var afterAcceptLine = getline(1)
+  assert_equal(true, afterAcceptLine != beforeAcceptLine, 'Accept should modify buffer content')
+  assert_equal(true, len(afterAcceptLine) > len(beforeAcceptLine), 'Accept should insert non-empty text')
 endif
 
 bwipeout!
