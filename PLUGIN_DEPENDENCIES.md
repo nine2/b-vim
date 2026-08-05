@@ -100,9 +100,9 @@ python3 install.py --all                  # 一次编译所有语言
 
 > 配置目录 `bundle/ycm_simple_conf/` 是 `.ycm_extra_conf.py` 模板，无需额外安装。
 
-### ai-complete（自研，替代已被组织禁用的 Copilot）
+### vim-ai-complete（自研，替代已被组织禁用的 Copilot）
 
-独立 git 仓库（后续推到 `nine2/ai-complete`），跟 YouCompleteMe/vim-go 一样放在 `$VIM_TMP_PATH/bundle/ai-complete`，不纳入 vim-plug 管理，也不在 b-vim 自己的 git 历史里（`.vim` 目录已在 `.gitignore`）。
+独立 git 仓库 [`nine2/vim-ai-complete`](https://github.com/nine2/vim-ai-complete)，纳入 vim-plug 管理（`Plug 'nine2/vim-ai-complete'`），放在 `$VIM_TMP_PATH/bundle/vim-ai-complete`（跟 `plug#begin()` 的 base 目录一致），不在 b-vim 自己的 git 历史里（`.vim` 目录已在 `.gitignore`）。
 
 | 依赖 | 用途 | 获取方式 |
 |---|---|---|

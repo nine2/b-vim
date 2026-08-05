@@ -74,12 +74,12 @@ Plug 'guns/xterm-color-table.vim'
 " :XtermColorTable
 
 " Copilot 已禁用（组织策略），旧配置保留在 git 历史里；改用自研 AI 补全替代（后端 ModelScope
-" API-Inference + Qwen3-Coder，国内直连，免费额度 2000 次/天）。ai-complete 纳入 vim-plug
-" 管理，用 GitHub 短写法——plug#begin() 的 base 目录正好就是 $VIM_TMP_PATH/bundle
-" （见 vimrc.bundles_base），跟 ai-complete 当前所在目录一致，vim-plug 发现目录已存在
-" 就不会去联网克隆，日常加载没问题；仓库 nine2/ai-complete 还没 push，只有显式跑
+" API-Inference + Qwen3-Coder，国内直连，免费额度 2000 次/天）。vim-ai-complete 纳入
+" vim-plug 管理，用 GitHub 短写法——plug#begin() 的 base 目录正好就是 $VIM_TMP_PATH/bundle
+" （见 vimrc.bundles_base），跟 vim-ai-complete 当前所在目录一致，vim-plug 发现目录已存在
+" 就不会去联网克隆，日常加载没问题；仓库 nine2/vim-ai-complete 本地还没 push，只有显式跑
 " :PlugInstall/:PlugUpdate 时才会因为远程不存在而报错，跑一次全量更新时留意一下这条即可
-Plug 'nine2/ai-complete'
+Plug 'nine2/vim-ai-complete'
 
 " Tab 路由：UltiSnips 展开 → YCM popup 导航 → AI 建议接受 > 普通 Tab
 " 优先级：snippet > 补全菜单 > AI ghost text > 普通 Tab
