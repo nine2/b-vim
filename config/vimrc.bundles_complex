@@ -74,15 +74,11 @@ Plug 'guns/xterm-color-table.vim'
 " :XtermColorTable
 
 " Copilot 已禁用（组织策略），旧配置保留在 git 历史里；改用自研 AI 补全替代（后端 ModelScope
-" API-Inference + Qwen3-Coder，国内直连，免费额度 2000 次/天）。ai-complete 是独立 git 仓库
-" （后续会推到 nine2/ai-complete），跟 YouCompleteMe/vim-go 一样放在 $VIM_TMP_PATH/bundle/
-" 下，不纳入 vim-plug 管理，也不受 b-vim 自己的 git 追踪（.vim 目录已在 b-vim 的 .gitignore 里）
-set rtp+=$VIM_TMP_PATH/bundle/ai-complete
-" ai-complete 的 set rtp+= 发生在本文件（vimrc.bundles_complex 经由 vimrc.bundles_base
-" 在 call plug#end() 之前 source），理论上 plug#end() 的运行时扫描会覆盖到它；显式 runtime!
-" 一次是防御性写法，避免依赖 vim-plug 内部扫描时机的隐性假设（同一文件里 YCM/vim-go 那种
-" plug#end() 之后才 rtp+= 的情形必须手动 runtime!，这里保留同样的显式声明更稳妥）
-runtime! plugin/ai_complete.vim
+" API-Inference + Qwen3-Coder，国内直连，免费额度 2000 次/天）。ai-complete 纳入 vim-plug
+" 管理，用本地路径形式（GitHub 仓库 nine2/ai-complete 还没 push，且当前网络 SSH 连 GitHub
+" 不稳定，用本地路径不依赖网络）；push 完成后可以改成 `Plug 'nine2/ai-complete'` 短写法，
+" 让 :PlugUpdate 走真正的远程拉取
+Plug '$VIM_TMP_PATH/bundle/ai-complete'
 
 " Tab 路由：UltiSnips 展开 → YCM popup 导航 → AI 建议接受 > 普通 Tab
 " 优先级：snippet > 补全菜单 > AI ghost text > 普通 Tab
