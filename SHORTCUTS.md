@@ -1,7 +1,7 @@
 # Vim 快捷键速查表
 
 **生成日期**: 2026-05-08
-**总数**: 294 个映射（含 nmap/imap/vmap/smap/map + 变量配置式）
+**总数**: 293 个映射（含 nmap/imap/vmap/smap/map + 变量配置式）
 **全局映射**: 234（不含 buffer-local 的 FileType 限定项）
 
 > **mode 列说明**：N=normal, I=insert, V=visual, S=select, C=cmdline；buf=buffer-local
@@ -160,7 +160,7 @@
 | `q` | N buf sil | 关闭当前窗口 | `:q<cr>` | `autoload/plug.vim:2752` |
 | `qa` | N | 关闭当前窗口 | `:qa<CR>` | `vimrc.config_base:493` |
 | `qq` | N | 关闭当前窗口 | `:q<CR>` | `vimrc.config_base:492` |
-| `<Leader>r` | N | Plug 触发：quickrun | `<Plug>(quickrun)` | `vimrc.bundles_base:810` |
+| `<Leader>r` | N | Plug 触发：quickrun（被下方 TranslateR 覆盖，实际不生效，QuickRun 用 `<Leader>u`） | `<Plug>(quickrun)` | `vimrc.bundles_base:828` |
 | `<Leader>r` | N sil | Replace the text with translation | `<Plug>TranslateR` | `filetype_bundles/dependout.vim:24` |
 | `<Leader>r` | V sil | 翻译 | `<Plug>TranslateRV` | `filetype_bundles/dependout.vim:25` |
 | `R` | N buf sil | 执行 :call | `:call <SID>retry()<cr>` | `autoload/plug.vim:904` |
@@ -190,6 +190,7 @@
 | `U` | N | remap U to <C-r> for easier redo | `<C-r>` | `vimrc.config_base:503` |
 | `U` | N buf sil | 执行 :call | `:call <SID>status_update()<cr>` | `autoload/plug.vim:907` |
 | `U` | V buf sil | 执行 :call | `:call <SID>status_update()<cr>` | `autoload/plug.vim:908` |
+| `<Leader>u` | N | 执行 :QuickRun（原 F10；F10 已让给 Hammerspoon 全局切换 Chrome） | `:QuickRun<CR>` | `vimrc.bundles_base:830` |
 | `uh` |  | 执行 :CopyrightUpdate | `:CopyrightUpdate<cr>` | `vimrc.bundles_base:833` |
 | `<leader>v` | N | select block | `V`}` | `vimrc.config_base:483` |
 | `V` | V | Plug 触发：expand_region_shrink | `<Plug>(expand_region_shrink)` | `vimrc.bundles_base:357` |
@@ -231,7 +232,6 @@
 | `<F7>` | N | 项目级 grep 搜索（侧边栏） | `:CtrlSF -R '\W<c-r>=expand("<cword>")<cr>[(,)]'<cr>` | `vimrc.bundles_base:505` |
 | `<F8>` |  | 通用格式化（vim-autoformat） | `:Autoformat<CR>` | `vimrc.bundles_complex:24` |
 | `<F8>` |  | 执行 :F8FormatFile | `:F8FormatFile<CR>` | `vimrc.bundles_simple:42` |
-| `<F10>` |  | 执行 :QuickRun | `:QuickRun<CR>` | `vimrc.bundles_base:811` |
 | `<` | V | ##### 选中及操作改键 / 调整缩进后自动选中，方便再次操作 | `<gv` | `vimrc.config_base:475` |
 | `<2-LeftMouse>` |  | 双击跳转 | `<C-]>` | `vimrc.config_base:756` |
 | `<2-RightMouse>` |  | — | `<C-o>` | `vimrc.config_base:757` |
@@ -447,8 +447,8 @@
 | `cq` | N sil | 适用：在主代码 buffer 中按 :GoReferrers / :GoBuild 后弹出 quickfix， /... | `:cclose<bar>lclose<bar>pclose<CR>` | 790 |
 | `ga` | V | 对齐选区/动作（vim-easy-align） | `<Plug>(EasyAlign)` | 793 |
 | `ga` | N | 对齐选区/动作（vim-easy-align） | `<Plug>(EasyAlign)` | 794 |
-| `<Leader>r` | N | Plug 触发：quickrun | `<Plug>(quickrun)` | 810 |
-| `<F10>` |  | 执行 :QuickRun | `:QuickRun<CR>` | 811 |
+| `<Leader>r` | N | Plug 触发：quickrun（被 TranslateR 覆盖，实际不生效） | `<Plug>(quickrun)` | 828 |
+| `<Leader>u` | N | 执行 :QuickRun（原 F10；F10 已让给 Hammerspoon 全局切换 Chrome） | `:QuickRun<CR>` | 830 |
 | `uh` |  | 执行 :CopyrightUpdate | `:CopyrightUpdate<cr>` | 833 |
 | `<silent><expr>` | I | — | `( complete_parameter#pre_complete("()")` | 859 |
 | `<c-j>` | S | Plug 触发：complete_parameter#goto_next_parameter | `<Plug>(complete_parameter#goto_next_parameter)` | 860 |
@@ -560,7 +560,7 @@
 | `<Leader>e` | N | go build 检查错误 | `:GoBuild<cr>` | 149 |
 | `<Leader>gb` | N | Go 编译当前包 | `:GoBuild<cr>` | 150 |
 | `cl` | N | 运行 Go metalinter | `:GoMetaLinter<cr>` | 151 |
-| `<F10>` | N | 运行 Go metalinter | `:GoMetaLinter<CR>` | 152 |
+| `<Leader>gl` | N | 运行 Go metalinter（原 F10；F10 已让给 Hammerspoon 全局切换 Chrome） | `:GoMetaLinter<CR>` | 154 |
 | `ek` | N sil | quickfix 上一个 | `:cprevious<cr>` | 153 |
 | `ej` | N sil | quickfix 下一个 | `:cnext<cr>` | 154 |
 | `eh` | N sil | quickfix 跳指定项 | `:cr<cr>` | 155 |
@@ -596,8 +596,7 @@
 
 | 按键 | 模式 | 说明 | 命令 | 行号 |
 |------|:----:|------|------|------|
-| `<F10>` | N | 执行 :w | `:w<CR> :PlantumlOpenSVG<CR>` | 28 |
-| `<F10>` | I | — | `<Esc>:w<CR> :PlantumlOpenSVG<CR>` | 29 |
+| `<Leader>pv` | N | 保存并预览 PlantUML SVG（原 F10；F10 已让给 Hammerspoon 全局切换 Chrome） | `:w<CR> :PlantumlOpenSVG<CR>` | 29 |
 
 ---
 

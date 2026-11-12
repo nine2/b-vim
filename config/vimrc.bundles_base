@@ -826,7 +826,9 @@ let g:quickrun_config = {
 \}
 let g:quickrun_no_default_key_mappings = 1
 nmap <Leader>r <Plug>(quickrun)
-map <F10> :QuickRun<CR>
+" F10 已让给 Hammerspoon（全局切换 Chrome）；<Leader>r 已被 dependout.vim 的 TranslateR 覆盖，QuickRun 改用 <Leader>u
+nmap <Leader>u :QuickRun<CR>
+" map <F10> :QuickRun<CR>
 
 
 " 文件头增加 copyright

@@ -25,5 +25,6 @@ let g:plantuml_set_makeprg = 1
 Plug 'tyru/open-browser.vim'
 Plug 'nine2/plantuml-previewer.vim'
 let g:plantuml_previewer#save_format='svg'
-au FileType uml,plantuml nnoremap <F10> :w<CR> :PlantumlOpenSVG<CR>
-au FileType uml,plantuml inoremap <F10> <Esc>:w<CR> :PlantumlOpenSVG<CR>
+" F10 已让给 Hammerspoon（全局切换 Chrome），改用 <Leader>pv
+au FileType uml,plantuml nnoremap <Leader>pv :w<CR> :PlantumlOpenSVG<CR>
+" au FileType uml,plantuml inoremap <F10> <Esc>:w<CR> :PlantumlOpenSVG<CR>

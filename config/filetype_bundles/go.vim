@@ -150,7 +150,8 @@ au FileType go nmap grd :GoRemoveTags db<CR>
 au FileType go nmap <Leader>e :GoBuild<cr>
 au FileType go nmap <Leader>gb :GoBuild<cr>
 au FileType go nmap cl :GoMetaLinter<cr>
-au FileType go nmap <F10> :GoMetaLinter<CR>
+" F10 已让给 Hammerspoon（全局切换 Chrome），GoMetaLinter 用上面的 cl 或 <Leader>gl
+au FileType go nmap <Leader>gl :GoMetaLinter<CR>
 au FileType go nmap <silent> ek :cprevious<cr>
 au FileType go nmap <silent> ej :cnext<cr>
 au FileType go nmap <silent> eh :cr<cr>
