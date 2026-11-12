@@ -931,6 +931,14 @@ autocmd VimEnter * silent! call youcompleteme#Enable()
 
 " === 依赖插件已加入 rtp 的命令（必须在 plug#end 之后立即执行）===
 " 配色方案
+" truecolor + 斜体：tmux 内 $TERM=tmux-256color，Vim 不会自动设置 24bit / 斜体转义
+if &term =~# 'tmux\|screen'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    let &t_ZH = "\e[3m"
+    let &t_ZR = "\e[23m"
+endif
+" 不开 termguicolors：molokai / airline 的 gui 色值比 256 色版本暗淡（2026-11-12 实测），保持 256 色
 silent! colorscheme molokai
 " airline section（需要 vim-airline 加载完成）
 if exists('*airline#section#create_right')

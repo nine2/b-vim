@@ -17,6 +17,55 @@ let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_math=1
 let g:vim_markdown_frontmatter=1
 let g:vim_markdown_no_default_key_mappings=1
+" ---- 编辑态美化（2026-11-12）：隐藏标记 + 分级配色，接近 Obsidian Live Preview ----
+let g:vim_markdown_conceal = 1                 " 隐藏 ** _ []() 等标记
+let g:vim_markdown_conceal_code_blocks = 0     " 保留 ``` 便于看代码块边界
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_fenced_languages = ['go', 'bash=sh', 'sh', 'python', 'json', 'yaml', 'sql', 'vim', 'js=javascript']
+
+augroup md_pretty
+    autocmd!
+    " concealcursor 置空：光标所在行显示原文，其余行显示美化效果
+    autocmd FileType markdown setlocal conceallevel=2 concealcursor= wrap linebreak breakindent
+augroup END
+" 列表符号 → •，复选框 → ☐ / ☑：放在 $VIM_CONFIG_PATH/after/syntax/markdown.vim
+" （plug#end 会重注册 syntax autocmd，写在 Syntax 事件里会被 vim-markdown 的 syn clear 冲掉）
+set rtp+=$VIM_CONFIG_PATH/after
+
+" 分级配色：取 molokai 调色板，gui（truecolor）+ cterm（256 色兜底）双写
+function! s:MdHighlight() abort
+    hi htmlH1 guifg=#F92672 ctermfg=197 gui=bold cterm=bold
+    hi htmlH2 guifg=#FD971F ctermfg=208 gui=bold cterm=bold
+    hi htmlH3 guifg=#E6DB74 ctermfg=186 gui=bold cterm=bold
+    hi htmlH4 guifg=#A6E22E ctermfg=148 gui=bold cterm=bold
+    hi htmlH5 guifg=#66D9EF ctermfg=81  gui=bold cterm=bold
+    hi htmlH6 guifg=#AE81FF ctermfg=141 gui=bold cterm=bold
+    hi mkdHeading       guifg=#5C5F5A ctermfg=240
+    hi htmlBold         guifg=#FFFFFF ctermfg=231 gui=bold cterm=bold
+    hi htmlItalic       guifg=#F4BFD0 ctermfg=218 gui=italic cterm=italic
+    hi htmlBoldItalic   guifg=#FFFFFF ctermfg=231 gui=bold,italic cterm=bold,italic
+    hi mkdStrike        guifg=#75715E ctermfg=242 gui=strikethrough cterm=strikethrough
+    hi mkdCode          guifg=#A6E22E ctermfg=148 guibg=#2D2F2A ctermbg=236
+    hi mkdCodeDelimiter guifg=#5C5F5A ctermfg=240
+    hi mkdCodeStart     guifg=#5C5F5A ctermfg=240
+    hi mkdCodeEnd       guifg=#5C5F5A ctermfg=240
+    hi mkdLink          guifg=#66D9EF ctermfg=81 gui=underline cterm=underline
+    hi mkdInlineURL     guifg=#66D9EF ctermfg=81 gui=underline cterm=underline
+    hi mkdURL           guifg=#75715E ctermfg=242
+    hi mkdBlockquote    guifg=#A8A595 ctermfg=247 gui=italic cterm=italic
+    hi mkdRule          guifg=#5C5F5A ctermfg=240
+    hi mkdListItem      guifg=#FD971F ctermfg=208
+    hi mdBullet         guifg=#FD971F ctermfg=208
+    hi mdTodo           guifg=#F92672 ctermfg=197
+    hi mdDone           guifg=#A6E22E ctermfg=148
+    hi Conceal          guifg=#FD971F ctermfg=208 guibg=NONE ctermbg=NONE
+endfunction
+augroup md_colors
+    autocmd!
+    autocmd ColorScheme * call s:MdHighlight()
+    autocmd FileType markdown call s:MdHighlight()
+augroup END
 " https://github.com/suan/vim-instant-markdown
 " npm -g install instant-markdown-d
 "
