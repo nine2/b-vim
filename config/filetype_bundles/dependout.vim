@@ -15,8 +15,12 @@
 """ Configuration example
 Plug 'nine2/vim-translator'
 " Echo translation in the cmdline
-nmap <silent> <Leader>t <Plug>Translate
-vmap <silent> <Leader>t <Plug>TranslateV
+" 2026-11-12：由 <Leader>t 改为 <Leader>y（译），<Leader>t 前缀整体让给 vim-table-mode
+"（<Leader>tr 重排 / <Leader>tt 表格化），避免按 <Leader>tr 时落到翻译 + r 替换字符
+nmap <silent> <Leader>y <Plug>Translate
+vmap <silent> <Leader>y <Plug>TranslateV
+" 实测仅 haici 可用（google 超时、bing/youdao 返回空），只用它避免每次等超时；仅支持查单词
+let g:translator_default_engines = ['haici']
 " Display translation in a window
 nmap <silent> <Leader>w <Plug>TranslateW
 vmap <silent> <Leader>w <Plug>TranslateWV

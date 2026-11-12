@@ -87,6 +87,24 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#buffer_idx_mode = 1
 let g:airline#extensions#tabline#switch_buffers_and_tabs = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#show_splits = 0        " 右侧 buffer 列表：由下方 autocmd 按需开关
+let g:airline#extensions#tabline#show_close_button = 0  " 去掉右上角 X（终端里点击无效）
+" 当前 tab 里只有 1 个文件时隐藏右侧列表（避免和左侧 tab 名重复），有 ≥2 个不同文件时才显示
+" 只统计普通文件 buffer（buflisted 且 buftype 为空），NERDTree / tagbar / quickfix 不算
+function! s:AirlineAutoSplits() abort
+    let l:bufs = filter(uniq(sort(tabpagebuflist())), 'buflisted(v:val) && getbufvar(v:val, "&buftype") ==# ""')
+    let l:want = len(l:bufs) > 1 ? 1 : 0
+    if get(g:, 'airline#extensions#tabline#show_splits', 1) != l:want
+        let g:airline#extensions#tabline#show_splits = l:want
+        silent! call airline#extensions#tabline#tabs#invalidate()
+        redrawtabline
+    endif
+endfunction
+augroup airline_auto_splits
+    autocmd!
+    autocmd VimEnter,TabEnter,WinEnter,BufWinEnter,BufEnter * call s:AirlineAutoSplits()
+    autocmd WinClosed * call timer_start(0, {-> s:AirlineAutoSplits()})
+augroup END
 " let g:airline_statusline_ontop=1
 
 if !exists('g:airline_symbols')
